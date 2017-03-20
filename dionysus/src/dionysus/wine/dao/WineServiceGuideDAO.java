@@ -4,5 +4,7 @@ public interface WineServiceGuideDAO {
 	/*
 	 * 	보류
 	 * 	보류
+	 * 	보류
+	 * 	보류
 	 * */
 }
