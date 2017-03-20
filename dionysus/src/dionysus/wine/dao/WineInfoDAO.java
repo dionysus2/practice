@@ -15,6 +15,7 @@ public interface WineInfoDAO {
 	 *상품별 리뷰관리					winereview						Connection, 상품리뷰
 	 *회사별 상품조회					ArrayList<wineInfo>				Connection, 회사이름
 	 * 
+	 * 3
 	 * 
 	 * 
 	 * 
