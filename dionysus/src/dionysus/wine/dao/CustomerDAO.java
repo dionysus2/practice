@@ -1,6 +1,38 @@
 package dionysus.wine.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.management.Query;
+
+import dionysus.wine.vo.Customer;
+
 public interface CustomerDAO {
+	public static int CustomerJoin(Connection conn, Customer customer){
+		PreparedStatement pstmt = null;
+		try{
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, customer.getCustomerId());
+		pstmt.setString(2, customer.getCustomerUsername());
+		pstmt.setString(3, customer.getCustomerPwd());
+		pstmt.setString(4, customer.getCustomerRrn());
+		pstmt.setString(5, customer.getCustomerAddress());
+		pstmt.setString(6, customer.getCustomerName());
+		pstmt.setString(7, customer.getCustomerTel());
+		pstmt.setString(8, customer.getCustomerGender());
+		pstmt.setString(9, customer.getCustomerAccountNo());
+		pstmt.setString(10, customer.getCustomerJob());
+		pstmt.setString(11, customer.getCustomerEmail());
+		pstmt.setString(12, customer.getCustomerActivated());
+		return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, null);
+		}
+		return 0;
+	}
 	/*
 	 * 	- 일반회원 정보 페이지별 조회.							리턴					매개변수
 	 * 		1. 일반회원 정보 페이지별 조회				ArrayList<Customer>		Connection, 페이지, 페이지				
@@ -24,6 +56,7 @@ public interface CustomerDAO {
 	 *	- 로그인.										
 	 *		11. 일반회원 로그인 처리					int						Connection, 아이디, 비밀번호
 	 *	- 로그아웃(컨트롤단에서 처리)
+	 *	11-1. 일반회원 회원탈퇴						int						Connection, 고객번호
 	 *	- 일반회원 레스토랑 예약내역 조회.
 	 *		12. 일반회원 예약내역 조회.		ArrayList<HashMap<String, Object>>	Connection
 	 *	- 일반회원 레스토랑 예약내역 수정.
