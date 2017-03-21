@@ -22,15 +22,15 @@ public interface WineInfoDAO {
 	 *	회사리스트별 상품조회 	ArrayList<wineInfo>				Connection, 회사이름
 	 *	와인회사별 Count						int							Connection
 	 */
-	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int start, int last)throws SQLException;
-	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int wineInfoPrice, int start, int last)throws SQLException;
-	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int wineInfoPrice, int start, int last)throws SQLException;
+	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow)throws SQLException;
+	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int wineInfoPrice, int startRow, int lastRow)throws SQLException;
+	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int wineInfoPrice, int startRow, int lastRow)throws SQLException;
 	public int wineInfoCount(Connection conn)throws SQLException;
-	public ArrayList<WineInfo> selectWineOrigin(Connection conn, String wineInfoOrigin, int start, int last)throws SQLException;
+	public ArrayList<WineInfo> selectWineOrigin(Connection conn, String wineInfoOrigin, int startRow, int lastRow)throws SQLException;
 	public int wineOriginCount(Connection conn)throws SQLException;
 	public int wineInfoInsert(Connection conn, WineInfo wine)throws SQLException;
 	public int wineInfoUpdate(Connection conn, WineInfo wine)throws SQLException;
 	public int wineInfoDelete(Connection conn, String wineInfoName)throws SQLException;
-	public ArrayList<WineInfo> selectByWineSellerWineInfo(Connection conn, String wineInfoName, int start, int last)throws SQLException;
+	public ArrayList<WineInfo> selectByWineSellerWineInfo(Connection conn, String wineInfoName, int startRow, int lastRow)throws SQLException;
 	public int wineSellerWineInfoCount(Connection conn)throws SQLException;
 }

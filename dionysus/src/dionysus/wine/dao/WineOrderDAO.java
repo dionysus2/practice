@@ -29,5 +29,5 @@ public interface WineOrderDAO {
 	 * 		11. 주문건 삭제											int						Connection, 주문번호
 	 * 	- 주문건수정(주문상세에서 처리)
 	 * */
-	public ArrayList<WineOrder> selectWineOrderList(Connection conn, int start, int last)throws SQLException;
+	public ArrayList<WineOrder> selectWineOrderList(Connection conn, int startRow, int lastRow)throws SQLException;
 }
