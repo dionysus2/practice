@@ -11,5 +11,5 @@ public class WineOrder {
 	private Date wineOrderDate;
 	private int wineOrderAmount;
 	private int customerId;
-
+	private int wineSellerId;
 }

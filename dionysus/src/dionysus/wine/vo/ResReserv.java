@@ -9,4 +9,5 @@ public class ResReserv {
        private Date resResrvDate;
        private int resResrvFee;
        private int customerId;
+       private int resId;
 }
