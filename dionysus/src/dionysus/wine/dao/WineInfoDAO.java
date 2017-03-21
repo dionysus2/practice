@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import dionysus.wine.vo.WineInfo;
 
 public interface WineInfoDAO {
-
-	/*
-	 * 												리턴				매개변수	
+	/*										리턴				매개변수	
 	 *	와인상품 전체리스트 조회		ArrayList<wineInfo>			Connection
 	 *	단가높은순 조회					ArrayList<wineInfo>			Connection, 와인가격
 	 *	단가낮은순 조회					ArrayList<WineInfo>			Connection, 와인가격
@@ -23,7 +21,6 @@ public interface WineInfoDAO {
 	 *	와인상품 삭제						int								Connection, 와인이름
 	 *	회사리스트별 상품조회 	ArrayList<wineInfo>				Connection, 회사이름
 	 *	와인회사별 Count						int							Connection
-	 * 
 	 */
 	public ArrayList<WineInfo> selectAllWineInfo(Connection conn)throws SQLException;
 	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int wineInfoPrice)throws SQLException;
