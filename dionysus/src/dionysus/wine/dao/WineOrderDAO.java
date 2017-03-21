@@ -16,7 +16,7 @@ public interface WineOrderDAO {
 	 * 		7. 와인회사별/월별 상품 주문건 판매량 조회	ArrayList<HashMap<String, Object>>	Connection, 주문일자(월별), 와인회사번호
 	 * 		8. 와인회사별/일별 상품 주문건 판매량 조회	ArrayList<HashMap<String, Object>>	Connection, 주문일자(일별), 와인회사번호
 	 * 	- 와인상품 주문회원 정보조회
-	 * 		9. 와인상품 주문회원 정보조회						ArryList<Customer>			Connection
+	 * 		9. 와인상품 주문회원 정보조회						ArryList<Customer>			Connection, 와인회사번호, 고객번호
 	 * 	- 주문건 등록.
 	 * 		10. 주문건 등록											int						Connection, WineOrder
 	 * 	- 주문건 삭제.

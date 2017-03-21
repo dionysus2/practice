@@ -10,8 +10,6 @@ public interface ResDAO {
 	 * 		3. 레스토랑 업주 회원 count								int							Connection
 	 * 	- 레스토랑 업주 회원 지역별/페이지별 리스트 조회
 	 * 		4. 레스토랑 업주 회원 지역별 조회						ArrayList<Res>				Connection, 지역
-	 * 	- 레스토랑 업주 회원신청 승인.
-	 * 		5. 레스토랑 업주 회원신청자 비활성화 속성 1로 변경.		int							Connection
 	 * 	- 레스토랑 업주 회원 추가
 	 * 		6. 레스토랑 업주 회원추가								int							Connection, Res
 	 * 		(회원추가 시 ResAuthorization테이블로 이동)

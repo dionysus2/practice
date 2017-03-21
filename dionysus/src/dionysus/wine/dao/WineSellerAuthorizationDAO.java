@@ -8,5 +8,7 @@ public interface WineSellerAuthorizationDAO {
 	 *	- 와인회사 업주 회원신청자 추가		
 	 *	3. 와인회사 업주 회원신청자 추가 			int									Connection, WineSellerAuthorization 				
 	 *	- 와인회사 업주 회원신청자 삭제				int									Connection, 와인회사 회원번호
+	 * 	와인회사 업주 회원신청 승인.
+	 * 4. 와인회사 업주 회원신청자 비활성화 속성 1로 변경.		int							Connection
 	 * */
 }

@@ -11,5 +11,6 @@ public interface NoticeDAO {
 	 * 		4. 공지사항 게시글 수정.					int					Connection, Notice
 	 * 	- 공지사항 게시판 게시글 삭제.
 	 * 		5. 공지사항 게시글 삭제						int					Connection
+	 * 	6. 공지사항 게시글 조회수 증가					int					Connection
 	 * */
 }

@@ -10,8 +10,6 @@ public interface WineSellerDAO {
 	 * 		3. 와인회사 업주 회원 count								int							Connection
 	 * 	- 와인회사 업주 회원 지역별/페이지별 리스트 조회
 	 * 		4. 와인회사 업주 회원 지역별 조회						ArrayList<WineSeller>		Connection, 지역
-	 * 	- 와인회사 업주 회원신청 승인.
-	 * 		5. 와인회사 업주 회원신청자 비활성화 속성 1로 변경.		int							Connection
 	 * 	- 와인회사 업주 회원 추가
 	 * 		6. 와인회사 업주 회원추가								int							Connection, WineSeller
 	 * 		(회원추가 시 WineAuthorization테이블로 이동)
