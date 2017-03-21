@@ -12,7 +12,7 @@ public interface WineInfoDAO {
 	 *와인상품 삭제						int								Connection, 와인이름
 	 *상품별 상품등록 회사리스트조회 	ArrayList<wineInfo>				Connection, 등록회사,와인번호
 	 *단가별 조회						ArrayList<wineInfo>				Connection, 와인가격
-	 *상품별 리뷰관리					winereview						Connection, 상품리뷰
+	 *상품별 리뷰관리					Winereview						Connection, 상품리뷰
 	 *회사별 상품조회					ArrayList<wineInfo>				Connection, 회사이름
 	 * 
 	 * 3
