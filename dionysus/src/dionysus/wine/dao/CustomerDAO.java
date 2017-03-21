@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.management.Query;
 
+import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.Customer;
 
 public interface CustomerDAO {
@@ -29,7 +30,7 @@ public interface CustomerDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(pstmt, null);
+			JDBCUtil.close(pstmt, null);
 		}
 		return 0;
 	}
