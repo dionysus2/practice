@@ -10,6 +10,7 @@ public interface WineDeliveryDAO {
 	 *배송진행 사항 수정				String					Connection, 배송진행사항
 	 *와인회사명으로 배송리스트 조회	ArrayList<WineDelivery>	Connection, 와인회사명
 	 *레스토랑명으로 배송리스트 조회	ArrayList<WineDelivery>	Connection, 레스토랑명
+	 *
 	 */
 	
 	

@@ -7,6 +7,6 @@ public interface WineOrderInfoDAO {
 	 * 	- 주문번호별 상품삭제
 	 * 		2. 주문번호별 상품삭제			int							Connection, 주문번호, 상품번호
 	 * 	- 주문번호별 상품별 수량수정
-	 * 		3. 주문번호별 상품수량 수정		WineOrderInfo				Connection, 주문번호, 상품번호
+	 * 		3. 주문번호별 상품수량 수정		WineOrderInfo				Connection, 주문번호, 상품번호, 수량
 	 * */
 }
