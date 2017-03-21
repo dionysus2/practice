@@ -11,6 +11,7 @@ import dionysus.wine.vo.Customer;
 
 public interface CustomerDAO {
 	public static int CustomerJoin(Connection conn, Customer customer){
+		String sql = "insert into account values(?,?,?,?,?,?,?,?,?,?,?,?)"; 
 		PreparedStatement pstmt = null;
 		try{
 		pstmt = conn.prepareStatement(sql);
