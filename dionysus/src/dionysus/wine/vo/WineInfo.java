@@ -8,7 +8,7 @@ public class WineInfo {
 	private String wineInfoName;
 	private String wineInfoProfilePicture;
 	private int wineInfoPrice;
-	private String wineInfoOrgin;
+	private String wineInfoOrigin;
 	private String wineInfoPicture1;
 	private String wineInfoPicture2;
 	private String wineInfoPicture3;

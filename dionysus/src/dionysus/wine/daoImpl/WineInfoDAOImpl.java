@@ -1,10 +1,13 @@
 package dionysus.wine.daoImpl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dionysus.wine.dao.WineInfoDAO;
+import dionysus.wine.query.WineInfoQuery;
 import dionysus.wine.vo.WineInfo;
 
 public class WineInfoDAOImpl implements WineInfoDAO {
@@ -24,9 +27,25 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 	 *	와인회사별 Count						int							Connection, 회사번호
 	 */
 	@Override
-	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow) {
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.selectAll);
+			pstm.setInt(1, startRow);
+			pstm.setInt(2, lastRow);
+			rs= pstm.executeQuery();
+			while(rs.next()){
+				WineInfo wine= new WineInfo();
+				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
+				wine.setWineInfoName(rs.getString("WINE_INFO_NAME"));
+				wine.setWineInfoOrgin(rs.getString("WINE_INFO_ORIGIN"));
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
