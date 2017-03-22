@@ -12,7 +12,7 @@ public interface NoticeDAO {
 	public int insertNotice(Connection conn, Notice notice) throws SQLException;
 	public int updateNotice(Connection conn, String noticeTitle) throws SQLException;
 	public int deleteNotice(Connection conn, int noticeId) throws SQLException;
-	public int viewsNotice(Connection conn) throws SQLException;
+	public int viewsNotice(Connection conn, int noticeId) throws SQLException;
 	/*
 	 * 	- 공지사항 게시판 페이지별 조회.				리턴					매개변수
 	 * 		1. 공지사항 게시판 페이지별 조회.		ArrayList<Notice>		Connection, 게시글, 게시글
