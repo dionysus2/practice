@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import dionysus.wine.service.WineInfoService;
 
 public class WineInfoServiceImpl implements WineInfoService {
-
+	
 	@Override
 	public String readAllWineInfo(HttpServletRequest request) {
 		// TODO Auto-generated method stub
