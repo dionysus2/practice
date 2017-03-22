@@ -50,7 +50,7 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
 				wine.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
 				list.add(wine);
-			}
+			} 
 			return list;
 		} 
 		catch (SQLException e) {
