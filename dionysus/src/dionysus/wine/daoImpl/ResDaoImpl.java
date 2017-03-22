@@ -31,14 +31,11 @@ public class ResDaoImpl implements ResDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String Sql="update res set res_activated=0 where res_id =?";
-		Res res = new Res();;
 		try{
 			pstmt = conn.prepareStatement(Sql);	
 			pstmt.setInt(1, resId);			
 			rs =pstmt.executeQuery();
-			if(rs.next()){
-			res.setResActivated(rs.getString("resActivated"));
-			}
+			if(rs.next())
 			
 		}catch(SQLException e){
 			e.printStackTrace();
