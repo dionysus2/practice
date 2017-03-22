@@ -1,6 +1,17 @@
 package dionysus.wine.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import dionysus.wine.vo.NoticeComment;
+
 public interface NoticeCommentDAO {
+	public ArrayList<NoticeComment> NoticeAllList(Connection conn, int noticeId);
+	public int insertNoticeComment(Connection conn, int customerId, String noticeCommentContent) throws SQLException;
+	public int updateNoticeComment(Connection conn, String noticeCommentContent) throws SQLException;
+	public int deleteNoiceComment(Connection conn, int customerId) throws SQLException;
+	
 	/*
 	 *	- 게시글별 댓글 리스트 조회				리턴						매개변수
 	 *		1. 게시글별 댓글 리스트 조회	ArrayList<NoticeComment>	Connection, 게시글번호
