@@ -1,5 +1,10 @@
 package dionysus.wine.dao;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import dionysus.wine.vo.Res;
+
 public interface ResDAO {
 	/*			
 	 * 	- 레스토랑 업주 회원 비활성화 설정.							리턴						매개변수
@@ -11,14 +16,39 @@ public interface ResDAO {
 	 * 	- 레스토랑 업주 회원 지역별/페이지별 리스트 조회
 	 * 		4. 레스토랑 업주 회원 지역별 조회						ArrayList<Res>				Connection, 지역
 	 * 	- 레스토랑 업주 회원 추가
-	 * 		6. 레스토랑 업주 회원추가								int							Connection, Res
+	 * 		6. 레스토랑 업주 회원추가								int		Connection, Res
 	 * 		(회원추가 시 ResAuthorization테이블로 이동)
 	 * 	- 로그인
-	 * 		7. 레스토랑 업주 회원로그인								int							Connection, 아이디, 비밀번호
+	 * 		7. 레스토랑 업주 회원로그인								int		Connection, 아이디, 비밀번호
 	 * 	- 로그아웃(컨트롤단에서 처리)
 	 * 	- 레스토랑 업주 회원 아이디 찾기
-	 * 		8. 레스토랑 업주 회원 아이디 찾기						String						Connection, 이름, 사업자번호			
+	 * 		8. 레스토랑 업주 회원 아이디 찾기						String	Connection, 이름, 사업자번호			
 	 * 	- 레스토랑 업주 회원 비밀번호 찾기
-	 * 		9. 레스토랑 업주 회원 비밀번호 찾기						String						Connection, 아이디, 이름, 사업자번호
-	 * */
+	 * 		9. 레스토랑 업주 회원 비밀번호 찾기						String	Connection, 아이디, 이름, 사업자번호
+	 */
+	
+	
+	//레스토랑 업주 회원 비활성화 설정	SelectResOwnerActivated
+public int SelectResOwnerActivated(Connection conn, int resId);
+	//레스토랑 업주 페이지별 리스트 조회	SelectResOwnerAllList
+public ArrayList<Res> SelectResownerAllList(Connection conn);
+	//레스토랑 업주 회원 마지막 번호 찾기count	ResOwnerCount
+public int ResOwnerCount(Connection conn);
+	//레스토랑 업주 회원 지역별 조회	SelectResOwnerLocation
+public ArrayList<Res> SelectResOwnerLocation(Connection conn, String reslocation);
+	//레스토랑 업주 회원추가	InserResOwner
+public int InserResOwner(Connection conn, Res res);
+	//레스토랑 업주 회원로그인 	ResOwnerLogin
+public int ResOwnerLogin(Connection conn, int resid, String respwd);
+	//레스토랑 업주 회원 아이디 찾기	SelectRe	sOwnerId
+public int SelectResOwnerId(Connection conn, int resid, String resBrn);
+	//레스토랑 업주 회원 비밀번호 찾기	SelectResOwnerPwd
+public int SelectResOwnerPwd(Connection conn, int resid, String resname, String resBrn);
+	//레스토랑 업주 회원 정보수정	UpdateResOwner
+public int UpdateResOwner(Connection conn, Res resid);
+	//레스토랑 업주 회원 아이디 중복 확인
+public int ResOwnerIdCheck(Connection conn, int Check);
+
+		
+ 
 }

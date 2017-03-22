@@ -11,4 +11,10 @@ public interface ResAuthorizationDAO {
 	 * 	- 레스토랑 업주 회원신청 승인.
 	 * 		4. 레스토랑 업주 회원신청자 비활성화 속성 1로 변경.		int							Connection
 	 * */
+	
+	
+	
+	
+	
+	
 }
