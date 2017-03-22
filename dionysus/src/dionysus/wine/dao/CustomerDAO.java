@@ -45,6 +45,7 @@ public interface CustomerDAO {
 		return 0;
 	}
 	public ArrayList<Customer> selectAllCustomer(Connection conn);
+	public int CustomerCount(Connection conn)throws SQLException;
 	public ArrayList<Customer> selectByCustomerAge(Connection conn, int customerAge);
 	public ArrayList<Customer> selectByCustomerJob(Connection conn, String customerJob);
 	public ArrayList<Customer> selectByCustomerGender(Connection conn, String customerGender);
