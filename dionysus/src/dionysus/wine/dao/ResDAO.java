@@ -47,7 +47,7 @@ public int SelectResOwnerPwd(Connection conn, int resid, String resname, String 
 	//레스토랑 업주 회원 정보수정	UpdateResOwner
 public int UpdateResOwner(Connection conn, Res resid);
 	//레스토랑 업주 회원 아이디 중복 확인
-public int ResOwnerIdCheck(Connection conn, int Check);
+public int ResOwnerIdCheck(Connection conn, String username);
 
 		
  
