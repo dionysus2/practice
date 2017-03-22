@@ -3,6 +3,7 @@ package dionysus.wine.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dionysus.wine.vo.WineInfo;
 
@@ -31,6 +32,6 @@ public interface WineInfoDAO {
 	public int wineInfoInsert(Connection conn, WineInfo wine)throws SQLException;
 	public int wineInfoUpdate(Connection conn, WineInfo wine)throws SQLException;
 	public int wineInfoDelete(Connection conn, String wineInfoName)throws SQLException;
-	public ArrayList<WineInfo> selectByWineSellerWineInfo(Connection conn, String wineInfoName, int startRow, int lastRow)throws SQLException;
+	public ArrayList<HashMap<String, Object>> selectByWineSellerWineInfo(Connection conn, String wineSellelrUsername, int startRow, int lastRow)throws SQLException;
 	public int wineSellerWineInfoCount(Connection conn)throws SQLException;
 }
