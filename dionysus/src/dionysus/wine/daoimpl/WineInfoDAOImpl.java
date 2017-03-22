@@ -1,4 +1,4 @@
-package dionysus.wine.daoImpl;
+package dionysus.wine.daoimpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
