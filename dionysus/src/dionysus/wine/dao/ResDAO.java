@@ -37,7 +37,7 @@ public int ResOwnerCount(Connection conn);
 	//레스토랑 업주 회원 지역별 조회	SelectResOwnerLocation
 public ArrayList<Res> SelectResOwnerLocation(Connection conn, String reslocation);
 	//레스토랑 업주 회원추가	InserResOwner
-public int InserResOwner(Connection conn, Res res);
+public int InsertResOwner(Connection conn, Res res);
 	//레스토랑 업주 회원로그인 	ResOwnerLogin
 public int ResOwnerLogin(Connection conn, int resid, String respwd);
 	//레스토랑 업주 회원 아이디 찾기	SelectRe	sOwnerId
