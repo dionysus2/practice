@@ -29,25 +29,25 @@ public interface ResDAO {
 	
 	
 	//레스토랑 업주 회원 비활성화 설정	SelectResOwnerActivated
-public int SelectResOwnerActivated(Connection conn, int resId);
+public int selectResOwnerActivated(Connection conn, int resId);
 	//레스토랑 업주 페이지별 리스트 조회	SelectResOwnerAllList
-public ArrayList<Res> SelectResownerAllList(Connection conn);
+public ArrayList<Res> selectResownerAllList(Connection conn, int startRow, int lastRow);
 	//레스토랑 업주 회원 마지막 번호 찾기count	ResOwnerCount
-public int ResOwnerCount(Connection conn);
+public int resOwnerCount(Connection conn);
 	//레스토랑 업주 회원 지역별 조회	SelectResOwnerLocation
-public ArrayList<Res> SelectResOwnerLocation(Connection conn, String reslocation);
+public ArrayList<Res> selectResOwnerLocation(Connection conn, String reslocation);
 	//레스토랑 업주 회원추가	InserResOwner
-public int InsertResOwner(Connection conn, Res res);
+public int insertResOwner(Connection conn, Res res);
 	//레스토랑 업주 회원로그인 	ResOwnerLogin
-public int ResOwnerLogin(Connection conn, int resid, String respwd);
+public int resOwnerLogin(Connection conn, int resid, String respwd);
 	//레스토랑 업주 회원 아이디 찾기	SelectRe	sOwnerId
-public int SelectResOwnerId(Connection conn, int resid, String resBrn);
+public int selectResOwnerId(Connection conn, int resid, String resBrn);
 	//레스토랑 업주 회원 비밀번호 찾기	SelectResOwnerPwd
-public int SelectResOwnerPwd(Connection conn, int resid, String resname, String resBrn);
+public int selectResOwnerPwd(Connection conn, int resid, String resname, String resBrn);
 	//레스토랑 업주 회원 정보수정	UpdateResOwner
-public int UpdateResOwner(Connection conn, Res resid);
+public int updateResOwner(Connection conn, Res resid);
 	//레스토랑 업주 회원 아이디 중복 확인
-public int ResOwnerIdCheck(Connection conn, String username);
+public int resOwnerIdCheck(Connection conn, String username);
 
 		
  
