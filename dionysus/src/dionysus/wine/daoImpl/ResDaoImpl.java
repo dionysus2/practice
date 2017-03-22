@@ -35,7 +35,9 @@ public class ResDaoImpl implements ResDAO {
 			pstmt = conn.prepareStatement(Sql);	
 			pstmt.setInt(1, resId);			
 			rs =pstmt.executeQuery();
-			if(rs.next())
+			if(rs.next()){
+				return rs.getInt(1);
+			}
 			
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -92,7 +94,9 @@ public class ResDaoImpl implements ResDAO {
 					e.printStackTrace();
 				} finally {
 					JDBCUtil.close(pstmt, null);
-				}
+				}finally{
+					JDBCUtil.close(conn);
+				}	
 				return -1;
 			}
 
@@ -115,8 +119,8 @@ public class ResDaoImpl implements ResDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
-			JDBCUtil.close(pstmt, rs);
-		}
+			JDBCUtil.close(conn);
+		}	
 		return null;
 		
 	}
@@ -143,7 +147,9 @@ public class ResDaoImpl implements ResDAO {
 			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+			JDBCUtil.close(conn);
+		}	
 		return -1;
 	}
 	//레스토랑 업주 회원로그인
@@ -163,7 +169,7 @@ public class ResDaoImpl implements ResDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
-			JDBCUtil.close(pstmt, rs);
+			JDBCUtil.close(conn);
 		}
 		return -1;
 	}
@@ -183,7 +189,9 @@ public class ResDaoImpl implements ResDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+			JDBCUtil.close(conn);
+		}	
 		return -1;
 	}
 
@@ -203,7 +211,9 @@ public class ResDaoImpl implements ResDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+			JDBCUtil.close(conn);
+		}	
 		
 		return -1;
 	}
@@ -212,13 +222,12 @@ public class ResDaoImpl implements ResDAO {
 	@Override
 	public int UpdateResOwner(Connection conn, Res resid) {
 		String Sql ="update res set res_pwd=?,res_location=?,"
-				+ "res_tel=?,res_account_no=?,res_profile_picture=?,"
+				+ "res_tel=?,res_email=?,res_account_no=?,res_profile_picture=?,"
 				+ "res_ownername=? where res_id=?";
 		PreparedStatement pstmt=null;
 		Res res = new Res();
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(9, res.getResId());
 			//비밀번호 변경
 			pstmt.setString(1, res.getResPwd());
 			//위치변경
@@ -233,21 +242,36 @@ public class ResDaoImpl implements ResDAO {
 			pstmt.setString(6, res.getResProfilePicture());
 			//이름
 			pstmt.setString(7, res.getResUsername());
+			//번호
+			pstmt.setInt(8, res.getResId());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			JDBCUtil.close(conn);
-		}
-		
-		
-		
+		}		
 		return 0;
 	}
-
+	//레스토랑 업주 회원 아이디 중복 확인
 	@Override
-	public int ResOwnerIdCheck(Connection conn, int Check) {
+	public int ResOwnerIdCheck(Connection conn, String username) {
+		String Sql = "select count(*) from res where res_username=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(Sql);
+			pstmt.setString(1, username);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			JDBCUtil.close(conn);
+		}
 		return 0;
 	}
 
