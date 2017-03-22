@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dionysus.wine.dao.WineInfoDAO;
 import dionysus.wine.query.WineInfoQuery;
+import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.WineInfo;
 
 public class WineInfoDAOImpl implements WineInfoDAO {
@@ -27,7 +28,8 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 	 *	와인회사별 Count						int							Connection, 회사번호
 	 */
 	@Override
-	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow) {
+	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow) throws SQLException {
+		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		ResultSet rs= null;
 		try {
@@ -35,44 +37,157 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 			pstm.setInt(1, startRow);
 			pstm.setInt(2, lastRow);
 			rs= pstm.executeQuery();
+			ArrayList<WineInfo>list= new ArrayList<WineInfo>();
 			while(rs.next()){
 				WineInfo wine= new WineInfo();
 				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
 				wine.setWineInfoName(rs.getString("WINE_INFO_NAME"));
-				wine.setWineInfoOrgin(rs.getString("WINE_INFO_ORIGIN"));
+				wine.setWineInfoOrigin(rs.getString("WINE_INFO_ORIGIN"));
+				wine.setWineInfoPicture1(rs.getString("WINE_INFO_PICTURE1"));
+				wine.setWineInfoPicture2(rs.getString("WINE_INFO_PICTURE2"));
+				wine.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
+				wine.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
+				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
+				wine.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
+				list.add(wine);
 			}
+			return list;
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
 		}
 	}
 
 	@Override
-	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int wineInfoPrice, int startRow, int lastRow)
-			throws SQLException {
+	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int wineInfoPrice, int startRow, int lastRow) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.sellMax);
+			pstm.setInt(1, startRow);
+			pstm.setInt(2, lastRow);
+			rs= pstm.executeQuery();
+			ArrayList<WineInfo>list= new ArrayList<WineInfo>();
+			while(rs.next()){
+				WineInfo wine= new WineInfo();
+				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
+				wine.setWineInfoName(rs.getString("WINE_INFO_NAME"));
+				wine.setWineInfoOrigin(rs.getString("WINE_INFO_ORIGIN"));
+				wine.setWineInfoPicture1(rs.getString("WINE_INFO_PICTURE1"));
+				wine.setWineInfoPicture2(rs.getString("WINE_INFO_PICTURE2"));
+				wine.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
+				wine.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
+				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
+				wine.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
+				list.add(wine);
+			}
+			return list;
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
 	}
 
 	@Override
-	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int wineInfoPrice, int startRow, int lastRow)
-			throws SQLException {
+	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int wineInfoPrice, int startRow, int lastRow)throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.sellMin);
+			pstm.setInt(1, startRow);
+			pstm.setInt(2, lastRow);
+			rs= pstm.executeQuery();
+			ArrayList<WineInfo>list= new ArrayList<WineInfo>();
+			while(rs.next()){
+				WineInfo wine= new WineInfo();
+				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
+				wine.setWineInfoName(rs.getString("WINE_INFO_NAME"));
+				wine.setWineInfoOrigin(rs.getString("WINE_INFO_ORIGIN"));
+				wine.setWineInfoPicture1(rs.getString("WINE_INFO_PICTURE1"));
+				wine.setWineInfoPicture2(rs.getString("WINE_INFO_PICTURE2"));
+				wine.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
+				wine.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
+				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
+				wine.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
+				list.add(wine);
+			}
+			return list;
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
 	}
 
 	@Override
-	public int wineInfoCount(Connection conn) throws SQLException {
+	public int wineInfoCount(Connection conn) throws SQLException  {
 		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.selectAllCount);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
 		return 0;
 	}
 
 	@Override
-	public ArrayList<WineInfo> selectWineOrigin(Connection conn, String wineInfoOrigin, int startRow, int lastRow)
-			throws SQLException {
+	public ArrayList<WineInfo> selectWineOrigin(Connection conn, String wineInfoOrigin, int startRow, int lastRow) throws SQLException{
 		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.selectByOrigin);
+			pstm.setString(1, wineInfoOrigin);
+			pstm.setInt(2, startRow);
+			pstm.setInt(3, lastRow);
+			rs= pstm.executeQuery();
+			ArrayList<WineInfo>list= new ArrayList<WineInfo>();
+			while(rs.next()){
+				WineInfo wine= new WineInfo();
+				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
+				wine.setWineInfoName(rs.getString("WINE_INFO_NAME"));
+				wine.setWineInfoOrigin(rs.getString("WINE_INFO_ORIGIN"));
+				wine.setWineInfoPicture1(rs.getString("WINE_INFO_PICTURE1"));
+				wine.setWineInfoPicture2(rs.getString("WINE_INFO_PICTURE2"));
+				wine.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
+				wine.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
+				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
+				wine.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
+				list.add(wine);
+			}
+			return list;
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
 	}
 
 	@Override
