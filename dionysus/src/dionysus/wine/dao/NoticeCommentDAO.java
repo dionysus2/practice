@@ -8,8 +8,8 @@ import dionysus.wine.vo.NoticeComment;
 
 public interface NoticeCommentDAO {
 	public ArrayList<NoticeComment> NoticeAllList(Connection conn, int noticeId);
-	public int insertNoticeComment(Connection conn, int customerId, String noticeCommentContent) throws SQLException;
-	public int updateNoticeComment(Connection conn, String noticeCommentContent) throws SQLException;
+	public int insertNoticeComment(Connection conn, NoticeComment comment) throws SQLException;
+	public int updateNoticeComment(Connection conn, int customerId) throws SQLException;
 	public int deleteNoiceComment(Connection conn, int customerId) throws SQLException;
 	
 	/*
