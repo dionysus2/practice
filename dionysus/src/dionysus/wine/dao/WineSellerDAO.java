@@ -1,6 +1,6 @@
 package dionysus.wine.dao;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.ArrayList;
 
 import dionysus.wine.vo.Res;
@@ -41,25 +41,25 @@ public interface WineSellerDAO {
 	//와인회사업주 회원 정보수정	UpdateWineSeller
 
 		//와인회사 업주 회원 비활성화 설정	SelectResOwnerActivated
-	public int selectWineSellerActivated(Connection conn, int resId);
+	public int selectWineSellerActivated(Connection conn, int resId)throws SQLException;
 		//와인회사 업주 페이지별 리스트 조회	SelectResOwnerAllList
-	public ArrayList<WineSeller> selectWineSellerAllList(Connection conn, int startRow, int lastRow);
+	public ArrayList<WineSeller> selectWineSellerAllList(Connection conn, int startRow, int lastRow)throws SQLException;
 		//와인회사 업주 회원 마지막 번호count	ResOwnerCount
-	public int wineSellerCount(Connection conn);
+	public int wineSellerCount(Connection conn)throws SQLException;
 		//와인회사 업주 회원 지역별 조회	SelectResOwnerLocation
-	public ArrayList<WineSeller> selectWineSellerLocation(Connection conn, String wineSellerlocation);
+	public ArrayList<WineSeller> selectWineSellerLocation(Connection conn, String wineSellerlocation)throws SQLException;
 		//와인회사 업주 회원추가	InserResOwner
-	public int inserWineSeller(Connection conn, WineSeller WineSeller);
+	public int inserWineSeller(Connection conn, WineSeller WineSeller)throws SQLException;
 		//와인회사 업주 회원로그인 	ResOwnerLogin
-	public int resWineSellerLogin(Connection conn, int wineSellerid, String wineSellerPwd);
+//public int resWineSellerLogin(Connection conn, int wineSellerid, String wineSellerPwd)throws SQLException;
 		//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
-	public int SelectWineSellerrId(Connection conn, int wineId, String wineSellerBrn);
+	public int SelectWineSellerrId(Connection conn, int wineId, String wineSellerBrn)throws SQLException;
 		//와인회사 업주 회원 비밀번호 찾기	SelectResOwnerPwd
-	public int SelectWineSellerPwd(Connection conn, int wineId, String wineSellerName, String wineSellerBrn);
+	public int SelectWineSellerPwd(Connection conn, int wineId, String wineSellerName, String wineSellerBrn)throws SQLException;
 		//와인회사 업주 회원 정보수정	UpdateResOwner
-	public int updateWineSeller(Connection conn, int WineSellerId);
+	public int updateWineSeller(Connection conn, WineSeller WineSellerId)throws SQLException;
 		//와인회사 업주 회원 아이디 중복 확인
-	public int resOwnerIdCheck(Connection conn, String wineSellerUsername);
+//public int resOwnerIdCheck(Connection conn, String wineSellerUsername)throws SQLException;
 
 			
 		

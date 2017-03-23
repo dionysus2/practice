@@ -10,7 +10,7 @@ public class WineSeller {
 	private String wineSellerTel;
 	private String wineSellerAccountNo;
 	private String wineSellerProfilePicture;
-	private String wineSellerActivatied;
+	private String wineSellerActivated;
 	private String wineSellerName;
-	private String basicInfoId;
+	private int basicInfoId;
 }

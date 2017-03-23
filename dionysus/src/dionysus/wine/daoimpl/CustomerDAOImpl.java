@@ -1,25 +1,13 @@
 package dionysus.wine.daoimpl;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
-import javax.print.attribute.PrintRequestAttribute;
-
-import dionysus.wine.dao.CustomerDAO;
-import dionysus.wine.query.CustomerQuery;
-import dionysus.wine.query.WineInfoQuery;
-import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.Customer;
-import dionysus.wine.vo.Res;
-import dionysus.wine.vo.ResReserv;
-import dionysus.wine.vo.WineInfo;
-import dionysus.wine.vo.WineOrder;
-import dionysus.wine.vo.WineWishlist;
+import dionysus.wine.dao.*;
+import dionysus.wine.query.*;
+import dionysus.wine.util.*;
+import dionysus.wine.vo.*;
 
 public class CustomerDAOImpl implements CustomerDAO{
 	@Override
