@@ -10,8 +10,6 @@ import java.util.HashMap;
 
 import javax.management.Query;
 
-import org.apache.catalina.webresources.war.WarURLConnection;
-
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.Customer;
 import dionysus.wine.vo.ResReserv;
@@ -19,50 +17,26 @@ import dionysus.wine.vo.WineInfo;
 import dionysus.wine.vo.WineOrder;
 
 public interface CustomerDAO {
-	public static int CustomerJoin(Connection conn, Customer customer){
-		String sql = "insert into account values(?,?,?,?,?,?,?,?,?,?,?,?)"; 
-		PreparedStatement pstmt = null;
-		try{
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, customer.getCustomerId());
-		pstmt.setString(2, customer.getCustomerUsername());
-		pstmt.setString(3, customer.getCustomerPwd());
-		pstmt.setString(4, customer.getCustomerRrn());
-		pstmt.setString(5, customer.getCustomerAddress());
-		pstmt.setString(6, customer.getCustomerName());
-		pstmt.setString(7, customer.getCustomerTel());
-		pstmt.setString(8, customer.getCustomerGender());
-		pstmt.setString(9, customer.getCustomerAccountNo());
-		pstmt.setString(10, customer.getCustomerJob());
-		pstmt.setString(11, customer.getCustomerEmail());
-		pstmt.setString(12, customer.getCustomerActivated());
-		return pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(pstmt, null);
-		}
-		return 0;
-	}
-	public ArrayList<Customer> selectAllCustomer(Connection conn);
-	public int CustomerCount(Connection conn)throws SQLException;
-	public ArrayList<Customer> selectByCustomerAge(Connection conn, int customerAge);
-	public ArrayList<Customer> selectByCustomerJob(Connection conn, String customerJob);
-	public ArrayList<Customer> selectByCustomerGender(Connection conn, String customerGender);
-	public ArrayList<Customer> selectByCustomerName(Connection conn, String customerName);
+	public int CustomerJoin(Connection conn, Customer customer) throws SQLException;
+	public ArrayList<Customer> selectAllCustomer(Connection conn) throws SQLException;
+	public int CustomerCount(Connection conn)throws SQLException ;
+	public ArrayList<Customer> selectByCustomerAge(Connection conn, int customerAge) throws SQLException;
+	public ArrayList<Customer> selectByCustomerJob(Connection conn, String customerJob) throws SQLException;
+	public ArrayList<Customer> selectByCustomerGender(Connection conn, String customerGender) throws SQLException;
+	public ArrayList<Customer> selectByCustomerName(Connection conn, String customerName) throws SQLException;
 	public int CustomerInfoUpdate(Connection conn, Customer customer) throws SQLException;
-	public int CustomerInfoDelete(Connection conn, int customerId) throws SQLException;
+	public int CustomerInfoDelete(Connection conn, int customerId) throws SQLException ;
 	public String CustomerIdFind(Connection conn, String customerName, String customerRrn) throws SQLException;
 	public String CustomerPwdFind(Connection conn, String customerName, String customerRrn, String customerUserName) throws SQLException;
 	public int CustomerLogin(Connection conn, String customerUserName, String customerPwd) throws SQLException;
-	public ArrayList<HashMap<String, Object>> CustomerResReserv(Connection conn);
+	public ArrayList<HashMap<String, Object>> CustomerResReserv(Connection conn) throws SQLException;
 	public int customerResReservUpdate(Connection conn, ResReserv ResReserv) throws SQLException;
 	public int customerResReservDelete(Connection conn, int customerId) throws SQLException;
-	public ArrayList<HashMap<String, Object>> SelectLastResReserv(Connection conn, Date date);
-	public ArrayList<HashMap<String, Object>> SelectCustomerWineOrder(Connection conn);
+	public ArrayList<HashMap<String, Object>> SelectLastResReserv(Connection conn, Date date) throws SQLException;
+	public ArrayList<HashMap<String, Object>> SelectCustomerWineOrder(Connection conn) throws SQLException;
 	public int CustomerWineOrderUpdate(Connection conn, WineOrder wineorder) throws SQLException;
 	public int CustomerWineOrderDelete(Connection conn, int customerId) throws SQLException;
-	public ArrayList<WineInfo> CustomerWineCart(Connection conn, int customerId);
+	public ArrayList<WineInfo> CustomerWineCart(Connection conn, int customerId) throws SQLException;
 	public int CustomerWineCartOrder(Connection conn, int customerId, int wineOrderId) throws SQLException;
 	public int CustomerWineCartDelete(Connection conn, int customerId) throws SQLException;
 	
