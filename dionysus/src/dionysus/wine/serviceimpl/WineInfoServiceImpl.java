@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -19,6 +22,7 @@ public class WineInfoServiceImpl implements WineInfoService {
 		// TODO Auto-generated constructor stub
 		this.dao= dao;
 	}
+	private Logger logger= LoggerFactory.getLogger(WineInfoServiceImpl.class);
 	@Override
 	public String readAllWineInfo(HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -62,12 +66,17 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String wineInfoPicture3= request.getParameter("wineInfoPicture3");
 		int wineSellerId= Integer.parseInt("wineSellerId");
 		try {
+			logger.info("Connection연결성공");
 			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoOrigin, wineInfoPicture1, wineInfoPicture2, wineInfoPicture3, wineSellerId));
 			JsonObject ob= new JsonObject();
-			if(result==1)
+			if(result==1){
 				ob.addProperty("result", "success");
-			else
-				ob.addProperty("result", "fail");
+				logger.info("DAO INSERT입력성공");
+			}
+			else{
+				ob.addProperty("result", "fail");	
+				logger.info("DAO INSERT입력실패");
+			}
 			return new Gson().toJson(ob);
 		} 
 		catch (SQLException e) {
