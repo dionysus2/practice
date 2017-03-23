@@ -35,19 +35,19 @@ public ArrayList<Res> selectResownerAllList(Connection conn, int startRow, int l
 	//레스토랑 업주 회원 마지막 번호 찾기count	ResOwnerCount
 public int resOwnerCount(Connection conn);
 	//레스토랑 업주 회원 지역별 조회	SelectResOwnerLocation
-public ArrayList<Res> selectResOwnerLocation(Connection conn, String reslocation);
+public ArrayList<Res> selectResOwnerLocation(Connection conn, String reslocation, int startRow, int lastRow);
 	//레스토랑 업주 회원추가	InserResOwner
 public int insertResOwner(Connection conn, Res res);
 	//레스토랑 업주 회원로그인 	ResOwnerLogin
-public int resOwnerLogin(Connection conn, int resid, String respwd);
+//public int resOwnerLogin(Connection conn, int resid, String respwd);
 	//레스토랑 업주 회원 아이디 찾기	SelectRe	sOwnerId
-public int selectResOwnerId(Connection conn, int resid, String resBrn);
+//public int selectResOwnerId(Connection conn, String resOwnerName, String resBrn);
 	//레스토랑 업주 회원 비밀번호 찾기	SelectResOwnerPwd
-public int selectResOwnerPwd(Connection conn, int resid, String resname, String resBrn);
+public int selectResOwnerPwd(Connection conn, String basicInfoUserName, String resOwnerName, String resBrn);
 	//레스토랑 업주 회원 정보수정	UpdateResOwner
 public int updateResOwner(Connection conn, Res resid);
 	//레스토랑 업주 회원 아이디 중복 확인
-public int resOwnerIdCheck(Connection conn, String username);
+//public int resOwnerIdCheck(Connection conn, String username);
 
 		
  
