@@ -14,7 +14,7 @@ public class BasicInfoController {
 	@RequestMapping(value="/basicjoin/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/test2.jsp");
+		mav.setView("");
 		return mav;
 	}
 	@RequestMapping(value="/basicjoin/insert", method="POST")
@@ -22,14 +22,12 @@ public class BasicInfoController {
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("service");
 		mav.addObject("result", service.createEnd(request));
-		if(service.createEnd(request).equals("success")){
+		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
-			mav.setView("/index.html");
 			mav.setRedirect();
 			return mav;
 		}
-		else if(service.createEnd(request).equals("fail")){
-			mav.setView("insert");
+		else if(service.createEnd(request).equals("{\"result\":\"fail\"}")){
 			mav.setRedirect();
 			return mav;
 		}
