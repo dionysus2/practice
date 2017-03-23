@@ -41,25 +41,25 @@ public interface WineSellerDAO {
 	//와인회사업주 회원 정보수정	UpdateWineSeller
 
 		//와인회사 업주 회원 비활성화 설정	SelectResOwnerActivated
-	public int SelectWineSellerActivated(Connection conn);
+	public int selectWineSellerActivated(Connection conn, int resId);
 		//와인회사 업주 페이지별 리스트 조회	SelectResOwnerAllList
-	public ArrayList<WineSeller> SelectWineSellerAllList(Connection conn);
+	public ArrayList<WineSeller> selectWineSellerAllList(Connection conn, int startRow, int lastRow);
 		//와인회사 업주 회원 마지막 번호count	ResOwnerCount
-	public int WineSellerCount(Connection conn);
+	public int wineSellerCount(Connection conn);
 		//와인회사 업주 회원 지역별 조회	SelectResOwnerLocation
-	public ArrayList<Res> SelectWineSellerLocation(Connection conn, String wineSellerlocation);
+	public ArrayList<WineSeller> selectWineSellerLocation(Connection conn, String wineSellerlocation);
 		//와인회사 업주 회원추가	InserResOwner
-	public int InserWineSeller(Connection conn, WineSeller WineSeller);
+	public int inserWineSeller(Connection conn, WineSeller WineSeller);
 		//와인회사 업주 회원로그인 	ResOwnerLogin
-	public int ResWineSellerLogin(Connection conn, WineSeller wineSellerid, WineSeller wineSellerPwd);
+	public int resWineSellerLogin(Connection conn, int wineSellerid, String wineSellerPwd);
 		//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
-	public String SelectWineSellerrId(Connection conn, WineSeller wineId, WineSeller wineSellerBrn);
+	public int SelectWineSellerrId(Connection conn, int wineId, String wineSellerBrn);
 		//와인회사 업주 회원 비밀번호 찾기	SelectResOwnerPwd
-	public String SelectWineSellerPwd(Connection conn, WineSeller wineId, WineSeller wineSellerName, WineSeller wineSellerBrn);
+	public int SelectWineSellerPwd(Connection conn, int wineId, String wineSellerName, String wineSellerBrn);
 		//와인회사 업주 회원 정보수정	UpdateResOwner
-	public int UpdateWineSeller(Connection conn, WineSeller WineSellerId);
+	public int updateWineSeller(Connection conn, int WineSellerId);
 		//와인회사 업주 회원 아이디 중복 확인
-	public int ResOwnerIdCheck(Connection conn, Res Check);
+	public int resOwnerIdCheck(Connection conn, String wineSellerUsername);
 
 			
 		

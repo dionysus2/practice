@@ -1,39 +1,37 @@
 package dionysus.wine.daoimpl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.*;
+import java.util.*;
 
-import dionysus.wine.dao.ResDAO;
-import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.Res;
+import dionysus.wine.dao.*;
+import dionysus.wine.util.*;
+import dionysus.wine.vo.*;
 
-public class ResDaoImpl implements ResDAO {
+public class WineSellerDaoImpl implements WineSellerDAO {
 
-
-	public Res makeRes(ResultSet rs)throws SQLException{
-		Res res = new Res();
-		res.setResAccountNo(rs.getString("resAccountNo"));
-		res.setResEmail(rs.getString("resEmail"));
-		res.setResLocation(rs.getString("resLocation"));
-		res.setResOwnername(rs.getString("resOwnerName"));
-		res.setResProfilePicture(rs.getString("resProfilePicture"));	
-		res.setResTel(rs.getString("resTel"));
-		res.setResUsername(rs.getString("resUserName"));
-		return res;		
+	
+	public WineSeller makeWineSeller(ResultSet rs)throws SQLException{
+		WineSeller wine = new WineSeller();
+		wine.setWineSellerAccountNo(rs.getString("wineSellerAccountNo"));
+		wine.setWineSellerEmail(rs.getString("wineSellerEmail"));
+		wine.setWineSellerLocation(rs.getString("wineSellerLocation"));
+		wine.setWineSellerOwnername(rs.getString("wineSellerOwnername"));
+		wine.setWineSellerProfilePicture(rs.getString("wineSellerOwnername"));	
+		wine.setWineSellerTel(rs.getString("wineSellerTel"));
+		wine.setWineSellerUsername(rs.getString("wineSellerUsername"));
+		return wine;		
 	}
 	
-	//레스토랑 업주 회원 비활성화 설정	SelectResOwnerActivated
+	
+	//와인회사 업주 회원 비활성화 설정	SelectResOwnerActivated
 	@Override
-	public int selectResOwnerActivated(Connection conn, int resId) {
+	public int selectWineSellerActivated(Connection conn, int wineSellerId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String Sql="update res set res_activated=0 where res_id =?";
+		String Sql="update wine_seller_id set ine_seller_activated=0 where ine_seller_id =?";
 		try{
 			pstmt = conn.prepareStatement(Sql);	
-			pstmt.setInt(1, resId);			
+			pstmt.setInt(1, wineSellerId);			
 			rs =pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt(1);
@@ -46,34 +44,34 @@ public class ResDaoImpl implements ResDAO {
 		}		
 		return -1;
 	}
-	//레스토랑 업주 페이지별 리스트 조회	SelectResOwnerAllList
+	//와인회사 업주 페이지별 리스트 조회	SelectResOwnerAllList
 	@Override
-	public ArrayList<Res> selectResownerAllList(Connection conn, int startRow, int lastRow) {
+	public ArrayList<WineSeller> selectWineSellerAllList(Connection conn, int startRow, int lastRow) {
 		String Sql = "select r2.*from(select rownum rnum, r1.* from(select res_id, res_brn,res_username,res_location,res_tel,"
 				+ "res_email,res_account_no,res_profile_picture,res_activated,res_ownername from res)r1)r2"
 				+ "where rnum between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 	
-		ArrayList<Res> list = new ArrayList<>();
-		Res res= new Res();
+		ArrayList<WineSeller> list = new ArrayList<>();
+		WineSeller wine=new WineSeller();
 		try {
 			pstmt = conn.prepareStatement(Sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, lastRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){				
-				res.setResId(rs.getShort("resId"));
-				res.setResBrn(rs.getString("resBrn"));
-				res.setResUsername(rs.getString("resUserName"));
-				res.setResLocation(rs.getString("resLocation"));
-				res.setResTel(rs.getString("resTel"));
-				res.setResEmail(rs.getString("resEmail"));				
-				res.setResAccountNo(rs.getString("resAccountNO"));
-				res.setResProfilePicture(rs.getString("resPicture"));
-				res.setResActivated(rs.getString("resActivatied"));
-				res.setResOwnername(rs.getString("resPwnerName"));				
-				list.add(res);
+				wine.setWineSellerId(rs.getShort("wineSellerId"));
+				wine.setWineSellerBrn(rs.getString("wineSellerBrn"));
+				wine.setWineSellerUsername(rs.getString("wineSellerUsername"));
+				wine.setWineSellerLocation(rs.getString("wineSellerLocation"));
+				wine.setWineSellerTel(rs.getString("wineSellerTel"));
+				wine.setWineSellerEmail(rs.getString("wineSellerEmail"));				
+				wine.setWineSellerAccountNo(rs.getString("wineSellerAccountNo"));
+				wine.setWineSellerProfilePicture(rs.getString("wineSellerProfilePicture"));
+				wine.setWineSellerActivatied(rs.getString("wineSellerActivatied"));
+				wine.setWineSellerOwnername(rs.getString("wineSellerOwnername"));				
+				list.add(wine);
 			}
 			return list;
 		} catch (SQLException e) {
@@ -83,13 +81,12 @@ public class ResDaoImpl implements ResDAO {
 		}
 		return null;
 	}
-	
-	//레스토랑 업주 회원 count	
+	//와인회사 업주 회원 마지막 번호count	ResOwnerCount
 	@Override
-	public int resOwnerCount(Connection conn) {
+	public int wineSellerCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String Sql = "select max(res_id)+1 from res";
+		String Sql = "select max(wine_seller_id)+1 from res";
 				try {
 					pstmt = conn.prepareStatement(Sql);
 					rs = pstmt.executeQuery();
@@ -103,20 +100,20 @@ public class ResDaoImpl implements ResDAO {
 				return -1;
 			}
 
-	//레스토랑 업주 회원 지역별 조회
+	//와인회사 업주 회원 지역별 조회	SelectResOwnerLocation
 	@Override
-	public ArrayList<Res> selectResOwnerLocation(Connection conn, String reslocation){
+	public ArrayList<WineSeller> selectWineSellerLocation(Connection conn, String wineSellerlocation) {
 		String Sql = "select res_account_no,res_email,res_location,res_Ownername,res_profile_picture,res_tel,"
 				+ "res_username from res where res_location=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Res> list = new ArrayList<>();
+		ArrayList<WineSeller> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setString(1, reslocation);
+			pstmt.setString(1, wineSellerlocation);
 			rs = pstmt.executeQuery();
 			while(rs.next())
-			list.add(makeRes(rs));	
+			list.add(makeWineSeller(rs));	
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,25 +123,25 @@ public class ResDaoImpl implements ResDAO {
 		return null;
 		
 	}
-	//레스토랑 업주 회원추가
+	//와인회사 업주 회원추가	InserResOwner
 	@Override
-	public int insertResOwner(Connection conn, Res res) {
+	public int inserWineSeller(Connection conn, WineSeller wineSeller) {
 		String Sql = "insert into res(res_id, res_brn, res_username, "
 				+ "res_pwd, res_location, res_tel, es_email, res_account_no,"
 				+ "res_profile_picture, res_ownername,res_activated values(?,?,?,?,?,?,?,?,?,?,0)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1, res.getResId());
-			pstmt.setString(2, res.getResBrn());
-			pstmt.setString(3, res.getResUsername());
-			pstmt.setString(4, res.getResPwd());
-			pstmt.setString(5, res.getResLocation());
-			pstmt.setString(6, res.getResTel());
-			pstmt.setString(7, res.getResEmail());
-			pstmt.setString(8, res.getResAccountNo());
-			pstmt.setString(9, res.getResProfilePicture());
-			pstmt.setString(10, res.getResOwnername());
+			pstmt.setInt(1, wineSeller.getWineSellerId());
+			pstmt.setString(2, wineSeller.getWineSellerBrn());
+			pstmt.setString(3, wineSeller.getWineSellerUsername());
+			pstmt.setString(4, wineSeller.getWineSellerPwd());
+			pstmt.setString(5, wineSeller.getWineSellerLocation());
+			pstmt.setString(6, wineSeller.getWineSellerTel());
+			pstmt.setString(7, wineSeller.getWineSellerEmail());
+			pstmt.setString(8, wineSeller.getWineSellerAccountNo());
+			pstmt.setString(9, wineSeller.getWineSellerProfilePicture());
+			pstmt.setString(10, wineSeller.getWineSellerOwnername());
 			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,16 +150,17 @@ public class ResDaoImpl implements ResDAO {
 		}	
 		return -1;
 	}
-	//레스토랑 업주 회원로그인
+
+	//와인회사 업주 회원로그인 	ResOwnerLogin
 	@Override
-	public int resOwnerLogin(Connection conn, int resid, String respwd) {
+	public int resWineSellerLogin(Connection conn, int wineSellerid, String wineSellerPwd) {
 		String Sql= "select count(*) from res where res_user_name=? and res_pwd=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1, resid);
-			pstmt.setString(2, respwd);
+			pstmt.setInt(1, wineSellerid);
+			pstmt.setString(2, wineSellerPwd);
 			rs =pstmt.executeQuery();
 			if(rs.next()){				
 				return rs.getInt(1);
@@ -174,16 +172,16 @@ public class ResDaoImpl implements ResDAO {
 		}
 		return -1;
 	}
-	//레스토랑 업주 회원 아이디 찾기
+	//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
 	@Override
-	public int selectResOwnerId(Connection conn, int resId, String resBrn) {
+	public int SelectWineSellerrId(Connection conn, int wineId, String wineSellerBrn) {
 		String Sql="select res_username from res where res_id=? and res_brn=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt=conn.prepareStatement(Sql);
-			pstmt.setInt(1, resId);
-			pstmt.setString(2, resBrn);
+			pstmt.setInt(1, wineId);
+			pstmt.setString(2, wineSellerBrn);
 			rs =pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt(1);
@@ -195,18 +193,17 @@ public class ResDaoImpl implements ResDAO {
 		}	
 		return -1;
 	}
-
-	//비밀번호 찾기
+	//와인회사 업주 회원 비밀번호 찾기	SelectResOwnerPwd
 	@Override
-	public int selectResOwnerPwd(Connection conn, int resid, String resname, String resBrn) {
+	public int SelectWineSellerPwd(Connection conn, int wineId, String wineSellerName, String wineSellerBrn) {
 		String Sql="select res_owner_pwd from res where res_id=? and res_username=? and res_brn=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt=conn.prepareStatement(Sql);
-			pstmt.setInt(1, resid);
-			pstmt.setString(2, resname);
-			pstmt.setString(3, resBrn);
+			pstmt.setInt(1, wineId);
+			pstmt.setString(2, wineSellerName);
+			pstmt.setString(3, wineSellerBrn);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt(1);
@@ -219,10 +216,9 @@ public class ResDaoImpl implements ResDAO {
 		
 		return -1;
 	}
-
-	//레스토랑 업주 회원 정보수정
+	//와인회사 업주 회원 정보수정	UpdateResOwner
 	@Override
-	public int updateResOwner(Connection conn, Res resid) {
+	public int updateWineSeller(Connection conn, int WineSellerId) {
 		String Sql ="update res set res_pwd=?,res_location=?,"
 				+ "res_tel=?,res_email=?,res_account_no=?,res_profile_picture=?,"
 				+ "res_ownername=? where res_id=?";
@@ -255,15 +251,15 @@ public class ResDaoImpl implements ResDAO {
 		}		
 		return 0;
 	}
-	//레스토랑 업주 회원 아이디 중복 확인
+	//와인회사 업주 회원 아이디 중복 확인
 	@Override
-	public int resOwnerIdCheck(Connection conn, String username) {
+	public int resOwnerIdCheck(Connection conn, String wineSellerUsername) {
 		String Sql = "select count(*) from res where res_username=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setString(1, username);
+			pstmt.setString(1, wineSellerUsername);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt(1);
@@ -276,5 +272,4 @@ public class ResDaoImpl implements ResDAO {
 		}
 		return 0;
 	}
-
 }
