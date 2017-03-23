@@ -11,9 +11,10 @@ import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 
 public class WineInfoController {
 	private Logger logger= LoggerFactory.getLogger(WineInfoController.class);
-	@RequestMapping(value="/wineinfo/insert", method="GET")
+	@RequestMapping(value="/sellers/wineinfo/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
+		mav.setView("sellers.html");
 		return mav;
 	}
 	@RequestMapping(value="/wineinfo/insert", method="POST")
