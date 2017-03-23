@@ -1,5 +1,14 @@
 package dionysus.wine.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.util.ArrayList;
+
+import dionysus.wine.vo.Res;
+import dionysus.wine.vo.ResInfo;
+import dionysus.wine.vo.ResReserv;
+import dionysus.wine.vo.WineOrder;
+
 public interface ResReservDAO {
 	/*
 	 * 레스토랑 예약(레스토랑 예약번호,예약일자,예약금액,고객번호)
@@ -15,4 +24,14 @@ public interface ResReservDAO {
 	 * 9.예약접수 정보삭제								int					Connection, 예약번호
 	 * 
 	 */
+
+	public ArrayList<ResInfo>selectAllReserv(Connection conn)throws Exception;
+	public ArrayList<Res>selectByResReserv(Connection conn, int resInfoId)throws Exception;
+	public ArrayList<ResReserv>selectByMonthReserv(Connection conn, Date resResrvDate)throws Exception;
+	public ArrayList<ResReserv>selectByDayReserv(Connection conn, Date resResrvDate)throws Exception;
+	public ArrayList<ResReserv>selectByLastReserv(Connection conn, int customerId)throws Exception;
+	public ArrayList<WineOrder>selectBySalesLate(Connection conn, int wineOrderAmount)throws Exception;
+	public int insertReserv(Connection conn, int resId, int customerId, Date resResrvDate, int resResrvFee)throws Exception;
+	public int updateReserv(Connection conn, Date resResrvDate,int resResrvFee)throws Exception;
+	public int deleteReserv(Connection conn, int resResrvId)throws Exception;
 }
