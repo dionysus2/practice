@@ -18,7 +18,7 @@ import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 
-@WebServlet({"/wineinfo/*", "/#/*", "/#/*"})
+@WebServlet({"/sellers/wineinfo/*", "/#/*", "/#/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
