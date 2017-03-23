@@ -24,11 +24,13 @@ public class BasicInfoController {
 		mav.addObject("result", service.createEnd(request));
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
+			mav.setView("/users/join.html");
 			mav.setRedirect();
 			return mav;
 		}
 		else if(service.createEnd(request).equals("{\"result\":\"fail\"}")){
 			mav.setRedirect();
+			mav.setView("insert");
 			return mav;
 		}
 		logger.info("Controller회원가입 추가실패");
