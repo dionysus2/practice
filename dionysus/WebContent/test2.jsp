@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	테스트
+	회원가입 폼!
 </body>
 </html>

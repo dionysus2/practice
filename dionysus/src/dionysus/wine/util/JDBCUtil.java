@@ -6,10 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class JDBCUtil {
 	private static String url= "jdbc:oracle:thin:@192.168.0.180:1521:XE";
 	private static String id= "DIONYSUS";
 	private static String pw= "1234";
+	private static Logger logger= LoggerFactory.getLogger(JDBCUtil.class);
 	public static Connection getConnection(){
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -17,7 +21,7 @@ public class JDBCUtil {
 		} 
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("JDBCUtil드라이버 연결 실패");
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
