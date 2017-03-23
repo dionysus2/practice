@@ -1,7 +1,5 @@
 package dionysus.wine.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 public interface CustomerService {	
 	/*																리턴				매개변수
 	 * 	<리턴은 무조건 Gson사용>
