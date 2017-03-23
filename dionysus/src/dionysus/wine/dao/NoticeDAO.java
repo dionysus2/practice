@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import dionysus.wine.vo.Notice;
 
 public interface NoticeDAO {
-	public ArrayList<Notice> selectAllNoticeList(Connection conn);
-	public int NoticeCount(Connection conn)throws SQLException;
+	public ArrayList<Notice> selectAllNoticeList(Connection conn) throws SQLException;
+	public int NoticeCount(Connection conn) throws SQLException;
 	public int insertNotice(Connection conn, Notice notice) throws SQLException;
-	public int updateNotice(Connection conn, String noticeTitle) throws SQLException;
+	public int updateNotice(Connection conn, Notice notice) throws SQLException;
 	public int deleteNotice(Connection conn, int noticeId) throws SQLException;
 	public int viewsNotice(Connection conn, int noticeId) throws SQLException;
 	/*

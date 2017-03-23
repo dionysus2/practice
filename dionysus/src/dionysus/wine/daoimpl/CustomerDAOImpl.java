@@ -8,18 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.empMgr.dao.Query;
-import com.empMgr.util.JdbcUtil;
-import com.empMgr.util.MappingUtil;
+import javax.print.attribute.PrintRequestAttribute;
 
 import dionysus.wine.dao.CustomerDAO;
 import dionysus.wine.query.CustomerQuery;
 import dionysus.wine.query.WineInfoQuery;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.Customer;
+import dionysus.wine.vo.Res;
 import dionysus.wine.vo.ResReserv;
 import dionysus.wine.vo.WineInfo;
 import dionysus.wine.vo.WineOrder;
+import dionysus.wine.vo.WineWishlist;
 
 public class CustomerDAOImpl implements CustomerDAO{
 	@Override
@@ -326,7 +326,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 			pstmt.setString(3, customerUserName);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return null; //여기도 수정해야함
+				return rs.getString(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -347,7 +347,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 			pstmt.setString(2, customerPwd);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return 0;//여기도 나중에 수정
+				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -360,62 +360,221 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Override
 	public ArrayList<HashMap<String, Object>> CustomerResReserv(Connection conn) throws SQLException {
 		// TODO Auto-generated method stub
-		
-		return null;
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		try {
+			pstmt= conn.prepareStatement(CustomerQuery.selectResReserv);
+			rs= pstmt.executeQuery();
+			ArrayList<HashMap<String, Object>> list= new ArrayList<HashMap<String, Object>>();
+			while(rs.next()){
+				ResReserv reserv = new ResReserv();
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				reserv.setResId(rs.getInt("RES_RESERV_ID"));
+				reserv.setResResrvDate(rs.getDate("RES_RESERV_DATE"));
+				reserv.setResResrvFee(rs.getInt("RES_RESERV_FEE"));
+				list.add(map);
+			}
+			return list;
+		} 
+		catch (SQLException e) {			
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstmt, rs);
+		}
 	}
 
 	@Override
 	public int customerResReservUpdate(Connection conn, ResReserv ResReserv) throws SQLException {
 		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		try{
+			pstmt = conn.prepareStatement(CustomerQuery.updateResReserv);
+			pstmt.setDate(1, ResReserv.getResResrvDate());
+			pstmt.setInt(2, ResReserv.getResResrvFee());
+		return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, null);
+		}
 		return 0;
 	}
 
 	@Override
 	public int customerResReservDelete(Connection conn, int customerId) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstmt= null;
+		try {
+			pstmt = conn.prepareStatement(CustomerQuery.deleteResReserv);
+			pstmt.setInt(1, customerId); //회원번호로 지워? 아님 예약번호로지워?
+			return pstmt.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstmt, null);
+		}
 	}
 
 	@Override
 	public ArrayList<HashMap<String, Object>> SelectLastResReserv(Connection conn, Date date) throws SQLException{
 		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		try {
+			pstmt= conn.prepareStatement(CustomerQuery.selectLastResReserv);
+			rs= pstmt.executeQuery();
+			ArrayList<HashMap<String, Object>> list= new ArrayList<HashMap<String, Object>>();
+			while(rs.next()){
+				ResReserv reserv = new ResReserv();
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				reserv.setResId(rs.getInt("RES_RESERV_ID"));
+				reserv.setResResrvDate(rs.getDate("RES_RESERV_DATE"));
+				reserv.setResResrvFee(rs.getInt("RES_RESERV_FEE"));
+				list.add(map);
+			}
+			return list;
+		} 
+		catch (SQLException e) {			
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstmt, rs);
+		}
 	}
 
 	@Override
 	public ArrayList<HashMap<String, Object>> SelectCustomerWineOrder(Connection conn) throws SQLException{
 		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		try {
+			pstmt= conn.prepareStatement(CustomerQuery.selectWineOrder);
+			rs= pstmt.executeQuery();
+			ArrayList<HashMap<String, Object>> list= new ArrayList<HashMap<String, Object>>();
+			while(rs.next()){
+				WineOrder order = new WineOrder();
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				order.setWineOrderId(rs.getInt("WINE_ORDER_ID"));
+				order.setWineOrderDate(rs.getDate("WINE_ORDER_DATE"));
+				order.setWineOrderAmount(rs.getInt("WINE_ORDER_AMOUNT"));
+				list.add(map);
+			}
+			return list;
+		} 
+		catch (SQLException e) {			
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstmt, rs);
+		}
 	}
 
 	@Override
 	public int CustomerWineOrderUpdate(Connection conn, WineOrder wineorder) throws SQLException {
 		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		try{
+			pstmt = conn.prepareStatement(CustomerQuery.updateWineOrder);
+			pstmt.setInt(1, wineorder.getWineOrderId());
+			pstmt.setDate(2, wineorder.getWineOrderDate());
+			pstmt.setInt(3, wineorder.getWineOrderAmount());
+		return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, null);
+		}
 		return 0;
 	}
 
 	@Override
 	public int CustomerWineOrderDelete(Connection conn, int customerId) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstmt= null;
+		try {
+			pstmt = conn.prepareStatement(CustomerQuery.deleteWineOrder);
+			pstmt.setInt(1, customerId); 
+			return pstmt.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstmt, null);
+		}
 	}
 
 	@Override
 	public ArrayList<WineInfo> CustomerWineCart(Connection conn, int customerId) throws SQLException{
 		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(CustomerQuery.selectWineWishList);
+			pstmt.setInt(1, customerId);
+			rs = pstmt.executeQuery();
+			ArrayList<WineInfo> list = new ArrayList<>();
+			while(rs.next()) {
+				WineWishlist wishlist = new WineWishlist();
+				WineInfo info = new WineInfo();
+				info.setWineInfoId(rs.getInt("WINE_INFO_ID"));
+				info.setWineInfoName(rs.getString("WINE_INFO_NAME"));
+				info.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
+				info.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
+				info.setWineInfoOrigin(rs.getString("WINE_INFO_ORIGIN"));
+				info.setWineInfoPicture1(rs.getString("WINE_INFO_PICTURE1"));
+				info.setWineInfoPicture2(rs.getString("WINE_INFO_PICTURE2"));
+				info.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
+				list.add(info);
+			}
+			return list;
+		}
+		catch (SQLException e){
+			throw e;
+		}
+		finally {
+			JDBCUtil.close(pstmt,rs);
+		}
 	}
 
 	@Override
 	public int CustomerWineCartOrder(Connection conn, int customerId, int wineOrderId) throws SQLException {
 		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(CustomerQuery.OrderWineWishList);
+			pstmt.setInt(1, customerId);
+			pstmt.setInt(2, wineOrderId);
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, rs);
+		}
 		return 0;
 	}
 
 	@Override
 	public int CustomerWineCartDelete(Connection conn, int customerId) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstmt= null;
+		try {
+			pstmt = conn.prepareStatement(CustomerQuery.deleteWineWishList);
+			pstmt.setInt(1, customerId); 
+			return pstmt.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstmt, null);
+		}
 	}
-	
 }

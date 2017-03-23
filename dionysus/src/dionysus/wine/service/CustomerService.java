@@ -8,7 +8,7 @@ public interface CustomerService {
 	 * 	- 직업별 일반회원 정보 페이지별 조회
 	 * 	- 성별 일반회원 정보 페이지별 조회.
 	 * 	- 이름으로 회원정보 조회.
-	 *	- 일반회원 회원가입.										String				HttpServletRequest
+	 *	- 일반회원 회원가입.(firstname+lastname)					String				HttpServletRequest
 	 *	- 일반회원 회원정보 수정.
 	 *	- 일반회원 아이디 찾기(이름, 주민번호).
 	 *	- 일반회원 비밀번호 찾기(이름, 주민번호, 아이디).

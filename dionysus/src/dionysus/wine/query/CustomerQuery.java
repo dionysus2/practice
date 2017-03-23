@@ -17,12 +17,12 @@ public interface CustomerQuery {
 	public String updateResReserv = "update Res_Reserv set Res_Reserv_Date=?, Res_Reserv_Fee=? where Customer_Id=?";
 	public String deleteResReserv = "delete from Res_Reserv where Customer_Id=?";
 	//회원 레스토랑 년별 지난예약 조회
-	//public String selectLastResReserv = 
+	public String selectLastResReserv = ""; 
 	public String selectWineOrder = "select * from Wine_Order w, customer c where w.Wine_Order_Id=c.Customer_Id";
 	public String updateWineOrder = "update Wine_Order set Wine_Order_Date=?, Wine_Order_Amount=? where Customer_Id=?";
 	public String deleteWineOrder = "delete from Wine_Order where Customer_Id=?";
 	public String selectWineWishList = "select * from Wine_WishList ww, customer c where ww.Wine_WishList_Id=c.Customer_Id";
 	//회원 장바구니 와인상품 주문
-	//public String OrderWineWishList =                                                                      
+	public String OrderWineWishList = "";                                                                   
 	public String deleteWineWishList = "delte from Wine_WishList where Customer_Id=?";
 }
