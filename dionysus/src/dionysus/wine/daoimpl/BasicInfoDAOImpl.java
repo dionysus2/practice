@@ -36,9 +36,23 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 	}
 
 	@Override
-	public int basicInfoUpdate(Connection conn, BasicInfo basicinfo) throws SQLException {
+	public int basicInfoUpdate(Connection conn, BasicInfo basicinfo) throws SQLException  {
 		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstm= null;
+		try {
+			pstm= conn.prepareStatement(BasicInfoQuery.update);
+			pstm.setString(1, basicinfo.getBasicInfoPwd());
+			pstm.setString(2, basicinfo.getBasicInfoEmail());
+			pstm.setString(3, basicinfo.getBasicInfoUsername());
+			return pstm.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, null);
+		}
 	}
 
 	@Override

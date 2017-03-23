@@ -18,7 +18,7 @@ import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
-@WebServlet({"/sellers/wineinfo/*", "/basicjoin/*"})
+@WebServlet({"/sellers/wineinfo/*", "/basic/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {

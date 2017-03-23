@@ -10,10 +10,7 @@ public interface BasicInfoService {
 	 * 	4. 로그인
 	 * 	5. 아이디 중복확인
 	 * */
-	public String createStart(HttpServletRequest request);
 	public String createEnd(HttpServletRequest request);
-	public String deleteStart(HttpServletRequest request);
-	public String deleteEnd(HttpServletRequest request);
 	public String updateStart(HttpServletRequest request);
 	public String updateEnd(HttpServletRequest request);
 	public String login(HttpServletRequest request);
