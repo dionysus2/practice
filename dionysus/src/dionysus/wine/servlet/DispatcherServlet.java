@@ -13,16 +13,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dionysus.wine.daoimpl.BasicInfoDAOImpl;
 import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
+import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
-@WebServlet("/sellers/wineinfo/*")
+@WebServlet({"/sellers/wineinfo/*", "/basicjoin/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		ServletContext context = getServletContext();
-		//	context.setAttribute("service", service);
+		BasicInfoDAOImpl basicinfodao= new BasicInfoDAOImpl();
+		BasicInfoServiceImpl basicinfoservice= new BasicInfoServiceImpl(basicinfodao);
+		context.setAttribute("service", basicinfoservice);
+		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");
 		AnnotationRunner.getRequestMapping(path, packageName);

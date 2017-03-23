@@ -76,6 +76,25 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 	@Override
 	public int basicInfoUserNameCheck(Connection conn, String basicInfoUserName) throws SQLException {
 		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(BasicInfoQuery.basicInfoUsernameCheck);
+			pstm.setString(1, basicInfoUserName);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				logger.info("DAO아이디 중복확인 성공");
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		logger.info("DAO아이디 중복확인 실패");
 		return 0;
 	}
 
