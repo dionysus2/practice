@@ -1,5 +1,10 @@
 package dionysus.wine.dao;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import dionysus.wine.vo.ResInfo;
+
 public interface ResInfoDAO {
 	/* 
 	 * 	- 레스토랑 정보 페이지별 리스트 조회				리턴						매개변수
@@ -14,4 +19,13 @@ public interface ResInfoDAO {
 	 * 	- 레스토랑 정보 수정
 	 * 		6. 레스토랑 정보 수정							int						Connection, ResInfo
 	 * */
+
+
+public ArrayList<ResInfo>selectResInfoAllList(Connection conn, int startPaging, int lastPaging)throws Exception;
+public int selectByCount(Connection conn)throws Exception;
+public ResInfo selectByResOwnerResInfo(Connection conn, int resId)throws Exception;
+public int insertResInfo(Connection conn, ResInfo resInfo) throws Exception;
+public int deleteResInfo(Connection conn, int resId)throws Exception;
+public int updateResInfo(Connection conn, ResInfo resInfo) throws Exception;
+
 }

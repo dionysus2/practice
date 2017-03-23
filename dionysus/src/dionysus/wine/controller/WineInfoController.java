@@ -14,8 +14,8 @@ public class WineInfoController {
 	@RequestMapping(value="/sellers/wineinfo/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		//	mav.setView("/sellers/sellers.html");
-		mav.setView("test2.jsp");
+		mav.setView("/sellers/sellers.html");
+		//	mav.setView("test2.jsp");
 		return mav;
 	}
 	@RequestMapping(value="/wineinfo/insert", method="POST")
