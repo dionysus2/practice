@@ -12,5 +12,5 @@ public class Res {
 	private String resProfilePicture;
 	private String resActivated;
 	private String resOwnername;
-	private String basicInfoId;
+	private int basicInfoId;
 }
