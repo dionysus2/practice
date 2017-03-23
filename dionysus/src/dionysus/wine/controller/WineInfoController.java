@@ -24,7 +24,7 @@ public class WineInfoController {
 		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
 		mav.addObject("result", service.wineInfoCreateEnd(request));		
 		//	result success일때, fail일때 다른view 이동 추가코딩 필요함
-		mav.setView("list");				
+		mav.setView("insert");				
 		//	상품추가 후 이동페이지 설정 다시정할 필요있음.
 		mav.setRedirect();
 		return mav;

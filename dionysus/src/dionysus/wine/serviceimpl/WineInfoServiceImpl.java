@@ -64,10 +64,10 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String wineInfoPicture1= request.getParameter("wineInfoPicture1");
 		String wineInfoPicture2= request.getParameter("wineInfoPicture2");
 		String wineInfoPicture3= request.getParameter("wineInfoPicture3");
-		int wineSellerId= Integer.parseInt("wineSellerId");
+	//	int wineSellerId= Integer.parseInt("wineSellerId");
 		try {
 			logger.info("Connection연결성공");
-			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoOrigin, wineInfoPicture1, wineInfoPicture2, wineInfoPicture3, wineSellerId));
+			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoOrigin, wineInfoPicture1, wineInfoPicture2, wineInfoPicture3));
 			JsonObject ob= new JsonObject();
 			if(result==1){
 				ob.addProperty("result", "success");
