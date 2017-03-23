@@ -14,7 +14,7 @@ public class BasicInfoController {
 	@RequestMapping(value="/basicjoin/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("");
+		mav.setView("/index.html");
 		return mav;
 	}
 	@RequestMapping(value="/basicjoin/insert", method="POST")
@@ -32,7 +32,7 @@ public class BasicInfoController {
 			return mav;
 		}
 		logger.info("Controller회원가입 추가실패");
-		mav.setView("/index.html");
+		mav.setView("insert");
 		mav.setRedirect();
 		return null;
 	}

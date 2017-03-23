@@ -36,12 +36,6 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 	}
 
 	@Override
-	public int basicInfoDelete(Connection conn, int basicinfoid) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int basicInfoUpdate(Connection conn, BasicInfo basicinfo) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
