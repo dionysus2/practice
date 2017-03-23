@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JDBCUtil {
-	private static String url= "jdbc:oracle:thin:@192.168.0.180:XE";
+	private static String url= "jdbc:oracle:thin:@192.168.0.180:1521:XE";
 	private static String id= "DIONYSUS";
 	private static String pw= "1234";
 	public static Connection getConnection(){
