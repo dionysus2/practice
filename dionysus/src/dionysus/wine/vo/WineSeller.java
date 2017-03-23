@@ -11,6 +11,6 @@ public class WineSeller {
 	private String wineSellerAccountNo;
 	private String wineSellerProfilePicture;
 	private String wineSellerActivatied;
-	private String wineSellerOwnername;
+	private String wineSellerName;
 	private String basicInfoId;
 }
