@@ -2,6 +2,7 @@ package dionysus.wine.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dionysus.wine.vo.BasicInfo;
 
@@ -16,4 +17,5 @@ public interface BasicInfoDAO {
 	public int basicInfoUpdate(Connection conn, BasicInfo basicinfo)throws SQLException;
 	public int Login(Connection conn, String basicInfoUserName, String basicInfoPwd)throws SQLException;
 	public int basicInfoUserNameCheck(Connection conn, String basicInfoUserName)throws SQLException;
+	public BasicInfo selectByBasicInfoId(Connection conn, String basicInfoUsername)throws SQLException;
 }

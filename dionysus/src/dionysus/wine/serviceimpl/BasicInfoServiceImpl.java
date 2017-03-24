@@ -60,6 +60,7 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 		try {
 			int result= dao.basicInfoInsert(conn, new BasicInfo(basicInfoUsername, basicInfoPwd, basicInfoEmail));
 			JsonObject ob= new JsonObject();
+			System.out.println(result);
 			if(result==1){
 				ob.addProperty("result", "success");
 				logger.info("Service아이디생성 성공");
@@ -84,6 +85,18 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 	@Override
 	public String updateStart(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		try {
+			BasicInfo basic= dao.selectByBasicInfoId(conn, request.getParameter("basicInfoUsername"));
+			return new Gson().toJson(basic);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 
@@ -102,7 +115,7 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 		try {
 			int result= dao.Login(conn, basicInfoUsername, basicInfoPwd);
 			JsonObject ob= new JsonObject();
-			if(result==2){
+			if(result==1){
 				ob.addProperty("result", "success");
 				logger.info("Service로그인 성공");
 			}
