@@ -45,7 +45,6 @@
 
 
 
-
 	<div class="container">
 
 		<h1>관리 메뉴</h1>
@@ -67,34 +66,34 @@
 				<p>사진은 전부 url로 등록해야 됨</p>
 				<div class="row">
 
-			<form>
+			<form action="/dionysus/sellers/insert" method="post">
 				<div class="form-group">
 					<label for="name">이름</label> <input type="text"
-						class="form-control" id="name" name="WINE_INFO_NAME">
+						class="form-control" id="name" name="wineInfoName">
 				</div>
 				<div class="form-group">
 					<label for="pro_pic">프로필 사진</label> <input type="url"
-						class="form-control" id="pro_pic" name="WINE_INFO_PROFILE_PICTURE">
+						class="form-control" id="pro_pic" name="wineInfoProfilePicture">
 				</div>
 				<div class="form-group">
 					<label for="price">가격</label> <input type="number"
-						class="form-control" id="price" name="WINE_INFO_PRICE">
+						class="form-control" id="price" name="wineInfoPrice">
 				</div>
 				<div class="form-group">
 					<label for="origin">원산지</label> <input type="text"
-						class="form-control" id="origin" name="WINE_INFO_ORIGIN">
+						class="form-control" id="origin" name="wineInfoOrigin">
 				</div>
 				<div class="form-group">
 					<label for="pic1">사진1</label> <input type="url" class="form-control"
-						id="pic1" name="WINE_INFO_PICTURE1">
+						id="pic1" name="wineInfoPicture1">
 				</div>
 				<div class="form-group">
 					<label for="pic2">사진2</label> <input type="url" class="form-control"
-						id="pic2" name="WINE_INFO_PICTURE2">
+						id="pic2" name="wineInfoPicture2">
 				</div>
 				<div class="form-group">
 					<label for="pic3">사진3</label> <input type="url" class="form-control"
-						id="pic3" name="WINE_INFO_PICTURE3">
+						id="pic3" name="wineInfoPicture3">
 				</div>
 				<button type="submit" class="btn btn-default">추가</button>
 			</form>

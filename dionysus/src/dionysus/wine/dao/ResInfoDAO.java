@@ -21,7 +21,7 @@ public interface ResInfoDAO {
 	 * */
 
 
-public ArrayList<ResInfo>selectResInfoAllList(Connection conn, int startPaging, int lastPaging)throws Exception;
+public ArrayList<ResInfo>selectResInfoAllList(Connection conn, int startRow, int  lastRow)throws Exception;
 public int selectByCount(Connection conn)throws Exception;
 public ResInfo selectByResOwnerResInfo(Connection conn, int resId)throws Exception;
 public int insertResInfo(Connection conn, ResInfo resInfo) throws Exception;
