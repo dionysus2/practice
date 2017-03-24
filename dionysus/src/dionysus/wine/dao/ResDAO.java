@@ -1,6 +1,6 @@
 package dionysus.wine.dao;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.ArrayList;
 
 import dionysus.wine.vo.Res;
@@ -29,23 +29,23 @@ public interface ResDAO {
 	
 	
 	//레스토랑 업주 회원 비활성화 설정	SelectResOwnerActivated
-public int selectResOwnerActivated(Connection conn, int resId);
+public int selectResOwnerActivated(Connection conn, int resId)throws SQLException;
 	//레스토랑 업주 페이지별 리스트 조회	SelectResOwnerAllList
-public ArrayList<Res> selectResownerAllList(Connection conn, int startRow, int lastRow);
+public ArrayList<Res> selectResownerAllList(Connection conn, int startRow, int lastRow)throws SQLException;
 	//레스토랑 업주 회원 마지막 번호 찾기count	ResOwnerCount
-public int resOwnerCount(Connection conn);
+public int resOwnerCount(Connection conn)throws SQLException;
 	//레스토랑 업주 회원 지역별 조회	SelectResOwnerLocation
-public ArrayList<Res> selectResOwnerLocation(Connection conn, String reslocation, int startRow, int lastRow);
+public ArrayList<Res> selectResOwnerLocation(Connection conn, String reslocation, int startRow, int lastRow)throws SQLException;
 	//레스토랑 업주 회원추가	InserResOwner
-public int insertResOwner(Connection conn, Res res);
+public int insertResOwner(Connection conn, Res res)throws SQLException;
 	//레스토랑 업주 회원로그인 	ResOwnerLogin
 //public int resOwnerLogin(Connection conn, int resid, String respwd);
 	//레스토랑 업주 회원 아이디 찾기	SelectRe	sOwnerId
-//public int selectResOwnerId(Connection conn, String resOwnerName, String resBrn);
+public int selectResOwnerId(Connection conn, String resName, String resBrn)throws SQLException;
 	//레스토랑 업주 회원 비밀번호 찾기	SelectResOwnerPwd
-public int selectResOwnerPwd(Connection conn, String basicInfoUserName, String resOwnerName, String resBrn);
+public int selectResOwnerPwd(Connection conn, String basicInfoUserName, String resName, String resBrn)throws SQLException;
 	//레스토랑 업주 회원 정보수정	UpdateResOwner
-public int updateResOwner(Connection conn, Res resid);
+public int updateResOwner(Connection conn, Res resid)throws SQLException;
 	//레스토랑 업주 회원 아이디 중복 확인
 //public int resOwnerIdCheck(Connection conn, String username);
 

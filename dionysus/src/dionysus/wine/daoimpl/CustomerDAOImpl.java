@@ -1,25 +1,13 @@
 package dionysus.wine.daoimpl;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
-import javax.print.attribute.PrintRequestAttribute;
-
-import dionysus.wine.dao.CustomerDAO;
-import dionysus.wine.query.CustomerQuery;
-import dionysus.wine.query.WineInfoQuery;
-import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.Customer;
-import dionysus.wine.vo.Res;
-import dionysus.wine.vo.ResReserv;
-import dionysus.wine.vo.WineInfo;
-import dionysus.wine.vo.WineOrder;
-import dionysus.wine.vo.WineWishlist;
+import dionysus.wine.dao.*;
+import dionysus.wine.query.*;
+import dionysus.wine.util.*;
+import dionysus.wine.vo.*;
 
 public class CustomerDAOImpl implements CustomerDAO{
 	@Override
@@ -29,8 +17,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 		try{
 			pstmt = conn.prepareStatement(CustomerQuery.insert);
 			pstmt.setInt(1, customer.getCustomerId());
-			pstmt.setString(2, customer.getCustomerUsername());
-			pstmt.setString(3, customer.getCustomerPwd());
+			//pstmt.setString(2, customer.getCustomerUsername());
+			//pstmt.setString(3, customer.getCustomerPwd());
 			pstmt.setString(4, customer.getCustomerRrn());
 			pstmt.setString(5, customer.getCustomerAddress());
 			pstmt.setString(6, customer.getCustomerName());
@@ -38,7 +26,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 			pstmt.setString(8, customer.getCustomerGender());
 			pstmt.setString(9, customer.getCustomerAccountNo());
 			pstmt.setString(10, customer.getCustomerJob());
-			pstmt.setString(11, customer.getCustomerEmail());
+			//pstmt.setString(11, customer.getCustomerEmail());
 			pstmt.setString(12, customer.getCustomerActivated());
 		return pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -60,8 +48,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			while(rs.next()){
 				Customer customer = new Customer();
 				customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
-				customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
-				customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
+				//customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
+				//customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerRrn(rs.getString("CUSTOMER_RRN"));
 				customer.setCustomerAddress(rs.getString("CUSTOMER_ADDRESS"));
 				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
@@ -69,7 +57,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 				customer.setCustomerGender(rs.getString("CUSTOMER_GENDER"));
 				customer.setCustomerAccountNo(rs.getString("CUSTOMER_ACCOUNT_NO"));
 				customer.setCustomerJob(rs.getString("CUSTOMER_JOB"));
-				customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
+				//customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
 				customer.setCustomerActivated(rs.getString("CUSTOMER_ACTIVATED"));
 				list.add(customer);
 			}
@@ -117,8 +105,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			while(rs.next()){
 				Customer customer = new Customer();
 				customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
-				customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
-				customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
+			    //customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
+			    //customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerRrn(rs.getString("CUSTOMER_RRN"));
 				customer.setCustomerAddress(rs.getString("CUSTOMER_ADDRESS"));
 				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
@@ -126,7 +114,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 				customer.setCustomerGender(rs.getString("CUSTOMER_GENDER"));
 				customer.setCustomerAccountNo(rs.getString("CUSTOMER_ACCOUNT_NO"));
 				customer.setCustomerJob(rs.getString("CUSTOMER_JOB"));
-				customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
+				//customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
 				customer.setCustomerActivated(rs.getString("CUSTOMER_ACTIVATED"));
 				list.add(customer);
 			}
@@ -154,8 +142,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			while(rs.next()){
 				Customer customer = new Customer();
 				customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
-				customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
-				customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
+				//customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
+				//customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerRrn(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerAddress(rs.getString("CUSTOMER_ADDRESS"));
 				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
@@ -163,7 +151,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 				customer.setCustomerGender(rs.getString("CUSTOMER_GENDER"));
 				customer.setCustomerAccountNo(rs.getString("CUSTOMER_ACCOUNT_NO"));
 				customer.setCustomerJob(rs.getString("CUSTOMER_JOB"));
-				customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
+				//customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
 				customer.setCustomerActivated(rs.getString("CUSTOMER_ACTIVATED"));
 				list.add(customer);
 			}
@@ -190,8 +178,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			while(rs.next()) {
 				Customer customer = new Customer();
 				customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
-				customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
-				customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
+				//customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
+				//customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerRrn(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerAddress(rs.getString("CUSTOMER_ADDRESS"));
 				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
@@ -199,7 +187,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 				customer.setCustomerGender(rs.getString("CUSTOMER_GENDER"));
 				customer.setCustomerAccountNo(rs.getString("CUSTOMER_ACCOUNT_NO"));
 				customer.setCustomerJob(rs.getString("CUSTOMER_JOB"));
-				customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
+				//customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
 				customer.setCustomerActivated(rs.getString("CUSTOMER_ACTIVATED"));
 				list.add(customer);
 			}
@@ -226,8 +214,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			while(rs.next()) {
 				Customer customer = new Customer();
 				customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
-				customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
-				customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
+				//customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
+				//customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerRrn(rs.getString("CUSTOMER_PWD"));
 				customer.setCustomerAddress(rs.getString("CUSTOMER_ADDRESS"));
 				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
@@ -235,7 +223,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 				customer.setCustomerGender(rs.getString("CUSTOMER_GENDER"));
 				customer.setCustomerAccountNo(rs.getString("CUSTOMER_ACCOUNT_NO"));
 				customer.setCustomerJob(rs.getString("CUSTOMER_JOB"));
-				customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
+				//customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
 				customer.setCustomerActivated(rs.getString("CUSTOMER_ACTIVATED"));
 				list.add(customer);
 			}
@@ -255,8 +243,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(CustomerQuery.update);
-			pstmt.setString(1, customer.getCustomerUsername());
-			pstmt.setString(2, customer.getCustomerPwd());
+			//pstmt.setString(1, customer.getCustomerUsername());
+			//pstmt.setString(2, customer.getCustomerPwd());
 			pstmt.setString(3, customer.getCustomerRrn());
 			pstmt.setString(4, customer.getCustomerAddress());
 			pstmt.setString(5, customer.getCustomerName());
@@ -264,7 +252,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 			pstmt.setString(7, customer.getCustomerGender());
 			pstmt.setString(8, customer.getCustomerAccountNo());
 			pstmt.setString(9, customer.getCustomerJob());
-			pstmt.setString(10, customer.getCustomerEmail());
+			//pstmt.setString(10, customer.getCustomerEmail());
 			pstmt.setString(11, customer.getCustomerActivated());
 		return pstmt.executeUpdate();
 		} catch (SQLException e) {
