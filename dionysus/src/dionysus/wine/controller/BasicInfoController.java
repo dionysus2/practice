@@ -22,7 +22,6 @@ public class BasicInfoController {
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
-		mav.addObject("result", service.createEnd(request));
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
 			mav.setView("login");
@@ -49,7 +48,6 @@ public class BasicInfoController {
 	public static ModelAndView loginEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
-		mav.addObject("result", service.login(request));
 		if(service.login(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller로그인 성공");
 			HttpSession session= request.getSession();
@@ -67,5 +65,23 @@ public class BasicInfoController {
 		mav.setView("login");
 		mav.setRedirect();
 		return mav;
+	}
+	@RequestMapping(value="/basic/update", method="GET")
+	public static ModelAndView updateStart(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
+		HttpSession session= request.getSession();
+		if(session!=null){
+			session.getAttribute("basicInfoUsername");
+			mav.addObject("result", service.updateStart(request));
+			mav.setView("/jaehyuntest/basicupdate.jsp");
+			return mav;
+		}
+		mav.setView("/jaehyuntest/basiclogin.jsp");
+		return mav;
+	}
+	
+	public static ModelAndView updateEnd(HttpServletRequest request){
+		
 	}
 }

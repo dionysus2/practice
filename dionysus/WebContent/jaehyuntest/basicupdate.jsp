@@ -5,10 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="script/jquery-3.1.1.min.js"></script>
+<script>
+	var result= request.getAttribute("result");
+</script>
 </head>
 <body>
-	<%=session.getAttribute("basicInfoUsername") %>님 안녕하세요.
-	<a href="basicupdate.jsp">정보변경</a>
-	<a href="logout.jsp">로그아웃</a>
+	<%=session.getAttribute("basicInfoUsername") %>님 정보변경 페이지
 </body>
 </html>
