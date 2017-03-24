@@ -1,6 +1,7 @@
 package dionysus.wine.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,20 +12,20 @@ import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
 public class BasicInfoController {
 	private static Logger logger= LoggerFactory.getLogger(BasicInfoController.class);
-	@RequestMapping(value="/basicjoin/insert", method="GET")
+	@RequestMapping(value="/basic/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/index.html");
+		mav.setView("/jaehyuntest/basicjoin.jsp");
 		return mav;
 	}
-	@RequestMapping(value="/basicjoin/insert", method="POST")
+	@RequestMapping(value="/basic/insert", method="POST")
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("service");
+		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
 		mav.addObject("result", service.createEnd(request));
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
-			mav.setView("/users/join.html");
+			mav.setView("login");
 			mav.setRedirect();
 			return mav;
 		}
@@ -37,5 +38,34 @@ public class BasicInfoController {
 		mav.setView("insert");
 		mav.setRedirect();
 		return null;
+	}
+	@RequestMapping(value="/basic/login", method="GET")
+	public static ModelAndView loginStart(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		mav.setView("/jaehyuntest/basiclogin.jsp");
+		return mav;
+	}
+	@RequestMapping(value="/basic/login", method="POST")
+	public static ModelAndView loginEnd(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
+		mav.addObject("result", service.login(request));
+		if(service.login(request).equals("{\"result\":\"success\"}")){
+			logger.info("Controller로그인 성공");
+			HttpSession session= request.getSession();
+			session.setAttribute("basicInfoUsername", request.getParameter("basicInfoUsername"));
+			mav.setView("/dionysus/jaehyuntest/main.jsp");
+			mav.setRedirect();
+			return mav;
+		}
+		else if(service.login(request).equals("{\"result\":\"fail\"}")){
+			logger.info("Conroller로그인 실패");
+			mav.setView("login");
+			mav.setRedirect();
+			return mav;
+		}
+		mav.setView("login");
+		mav.setRedirect();
+		return mav;
 	}
 }
