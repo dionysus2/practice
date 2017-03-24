@@ -41,7 +41,6 @@ public class DispatcherServlet extends HttpServlet {
 			HashMap<String,Object> model = mav.getModel();
 			response.setContentType("application/x-json; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			System.out.println(model.get("result"));
 			out.print(model.get("result"));
 			out.flush();
 		}
@@ -66,6 +65,6 @@ public class DispatcherServlet extends HttpServlet {
 		process(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		process(request, response);
+		doGet(request, response);
 	}
 }
