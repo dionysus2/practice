@@ -17,13 +17,13 @@ public class BasicInfoDAOTest {
 	@Test
 	public void insert(){
 		Connection conn= JDBCUtil.getConnection();
-		String basicInfoUsername= "TEST";
+		String basicInfoUsername= "asas";
 		String basicInfoPwd= "1234";
-		String basicInfoEmail= "test@naver.com";
+		String basicInfoEmail= "asas";
 		try {
-			dao.basicInfoInsert(conn, new BasicInfo(basicInfoUsername, basicInfoPwd, basicInfoEmail));
-			int result= dao.Login(conn, "TEST", "1234");
-			assertThat(result, is(1));
+			int result=dao.basicInfoInsert(conn, new BasicInfo(basicInfoUsername, basicInfoPwd, basicInfoEmail));
+			//	int result= dao.Login(conn, "asas", "1234");
+			assertThat(result, is(2));
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

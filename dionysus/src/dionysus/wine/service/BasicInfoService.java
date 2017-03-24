@@ -12,10 +12,7 @@ public interface BasicInfoService {
 	 * */
 	public String createStart(HttpServletRequest request);
 	public String createEnd(HttpServletRequest request);
-	public String deleteStart(HttpServletRequest request);
-	public String deleteEnd(HttpServletRequest request);
 	public String updateStart(HttpServletRequest request);
 	public String updateEnd(HttpServletRequest request);
 	public String login(HttpServletRequest request);
-	public String readUsernameCheck(HttpServletRequest request);
 }

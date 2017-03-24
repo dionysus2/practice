@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class BasicInfo {
-	private String basicInfoId;
+	private int basicInfoId;
 	private String basicInfoUsername;
 	private String basicInfoPwd;
 	private String basicInfoEmail;

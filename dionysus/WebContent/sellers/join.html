@@ -2,88 +2,77 @@
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="import" href="http://localhost:8087/dionysus/heads/bootstrap.html">
+    
 </head>
+
+<script src="https://www.w3schools.com/lib/w3data.js"></script>
+
 <body>
 
-	<div class="container-fluid">
-
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Dionysus</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Page 1</a></li>
-						<li><a href="#">Page 2</a></li>
-						<li><a href="#">Page 3</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" data-toggle="modal" data-target="#myModal2"><span
-								class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#myModal"><span
-								class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
+<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div> 
+<script>w3IncludeHTML();</script>
+	
 
 
 
 
+	<!-- 회원 가입 추가 정보 폼 -->
 	<div class="container">
 
-		<h1>회원 가입</h1>
-		
+		<h1>와인회사 회원 가입</h1>
+		<br>
 
-			<form>
-				<div class="form-group">
-					<label for="name">이름</label> <input type="text"
-						class="form-control" id="name" name="WINE_INFO_NAME">
+		<form>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="name">법인명</label> <input type="text"
+							class="form-control" id="name" name="wineSellerName">
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="pro_pic">프로필 사진</label> <input type="url"
-						class="form-control" id="pro_pic" name="WINE_INFO_PROFILE_PICTURE">
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="brn">사업자번호</label> <input type="text"
+							class="form-control" id="brn" name="wineSellerBrn">
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="price">가격</label> <input type="number"
-						class="form-control" id="price" name="WINE_INFO_PRICE">
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="tel">연락처</label> <input type="tel"
+							class="form-control" id="tel" name="wineSellerTel">
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="origin">원산지</label> <input type="text"
-						class="form-control" id="origin" name="WINE_INFO_ORIGIN">
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="location">위치</label> <input type="text"
+							class="form-control" id="location" name="wineSellerLocation">
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="pic1">사진1</label> <input type="url" class="form-control"
-						id="pic1" name="WINE_INFO_PICTURE1">
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="account">연결계좌</label> <input type="text"
+							class="form-control" id="account" name="wineSellerAccount">
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="pic2">사진2</label> <input type="url" class="form-control"
-						id="pic2" name="WINE_INFO_PICTURE2">
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<a href="../index.html" input type="submit"
+						class="btn btn-default btn-block" value="Submit Button">가입 완료</a>
 				</div>
-				<div class="form-group">
-					<label for="pic3">사진3</label> <input type="url" class="form-control"
-						id="pic3" name="WINE_INFO_PICTURE3">
-				</div>
-				<button type="submit" class="btn btn-default">추가</button>
-			</form>
-		</div>
-		
+			</div>
+		</form>
+	</div>
 
 </body>
 </html>

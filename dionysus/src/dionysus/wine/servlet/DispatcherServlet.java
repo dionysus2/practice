@@ -18,7 +18,7 @@ import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
-@WebServlet({"/sellers/wineinfo/*", "/basicjoin/*"})
+@WebServlet("/basic/*")
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
@@ -26,7 +26,7 @@ public class DispatcherServlet extends HttpServlet {
 		ServletContext context = getServletContext();
 		BasicInfoDAOImpl basicinfodao= new BasicInfoDAOImpl();
 		BasicInfoServiceImpl basicinfoservice= new BasicInfoServiceImpl(basicinfodao);
-		context.setAttribute("service", basicinfoservice);
+		context.setAttribute("basicinfoservice", basicinfoservice);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");
@@ -41,7 +41,6 @@ public class DispatcherServlet extends HttpServlet {
 			HashMap<String,Object> model = mav.getModel();
 			response.setContentType("application/x-json; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			System.out.println(model.get("result"));
 			out.print(model.get("result"));
 			out.flush();
 		}
@@ -66,6 +65,6 @@ public class DispatcherServlet extends HttpServlet {
 		process(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		process(request, response);
+		doGet(request, response);
 	}
 }

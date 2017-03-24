@@ -24,6 +24,7 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 			pstm.setString(1, basicinfo.getBasicInfoUsername());
 			pstm.setString(2, basicinfo.getBasicInfoPwd());
 			pstm.setString(3, basicinfo.getBasicInfoEmail());
+			logger.info("DAO아이디 생성");
 			return pstm.executeUpdate();
 		} 
 		catch (SQLException e) {
@@ -36,9 +37,23 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 	}
 
 	@Override
-	public int basicInfoUpdate(Connection conn, BasicInfo basicinfo) throws SQLException {
+	public int basicInfoUpdate(Connection conn, BasicInfo basicinfo) throws SQLException  {
 		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstm= null;
+		try {
+			pstm= conn.prepareStatement(BasicInfoQuery.update);
+			pstm.setString(1, basicinfo.getBasicInfoPwd());
+			pstm.setString(2, basicinfo.getBasicInfoEmail());
+			pstm.setString(3, basicinfo.getBasicInfoUsername());
+			return pstm.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, null);
+		}
 	}
 
 	@Override
@@ -91,5 +106,30 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 		logger.info("DAO아이디 중복확인 실패");
 		return 0;
 	}
-
+	
+	@Override
+	public BasicInfo selectByBasicInfoId(Connection conn, String basicInfoUsername) throws SQLException{
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(BasicInfoQuery.selectByID);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				BasicInfo basic= new BasicInfo();
+				basic.setBasicInfoEmail(rs.getString("BASIC_INFO_EMAIL"));
+				basic.setBasicInfoPwd(rs.getString("BASIC_INFO_PWD"));
+				logger.info("DAO검색:"+basic);
+				return basic;
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return null;
+	}
 }
