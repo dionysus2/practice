@@ -33,7 +33,7 @@ public interface WineSellerAuthorizationDAO {
 	public int yesWineSellerAuthorizated(Connection conn, int wineSellerAuthorizationId)throws SQLException;
 	
 	//6. 와인회사 업주 회원 신청자 비활성화 속성 1로 변경
-	public int selectWineSellerAuthorization(Connection conn, int wineSellerAuthorizationId)throws SQLException;
+//	public int selectWineSellerAuthorization(Connection conn, int wineSellerAuthorizationId)throws SQLException;
 	
 	
 	

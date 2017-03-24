@@ -29,7 +29,7 @@ public class WineSellerAthorizationDaoImpl implements WineSellerAuthorizationDAO
 			while(rs.next()){
 				wine.setWineSellerAuthorizated(rs.getString("wine_seller_authorizated"));
 				wine.setWineSellerAuthorizationDate(rs.getDate("wine_seller_authorization_date"));
-				wine.setWineSellerId(rs.getInt("wine_seller_authorization_id"));
+				wine.setWineSellerId(rs.getInt("wine_seller_id"));
 				list.add(wine);				
 			}return list;
 		}catch(SQLException e){
@@ -42,7 +42,7 @@ public class WineSellerAthorizationDaoImpl implements WineSellerAuthorizationDAO
 	//2. 와인회사 업주 회원신청자 count
 	@Override
 	public int wineSellerAuthorization(Connection conn) throws SQLException {
-		String Sql = "select count(wine_seller_authorization_id) from wine_seller_authorization";
+		String Sql = "select count(wine_seller_id) from wine_seller_authorization";
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		try{
@@ -62,13 +62,12 @@ public class WineSellerAthorizationDaoImpl implements WineSellerAuthorizationDAO
 	@Override
 	public int insertWineSellerAuthorization(Connection conn, WineSellerAuthorization wineSellerAuthorization) throws SQLException {
 		String Sql = "insert into wine_seller_authorization(wine_seller_id,wine_seller_authorization_date, "
-				+ "wine_seller_authorizated)values(?,?,?)";
+				+ "wine_seller_authorizated)values(?,?,'승인신청중')";
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(Sql);
 			pstmt.setInt(1, wineSellerAuthorization.getWineSellerId());
 			pstmt.setDate(2, wineSellerAuthorization.getWineSellerAuthorizationDate());
-			pstmt.setString(3, wineSellerAuthorization.getWineSellerAuthorizated());
 			return pstmt.executeUpdate();		
 		
 		}catch(SQLException e){
@@ -76,32 +75,40 @@ public class WineSellerAthorizationDaoImpl implements WineSellerAuthorizationDAO
 		}finally{
 			JDBCUtil.close(pstmt, null);
 		}	
-		return null;
+		return 0;
 	}
 	//4.와인회사 업주 회원신청자 삭제
 	@Override
 	public int deleteWineSellerAuthorization(Connection conn, int wineSellerAuthorizationId) throws SQLException {
-		String Sql = "delete "
+		String Sql = "delete from wine_seller_authorization where wine_seller_id=?";
+		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(Sql);
-		
+			pstmt.setInt(1, wineSellerAuthorizationId);
+			return pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
-			JDBCUtil.close(pstmt, rs);
+			JDBCUtil.close(pstmt, null);
 		}	
 		return 0;
 	}
 	//5. 와인회사 업주 회원신청자 승인
 	@Override
 	public int yesWineSellerAuthorizated(Connection conn, int wineSellerAuthorizationId) throws SQLException {
+		String Sql ="update wine_seller_authorization "
+				+ "set wine_seller_authorizated = '승인완료' "
+				+ "where wine_seller_id=?";
+		PreparedStatement pstmt = null;
+		
 		try{
 			pstmt = conn.prepareStatement(Sql);
-		
+			pstmt.setInt(1, wineSellerAuthorizationId);
+			return pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
-			JDBCUtil.close(pstmt, rs);
+			JDBCUtil.close(pstmt, null);
 		}	
 		return 0;
 	}
