@@ -1,5 +1,7 @@
 package dionysus.wine.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface CustomerService {	
 	/*																리턴				매개변수
 	 * 	<리턴은 무조건 Gson사용>
@@ -25,4 +27,25 @@ public interface CustomerService {
 	 *	- 일반회원 장바구니내 와인상품 주문신청.
 	 *	- 일반회원 장바구니내 와인상품 삭제.
 	 * */
+	public String readCustomerAll(HttpServletRequest req);
+	public String readCustomerAge(HttpServletRequest req);
+	public String readCustomerJob(HttpServletRequest req);
+	public String readCustomerGender(HttpServletRequest req);
+	public String readCustomerName(HttpServletRequest req);
+	public String createCustomer(HttpServletRequest req);
+	public String updateCustomer(HttpServletRequest req);
+	public String customerIdFind(HttpServletRequest req);
+	public String customerPwdFind(HttpServletRequest req);
+	public String customerLogin(HttpServletRequest req);
+	public String customerLogout(HttpServletRequest req);
+	public String customerResReserv(HttpServletRequest req);
+	public String customerResReservUpdate(HttpServletRequest req);
+	public String customerResReservDelete(HttpServletRequest req);
+	public String customerLastResReserv(HttpServletRequest req);
+	public String customerWineOrder(HttpServletRequest req);
+	public String customerWineOrderDelete(HttpServletRequest req);
+	public String customerWineOrderUpdate(HttpServletRequest req);
+	public String customerWineWishList(HttpServletRequest req);
+	public String customerWineWishListOrder(HttpServletRequest req);
+	public String customerWineWishListDelete(HttpServletRequest req);
 }
