@@ -24,7 +24,7 @@ public interface WineSellerAuthorizationDAO {
 	public int wineSellerAuthorization(Connection conn)throws SQLException;
 	
 	//3. 와인회사 업주 회원신청자 추가
-	public WineSellerAuthorization insertWineSellerAuthorization(Connection conn, WineSellerAuthorization wineSellerAuthorization)throws SQLException;
+	public int insertWineSellerAuthorization(Connection conn, WineSellerAuthorization wineSellerAuthorization)throws SQLException;
 	
 	//4.와인회사 업주 회원신청자 삭제
 	public int deleteWineSellerAuthorization(Connection conn, int wineSellerAuthorizationId)throws SQLException;

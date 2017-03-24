@@ -11,6 +11,7 @@ public class ResAuthorizationDaoImpl implements ResAuthorizationDAO {
 	//1. 레스토랑 업주 회원신청 리스트 조회
 	@Override
 	public ArrayList<ResAuthorization> selectResAuthorizitionAllList(Connection conn, int startRow, int lastRow)
+			
 			throws SQLException {
 		return null;
 	}
