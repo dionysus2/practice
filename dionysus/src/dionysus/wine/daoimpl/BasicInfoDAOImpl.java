@@ -24,6 +24,7 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 			pstm.setString(1, basicinfo.getBasicInfoUsername());
 			pstm.setString(2, basicinfo.getBasicInfoPwd());
 			pstm.setString(3, basicinfo.getBasicInfoEmail());
+			logger.info("DAO아이디 생성");
 			return pstm.executeUpdate();
 		} 
 		catch (SQLException e) {
