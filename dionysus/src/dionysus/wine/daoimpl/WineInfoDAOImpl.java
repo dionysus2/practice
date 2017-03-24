@@ -10,8 +10,8 @@ import java.util.HashMap;
 import dionysus.wine.dao.WineInfoDAO;
 import dionysus.wine.query.WineInfoQuery;
 import dionysus.wine.util.JDBCUtil;
+import dionysus.wine.vo.BasicInfo;
 import dionysus.wine.vo.WineInfo;
-import dionysus.wine.vo.WineSeller;
 
 public class WineInfoDAOImpl implements WineInfoDAO {
 	
@@ -283,7 +283,7 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 			ArrayList<HashMap<String, Object>>list= new ArrayList<HashMap<String, Object>>();
 			while(rs.next()){
 				WineInfo wine= new WineInfo();
-				WineSeller seller= new WineSeller();
+				BasicInfo basic= new BasicInfo();
 				HashMap<String, Object> map= new HashMap<String, Object>();
 				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
 				wine.setWineInfoName(rs.getString("WINE_INFO_NAME"));
@@ -293,9 +293,9 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 				wine.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
 				wine.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
 				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
-				seller.setWineSellerUsername(rs.getString("WINE_SELLER_USERNAME"));
+				basic.setBasicInfoUsername(rs.getString("BASIC_INFO_USERNAME"));
 				map.put("wine", wine);
-				map.put("seller", seller);
+				map.put("basic", basic);
 				list.add(map);
 			}
 			return list;

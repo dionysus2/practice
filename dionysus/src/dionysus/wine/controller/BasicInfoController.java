@@ -82,6 +82,7 @@ public class BasicInfoController {
 	}
 	
 	public static ModelAndView updateEnd(HttpServletRequest request){
-		
+		return null;
+		//	다음에
 	}
 }
