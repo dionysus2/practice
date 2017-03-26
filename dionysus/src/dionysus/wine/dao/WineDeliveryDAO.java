@@ -33,7 +33,7 @@ public interface WineDeliveryDAO {
 	public ArrayList<WineDelivery> selectWineDeliveryCustomerId(Connection conn, int startRow, int lastRow, int customerId)throws SQLException;
 	
 	//배송진행사항 수정
-	public String updateWineDelivery(Connection conn, int WineDelivery)throws SQLException;
+	public int updateWineDelivery(Connection conn, WineDelivery WineDelivery)throws SQLException;
 	
 	//와인회사명으로 배송리스트 조회
 	public ArrayList<WineDelivery> selectWineDeliveryWineSellerId(Connection conn, int startRow, int lastRow, int wineSellerId)throws SQLException;

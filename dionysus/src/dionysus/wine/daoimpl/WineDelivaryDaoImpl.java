@@ -140,17 +140,19 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 	}
 	//배송진행사항 수정
 	@Override
-	public int updateWineDelivery(Connection conn, int WineDelivery) throws SQLException {
+	public int updateWineDelivery(Connection conn, WineDelivery wineDelivery) throws SQLException {
 		String Sql = "update wine_delivery set(wine_delivery_progress=?)where customer_id=?";
-		PreparedStatement pstmt = null;
-		
+		PreparedStatement pstmt = null;		
 		try{
-			
+			pstmt = conn.prepareStatement(Sql);
+			pstmt.setString(1, wineDelivery.getWineDeliveryProgress());
+			pstmt.setInt(2, wineDelivery.getWineDeliveryId());
+			return pstmt.executeUpdate();
 		}catch (Exception e) {
 		e.printStackTrace();
 		
 		}finally {
-			JDBCUtil.close(pstmt, rs);
+			JDBCUtil.close(pstmt, null);
 		}		
 		
 		return null;
@@ -159,14 +161,25 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 	@Override
 	public ArrayList<WineDelivery> selectWineDeliveryWineSellerId(Connection conn, int startRow, int lastRow,
 			int wineSellerId) throws SQLException {
+		String Sql ="select  from wine_delivery where wine_delivery_id=?";
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<WineDelivery> list = new ArrayList<>();
+		WineDelivery wine = new WineDelivery();
 		try{
+			pstmt = conn.prepareStatement(Sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, lastRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				
+			}
 			
 		}catch (Exception e) {
 		e.printStackTrace();
 		
 		}finally {
-			JDBCUtil.close(pstmt, rs);
+			JDBCUtil.close(pstmt, null);
 		}		
 		
 		return null;
