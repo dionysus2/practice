@@ -269,14 +269,14 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> selectByWineSellerWineInfo(Connection conn, String wineSellelrUsername, int startRow,
+	public ArrayList<HashMap<String, Object>> selectByWineSellerWineInfo(Connection conn, String wineSellerUsername, int startRow,
 			int lastRow) throws SQLException  {
 		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		ResultSet rs= null;
 		try {
 			pstm= conn.prepareStatement(WineInfoQuery.selectByWineSeller);
-			pstm.setString(1, wineSellelrUsername);
+			pstm.setString(1, wineSellerUsername);
 			pstm.setInt(2, startRow);
 			pstm.setInt(3, lastRow);
 			rs= pstm.executeQuery();
@@ -329,5 +329,37 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 			JDBCUtil.close(pstm, rs);
 		}
 		return 0;
+	}
+	
+	@Override
+	public WineInfo selectByWineInfoId(Connection conn, int wineInfoId) throws SQLException{
+		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.selectByWineInfoId);
+			pstm.setInt(1, wineInfoId);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				WineInfo wine= new WineInfo();
+				wine.setWineInfoName(rs.getString("WINE_INFO_NAME"));
+				wine.setWineInfoOrigin(rs.getString("WINE_INFO_ORIGIN"));
+				wine.setWineInfoPicture1(rs.getString("WINE_INFO_PICTURE1"));
+				wine.setWineInfoPicture2(rs.getString("WINE_INFO_PICTURE2"));
+				wine.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
+				wine.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
+				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
+				wine.setWineSellerId(rs.getInt("WINIE_SELLER_ID"));
+				return wine;
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return null;
 	}
 }

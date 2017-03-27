@@ -16,6 +16,7 @@ public class WineInfo {
 	private String wineInfoPicture2;
 	private String wineInfoPicture3;
 	private int wineSellerId;
+
 	public WineInfo(String wineInfoName, String wineInfoProfilePicture, int wineInfoPrice, String wineInfoOrigin,
 			String wineInfoPicture1, String wineInfoPicture2, String wineInfoPicture3, int wineSellerId) {
 		super();

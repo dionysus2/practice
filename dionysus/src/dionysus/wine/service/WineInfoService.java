@@ -19,7 +19,8 @@ public interface WineInfoService {
 	public String readOriginWineInfo(HttpServletRequest request);
 	public String wineInfoCreateStart(HttpServletRequest request);
 	public String wineInfoCreateEnd(HttpServletRequest request);
-	public String wineInfoUpdate(HttpServletRequest request);
+	public String wineInfoUpdateStart(HttpServletRequest request);
+	public String wineInfoUpdateEnd(HttpServletRequest request);
 	public String wineInfoDelete(HttpServletRequest request);
 	public String readWineSellerWineInfo(HttpServletRequest request);
 }

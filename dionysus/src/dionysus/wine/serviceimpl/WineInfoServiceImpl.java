@@ -158,10 +158,10 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String wineInfoPicture1= request.getParameter("wineInfoPicture1");
 		String wineInfoPicture2= request.getParameter("wineInfoPicture2");
 		String wineInfoPicture3= request.getParameter("wineInfoPicture3");
-	//	int wineSellerId= Integer.parseInt("wineSellerId");
+		int wineSellerId= Integer.parseInt("wineSellerId");
 		try {
 			logger.info("Connection연결성공");
-			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoOrigin, wineInfoPicture1, wineInfoPicture2, wineInfoPicture3));
+			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoOrigin, wineInfoPicture1, wineInfoPicture2, wineInfoPicture3, wineSellerId));
 			JsonObject ob= new JsonObject();
 			if(result==1){
 				ob.addProperty("result", "success");
@@ -184,20 +184,108 @@ public class WineInfoServiceImpl implements WineInfoService {
 	}
 	
 	@Override
-	public String wineInfoUpdate(HttpServletRequest request) {
+	public String wineInfoUpdateStart(HttpServletRequest request){
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		int wineInfoId= Integer.parseInt(request.getParameter("wineInfoId"));
+		try {
+			WineInfo wineInfo= dao.selectByWineInfoId(conn, wineInfoId);
+			return new Gson().toJson(wineInfo);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
+		return null;
+	}
+	@Override
+	public String wineInfoUpdateEnd(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		String wineInfoOrigin= request.getParameter("wineInfoOrigin");
+		String wineInfoPicture1= request.getParameter("wineInfoPicture1");
+		String wineInfoPicture2= request.getParameter("wineInfoPicture2");
+		String wineInfoPicture3= request.getParameter("wineInfoPicture3");
+		String wineInfoProfilePicture= request.getParameter("wineInfoProfilePicture");
+		int wineInfoPrice= Integer.parseInt(request.getParameter("wineInfoPrice"));
+		int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
+		String wineInfoName= request.getParameter("wineInfoName");
+		try {
+			JsonObject ob= new JsonObject();
+			int result = dao.wineInfoUpdate(conn, new WineInfo(wineInfoOrigin, wineInfoPicture1, wineInfoPrice, wineInfoPicture2, wineInfoPicture3, wineInfoProfilePicture, wineInfoName, wineSellerId));
+			if(result==1){
+				ob.addProperty("result", "success");
+			}
+			else{
+				ob.addProperty("result", "fail");
+			}
+			return new Gson().toJson(ob);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 
 	@Override
 	public String wineInfoDelete(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		String wineInfoName= request.getParameter("wineInfoName");
+		try {
+			int result= dao.wineInfoDelete(conn, wineInfoName);
+			JsonObject ob= new JsonObject();
+			if(result==1){
+				ob.addProperty("result", "success");
+			}
+			else{
+				ob.addProperty("result", "fail");
+			}
+			return new Gson().toJson(ob);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 
 	@Override
 	public String readWineSellerWineInfo(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		try {
+			int pageNo= 1;
+			if(request.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+				logger.info("사용자 페이징 요청");
+			}
+			int cntOfRow= dao.wineSellerWineInfoCount(conn);
+			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+			String wineSellerUsername= request.getParameter("wineSellerUsername");
+			ArrayList<HashMap<String, Object>>list= dao.selectByWineSellerWineInfo(conn, wineSellerUsername, pagination.getStartRow(), pagination.getLastRow());
+			HashMap<String, Object>map= new HashMap<String, Object>();
+			map.put("pagination", pagination);
+			map.put("list", list);
+			return new Gson().toJson(map);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 
