@@ -43,6 +43,7 @@ public class WineInfoServiceImpl implements WineInfoService {
 	         HashMap<String, Object> map= new HashMap<String, Object>();
 	         map.put("pagination", pagination);
 	         map.put("list", list);
+	         logger.info("서비스단 페이징"+pagination);
 	         return new Gson().toJson(map);
 	      } 
 	      catch (SQLException e) {

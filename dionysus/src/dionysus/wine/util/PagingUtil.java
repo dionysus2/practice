@@ -11,7 +11,7 @@ public class PagingUtil {				//	매개변수: 사용자 요청페이징 번호, 
 		int groupNo = (pageNo-1)/pagingSize + 1; 			//	하단영역 페이징 사이즈에 따른 그룹
 		int startRow = (pageNo-1)*pageRow +1;				//	뷰되는 페이지의 첫번째 게시글 번호 
 		int lastRow = pageNo*pageRow;						//	뷰되는 페이지의 마지막 게시글 번호
-		if(lastRow>startRow)								
+		if(lastRow<startRow)								
 			lastRow = cntOfRow;
 		int startPaging = (groupNo-1)*pagingSize+1;			//	하단영역 첫번째 페이징 번호
 		int lastPaging = groupNo*pagingSize;				//	하단영역 마지막 페이징 번호

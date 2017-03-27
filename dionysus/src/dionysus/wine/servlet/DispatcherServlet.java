@@ -14,19 +14,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dionysus.wine.daoimpl.BasicInfoDAOImpl;
+import dionysus.wine.daoimpl.WineInfoDAOImpl;
 import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
+import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 
-@WebServlet("/basic/*")
+@WebServlet({"/basic/*", "/wineinfo/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		ServletContext context = getServletContext();
+		//	1. 기본정보 DAO, SERVICE 객체화
 		BasicInfoDAOImpl basicinfodao= new BasicInfoDAOImpl();
 		BasicInfoServiceImpl basicinfoservice= new BasicInfoServiceImpl(basicinfodao);
 		context.setAttribute("basicinfoservice", basicinfoservice);
+		//	2. 와인정보 DAO, SERVICE 객체화
+		WineInfoDAOImpl wineinfodao= new WineInfoDAOImpl();
+		WineInfoServiceImpl wineinfoservice= new WineInfoServiceImpl(wineinfodao);
+		context.setAttribute("wineinfoservice", wineinfoservice);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");

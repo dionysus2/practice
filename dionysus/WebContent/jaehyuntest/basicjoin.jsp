@@ -13,9 +13,8 @@
 <body>
 	<form action="/dionysus/basic/insert" method="post">
 		<h1>회원가입</h1>
-		<table border="1">
+		<table>
 			<tr><td>아이디</td><td><input type="text" name="basicInfoUsername"></td></tr>
-			<tr><td><button id="check">중복체크</button>
 			<tr><td>비밀번호</td><td><input type="password" name="basicInfoPwd"></td></tr>
 			<tr><td>이메일</td><td><input type="text" name="basicInfoEmail"></td></tr>
 		</table>

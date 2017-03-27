@@ -11,6 +11,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%=session.getAttribute("basicInfoUsername") %>없음.
+	<%=session.getAttribute("basicInfoUsername") %><br>
+	아이디가 세션 종료되었습니다.<br>
+	<a href="start.html">홈으로</a>
 </body>
 </html>

@@ -10,23 +10,24 @@ import dionysus.wine.di.RequestMapping;
 import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 
 public class WineInfoController {
-	private Logger logger= LoggerFactory.getLogger(WineInfoController.class);
-	@RequestMapping(value="/sellers/wineinfo/insert", method="GET")
-	public static ModelAndView insertStart(HttpServletRequest request){
-		ModelAndView mav= new ModelAndView();
-		mav.setView("/sellers/sellers.html");
-		//	mav.setView("test2.jsp");
-		return mav;
-	}
-	@RequestMapping(value="/wineinfo/insert", method="POST")
-	public static ModelAndView inserEnd(HttpServletRequest request){
+	/*											
+	 *	와인상품 전체리스트 조회		
+	 *	단가높은순 조회					
+	 *	단가낮은순 조회					
+	 *	와인상품 원산지별 조회			
+	 *	와인상품 추가						
+	 *	와인상품 정보수정					
+	 *	와인상품 삭제							
+	 *	회사리스트별 상품조회 	
+	 */
+	private static Logger logger= LoggerFactory.getLogger(WineInfoController.class);
+	@RequestMapping(value="/wineinfo/list", method="GET")
+	public static ModelAndView readAllWineInfo(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
-		mav.addObject("result", service.wineInfoCreateEnd(request));		
-		//	result success일때, fail일때 다른view 이동 추가코딩 필요함
-		mav.setView("insert");				
-		//	상품추가 후 이동페이지 설정 다시정할 필요있음.
-		mav.setRedirect();
+		mav.setView("/jaehyuntest/wineinfo.jsp");
+		mav.addObject("result", service.readAllWineInfo(request));
+		logger.info("와인정보 전체리스트 출력");
 		return mav;
 	}
 }
