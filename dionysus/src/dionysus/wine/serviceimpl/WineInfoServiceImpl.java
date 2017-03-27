@@ -289,5 +289,23 @@ public class WineInfoServiceImpl implements WineInfoService {
 		}
 		return null;
 	}
-
+	
+	@Override 
+	public String readByWineInfoId(HttpServletRequest request){
+		Connection conn= JDBCUtil.getConnection();
+		int wineInfoId= Integer.parseInt(request.getParameter("wineInfoId"));
+		try {
+			WineInfo wine= dao.selectByWineInfoId(conn, wineInfoId);
+			logger.info("서비스단 와인정보 상세검색"+wineInfoId);
+			return new Gson().toJson(wine);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
+		return null;
+	}
 }
