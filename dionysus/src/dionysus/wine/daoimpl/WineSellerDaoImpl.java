@@ -51,8 +51,7 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 					+ "basic_info b where w.basic_info_id = b.basic_info_id)r1)r2 "
 					+ "where rnum between ? and ?";	
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-	
+		ResultSet rs = null;	
 		ArrayList<WineSeller> list = new ArrayList<>();
 		WineSeller wine=new WineSeller();
 		try {
@@ -61,14 +60,14 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 			pstmt.setInt(2, lastRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){				
-				wine.setWineSellerId(rs.getShort("wineSellerId"));
-				wine.setWineSellerBrn(rs.getString("wineSellerBrn"));
-				wine.setWineSellerLocation(rs.getString("wineSellerLocation"));
-				wine.setWineSellerTel(rs.getString("wineSellerTel"));
-				wine.setWineSellerAccountNo(rs.getString("wineSellerAccountNo"));
-				wine.setWineSellerProfilePicture(rs.getString("wineSellerProfilePicture"));
-				wine.setWineSellerActivated(rs.getString("wineSellerActivatied"));
-				wine.setWineSellerName(rs.getString("wineSellerName"));				
+				wine.setWineSellerId(rs.getShort("wine_seller_id"));
+				wine.setWineSellerBrn(rs.getString("wine_seller_brn"));
+				wine.setWineSellerLocation(rs.getString("wine_seller_location"));
+				wine.setWineSellerTel(rs.getString("wine_seller_tel"));
+				wine.setWineSellerAccountNo(rs.getString("wine_seller_account_no"));
+				wine.setWineSellerProfilePicture(rs.getString("wine_seller_profile_picture"));
+				wine.setWineSellerActivated(rs.getString("wine_seller_activatied"));
+				wine.setWineSellerName(rs.getString("wine_seller_name"));				
 				list.add(wine);
 			}
 			return list;
@@ -84,7 +83,7 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	public int wineSellerCount(Connection conn) throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String Sql = "select max(wine_seller_id)+1 from wine_seller";
+		String Sql = "select max(wine_seller_id) from wine_seller";
 				try {
 					pstmt = conn.prepareStatement(Sql);
 					rs = pstmt.executeQuery();
@@ -185,13 +184,14 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	}*/
 	//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
 	@Override
-	public int SelectWineSellerrId(Connection conn, int wineId, String wineSellerBrn)throws SQLException {
-		String Sql="select wine_seller_username from wine_seller where wine_seller_id=? and wine_seller_brn=?";
+	public int SelectWineSellerrId(Connection conn, String wineSellerOwnername, String wineSellerBrn)throws SQLException {
+		String Sql ="select b.basic_info_username from wine_seller w, basic_info b where w.basic_info_id= b.basic_info_id and w.wine_seller_ownername='?' and w.wine_seller_brn ='?'";
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt=conn.prepareStatement(Sql);
-			pstmt.setInt(1, wineId);
+			pstmt.setString(1, wineSellerOwnername);
 			pstmt.setString(2, wineSellerBrn);
 			rs =pstmt.executeQuery();
 			if(rs.next()){

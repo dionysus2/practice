@@ -15,11 +15,11 @@ public class ResDaoImpl implements ResDAO {
 
 	public Res makeRes(ResultSet rs)throws SQLException{
 		Res res = new Res();
-		res.setResAccountNo(rs.getString("resAccountNo"));
-		res.setResLocation(rs.getString("resLocation"));
-		res.setResName(rs.getString("resName"));
-		res.setResProfilePicture(rs.getString("resProfilePicture"));	
-		res.setResTel(rs.getString("resTel"));
+		res.setResAccountNo(rs.getString("res_account_no"));
+		res.setResLocation(rs.getString("res_location"));
+		res.setResName(rs.getString("res_name"));
+		res.setResProfilePicture(rs.getString("res_profile_picture"));	
+		res.setResTel(rs.getString("res_tel"));
 		return res;		
 	}
 	
@@ -27,20 +27,15 @@ public class ResDaoImpl implements ResDAO {
 	@Override
 	public int selectResOwnerActivated(Connection conn, int resId)throws SQLException {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		String Sql="update res set res_activated=0 where res_id=?";
 		try{
 			pstmt = conn.prepareStatement(Sql);	
 			pstmt.setInt(1, resId);			
-			rs =pstmt.executeQuery();
-			if(rs.next()){
-				return rs.getInt(1);
-			}
-			
+			return pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally {
-			JDBCUtil.close(pstmt,rs);
+			JDBCUtil.close(pstmt,null);
 		}		
 		return -1;
 	}
@@ -63,15 +58,14 @@ public class ResDaoImpl implements ResDAO {
 			pstmt.setInt(2, lastRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){				
-				res.setResId(rs.getShort("resId"));
-				res.setResBrn(rs.getString("resBrn"));
-				res.setResLocation(rs.getString("resLocation"));
+				res.setResId(rs.getShort("res_id"));
+				res.setResBrn(rs.getString("res_brn"));
+				res.setResLocation(rs.getString("res_location"));
 				res.setResTel(rs.getString("resTel"));
-				res.setResAccountNo(rs.getString("resAccountNO"));
-				res.setResProfilePicture(rs.getString("resProfilePicture"));
-				res.setResActivated(rs.getString("resActivatied"));
-				res.setResName(rs.getString("resName"));				
-			
+				res.setResAccountNo(rs.getString("res_account_no"));
+				res.setResProfilePicture(rs.getString("res_profile_picture"));
+				res.setResActivated(rs.getString("res_activatied"));
+				res.setResName(rs.getString("res_name"));				
 				list.add(res);
 			}
 			return list;
@@ -88,7 +82,7 @@ public class ResDaoImpl implements ResDAO {
 	public int resOwnerCount(Connection conn)throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String Sql = "select max(res_id)+1 from res";
+		String Sql = "select max(res_id) from res";
 				try {
 					pstmt = conn.prepareStatement(Sql);
 					rs = pstmt.executeQuery();
@@ -122,15 +116,14 @@ public class ResDaoImpl implements ResDAO {
 			pstmt.setInt(3, lastRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){				
-				res.setResId(rs.getShort("resId"));
-				res.setResBrn(rs.getString("resBrn"));
-				res.setResLocation(rs.getString("resLocation"));
-				res.setResTel(rs.getString("resTel"));
-				res.setResAccountNo(rs.getString("resAccountNO"));
-				res.setResProfilePicture(rs.getString("resProfilePicture"));
-				res.setResActivated(rs.getString("resActivatied"));
-				res.setResName(rs.getString("resName"));				
-			
+				res.setResId(rs.getShort("res_id"));
+				res.setResBrn(rs.getString("res_brn"));
+				res.setResLocation(rs.getString("res_location"));
+				res.setResTel(rs.getString("res_tel"));
+				res.setResAccountNo(rs.getString("res_account_no"));
+				res.setResProfilePicture(rs.getString("res_profile_picture"));
+				res.setResActivated(rs.getString("res_activatied"));
+				res.setResName(rs.getString("res_name"));			
 				list.add(res);
 			}
 			return list;
@@ -193,13 +186,14 @@ public class ResDaoImpl implements ResDAO {
 	*/
 	//레스토랑 업주 회원 아이디 찾기
 	@Override
-	public int selectResOwnerId(Connection conn, String resName, String resBrn)throws SQLException {
-		String Sql="select res_username from res where res_id=? and res_brn=?";
+	public int selectResOwnerId(Connection conn, String resOwnername, String resBrn)throws SQLException {
+		String Sql ="select b.basic_info_username from res r, basic_info b where r.basic_info_id= b.basic_info_id and r.res_ownername='?' and r.res_brn ='?'";
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt=conn.prepareStatement(Sql);
-			pstmt.setString(1, resName);
+			pstmt.setString(1, resOwnername);
 			pstmt.setString(2, resBrn);
 			rs =pstmt.executeQuery();
 			if(rs.next()){
@@ -215,15 +209,14 @@ public class ResDaoImpl implements ResDAO {
 
 	//비밀번호 찾기
 	@Override
-	public int selectResOwnerPwd(Connection conn, String basicInfoUserName, String resOwnerName, String resBrn)throws SQLException {
-		String Sql="select res_owner_pwd from res where res_id=? and res_username=? and res_brn=?";
+	public int selectResOwnerPwd(Connection conn, String basicInfoUserName, String resBrn)throws SQLException {
+		String Sql ="select b.basic_info_pwd from res r, basic_info b where r.basic_info_id= b.basic_info_id and b.basic_info_username='?' and r.res_brn ='?'";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt=conn.prepareStatement(Sql);
 			pstmt.setString(1, basicInfoUserName);
-			pstmt.setString(2, resOwnerName);
-			pstmt.setString(3, resBrn);
+			pstmt.setString(2, resBrn);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt(1);
@@ -239,12 +232,11 @@ public class ResDaoImpl implements ResDAO {
 
 	//레스토랑 업주 회원 정보수정
 	@Override
-	public int updateResOwner(Connection conn, Res resid)throws SQLException {
+	public int updateResOwner(Connection conn, Res res)throws SQLException {
 		String Sql ="update res set res_location=?,"
 				+ "res_tel=?,res_account_no=?,res_profile_picture=?,"
 				+ "res_ownername=? where res_id=?";
 		PreparedStatement pstmt=null;
-		Res res = new Res();
 		try {
 			pstmt = conn.prepareStatement(Sql);
 			//비밀번호 변경

@@ -5,7 +5,7 @@ import dionysus.wine.vo.Pagination;
 public class PagingUtil {				//	매개변수: 사용자 요청페이징 번호, 게시글의 총 개수
 										//			  DAO에서 가져온 count값을 넣으면 됩니다. 
 	public static Pagination getPagination(int pageNo, int cntOfRow) {
-		int pageRow = 10;									//	게시판 한페이지에 뿌려져야 하는 게시글 개수
+		int pageRow = 20;									//	게시판 한페이지에 뿌려져야 하는 게시글 개수
 		int pagingSize = 5;									//	게시판 하단영역 페이징사이즈
 		int countOfPaging = (cntOfRow-1)/pageRow + 1;		//	하단영역 페이징 개수
 		int groupNo = (pageNo-1)/pagingSize + 1; 			//	하단영역 페이징 사이즈에 따른 그룹
