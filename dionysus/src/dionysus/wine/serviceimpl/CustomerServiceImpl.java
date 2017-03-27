@@ -1,5 +1,7 @@
 package dionysus.wine.serviceimpl;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -7,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import dionysus.wine.daoimpl.CustomerDAOImpl;
 import dionysus.wine.service.CustomerService;
+import dionysus.wine.util.JDBCUtil;
 
 public class CustomerServiceImpl implements CustomerService{
 	private CustomerDAOImpl dao;
@@ -19,6 +22,8 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public String readCustomerAll(HttpServletRequest req) {
 		// TODO Auto-generated method stub
+		Connection conn = JDBCUtil.getConnection();
+		
 		return null;
 	}
 
@@ -49,8 +54,10 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public String createCustomer(HttpServletRequest req) {
 		// TODO Auto-generated method stub
+		Connection conn = JDBCUtil.getConnection();
 		return null;
 	}
+	
 
 	@Override
 	public String updateCustomer(HttpServletRequest req) {
