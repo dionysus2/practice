@@ -114,6 +114,30 @@ public class WineInfoServiceImpl implements WineInfoService {
 	@Override
 	public String readOriginWineInfo(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		try {
+			int pageNo= 1;
+			if(request.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+				logger.info("사용자 페이징 요청");
+			}
+			String wineInfoOrigin= request.getParameter("wineInfoOrigin");
+			//	사용자에게 넘어오는 원산지명
+			int cntOfRow= dao.wineOriginCount(conn);
+			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+			ArrayList<WineInfo>list= dao.selectWineOrigin(conn, wineInfoOrigin, pagination.getStartRow(), pagination.getLastRow());
+			HashMap<String, Object>map= new HashMap<String, Object>();
+			map.put("pagination", pagination);
+			map.put("list", list);
+			return new Gson().toJson(map);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 

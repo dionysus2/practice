@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import dionysus.wine.dao.ResInfoDAO;
 import dionysus.wine.query.ResInfoQuery;
 import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.Res;
 import dionysus.wine.vo.ResInfo;
 
 public class ResInfoDaoImpl implements ResInfoDAO {
