@@ -11,5 +11,6 @@
 	<a href="basicupdate.jsp">정보변경</a>
 	<a href="logout.jsp">로그아웃</a>
 	<a href="/dionysus/wineinfo/list">와인상품</a>
+	<a href="/dionysus/wineinfo/insert">와인상품 추가</a>
 </body>
 </html>
