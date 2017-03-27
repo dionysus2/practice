@@ -2,6 +2,8 @@ package dionysus.wine.serviceimpl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +16,8 @@ import com.google.gson.JsonObject;
 import dionysus.wine.daoimpl.WineInfoDAOImpl;
 import dionysus.wine.service.WineInfoService;
 import dionysus.wine.util.JDBCUtil;
+import dionysus.wine.util.PagingUtil;
+import dionysus.wine.vo.Pagination;
 import dionysus.wine.vo.WineInfo;
 
 public class WineInfoServiceImpl implements WineInfoService {
@@ -26,18 +30,84 @@ public class WineInfoServiceImpl implements WineInfoService {
 	@Override
 	public String readAllWineInfo(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		return null;
+		 Connection conn= JDBCUtil.getConnection();
+	      try {
+	         int pageNo= 1;
+	         if(request.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(request.getParameter("pageNo"));
+	            logger.info("사용자 페이지 요청");
+	         }
+	         int cntOfRow= dao.wineInfoCount(conn);
+	         Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+	         ArrayList<WineInfo> list= dao.selectAllWineInfo(conn, pagination.getStartRow(), pagination.getLastRow());
+	         HashMap<String, Object> map= new HashMap<String, Object>();
+	         map.put("pagination", pagination);
+	         map.put("list", list);
+	         return new Gson().toJson(map);
+	      } 
+	      catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	      finally{
+	         JDBCUtil.close(conn);
+	      }
+	      return null;
 	}
 
 	@Override
 	public String readPriceMax(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		try {
+			int pageNo= 1;
+			if(request.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+				logger.info("사용자 페이징 요청");
+			}
+			int cntOfRow= dao.wineInfoCount(conn);
+			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+			ArrayList<WineInfo>list= dao.selectWinePriceMax(conn, pagination.getStartRow(), pagination.getLastRow());
+			HashMap<String, Object>map= new HashMap<String, Object>();
+			map.put("pagination", pagination);
+			map.put("list", list);
+			return new Gson().toJson(map);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 
 	@Override
 	public String readPriceMin(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		try {
+			int pageNo= 1;
+			if(request.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+				logger.info("사용자 페이징 요청");
+			}
+			int cntOfRow= dao.wineInfoCount(conn);
+			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+			ArrayList<WineInfo>list= dao.selectWinePriceMin(conn, pagination.getStartRow(), pagination.getLastRow());
+			HashMap<String, Object>map= new HashMap<String, Object>();
+			map.put("pagination", pagination);
+			map.put("list", list);
+			return new Gson().toJson(map);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 

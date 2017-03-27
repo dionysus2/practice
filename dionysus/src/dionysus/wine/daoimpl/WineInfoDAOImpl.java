@@ -51,7 +51,7 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 	}
 
 	@Override
-	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int wineInfoPrice, int startRow, int lastRow) throws SQLException {
+	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int startRow, int lastRow) throws SQLException {
 		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		ResultSet rs= null;
@@ -86,7 +86,7 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 	}
 
 	@Override
-	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int wineInfoPrice, int startRow, int lastRow)throws SQLException {
+	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int startRow, int lastRow)throws SQLException {
 		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		ResultSet rs= null;

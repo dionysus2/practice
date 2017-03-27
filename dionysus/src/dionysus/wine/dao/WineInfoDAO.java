@@ -10,8 +10,8 @@ import dionysus.wine.vo.WineInfo;
 public interface WineInfoDAO {
 	/*										리턴				매개변수	
 	 *	와인상품 전체리스트 조회		ArrayList<wineInfo>			Connection
-	 *	단가높은순 조회					ArrayList<wineInfo>			Connection, 와인가격
-	 *	단가낮은순 조회					ArrayList<WineInfo>			Connection, 와인가격
+	 *	단가높은순 조회					ArrayList<wineInfo>			Connection, 
+	 *	단가낮은순 조회					ArrayList<WineInfo>			Connection, 
 	 *	와인상품 Count						int						Connection
 	 *
 	 *	와인상품 원산지별 조회			ArrauList<wineInfo>					Connection, 원산지
@@ -24,8 +24,8 @@ public interface WineInfoDAO {
 	 *	와인회사별 Count						int							Connection, 회사번호
 	 */
 	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow)throws SQLException;
-	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int wineInfoPrice, int startRow, int lastRow)throws SQLException;
-	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int wineInfoPrice, int startRow, int lastRow)throws SQLException;
+	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int startRow, int lastRow)throws SQLException;
+	public ArrayList<WineInfo> selectWinePriceMin(Connection conn, int startRow, int lastRow)throws SQLException;
 	public int wineInfoCount(Connection conn)throws SQLException;
 	public ArrayList<WineInfo> selectWineOrigin(Connection conn, String wineInfoOrigin, int startRow, int lastRow)throws SQLException;
 	public int wineOriginCount(Connection conn)throws SQLException;
