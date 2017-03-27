@@ -45,7 +45,7 @@ public int selectResOwnerId(Connection conn, String resName, String resBrn)throw
 	//레스토랑 업주 회원 비밀번호 찾기	SelectResOwnerPwd
 public int selectResOwnerPwd(Connection conn, String basicInfoUserName, String resName, String resBrn)throws SQLException;
 	//레스토랑 업주 회원 정보수정	UpdateResOwner
-public int updateResOwner(Connection conn, Res resid)throws SQLException;
+public int updateResOwner(Connection conn, Res res)throws SQLException;
 	//레스토랑 업주 회원 아이디 중복 확인
 //public int resOwnerIdCheck(Connection conn, String username);
 

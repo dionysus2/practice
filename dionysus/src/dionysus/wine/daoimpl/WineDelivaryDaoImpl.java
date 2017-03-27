@@ -1,11 +1,14 @@
 package dionysus.wine.daoimpl;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-import dionysus.wine.dao.*;
-import dionysus.wine.util.*;
-import dionysus.wine.vo.*;
+import dionysus.wine.dao.WineDeliveryDAO;
+import dionysus.wine.util.JDBCUtil;
+import dionysus.wine.vo.WineDelivery;
 
 public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 
@@ -172,9 +175,9 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 			pstmt.setInt(2, lastRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				
+				list.add(wine);
 			}
-			
+			return list;
 		}catch (Exception e) {
 		e.printStackTrace();
 		
@@ -184,20 +187,37 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 		
 		return null;
 	}
-	//레스토랑며으로 배송리스트 조회
+	//레스토랑명으로 배송리스트 조회
 	@Override
 	public ArrayList<WineDelivery> selectWineDeliveryResId(Connection conn, int startRow, int lastRow, int resId)
 			throws SQLException {
+		String Sql = "select ";
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<WineDelivery> list = new ArrayList<>();
+		WineDelivery wine = new WineDelivery();
 		try{
-			
+			pstmt= conn.prepareStatement(Sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, lastRow);
+			pstmt.setInt(3, resId);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+			wine.setCustomerId(rs.getInt("customer_id"));
+			wine.setResId(rs.getInt("res_id"));
+			wine.setWineDeliveryDate(rs.getDate("wine_delivery_date"));
+			wine.setWineDeliveryId(rs.getInt("wine_delivery_id"));
+			wine.setWineDeliveryProgress(rs.getString("wine_delivery_progress"));
+			wine.setWineSellerId(rs.getInt("wine_seller_id"));
+			list.add(wine);				
+			}
+			return list;
 		}catch (Exception e) {
 		e.printStackTrace();
 		
 		}finally {
 			JDBCUtil.close(pstmt, rs);
-		}		
-		
+		}				
 		return null;
 	}
 
