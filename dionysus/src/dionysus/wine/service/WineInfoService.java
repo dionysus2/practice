@@ -17,7 +17,7 @@ public interface WineInfoService {
 	public String readAllWineInfo(HttpServletRequest request);
 	public String readPriceMax(HttpServletRequest request);
 	public String readPriceMin(HttpServletRequest request);
-	public String readOriginWineInfo(HttpServletRequest request);
+	public String readCountryWineInfo(HttpServletRequest request);
 	public String wineInfoCreateStart(HttpServletRequest request);
 	public String wineInfoCreateEnd(HttpServletRequest request);
 	public String wineInfoUpdateStart(HttpServletRequest request);

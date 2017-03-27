@@ -49,7 +49,7 @@ public class WineInfoController {
 		ModelAndView mav= new ModelAndView();
 		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
 		mav.setView("#.jsp");
-		mav.addObject("result", service.readOriginWineInfo(request));
+		mav.addObject("result", service.readCountryWineInfo(request));
 		return mav;
 	}
 	//	단가 높은순으로 상품 전체조회하기
@@ -69,5 +69,28 @@ public class WineInfoController {
 		mav.setView("#.jsp");
 		mav.addObject("result", service.readPriceMin(request));
 		return mav;
+	}
+	@RequestMapping(value="/wineinfo/insert", method="GET")
+	public static ModelAndView insertStart(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		mav.setView("/jaehyuntest/insert.jsp");
+		return mav;
+	}
+	@RequestMapping(value="/wineinfo/insert", method="POST")
+	public static ModelAndView insertEnd(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
+		request.setAttribute("wineSellerId", 1);
+		if(service.wineInfoCreateEnd(request).equals("{\"result\":\"success\"}")){
+			mav.setView("list");
+			mav.setRedirect();
+			return mav;
+		}
+		else{
+			logger.info("추가안됨.");
+			mav.setView("insert");
+			mav.setRedirect();
+			return mav;
+		}
 	}
 }

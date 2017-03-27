@@ -113,7 +113,7 @@ public class WineInfoServiceImpl implements WineInfoService {
 	}
 
 	@Override
-	public String readOriginWineInfo(HttpServletRequest request) {
+	public String readCountryWineInfo(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
 		try {
@@ -122,11 +122,11 @@ public class WineInfoServiceImpl implements WineInfoService {
 				pageNo= Integer.parseInt(request.getParameter("pageNo"));
 				logger.info("사용자 페이징 요청");
 			}
-			String wineInfoOrigin= request.getParameter("wineInfoOrigin");
+			String wineInfoCountry= request.getParameter("wineInfoCountry");
 			//	사용자에게 넘어오는 원산지명
 			int cntOfRow= dao.wineOriginCount(conn);
 			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
-			ArrayList<WineInfo>list= dao.selectWineOrigin(conn, wineInfoOrigin, pagination.getStartRow(), pagination.getLastRow());
+			ArrayList<WineInfo>list= dao.selectWineCountry(conn, wineInfoCountry, pagination.getStartRow(), pagination.getLastRow());
 			HashMap<String, Object>map= new HashMap<String, Object>();
 			map.put("pagination", pagination);
 			map.put("list", list);
@@ -155,14 +155,24 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String wineInfoName= request.getParameter("wineInfoName");
 		String wineInfoProfilePicture= request.getParameter("wineInfoProfilePicture");
 		int wineInfoPrice= Integer.parseInt(request.getParameter("wineInfoPrice"));
-		String wineInfoOrigin= request.getParameter("wineInfoOrigin");
-		String wineInfoPicture1= request.getParameter("wineInfoPicture1");
-		String wineInfoPicture2= request.getParameter("wineInfoPicture2");
-		String wineInfoPicture3= request.getParameter("wineInfoPicture3");
-		int wineSellerId= Integer.parseInt("wineSellerId");
+		String wineInfoCapacity= request.getParameter("wineInfoCapacity");
+		String wineInfoCountry= request.getParameter("wineInfoCountry");
+		String wineInfoRegion= request.getParameter("wineInfoRegion");
+		String wineInfoWinery= request.getParameter("wineInfoWinery");
+		String wineInfoImporter= request.getParameter("wineInfoImporter");
+		String wineInfoVintage= request.getParameter("wineInfoVintage");
+		String wineInfoGrapes= request.getParameter("wineInfoGrapes");
+		String wineInfoABV= request.getParameter("wineInfoABV");
+		String wineInfoType= request.getParameter("wineInfoType");
+		String wineInfoClassification= request.getParameter("wineInfoClassification");
+		String wineInfoFlavors= request.getParameter("wineInfoFlavors");
+		String wineInfoSweetness= request.getParameter("wineInfoSweetness");
+		String wineInfoAcidity= request.getParameter("wineInfoAcidity");
+		String wineInfoBody= request.getParameter("wineInfoBody");
+		int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
 		try {
 			logger.info("Connection연결성공");
-			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoOrigin, wineInfoPicture1, wineInfoPicture2, wineInfoPicture3, wineSellerId));
+			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoCapacity, wineInfoCountry, wineInfoRegion, wineInfoWinery, wineInfoImporter, wineInfoVintage, wineInfoGrapes, wineInfoABV, wineInfoType, wineInfoClassification, wineInfoFlavors, wineInfoSweetness, wineInfoAcidity, wineInfoBody, wineSellerId));
 			JsonObject ob= new JsonObject();
 			if(result==1){
 				ob.addProperty("result", "success");
@@ -206,17 +216,27 @@ public class WineInfoServiceImpl implements WineInfoService {
 	public String wineInfoUpdateEnd(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		String wineInfoOrigin= request.getParameter("wineInfoOrigin");
-		String wineInfoPicture1= request.getParameter("wineInfoPicture1");
-		String wineInfoPicture2= request.getParameter("wineInfoPicture2");
-		String wineInfoPicture3= request.getParameter("wineInfoPicture3");
+		String wineInfoName= request.getParameter("wineInfoName");
 		String wineInfoProfilePicture= request.getParameter("wineInfoProfilePicture");
 		int wineInfoPrice= Integer.parseInt(request.getParameter("wineInfoPrice"));
+		String wineInfoCapacity= request.getParameter("wineInfoCapacity");
+		String wineInfoCountry= request.getParameter("wineInfoCountry");
+		String wineInfoRegion= request.getParameter("wineInfoRegion");
+		String wineInfoWinery= request.getParameter("wineInfoWinery");
+		String wineInfoImporter= request.getParameter("wineInfoImporter");
+		String wineInfoVintage= request.getParameter("wineInfoVintage");
+		String wineInfoGrapes= request.getParameter("wineInfoGrapes");
+		String wineInfoABV= request.getParameter("wineInfoABV");
+		String wineInfoType= request.getParameter("wineInfoType");
+		String wineInfoClassification= request.getParameter("wineInfoClassification");
+		String wineInfoFlavors= request.getParameter("wineInfoFlavors");
+		String wineInfoSweetness= request.getParameter("wineInfoSweetness");
+		String wineInfoAcidity= request.getParameter("wineInfoAcidity");
+		String wineInfoBody= request.getParameter("wineInfoBody");
 		int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
-		String wineInfoName= request.getParameter("wineInfoName");
 		try {
 			JsonObject ob= new JsonObject();
-			int result = dao.wineInfoUpdate(conn, new WineInfo(wineInfoOrigin, wineInfoPicture1, wineInfoPrice, wineInfoPicture2, wineInfoPicture3, wineInfoProfilePicture, wineInfoName, wineSellerId));
+			int result = dao.wineInfoUpdate(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoCapacity, wineInfoCountry, wineInfoRegion, wineInfoWinery, wineInfoImporter, wineInfoVintage, wineInfoGrapes, wineInfoABV, wineInfoType, wineInfoClassification, wineInfoFlavors, wineInfoSweetness, wineInfoAcidity, wineInfoBody, wineSellerId));
 			if(result==1){
 				ob.addProperty("result", "success");
 			}
@@ -273,8 +293,8 @@ public class WineInfoServiceImpl implements WineInfoService {
 			}
 			int cntOfRow= dao.wineSellerWineInfoCount(conn);
 			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
-			String wineSellerUsername= request.getParameter("wineSellerUsername");
-			ArrayList<HashMap<String, Object>>list= dao.selectByWineSellerWineInfo(conn, wineSellerUsername, pagination.getStartRow(), pagination.getLastRow());
+			int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
+			ArrayList<WineInfo>list= dao.selectByWineSellerWineInfo(conn, wineSellerId, pagination.getStartRow(), pagination.getLastRow());
 			HashMap<String, Object>map= new HashMap<String, Object>();
 			map.put("pagination", pagination);
 			map.put("list", list);
