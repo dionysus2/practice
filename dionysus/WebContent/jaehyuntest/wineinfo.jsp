@@ -20,7 +20,7 @@
 				str = str + "<td><a href='view?pageNo=" + pagination.pageNo + "&wineInfoId=" + wine.wineInfoId + "'>" + wine.wineInfoName+ "</a></td>";
 				str = str + "<td>"+ wine.wineInfoOrigin+ "</a></td>";
 				str = str + "<td>"+ wine.wineInfoProfilePicture+ "</a></td>";
-				str = str + "<td>"+ wine.wineSellerId+ "</a></td>";
+				str = str + "<td>"+ wine.sellerId+ "</a></td>";
 				str = str + "<td>" + wine.wineInfoProfilePicture + "</td><td></tr>";
 				target.append(str);
 			})
@@ -28,7 +28,7 @@
 			var p = $("#pagination ul");
 			if (pagination.prev > -1)
 				p.append("<li><a href='list?pageNo=" + pagination.prev + "'>이전으로</a></li>");
-			for (var i = pagination.startPaging; i <= pagination.lastPaging; i++)
+			for (var i = pagination.startPaging; i <= pagination.endPaging; i++)
 				p.append("<li><a href='list?pageNo=" + i + "'>" + i + "</a></li>");
 			if (pagination.next > -1)
 				p.append("<li><a href='list?pageNo=" + pagination.next + "'>다음으로</a></li>");
@@ -43,6 +43,5 @@
 				</tbody>
 			</table>
 	<div id="pagination"></div>
-	</section>
 </body>
 </html>
