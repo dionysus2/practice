@@ -25,7 +25,7 @@ public class WineInfoController {
 	public static ModelAndView readAllWineInfo(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
-		mav.setView("/jaehyuntest/wineinfo.jsp");
+		mav.setView("/search/wineInfo.jsp");
 		mav.addObject("result", service.readAllWineInfo(request));
 		logger.info("와인정보 전체리스트 출력");
 		return mav;
