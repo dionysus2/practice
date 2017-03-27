@@ -19,6 +19,7 @@ public class WineInfoController {
 	 *	와인상품 정보수정					
 	 *	와인상품 삭제							
 	 *	회사리스트별 상품조회 	
+	 *	와인번호별 와인상품 상세정보 조회
 	 */
 	private static Logger logger= LoggerFactory.getLogger(WineInfoController.class);
 	@RequestMapping(value="/wineinfo/list", method="GET")
@@ -28,6 +29,14 @@ public class WineInfoController {
 		mav.setView("/search/wineInfo.jsp");
 		mav.addObject("result", service.readAllWineInfo(request));
 		logger.info("와인정보 전체리스트 출력");
+		return mav;
+	}
+	@RequestMapping(value="/wineinfo/view", method="GET")
+	public static ModelAndView readByWineInfoIdStart(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
+		mav.setView("/jaehyuntest/viewForm.jsp");
+		mav.addObject("result", service.readByWineInfoId(request));
 		return mav;
 	}
 }

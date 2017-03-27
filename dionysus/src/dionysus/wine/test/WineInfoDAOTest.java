@@ -49,7 +49,8 @@ public class WineInfoDAOTest {
 			JDBCUtil.close(conn);
 		}
 	}
-	@Test
+	//	@Test
+	//	성공
 	public void insertTest(){
 		Connection conn= JDBCUtil.getConnection();
 		String wineInfoName= "테스트";
@@ -70,4 +71,22 @@ public class WineInfoDAOTest {
 		}
 	}
 	//	나머지 테스트는.. DB정보 부족으로 인한...
+	@Test
+	public void selectByWineInfoId(){
+		Connection conn= JDBCUtil.getConnection();
+		int wineInfoId= 21;
+		try {
+			WineInfo wine= new WineInfoDAOImpl().selectByWineInfoId(conn, wineInfoId);
+			ArrayList<WineInfo>list= new ArrayList<WineInfo>();
+			list.add(wine);
+			assertThat(list.size(), is(1));
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
+	}
 }

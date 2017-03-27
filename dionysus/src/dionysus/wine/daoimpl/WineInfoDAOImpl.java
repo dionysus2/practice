@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dionysus.wine.dao.WineInfoDAO;
 import dionysus.wine.query.WineInfoQuery;
 import dionysus.wine.util.JDBCUtil;
@@ -14,6 +17,7 @@ import dionysus.wine.vo.BasicInfo;
 import dionysus.wine.vo.WineInfo;
 
 public class WineInfoDAOImpl implements WineInfoDAO {
+	private Logger logger= LoggerFactory.getLogger(WineInfoDAOImpl.class);
 	
 	@Override
 	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow) throws SQLException {
@@ -349,7 +353,8 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 				wine.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
 				wine.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
 				wine.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
-				wine.setWineSellerId(rs.getInt("WINIE_SELLER_ID"));
+				wine.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
+				logger.info("DAO와인정보 상세검색:"+wine);
 				return wine;
 			}
 		} 
