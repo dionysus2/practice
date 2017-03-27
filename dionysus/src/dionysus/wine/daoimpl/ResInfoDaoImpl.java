@@ -73,21 +73,34 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}finally{
 			JDBCUtil.close(pstmt,rs);
 		}
-		return -1;
+		return 0;
 	}
 	
 	// 레스토랑 정보 업주별 조회	
 	@Override
-	public ResInfo selectByResOwnerResInfo(Connection conn, int resId) throws Exception {
+	public  ArrayList<ResInfo>selectByResOwnerResInfo(Connection conn, int resInfoId, int startRow, int  lastRow) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		ArrayList<ResInfo>list = new ArrayList<>();
+		ResInfo resInfo = new ResInfo();
 		try{
 			pstmt = conn.prepareStatement(ResInfoQuery.selectByResOwnerResInfo);	
-			pstmt.setInt(1, resId);
+			pstmt.setInt(1, resInfoId);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, lastRow);
 			rs = pstmt.executeQuery();
-			ArrayList<ResInfo> list =new ArrayList<>();
-			if(rs.next())
-			return makerResInfo(rs);	
+		    while(rs.next()){
+				resInfo.setResInfoId(rs.getInt("resInfoId"));
+				resInfo.setResInfoName(rs.getString("resInfoName"));
+				resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
+				resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
+				resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
+				resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
+				resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
+				resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
+				resInfo.setResId(rs.getInt("resId"));
+				list.add(resInfo);
+				}
 		}catch (SQLException e) {
 			throw e;
 		}finally{
@@ -95,6 +108,24 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}
 		return null;
 	}
+	// 레스토랑 정보 업주별 count조회	
+	@Override
+	public int ResOwnerResInfoCount(Connection conn) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(ResInfoQuery.ResOwnerResInfoCount);	
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getInt(1);
+		}catch (SQLException e) {
+			throw e;
+		}finally{
+			JDBCUtil.close(pstmt,rs);
+		}
+		return 0;
+	}
+
 	// 레스토랑 정보 추가			
 	@Override
 	public int insertResInfo(Connection conn, ResInfo resInfo) throws Exception {
@@ -158,5 +189,34 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}
 		
 	}
+	//레스토랑번호별 레스토랑상세정보 조회
+	@Override
+	public ResInfo selectByResInfoId(Connection conn, int resInfoId) throws Exception {
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		try{
+		pstmt = conn.prepareStatement(ResInfoQuery.selectByResInfoId);
+		pstmt.setInt(1, resInfoId);
+		rs=pstmt.executeQuery();
+		if(rs.next()){
+			ResInfo resInfo = new ResInfo();
+			resInfo.setResInfoName(rs.getString("resInfoName"));
+			resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
+			resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
+			resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
+			resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
+			resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
+			resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
+			resInfo.setResId(rs.getInt("resId"));
+			return resInfo;
+		}
+		}catch (SQLException e) {
+           throw e;
+		}finally{
+			JDBCUtil.close(pstmt, rs);
+		}
+	  return null;
+	}
+
 
 }

@@ -170,7 +170,6 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 			return list;
 		} 
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw e;
 		}
 		finally{
