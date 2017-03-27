@@ -30,10 +30,5 @@ public class WineInfoController {
 		logger.info("와인정보 전체리스트 출력");
 		return mav;
 	}
-	@RequestMapping(value="/wineinfo/")
-	public static ModelAndView readByWinnInfoId(HttpServletRequest request){
-		ModelAndView mav= new ModelAndView();
-		mav.setView("/jaehyuntest/view.jsp");
-		return mav;
-	}
+
 }
