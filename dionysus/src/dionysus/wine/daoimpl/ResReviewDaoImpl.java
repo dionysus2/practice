@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dionysus.wine.dao.ResReviewDAO;
+import dionysus.wine.query.ResReviewQuery;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.ResReview;
 import dionysus.wine.vo.ResReview;
@@ -17,10 +18,10 @@ public class ResReviewDaoImpl implements ResReviewDAO {
 //  리뷰추가	
 	@Override
 	public int insertResReivew(Connection conn, ResReview resReview, int wineInfoId) throws Exception {
-	   String sql = "insert into Res_Reivew(wine_Review_Id, wine_Review_Content, wine_Review_Ratings,customer_Id,wine_Info_Id) values(?,?,?,?,?)";
+	
 	   PreparedStatement pstmt = null;
 	   try{
-		   pstmt = conn.prepareStatement(sql);
+		   pstmt = conn.prepareStatement(ResReviewQuery.insert);
 		   pstmt.setInt(1, resReview.getResReviewId());
 		   pstmt.setString(2, resReview.getResReviewContent());
 		   pstmt.setInt(3, resReview.getResReviewRatings());
@@ -37,12 +38,12 @@ public class ResReviewDaoImpl implements ResReviewDAO {
 // 리뷰 변경
 	@Override
 	public int updateResReivew(Connection conn, ResReview resReview,int customerId, int wineInfoId) throws Exception {
-		   String sql = "update Res_Reivew set wine_Review_Id=?,wine_Review_Content=?,wine_Review_Ratings=?,customer_Id=?,wine_Info_Id=?";
+		   
 		   PreparedStatement pstmt = null;
 		   pstmt.setInt(1, customerId);
 		   pstmt.setInt(2, wineInfoId);
 		   try{
-			   pstmt = conn.prepareStatement(sql);
+			   pstmt = conn.prepareStatement(ResReviewQuery.update);
 			   pstmt.setString(1, resReview.getResReviewContent());
 			   pstmt.setInt(2, resReview.getResReviewRatings());
 			   pstmt.setInt(3, resReview.getResInfoId());
@@ -60,7 +61,7 @@ public class ResReviewDaoImpl implements ResReviewDAO {
 		   String sql = "delete from Res_Reivew where customer_Id=? and wine_Info_Id=?";
 		   PreparedStatement pstmt = null;
 		   try{
-			   pstmt = conn.prepareStatement(sql);
+			   pstmt = conn.prepareStatement(ResReviewQuery.delete);
 			   pstmt.setInt(1, customerId);
 			   pstmt.setInt(2, wineInfoId);
 			   return pstmt.executeUpdate();
@@ -74,10 +75,10 @@ public class ResReviewDaoImpl implements ResReviewDAO {
 	// 레스토랑별 리뷰정보 전체리스트 조회
 	@Override
 	public ArrayList<ResReview> selectAllResReview(Connection conn, int resInfoId) throws SQLException {
-		String sql = "";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try{
+		pstmt = conn.prepareStatement(ResReviewQuery.selectAllResReview);	
 		pstmt.setInt(1, resInfoId);	
 		ArrayList<ResReview>list = new ArrayList<>();
 		ResReview resReview = new ResReview();

@@ -149,7 +149,7 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		}
 	  
 	}
-//	레스토랑별 예약접수 판매량 조회	(보류)
+//	레스토랑별 예약접수 판매량 조회
 	@Override
 	public ArrayList<ResReserv> selectBySalesLate(Connection conn, int resInfoId) throws Exception {
 		String sql = "";  //sql 문 보류
