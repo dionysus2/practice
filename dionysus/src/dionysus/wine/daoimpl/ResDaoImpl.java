@@ -239,12 +239,11 @@ public class ResDaoImpl implements ResDAO {
 
 	//레스토랑 업주 회원 정보수정
 	@Override
-	public int updateResOwner(Connection conn, Res resid)throws SQLException {
+	public int updateResOwner(Connection conn, Res res)throws SQLException {
 		String Sql ="update res set res_location=?,"
 				+ "res_tel=?,res_account_no=?,res_profile_picture=?,"
 				+ "res_ownername=? where res_id=?";
 		PreparedStatement pstmt=null;
-		Res res = new Res();
 		try {
 			pstmt = conn.prepareStatement(Sql);
 			//비밀번호 변경
