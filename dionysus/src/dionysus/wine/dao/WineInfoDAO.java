@@ -24,6 +24,7 @@ public interface WineInfoDAO {
 	 *	와인회사별 Count						int							Connection, 회사번호
 	 *
 	 *	와인번호(와인이름)별 와인상세정보 조회 WineInfo 		Connection, wineInfoId
+	 *	아이디별 와인업주 정보 가져오기.
 	 */
 	public ArrayList<WineInfo> selectAllWineInfo(Connection conn, int startRow, int lastRow)throws SQLException;
 	public ArrayList<WineInfo> selectWinePriceMax(Connection conn, int startRow, int lastRow)throws SQLException;
@@ -37,4 +38,5 @@ public interface WineInfoDAO {
 	public ArrayList<WineInfo> selectByWineSellerWineInfo(Connection conn, int wineSellerId, int startRow, int lastRow)throws SQLException;
 	public int wineSellerWineInfoCount(Connection conn)throws SQLException;
 	public WineInfo selectByWineInfoId(Connection conn, int wineInfoId)throws SQLException;
+	public int selectByBasicId(Connection conn, String basicInfoUsername)throws SQLException;
 }
