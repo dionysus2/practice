@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import dionysus.wine.dao.WineInfoDAO;
 import dionysus.wine.query.WineInfoQuery;
 import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.BasicInfo;
 import dionysus.wine.vo.WineInfo;
 
 public class WineInfoDAOImpl implements WineInfoDAO {
@@ -248,8 +246,8 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 		PreparedStatement pstm= null;
 		try {
 			pstm= conn.prepareStatement(WineInfoQuery.insert);
-			pstm.setInt(1, wine.getWineInfoId());
-			pstm.setString(2, wine.getWineInfoName());
+			pstm.setString(1, wine.getWineInfoName());
+			pstm.setString(2, wine.getWineInfoProfilePicture());
 			pstm.setInt(3, wine.getWineInfoPrice());
 			pstm.setInt(4, wine.getWineSellerId());
 			pstm.setString(5, wine.getWineInfoCapacity());
@@ -261,9 +259,9 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 			pstm.setString(11, wine.getWineInfoGrapes());
 			pstm.setString(12, wine.getWineInfoABV());
 			pstm.setString(13, wine.getWineInfoType());
-			pstm.setString(15, wine.getWineInfoClassification());
+			pstm.setString(14, wine.getWineInfoClassification());
 			pstm.setString(15, wine.getWineInfoFlavors());
-			pstm.setString(17, wine.getWineInfoSweetness());
+			pstm.setString(16, wine.getWineInfoSweetness());
 			pstm.setString(17, wine.getWineInfoAcidity());
 			pstm.setString(18, wine.getWineInfoBody());
 			return pstm.executeUpdate();
@@ -439,5 +437,28 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 			JDBCUtil.close(pstm, rs);
 		}
 		return null;
+	}
+	
+	@Override
+	public int selectByBasicId(Connection conn, String basicInfoUsername){
+		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.selectByWineSellerId);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
 	}
 }

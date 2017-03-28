@@ -158,7 +158,7 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 			JDBCUtil.close(pstmt, null);
 		}		
 		
-		return null;
+		return 0;
 	}
 	//와인회사명으로 배송리스트 조회
 	@Override

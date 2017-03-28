@@ -51,7 +51,7 @@ public class WineInfoDAOTest {
 	}
 	//	@Test
 	//	성공
-	public void insertTest(){
+	/*public void insertTest(){
 		Connection conn= JDBCUtil.getConnection();
 		String wineInfoName= "테스트";
 		String wineInfoProfilePicture="테스트";
@@ -69,7 +69,7 @@ public class WineInfoDAOTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	//	나머지 테스트는.. DB정보 부족으로 인한...
 	@Test
 	public void selectByWineInfoId(){
@@ -88,5 +88,13 @@ public class WineInfoDAOTest {
 		finally{
 			JDBCUtil.close(conn);
 		}
+	}
+	@Test
+	public void selectByWineSellerId(){
+		Connection conn= JDBCUtil.getConnection();
+		String basicInfoUsername= "hanamana";
+		int result= new WineInfoDAOImpl().selectByBasicId(conn, basicInfoUsername);
+		assertThat(result, is(81));
+		JDBCUtil.close(conn);
 	}
 }
