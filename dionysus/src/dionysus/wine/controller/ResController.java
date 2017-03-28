@@ -16,7 +16,7 @@ public class ResController {
 		return mav;
 	}
 	@RequestMapping(value="/basic/insert", method="POST")
-	public static ModelAndView insertEnd(HttpServletRequest request){
+	public static ModelAndView insertRes(HttpServletRequest request) throws Exception{
 		ModelAndView mav= new ModelAndView();
 		ResServiceImpl service= (ResServiceImpl)request.getServletContext().getAttribute("resservice");
 		if(service.createRes(request).equals("{\"result\":\"success\"}")){
