@@ -1,12 +1,20 @@
 package dionysus.wine.serviceimpl;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -148,13 +156,20 @@ public class WineInfoServiceImpl implements WineInfoService {
 		return null;
 	}
 	
+	/*
 	@Override
-	public String wineInfoCreateEnd(HttpServletRequest request) {
+	public String wineInfoCreateEnd(HttpServletRequest request){
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
+		String path= request.getServletContext().getRealPath("img");
+		DiskFileItemFactory df= new DiskFileItemFactory();
+		ServletFileUpload uploader= new ServletFileUpload(df);
+		uploader.setSizeMax(320*480*10);
+		WineInfo wine= new WineInfo();
+		HttpSession session= request.getSession();
+		System.out.println("try접근전");
 		String wineInfoName= request.getParameter("wineInfoName");
-		String wineInfoProfilePicture= request.getParameter("wineInfoProfilePicture");
-		int wineInfoPrice= Integer.parseInt(request.getParameter("wineInfoPrice"));
+		int wineInfoPrice= Integer.parseInt(request.getParameter("wineInfoPrice"));;
 		String wineInfoCapacity= request.getParameter("wineInfoCapacity");
 		String wineInfoCountry= request.getParameter("wineInfoCountry");
 		String wineInfoRegion= request.getParameter("wineInfoRegion");
@@ -163,18 +178,54 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String wineInfoVintage= request.getParameter("wineInfoVintage");
 		String wineInfoGrapes= request.getParameter("wineInfoGrapes");
 		String wineInfoABV= request.getParameter("wineInfoABV");
-		String wineInfoType= request.getParameter("wineInfoType");
+		String wineInfoType= request.getParameter("wineInfoType").trim();
 		String wineInfoClassification= request.getParameter("wineInfoClassification");
 		String wineInfoFlavors= request.getParameter("wineInfoFlavors");
 		String wineInfoSweetness= request.getParameter("wineInfoSweetness");
 		String wineInfoAcidity= request.getParameter("wineInfoAcidity");
 		String wineInfoBody= request.getParameter("wineInfoBody");
-		//	int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
-		int wineSellerId= 1;
+		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
+		logger.info("유저아이디"+basicInfoUsername);
+		int wineSellerId= dao.selectByBasicId(conn, basicInfoUsername);
+		logger.info("유저번호"+wineSellerId);
 		try {
-			logger.info("Connection연결성공");
-			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoCapacity, wineInfoCountry, wineInfoRegion, wineInfoWinery, wineInfoImporter, wineInfoVintage, wineInfoGrapes, wineInfoABV, wineInfoType, wineInfoClassification, wineInfoFlavors, wineInfoSweetness, wineInfoAcidity, wineInfoBody, wineSellerId));
+			System.out.println("try접근후");
 			JsonObject ob= new JsonObject();
+			wine.setWineInfoABV(wineInfoABV);
+			wine.setWineInfoAcidity(wineInfoAcidity);
+			wine.setWineInfoBody(wineInfoBody);
+			wine.setWineInfoCapacity(wineInfoCapacity);
+			wine.setWineInfoClassification(wineInfoClassification);
+			wine.setWineInfoCountry(wineInfoCountry);
+			wine.setWineInfoFlavors(wineInfoFlavors);
+			wine.setWineInfoGrapes(wineInfoGrapes);
+			wine.setWineInfoImporter(wineInfoImporter);
+			wine.setWineInfoName(wineInfoName);
+			wine.setWineInfoPrice(wineInfoPrice);
+			wine.setWineInfoRegion(wineInfoRegion);
+			wine.setWineInfoSweetness(wineInfoSweetness);
+			wine.setWineInfoType(wineInfoType);
+			wine.setWineInfoVintage(wineInfoVintage);
+			wine.setWineInfoWinery(wineInfoWinery);
+			wine.setWineSellerId(wineSellerId);
+			List<FileItem>list= uploader.parseRequest(request);
+			for(FileItem item: list){
+				if(!item.isFormField()){
+					String fileName= item.getName();
+					int positionOfPoint= fileName.indexOf(".");
+					String fName= fileName.substring(0, positionOfPoint);
+					String extension= fileName.substring(positionOfPoint+1);
+					fileName= fName+"-"+System.nanoTime()+"."+extension;
+					if(fileName!=null && !fileName.equals("")){
+						logger.info(path+"/"+fileName);
+						wine.setWineInfoProfilePicture(fileName);
+						logger.info(fileName);
+						logger.info(wine.getWineInfoProfilePicture());
+					}
+				}
+			}
+			logger.info("서비스에서 전달 new Wine():"+" "+wine);
+			int result= dao.wineInfoInsert(conn, wine);
 			if(result==1){
 				ob.addProperty("result", "success");
 				logger.info("DAO INSERT입력성공");
@@ -185,7 +236,127 @@ public class WineInfoServiceImpl implements WineInfoService {
 			}
 			return new Gson().toJson(ob);
 		} 
-		catch (SQLException e) {
+		catch (FileUploadException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
+		return null;
+
+	}*/
+	@Override
+	public String wineInfoCreateEnd(HttpServletRequest request){
+		Connection conn= JDBCUtil.getConnection();
+		HttpSession session= request.getSession();
+		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
+		logger.info("업주아뒤:"+basicInfoUsername);
+		String path= request.getServletContext().getRealPath("img");
+		DiskFileItemFactory df= new DiskFileItemFactory();
+		ServletFileUpload uploader= new ServletFileUpload(df);
+		uploader.setSizeMax(320*480*10);
+		WineInfo wine= new WineInfo();
+		System.out.println("try접근전");
+		try {
+			System.out.println("try접근후");
+			JsonObject ob= new JsonObject();
+			List<FileItem>list= uploader.parseRequest(request);
+			int wineSellerId= dao.selectByBasicId(conn, basicInfoUsername);
+			wine.setWineSellerId(wineSellerId);
+			logger.info("와인업주번호:"+wineSellerId);
+			for(FileItem item: list){
+				if(item.isFormField()){
+					if(item.getFieldName().equals("wineInfoName")){
+						wine.setWineInfoName(item.getString("UTF-8"));
+						logger.info("dao에 전달하기 위해 wine에 set한 값:"+" "+wine.getWineInfoName());
+					}
+					else if(item.getFieldName().equals("wineInfoPrice")){
+						wine.setWineInfoPrice(Integer.parseInt(item.getString("UTF-8")));
+						logger.info("dao에 전달하기 위해 wine에 set한 값:"+" "+wine.getWineInfoPrice());
+					}
+					else if(item.getFieldName().equals("wineInfoCapacity")){
+						wine.setWineInfoCapacity(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoCountry")){
+						wine.setWineInfoCountry(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoRegion")){
+						wine.setWineInfoRegion(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoWinery")){
+						wine.setWineInfoWinery(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoImporter")){
+						wine.setWineInfoImporter(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoVintage")){
+						wine.setWineInfoVintage(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoGrapes")){
+						wine.setWineInfoGrapes(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoABV")){
+						wine.setWineInfoABV(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoType")){
+						wine.setWineInfoType(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoClassification")){
+						wine.setWineInfoClassification(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoFlavors")){
+						wine.setWineInfoFlavors(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoSweetness")){
+						wine.setWineInfoSweetness(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoAcidity")){
+						wine.setWineInfoAcidity(item.getString("UTF-8"));
+					}
+					else if(item.getFieldName().equals("wineInfoBody")){
+						wine.setWineInfoBody(item.getString("UTF-8"));
+					}
+				}
+				else{
+					String fileName= item.getName();
+					int positionOfPoint= fileName.indexOf(".");
+					String fName= fileName.substring(0, positionOfPoint);
+					String extension= fileName.substring(positionOfPoint+1);
+					fileName= fName+"-"+System.nanoTime()+"."+extension;
+					if(fileName!=null && !fileName.equals("")){
+						logger.info(path+"/"+fileName);
+						wine.setWineInfoProfilePicture(fileName);
+						logger.info(fileName);
+						logger.info(wine.getWineInfoProfilePicture());
+					}
+				}
+			}
+			logger.info("서비스에서 전달 new Wine():"+" "+wine);
+			int result= dao.wineInfoInsert(conn, wine);
+			if(result==1){
+				ob.addProperty("result", "success");
+				logger.info("DAO INSERT입력성공");
+			}
+			else{
+				ob.addProperty("result", "fail");	
+				logger.info("DAO INSERT입력실패");
+			}
+			return new Gson().toJson(ob);
+		} 
+		catch (FileUploadException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

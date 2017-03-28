@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/dionysus/wineinfo/insert" method="POST" enctype="multipart/form-data">
+	<form action="/dionysus/wineinfo/insert" method="post" enctype="multipart/form-data">
 		<h1>와인상품 추가페이지</h1>
 		<table>
 			<tbody>
