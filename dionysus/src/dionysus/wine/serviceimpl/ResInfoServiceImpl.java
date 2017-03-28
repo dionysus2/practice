@@ -178,6 +178,22 @@ public class ResInfoServiceImpl implements ResInfoService {
 		
 	}
 
+	@Override
+	public String readByResInfoId(HttpServletRequest request) throws Exception {
+		Connection conn = JDBCUtil.getConnection();
+		int resInfoId = Integer.parseInt(request.getParameter("resInfoId"));
+	    try{
+	    	ResInfo resInfo = dao.selectByResInfoId(conn, resInfoId);
+	    	logger.info("서비스단 레스토랑정보 상세검색"+ resInfoId);
+	    	return new Gson().toJson(resInfo);
+	    }catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCUtil.close(conn);
+		}
+	return null;
+	}
+
 
 
 }

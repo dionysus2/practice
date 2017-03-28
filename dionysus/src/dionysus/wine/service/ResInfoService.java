@@ -19,5 +19,5 @@ public interface ResInfoService {
 	public String ResInfoUpdateStart(HttpServletRequest request) throws Exception;
 	public String ResInfoUpdateEnd(HttpServletRequest request) throws Exception;
 	public String ResInfoDelete(HttpServletRequest request) throws Exception;
-
+	public String readByResInfoId(HttpServletRequest request)throws Exception;
 }
