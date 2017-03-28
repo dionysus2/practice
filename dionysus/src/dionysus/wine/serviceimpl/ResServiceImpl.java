@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import dionysus.wine.daoimpl.ResDaoImpl;
 import dionysus.wine.service.ResService;
@@ -26,8 +27,13 @@ public class ResServiceImpl implements ResService {
 	@Override
 	public String updateResActivated(HttpServletRequest req) throws Exception {
 		Connection conn=JDBCUtil.getConnection();
+		int resId = Integer.parseInt(req.getParameter("res_id"));
+		int result = dao.selectResOwnerActivated(conn, resId);
+		JsonObject ob = new JsonObject();
+		if(result==1)ob.addProperty("result", "success");
+		else ob.addProperty("reult", "fail");
+		return new Gson().toJson(ob);
 		
-		return null;
 	}
 
 	@Override
@@ -65,14 +71,52 @@ public class ResServiceImpl implements ResService {
 
 	@Override
 	public String readAllResLocation(HttpServletRequest req) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Connection conn = JDBCUtil.getConnection();			
+		   try {
+		         int pageNo= 1;
+		         if(req.getParameter("pageNo")!=null){
+		            pageNo= Integer.parseInt(req.getParameter("pageNo"));
+		         }
+		         int cntOfRow= dao.resOwnerCount(conn);
+		         String location = req.getParameter("resLocation");
+		         Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+		         ArrayList<Res>list= dao.selectResOwnerLocation(conn, location,pagination.getStartRow(), pagination.getLastRow());
+		         HashMap<String, Object> map= new HashMap<String, Object>();
+		         map.put("pagination", pagination);
+		         map.put("list", list);
+		         return new Gson().toJson(map);
+		      } 
+		      catch (SQLException e) {
+		         // TODO Auto-generated catch block
+		         e.printStackTrace();
+		      }
+		      finally{
+		         JDBCUtil.close(conn);
+		      }
+			return null;
+		}
 
 	@Override
 	public String createRes(HttpServletRequest req) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Connection conn = JDBCUtil.getConnection();
+		int resId = dao.resOwnerCount(conn);
+		String resBrn = req.getParameter("resBrn");
+		String resLocation = req.getParameter("resLocation");
+		String resTel = req.getParameter("resTel");
+		String resAccountNo=req.getParameter("resAccpuntNO");
+		String resProfilePicture = req.getParameter("resProfilePicture");
+		String resActivated = req.getParameter("resActivated");
+		String resName= req.getParameter("resName");
+		int basicInfoId=Integer.parseInt(req.getParameter("basicInfoId"));
+		JsonObject ob = new JsonObject();
+		try{
+		int result = dao.insertResOwner(conn, new Res(resId,resBrn,resLocation,resTel,resAccountNo,resProfilePicture,resAccountNo,resName,basicInfoId));
+		if(result==1)ob.addProperty("result", "success");
+		else ob.addProperty("result", "fail");
+		}
+		return new Gson().toJson(ob);
+		
 	}
 
 	@Override
