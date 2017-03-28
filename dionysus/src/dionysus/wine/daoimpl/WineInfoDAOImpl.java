@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import dionysus.wine.dao.WineInfoDAO;
 import dionysus.wine.query.WineInfoQuery;
 import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.BasicInfo;
 import dionysus.wine.vo.WineInfo;
 
 public class WineInfoDAOImpl implements WineInfoDAO {
@@ -247,24 +245,9 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		try {
-/*
- * WINE_INFO_NAME, WINE_INFO_PROFILE_PICTURE, 
-WINE_INFO_PRICE, WINE_SELLER_ID, 
-WINE_INFO_CAPACITY, 
-WINE_INFO_COUNTRY, WINE_INFO_REGION, 
-WINE_INFO_WINERY, WINE_INFO_IMPORTER, 
-WINE_INFO_VINTAGE, WINE_INFO_GRAPES, 
-WINE_INFO_ABV,WINE_INFO_TYPE,
- WINE_INFO_CLASSIFICATION, WINE_INFO_FLAVORS, 
- WINE_INFO_SWEETNESS, WINE_INFO_ACIDITY,
-WINE_INFO_BODY*/
-			logger.info("DAO접근");
 			pstm= conn.prepareStatement(WineInfoQuery.insert);
-			logger.info("dao테스트1"+wine.getWineInfoId());
-			logger.info("dao테스트2"+wine.getWineInfoName());
 			pstm.setString(1, wine.getWineInfoName());
 			pstm.setString(2, wine.getWineInfoProfilePicture());
-			logger.info("dao테스트3"+wine.getWineInfoPrice());
 			pstm.setInt(3, wine.getWineInfoPrice());
 			pstm.setInt(4, wine.getWineSellerId());
 			pstm.setString(5, wine.getWineInfoCapacity());
@@ -281,7 +264,6 @@ WINE_INFO_BODY*/
 			pstm.setString(16, wine.getWineInfoSweetness());
 			pstm.setString(17, wine.getWineInfoAcidity());
 			pstm.setString(18, wine.getWineInfoBody());
-			logger.info("dao테스트 last:"+pstm);
 			return pstm.executeUpdate();
 		} 
 		catch (SQLException e) {
