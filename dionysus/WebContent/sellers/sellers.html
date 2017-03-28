@@ -2,50 +2,20 @@
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>
-<link rel="import" href="http://localhost:8087/dionysus/heads/bootstrap.html">
+<link rel="import"
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
 </head>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 
 <body>
 
-<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div> 
-<script>w3IncludeHTML();</script>
+	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div>
+	<script>
+		w3IncludeHTML();
+	</script>
 
 	<div class="container-fluid">
-
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Dionysus</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Page 1</a></li>
-						<li><a href="#">Page 2</a></li>
-						<li><a href="#">Page 3</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" data-toggle="modal" data-target="#myModal2"><span
-								class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#myModal"><span
-								class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
-
-
-
-	<div class="container">
-
 		<h1>관리 메뉴</h1>
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#home">기본정보</a></li>
@@ -65,39 +35,90 @@
 				<p>사진은 전부 url로 등록해야 됨</p>
 				<div class="row">
 
-			<form action="/dionysus/sellers/insert" method="post">
-				<div class="form-group">
-					<label for="name">이름</label> <input type="text"
-						class="form-control" id="name" name="wineInfoName">
-				</div>
-				<div class="form-group">
-					<label for="pro_pic">프로필 사진</label> <input type="url"
-						class="form-control" id="pro_pic" name="wineInfoProfilePicture">
-				</div>
-				<div class="form-group">
-					<label for="price">가격</label> <input type="number"
-						class="form-control" id="price" name="wineInfoPrice">
-				</div>
-				<div class="form-group">
-					<label for="origin">원산지</label> <input type="text"
-						class="form-control" id="origin" name="wineInfoOrigin">
-				</div>
-				<div class="form-group">
-					<label for="pic1">사진1</label> <input type="url" class="form-control"
-						id="pic1" name="wineInfoPicture1">
-				</div>
-				<div class="form-group">
-					<label for="pic2">사진2</label> <input type="url" class="form-control"
-						id="pic2" name="wineInfoPicture2">
-				</div>
-				<div class="form-group">
-					<label for="pic3">사진3</label> <input type="url" class="form-control"
-						id="pic3" name="wineInfoPicture3">
-				</div>
-				<button type="submit" class="btn btn-default">추가</button>
-			</form>
+					<form action="/dionysus/sellers/insert" method="post">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="name">와인명</label> <input type="text"
+									class="form-control" id="name" name="wineInfoName">
+							</div>
+							<div class="form-group">
+								<label for="pro_pic">프로필 사진</label> <input type="url"
+									class="form-control" id="pro_pic" name="wineInfoProfilePicture">
+							</div>
+							<div class="form-group">
+								<label for="price">가격</label> <input type="number"
+									class="form-control" id="price" name="wineInfoPrice">
+							</div>
+							<div class="form-group">
+								<label for="capacity">용량</label> <input type="text"
+									class="form-control" id="capacity" name="wineInfoCapacity">
+							</div>
+							<div class="form-group">
+								<label for="country">국가</label> <input type="text"
+									class="form-control" id="country" name="wineInfoCountry">
+							</div>
+							<div class="form-group">
+								<label for="region">지역</label> <input type="text"
+									class="form-control" id="region" name="wineInfoRegion">
+							</div>
+							<div class="form-group">
+								<label for="type">종류</label> <input type="text"
+									class="form-control" id="type" name="wineInfoType">
+							</div>
+							<div class="form-group">
+								<label for="classification">등급</label> <input type="text"
+									class="form-control" id="classification"
+									name="wineInfoClassification">
+							</div>
+							<div class="form-group">
+								<label for="flavors">향</label> <input type="text"
+									class="form-control" id="flavors" name="wineInfoFlavors">
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="sweetness">당도</label> <input type="text"
+									class="form-control" id="sweetness" name="wineInfoSweetness">
+							</div>
+							<div class="form-group">
+								<label for="acidity">산도</label> <input type="text"
+									class="form-control" id="acidity" name="wineInfoAcidity">
+							</div>
+							<div class="form-group">
+								<label for="body">바디</label> <input type="text"
+									class="form-control" id="body" name="wineInfoBody">
+							</div>
+							<div class="form-group">
+								<label for="vintage">빈티지</label> <input type="url"
+									class="form-control" id="vintage" name="wineInfoVintage">
+							</div>
+							<div class="form-group">
+								<label for="grapes">품종</label> <input type="text"
+									class="form-control" id="grapes"
+									name="wineInfoGrapes">
+							</div>
+							<div class="form-group">
+								<label for="winery">와이너리</label> <input type="text"
+									class="form-control" id="winery" name="wineInfoWinery">
+							</div>
+							<div class="form-group">
+								<label for="importer">수입처</label> <input type="text"
+									class="form-control" id="importer" name="wineInfoImporter">
+							</div>
+							<div class="form-group">
+								<label for="ABV">도수</label> <input type="text"
+									class="form-control" id="ABV" name="wineInfoABV">
+							</div>
+						</div>
 
-		</div>
+						<div class="container">
+						<br>
+							<button type="submit" class="btn btn-default btn-block">등록</button>
+						</div>
+					</form>
+
+				</div>
 			</div>
 			<div id="menu2" class="tab-pane fade">
 				<h3>Menu 2</h3>
@@ -105,7 +126,7 @@
 			</div>
 		</div>
 
-		
+
 
 
 	</div>
