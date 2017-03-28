@@ -169,7 +169,8 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String wineInfoSweetness= request.getParameter("wineInfoSweetness");
 		String wineInfoAcidity= request.getParameter("wineInfoAcidity");
 		String wineInfoBody= request.getParameter("wineInfoBody");
-		int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
+		//	int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
+		int wineSellerId= 1;
 		try {
 			logger.info("Connection연결성공");
 			int result= dao.wineInfoInsert(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoCapacity, wineInfoCountry, wineInfoRegion, wineInfoWinery, wineInfoImporter, wineInfoVintage, wineInfoGrapes, wineInfoABV, wineInfoType, wineInfoClassification, wineInfoFlavors, wineInfoSweetness, wineInfoAcidity, wineInfoBody, wineSellerId));
