@@ -13,4 +13,10 @@ public class Res {
 	private String resActivated;
 	private String resName;
 	private int basicInfoId;
+	public Res(String basicInfoUsername, String basicInfoPwd, String basicInfoEmail) {
+		super();
+		this.basicInfoUsername = basicInfoUsername;
+		this.basicInfoPwd = basicInfoPwd;
+		this.basicInfoEmail = basicInfoEmail;
+	}
 }

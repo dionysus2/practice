@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import dionysus.wine.daoimpl.BasicInfoDAOImpl;
 import dionysus.wine.daoimpl.ResDaoImpl;
 import dionysus.wine.service.ResService;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.util.PagingUtil;
+import dionysus.wine.vo.BasicInfo;
 import dionysus.wine.vo.Pagination;
 import dionysus.wine.vo.Res;
 
-public class ResServiceImpl implements ResService {
+public class ResServiceImpl implements ResService{
 	private ResDaoImpl dao;
-	public ResServiceImpl(ResDaoImpl dao) {
+	public ResServiceImpl(ResDaoImpl dao){
 		this.dao= dao;
-	}
-	
-	
+	}	
 	@Override
 	public String updateResActivated(HttpServletRequest req) throws Exception {
 		Connection conn=JDBCUtil.getConnection();
@@ -111,29 +111,65 @@ public class ResServiceImpl implements ResService {
 		int basicInfoId=Integer.parseInt(req.getParameter("basicInfoId"));
 		JsonObject ob = new JsonObject();
 		try{
-		int result = dao.insertResOwner(conn, new Res(resId,resBrn,resLocation,resTel,resAccountNo,resProfilePicture,resAccountNo,resName,basicInfoId));
+		int result = dao.insertResOwner(conn, new Res(resId,resBrn,resLocation,resTel,resAccountNo,resProfilePicture,resActivated,resName,basicInfoId));
+		
 		if(result==1)ob.addProperty("result", "success");
+		
 		else ob.addProperty("result", "fail");
 		}
+		
 		return new Gson().toJson(ob);
 		
 	}
 
 	@Override
 	public String readResId(HttpServletRequest req) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = JDBCUtil.getConnection();
+		String resOwnername = req.getParameter("resOwnername");
+		String resBrn = req.getParameter("resBrn");
+		JsonObject ob = new JsonObject();
+		int result = dao.selectResOwnerId(conn, resOwnername, resBrn);
+		if(result==1) ob.addProperty("result", "success");
+		else ob.addProperty("result", "fail");
+		return new Gson().toJson(ob);
 	}
 
 	@Override
 	public String readResPwd(HttpServletRequest req) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = JDBCUtil.getConnection();
+		String basicInfoUserName = req.getParameter("basicInfoUsername");
+		String resBrn = req.getParameter("resBrn");
+		JsonObject ob = new JsonObject();
+		int result = dao.selectResOwnerPwd(conn, basicInfoUserName, resBrn);
+		if(result==1) ob.addProperty("result", "success");
+		else ob.addProperty("result", "fail");
+		return new Gson().toJson(ob);
 	}
 
 	@Override
 	public String updateRes(HttpServletRequest req) throws Exception {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		String reslocation = req.getParameter("resLocation");
+		String resTel = req.getParameter("resTel");
+		String resAccountNo = req.getParameter("res_account_no");
+		String resProfilePictiure = req.getParameter("res_profile_picture");
+		String resName = req.getParameter("res_name");
+		int resId = Integer.parseInt(req.getParameter("res_id"));
+		JsonObject ob = new JsonObject();
+		try {
+			int result = dao.updateResOwner(conn, new Res(reslocation,resTel,resAccountNo,resProfilePictiure,resName,resId));
+			if(result==1)ob.addProperty("result", "success");
+			else ob.addProperty("result", "fail");
+			return new Gson().toJson(ob);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 
