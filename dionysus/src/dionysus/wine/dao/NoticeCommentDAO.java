@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import dionysus.wine.vo.NoticeComment;
 
 public interface NoticeCommentDAO {
-	public ArrayList<NoticeComment> NoticeAllList(Connection conn, int noticeId) throws SQLException;
+	public ArrayList<NoticeComment> NoticeCommentAllList(Connection conn, int noticeId) throws SQLException;
 	public int NoticeCommentCount(Connection conn) throws SQLException;
 	public int insertNoticeComment(Connection conn, NoticeComment comment) throws SQLException;
 	public int updateNoticeComment(Connection conn, NoticeComment comment) throws SQLException;

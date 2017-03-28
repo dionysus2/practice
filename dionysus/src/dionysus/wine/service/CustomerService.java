@@ -36,8 +36,6 @@ public interface CustomerService {
 	public String updateCustomer(HttpServletRequest req);
 	public String customerIdFind(HttpServletRequest req);
 	public String customerPwdFind(HttpServletRequest req);
-	public String customerLogin(HttpServletRequest req);
-	public String customerLogout(HttpServletRequest req);
 	public String customerResReserv(HttpServletRequest req);
 	public String customerResReservUpdate(HttpServletRequest req);
 	public String customerResReservDelete(HttpServletRequest req);

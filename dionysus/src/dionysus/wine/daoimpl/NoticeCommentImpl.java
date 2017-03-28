@@ -17,7 +17,7 @@ import dionysus.wine.vo.NoticeComment;
 public class NoticeCommentImpl implements NoticeCommentDAO{
 
 	@Override
-	public ArrayList<NoticeComment> NoticeAllList(Connection conn, int noticeId) throws SQLException {
+	public ArrayList<NoticeComment> NoticeCommentAllList(Connection conn, int noticeId) throws SQLException {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt= null;
 		ResultSet rs= null;
