@@ -110,8 +110,8 @@
 													+ wine.wineSellerId
 													+ "</a></p>";
 											str = str
-													+ "<p>"
-													+ wine.wineInfoProfilePicture
+													+ "<p>"		
+													+ "<img src=/dionysus/img/"+wine.wineInfoProfilePicture
 													+ "</p> </div> </a> </div></div>";
 											target.append(str);
 										})
