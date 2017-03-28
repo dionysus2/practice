@@ -4,7 +4,7 @@ public interface ResResrvQuery {
     //      예약접수 전체 리스트 출력
 	public String selectAllReserv = "select T2.* from(select rownum rnum, T1.* from(select * from res_Reserv)T1)T2 where rnum between ? and ?";
     //      레스토랑별 예약접수 리스트 출력
-    public String selectByResReserv = "select T2.* from(select rownum rnum, T1.* from(select * from res_Reserv where res_Id=?)T1)T2 where rnum between ? and ?";
+	public String selectByResReserv = "select T2.* from(select rownum rnum, T1.* from(select * from res_Reserv where res_Id=?)T1)T2 where rnum between ? and ?";
     //      월별 범위안 예약접수 리스트 출력
     public String selectByMonthReserv = "select T2.* from(select rownum rnum, T1.* from(select * from res_Reserv where res_Reserv_Date between '????/??/??' and '????/??/??')T1)T2 where rnum between ? and ?";
     //      일별 범위안 예약접수 리스트 출력

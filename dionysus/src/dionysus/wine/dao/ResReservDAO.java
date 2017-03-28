@@ -19,8 +19,7 @@ public interface ResReservDAO {
 =======
 	 * 1.예약접수 전체 리스트 출력					ArrayList<ResReserv>	Connection, startRow, lastRow
 	 * 2.레스토랑별 예약접수 리스트 출력			ArrayList<ResReserv>	Connection, 레스토랑번호
->>>>>>> branch 'master' of https://github.com/dionysus2/practice.git
-	 * 3.월별 예약접수 리스트 출력					ArrayList<ResReserv>	Connection, date							
+     * 3.월별 예약접수 리스트 출력					ArrayList<ResReserv>	Connection, date							
 	 * 4.일별 예약접수 리스트 출력					ArrayList<ResReserv>	Conneciton, date
 	 * 5.일반회원별 지난예약리스트 조회			ArrayList<ResReserv>	Connection, 회원번호
 	 * 6.레스토랑별 예약접수 판매량 조회			ArrayList<WineOrder>	Connection, 와인판매량
