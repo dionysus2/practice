@@ -15,7 +15,6 @@ public interface ResService {
 	
 	public String updateResActivated(HttpServletRequest req)throws Exception;
 	public String readAllRes(HttpServletRequest req)throws Exception;
-	public String readResCount(HttpServletRequest req)throws Exception;
 	public String readAllResLocation(HttpServletRequest req)throws Exception;
 	public String createRes(HttpServletRequest req)throws Exception;
 	public String readResId(HttpServletRequest req)throws Exception;

@@ -54,18 +54,11 @@ public class ResServiceImpl implements ResService{
 	         return new Gson().toJson(map);
 	      } 
 	      catch (SQLException e) {
-	         // TODO Auto-generated catch block
 	         e.printStackTrace();
 	      }
 	      finally{
 	         JDBCUtil.close(conn);
 	      }
-		return null;
-	}
-
-	@Override
-	public String readResCount(HttpServletRequest req) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -87,7 +80,6 @@ public class ResServiceImpl implements ResService{
 		         return new Gson().toJson(map);
 		      } 
 		      catch (SQLException e) {
-		         // TODO Auto-generated catch block
 		         e.printStackTrace();
 		      }
 		      finally{
@@ -112,13 +104,16 @@ public class ResServiceImpl implements ResService{
 		JsonObject ob = new JsonObject();
 		try{
 		int result = dao.insertResOwner(conn, new Res(resId,resBrn,resLocation,resTel,resAccountNo,resProfilePicture,resActivated,resName,basicInfoId));
-		
-		if(result==1)ob.addProperty("result", "success");
-		
-		else ob.addProperty("result", "fail");
-		}
-		
+		if(result==1)ob.addProperty("result", "success");		
+		else ob.addProperty("result", "fail");		
 		return new Gson().toJson(ob);
+		}catch (SQLException e) {
+        e.printStackTrace();
+     }
+     finally{
+        JDBCUtil.close(conn);
+     }
+	return null;
 		
 	}
 
@@ -132,6 +127,7 @@ public class ResServiceImpl implements ResService{
 		if(result==1) ob.addProperty("result", "success");
 		else ob.addProperty("result", "fail");
 		return new Gson().toJson(ob);
+		
 	}
 
 	@Override

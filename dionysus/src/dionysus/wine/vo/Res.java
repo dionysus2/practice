@@ -13,10 +13,25 @@ public class Res {
 	private String resActivated;
 	private String resName;
 	private int basicInfoId;
-	public Res(String basicInfoUsername, String basicInfoPwd, String basicInfoEmail) {
+	public Res(int resId, String resBrn, String resLocation,String resTel, String resAccountNo, 
+			String resProfilePicture,String resActivated ,String resName,int basicInfoId) {
 		super();
-		this.basicInfoUsername = basicInfoUsername;
-		this.basicInfoPwd = basicInfoPwd;
-		this.basicInfoEmail = basicInfoEmail;
+		this.resId = resId;
+		this.resBrn = resBrn;
+		this.resTel = resTel;
+		this.resAccountNo = resAccountNo;
+		this.resProfilePicture = resProfilePicture;
+		this.resActivated = resActivated;
+		this.resName = resName;
+		this.basicInfoId = basicInfoId;		
 	}
+	 public Res(String resLocation, String resTel, String resAccountNo, String resProfilePictiure, String resName,int resId){
+		 	this.resLocation = resLocation;
+			this.resTel = resTel;
+			this.resAccountNo = resAccountNo;
+			this.resProfilePicture = resProfilePictiure;
+			this.resName = resName;
+			this.resId = resId;
+	 }
+
 }
