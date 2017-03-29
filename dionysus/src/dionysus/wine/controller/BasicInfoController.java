@@ -15,7 +15,7 @@ public class BasicInfoController {
 	@RequestMapping(value="/basic/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/jaehyuntest/basicjoin.jsp");
+		mav.setView("http://localhost:8087/dionysus/modals/forms/join.html");
 		return mav;
 	}
 	@RequestMapping(value="/basic/insert", method="POST")

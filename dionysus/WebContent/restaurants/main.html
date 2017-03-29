@@ -29,7 +29,7 @@
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#home" id=first>예약
 					현황</a></li>
-			<li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+			<li><a data-toggle="tab" data-target="#menu1" href="#">Menu 1</a></li>
 			<li><a data-toggle="tab" href="#menu2">통계</a></li>
 		</ul>
 	</div>
@@ -42,6 +42,7 @@
 			<div id="menu1" class="tab-pane fade">
 				<h3>Menu 1</h3>
 				<p>Some content in menu 1.</p>
+				<div w3-include-html="http://localhost:8087/dionysus/sellers/addwine.html"></div>
 			</div>
 			<div id="menu2" class="tab-pane fade">
 				<h3>Menu 2</h3>

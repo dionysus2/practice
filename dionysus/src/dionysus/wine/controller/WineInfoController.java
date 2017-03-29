@@ -72,7 +72,7 @@ public class WineInfoController {
 	@RequestMapping(value="/wineinfo/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/jaehyuntest/insert.jsp");
+		mav.setView("/sellers/addWine.html");
 		return mav;
 	}
 	//	와인상품 추가완료 => 경로 수정 필요합니다
