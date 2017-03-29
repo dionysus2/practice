@@ -22,7 +22,7 @@ import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 import dionysus.wine.serviceimpl.ResInfoServiceImpl;
 import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 
-@WebServlet({"/basic/*", "/wineinfo/*","/resinfo/*"})
+@WebServlet({"/basic/*", "/wineinfo/*","/resinfo/*", "/main/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {

@@ -12,13 +12,13 @@ import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
 public class BasicInfoController {
 	private static Logger logger= LoggerFactory.getLogger(BasicInfoController.class);
-	@RequestMapping(value="/basic/insert", method="GET")
+	@RequestMapping(value="/main/home", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		mav.setView("/dionysus/main/home");
 		return mav;
 	}
-	@RequestMapping(value="/basic/insert", method="POST")
+	@RequestMapping(value="/main/home", method="POST")
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
