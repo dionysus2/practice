@@ -28,7 +28,7 @@ public int selectByCount(Connection conn)throws Exception;
 public ArrayList<ResInfo>selectByResOwnerResInfo(Connection conn, int resInfoId, int startRow, int  lastRow)throws Exception;
 public int ResOwnerResInfoCount(Connection conn)throws Exception;
 public int insertResInfo(Connection conn, ResInfo resInfo) throws Exception;
-public int deleteResInfo(Connection conn, int resId)throws Exception;
+public int deleteResInfo(Connection conn, int resInfo)throws Exception;
 public int updateResInfo(Connection conn, ResInfo resInfo) throws Exception;
 public ResInfo selectByResInfoId(Connection conn, int resInfoId)throws Exception;
 }

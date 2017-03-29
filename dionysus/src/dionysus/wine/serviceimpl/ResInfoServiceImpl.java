@@ -32,8 +32,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 		try{
 			int pageNo =1;
 			if(request.getParameter("pageNo")!=null){
-			logger.info("사용자 폐이지 요청");
-			pageNo = Integer.parseInt(request.getParameter("pageNo"));
+	        pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			}
 			int cntOfRow = dao.selectByCount(conn);
 			Pagination pagination = PagingUtil.getPagination(pageNo, cntOfRow);
@@ -41,11 +40,10 @@ public class ResInfoServiceImpl implements ResInfoService {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			 map.put("pagination", pagination);
 	         map.put("list", list);
-	         logger.info("서비스단 페이징"+pagination);
 	         return new Gson().toJson(map);
 		    }catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		    }finally {
 			JDBCUtil.close(conn);
 		}
 		return null;
