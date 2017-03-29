@@ -28,15 +28,11 @@ public class BasicInfoController {
 			mav.setRedirect();
 			return mav;
 		}
-		else if(service.createEnd(request).equals("{\"result\":\"fail\"}")){
+		else {
 			mav.setRedirect();
 			mav.setView("insert");
 			return mav;
 		}
-		logger.info("Controller회원가입 추가실패");
-		mav.setView("insert");
-		mav.setRedirect();
-		return null;
 	}
 	@RequestMapping(value="/basic/login", method="GET")
 	public static ModelAndView loginStart(HttpServletRequest request){
@@ -56,15 +52,12 @@ public class BasicInfoController {
 			mav.setRedirect();
 			return mav;
 		}
-		else if(service.login(request).equals("{\"result\":\"fail\"}")){
+		else{
 			logger.info("Conroller로그인 실패");
 			mav.setView("login");
 			mav.setRedirect();
 			return mav;
 		}
-		mav.setView("login");
-		mav.setRedirect();
-		return mav;
 	}
 	@RequestMapping(value="/basic/update", method="GET")
 	public static ModelAndView updateStart(HttpServletRequest request){
