@@ -13,6 +13,7 @@ import dionysus.wine.query.WineOrderQuery;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.Customer;
 import dionysus.wine.vo.WineOrder;
+import dionysus.wine.vo.WineSeller;
 
 public class WineOrderDAOImpl implements WineOrderDAO {
 
@@ -299,17 +300,25 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 	}
 	
 	@Override
-	public int selectWineOrderIdByWineSellerId(Connection conn, int wineOrderId) throws SQLException{
+	public ArrayList<HashMap<String, Object>> selectByWineSellerId(Connection conn) throws SQLException{
 		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		ResultSet rs= null;
 		try {
-			pstm= conn.prepareStatement(WineOrderQuery.selectWineOrderIdByWineSellerId);
-			pstm.setInt(1, wineOrderId);
+			pstm= conn.prepareStatement(WineOrderQuery.selectByWineSellerId);
 			rs= pstm.executeQuery();
-			if(rs.next()){
-				return rs.getInt(1);
+			ArrayList<HashMap<String, Object>>list= new ArrayList<>();
+			while(rs.next()){
+				WineOrder wine= new WineOrder();
+				WineSeller seller= new WineSeller();
+				HashMap<String, Object>map= new HashMap<String, Object>();
+				wine.setWineOrderId(rs.getInt("WINE_ORDER_ID"));
+				seller.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
+				map.put("wine", wine);
+				map.put("seller", seller);
+				list.add(map);
 			}
+			return list;
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -318,6 +327,5 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 		finally{
 			JDBCUtil.close(pstm, rs);
 		}
-		return 0;
 	}
 }

@@ -262,7 +262,11 @@ public class WineOrderServiceImpl implements WineOrderService {
 			date= sdf.parse(request.getParameter("wineOrderDate"));
 			int wineOrderAmount= Integer.parseInt(request.getParameter("wineOrderAmount"));
 			int customerId= new BasicInfoDAOImpl().selectByUsernameOfCustomerId(conn, basicInfoUsername);
-			int wineSellerId= dao.selectWineOrderIdByWineSellerId(conn, wineOrderId)
+			ArrayList<HashMap<String, Object>>list= dao.selectByWineSellerId(conn);
+			ArrayList<WineOrder>wine= new ArrayList<WineOrder>();
+			for(HashMap<String, Object> result: list){
+				result.get("wine");
+			}
 		} 
 		catch (ParseException e) {
 			// TODO Auto-generated catch block

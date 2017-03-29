@@ -15,7 +15,7 @@ public class BasicInfoController {
 	@RequestMapping(value="/basic/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/jaehyuntest/basicjoin.jsp");
+		mav.setView("/dionysus/main/home");
 		return mav;
 	}
 	@RequestMapping(value="/basic/insert", method="POST")
@@ -77,5 +77,11 @@ public class BasicInfoController {
 	public static ModelAndView updateEnd(HttpServletRequest request){
 		return null;
 		//	다음에
+	}
+	@RequestMapping(value="/main/home", method="GET")
+	public static ModelAndView homeMain(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		mav.setView("/index.html");
+		return mav;
 	}
 }

@@ -44,5 +44,5 @@ public interface WineOrderDAO {
 	public ArrayList<HashMap<String, Object>> wineOrderCustomer(Connection conn, int wineSellerId, int customerId)throws SQLException;
 	public int wineOrderInsert(Connection conn, WineOrder wineorder)throws SQLException;
 	public int wineOrderDelete(Connection conn, int wineOrderId)throws SQLException;
-	public int selectWineOrderIdByWineSellerId(Connection conn, int wineOrderId)throws SQLException;
+	public ArrayList<HashMap<String, Object>> selectByWineSellerId(Connection conn)throws SQLException;
 }
