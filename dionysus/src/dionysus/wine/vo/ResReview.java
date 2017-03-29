@@ -8,6 +8,6 @@ public class ResReview {
 	   private String resReviewContent;
 	   private int resReviewRatings;
 	   private int resInfoId;
-	   private int 	customerId;
+	   private int customerId;
 
 }

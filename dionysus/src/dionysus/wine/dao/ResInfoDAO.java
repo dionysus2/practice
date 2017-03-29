@@ -19,7 +19,7 @@ public interface ResInfoDAO {
 	 * 		5. 레스토랑 정보 삭제							int						Connection, 레스토랑 회원번호
 	 * 	- 레스토랑 정보 수정
 	 * 		6. 레스토랑 정보 수정							int						Connection, ResInfo
-	 *     7. 레스토랑번호별 레스토랑상세정보 조회 ResInfo 		       Connection, 레스토랑번호
+	 *     7. 레스토랑정보업데이트 시작                   ResInfo 		       Connection, 레스토랑번호
 	 * */
 
 

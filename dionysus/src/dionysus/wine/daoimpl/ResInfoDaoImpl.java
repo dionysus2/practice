@@ -189,7 +189,7 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}
 		
 	}
-	//레스토랑번호별 레스토랑상세정보 조회
+	//레스토랑정보 업데이트 시작
 	@Override
 	public ResInfo selectByResInfoId(Connection conn, int resInfoId) throws Exception {
 		PreparedStatement pstmt= null;
