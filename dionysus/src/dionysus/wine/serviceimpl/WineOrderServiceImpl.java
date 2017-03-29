@@ -265,7 +265,9 @@ public class WineOrderServiceImpl implements WineOrderService {
 			ArrayList<HashMap<String, Object>>list= dao.selectByWineSellerId(conn);
 			ArrayList<WineOrder>wine= new ArrayList<WineOrder>();
 			for(HashMap<String, Object> result: list){
-				result.get("wine");
+				if(result.get("wine").equals("wine")){
+					logger.info("result값"+result.get("wine"));
+				}
 			}
 		} 
 		catch (ParseException e) {
@@ -276,6 +278,7 @@ public class WineOrderServiceImpl implements WineOrderService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
