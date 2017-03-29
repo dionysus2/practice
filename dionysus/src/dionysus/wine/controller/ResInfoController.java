@@ -1,6 +1,5 @@
 package dionysus.wine.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,7 @@ public class ResInfoController {
 	public static ModelAndView readAllResInfo(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ResInfoServiceImpl service = (ResInfoServiceImpl) request.getServletContext().getAttribute("resinfoservice");
-		mav.setView("#.jsp");
+		mav.setView("/kibacktest/list.jsp");
 		mav.addObject("result", service.readAllResInfo(request));
 		logger.info("레스토랑정보 전체리스트 출력");
 		return mav;

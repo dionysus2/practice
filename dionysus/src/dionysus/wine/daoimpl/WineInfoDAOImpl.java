@@ -461,4 +461,27 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 		}
 		return 0;
 	}
+	
+	//	상품별 업주기본키 가져오기
+	@Override
+	public int selectByWineSellerIdOfWineInfo(Connection conn, int wineInfoId) throws SQLException{
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineInfoQuery.selectByWineSellerIdOfWineInfoId);
+			pstm.setInt(1, wineInfoId);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
+	}
 }

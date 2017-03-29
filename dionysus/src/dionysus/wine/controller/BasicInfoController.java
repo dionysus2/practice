@@ -12,13 +12,17 @@ import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
 public class BasicInfoController {
 	private static Logger logger= LoggerFactory.getLogger(BasicInfoController.class);
-	@RequestMapping(value="/basic/insert", method="GET")
+	@RequestMapping(value="/main/home", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
+<<<<<<< HEAD
 		mav.setView("http://localhost:8087/dionysus/modals/forms/join.html");
+=======
+		mav.setView("/dionysus/main/home");
+>>>>>>> branch 'master' of https://github.com/dionysus2/practice.git
 		return mav;
 	}
-	@RequestMapping(value="/basic/insert", method="POST")
+	@RequestMapping(value="/main/home", method="POST")
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
@@ -77,5 +81,11 @@ public class BasicInfoController {
 	public static ModelAndView updateEnd(HttpServletRequest request){
 		return null;
 		//	다음에
+	}
+	@RequestMapping(value="/main/home", method="GET")
+	public static ModelAndView homeMain(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		mav.setView("/index.html");
+		return mav;
 	}
 }

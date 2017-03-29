@@ -162,13 +162,12 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
 		logger.info("업주아뒤:"+basicInfoUsername);
 		String path= request.getServletContext().getRealPath("img");
+		System.out.println("저장경로:"+path);
 		DiskFileItemFactory df= new DiskFileItemFactory();
 		ServletFileUpload uploader= new ServletFileUpload(df);
 		uploader.setSizeMax(320*480*10);
 		WineInfo wine= new WineInfo();
-		System.out.println("try접근전");
 		try {
-			System.out.println("try접근후");
 			JsonObject ob= new JsonObject();
 			List<FileItem>list= uploader.parseRequest(request);
 			int wineSellerId= dao.selectByBasicId(conn, basicInfoUsername);
