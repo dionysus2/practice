@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import dionysus.wine.vo.Customer;
 import dionysus.wine.vo.WineOrder;
@@ -37,9 +38,9 @@ public interface WineOrderDAO {
 	public ArrayList<WineOrder> selectWineOrderByDay(Connection conn, Date wineOrderDate)throws SQLException;
 	public ArrayList<WineOrder> selectByWineSellerWineOrder(Connection conn, int wineSellerId)throws SQLException;
 	public int selectByWineOrderAmountSum(Connection conn, int wineSellerId)throws SQLException;
-	public ArrayList<Integer> wineSellerSellMonth(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
-	public ArrayList<Integer> wineSellerSellDay(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
-	public ArrayList<Customer> wineOrderCustomer(Connection conn, int wineSellerId, int customerId)throws SQLException;
+	public int wineSellerSellMonth(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
+	public int wineSellerSellDay(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
+	public ArrayList<HashMap<String, Object>> wineOrderCustomer(Connection conn, int wineSellerId, int customerId)throws SQLException;
 	public int wineOrderInsert(Connection conn, WineOrder wineorder)throws SQLException;
 	public int wineOrderDelete(Connection conn, int wineOrderId)throws SQLException;
 
