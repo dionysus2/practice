@@ -31,6 +31,7 @@ public interface WineOrderDAO {
 	 * 	- 주문건 삭제.
 	 * 		11. 주문건 삭제											int						Connection, 주문번호
 	 * 	- 주문건수정(주문상세에서 처리)
+	 * 와인주문 번호별 와인업주번호 가져오기 
 	 * */
 	public ArrayList<WineOrder> selectWineOrderList(Connection conn, int startRow, int lastRow)throws SQLException;
 	public int selectWineOrderCount(Connection conn)throws SQLException;
@@ -43,5 +44,5 @@ public interface WineOrderDAO {
 	public ArrayList<HashMap<String, Object>> wineOrderCustomer(Connection conn, int wineSellerId, int customerId)throws SQLException;
 	public int wineOrderInsert(Connection conn, WineOrder wineorder)throws SQLException;
 	public int wineOrderDelete(Connection conn, int wineOrderId)throws SQLException;
-
+	public int selectWineOrderIdByWineSellerId(Connection conn, int wineOrderId)throws SQLException;
 }

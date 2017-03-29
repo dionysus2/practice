@@ -297,5 +297,27 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 		}
 		return 0;
 	}
-
+	
+	@Override
+	public int selectWineOrderIdByWineSellerId(Connection conn, int wineOrderId) throws SQLException{
+		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineOrderQuery.selectWineOrderIdByWineSellerId);
+			pstm.setInt(1, wineOrderId);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
+	}
 }

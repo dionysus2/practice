@@ -1,6 +1,5 @@
 package dionysus.wine.controller;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -49,13 +48,13 @@ public class ResInfoController {
 		mav.addObject("result", service.readResOwnerResInfo(request));
 		return mav;
 	}
-	@RequestMapping(value = "/resinfo/insert", method = "GET")
+
 	public static ModelAndView insertStar(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setView("/jaehyuntest/insert.jsp");
 		return mav;
 	}
-	@RequestMapping(value = "/resinfo/insert", method = "POST")
+
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		ResInfoServiceImpl service = (ResInfoServiceImpl)request.getServletContext().getAttribute("resinfoservice");
@@ -69,51 +68,20 @@ public class ResInfoController {
 			for(FileItem item:list){
 			if(item.isFormField()){
 				if(item.getFieldName().equals("resInfoName"))
-				request.setAttribute("resInfoName", item.getString("UTF-8"));
-		        else if(item.getFieldName().equals("resInfoPicture1"))
-				request.setAttribute("resInfoPicture1", item.getString("UTF-8"));
-		        else if(item.getFieldName().equals("resInfoPicture2"))
-				request.setAttribute("resInfoPicture2", item.getString("UTF-8"));
-		        else if(item.getFieldName().equals("resInfoPicture3"))
-				request.setAttribute("resInfoPicture3", item.getString("UTF-8"));
-		        else if(item.getFieldName().equals("resInfoAvailableSeat"))
-				request.setAttribute("resInfoAvailableSeat",item.getString("UTF-8"));
-		        else if(item.getFieldName().equals("resInfoOpeningHours"))
-				request.setAttribute("resInfoOpeningHours",item.getString("UTF-8"));
-				else if(item.getFieldName().equals("resInfoWebsite"))
-				request.setAttribute("resInfoWebsite",item.getString("UTF-8"));
-				else if(item.getFieldName().equals("resId"))
-		        request.setAttribute("resId",item.getString("UTF-8"));
-				}
-			    else{
-			    	String fileName= item.getName();
-					int postOfPoint= fileName.indexOf(".");
-					String fName= fileName.substring(0, postOfPoint);
-					String ext= fileName.substring(postOfPoint);
-					fileName= fName+"-"+System.nanoTime()+"."+ext;
-					item.write(new File(path+"/"+fileName));
-					logger.info("전송되는wineInfoProfilePicture"+fileName);
-			    }
-				} 
-		request.setAttribute("resInfoId", session.getAttribute("basicInfoUsername"));
-		if(service.ResInfoCreateEnd(request).equals("{\"result\":\"success\"}")){
-			logger.info("레스토랑정보 추가완료");
-			mav.setView("list");
-			mav.setRedirect();
-			return mav;
-		}else{
-			logger.info("추가안됨.");
-			mav.setView("insert");
-			mav.setRedirect();
-			return mav;
+				request.setAttribute("wineInfoName", item.getString("UTF-8"));
+			
+				else if(item.getFieldName().equals("resInfoPicture1"))
+				request.setAttribute("wineInfoName", item.getString("UTF-8"));
+			}
+		} 
+			
 		}
-	    } 
-	     catch (FileUploadException e) {
+		catch (FileUploadException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-        }
-	  
+	
+	}
 }
