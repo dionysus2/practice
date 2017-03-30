@@ -39,8 +39,8 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 	      try {
 	         int pageNo= 1;
-	         if(request.getParameter("pageNo")!=null){
-	            pageNo= Integer.parseInt(request.getParameter("pageNo"));
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
 	            logger.info("사용자 페이지 요청");
 	         }
 	         int cntOfRow= dao.CustomerCount(conn);
@@ -68,11 +68,11 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 		try {
 			int pageNo= 1;
-			if(request.getParameter("pageNo")!=null){
-				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+			if(req.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(req.getParameter("pageNo"));
 				logger.info("사용자 페이징 요청");
 			}
-			String customerAge = request.getParameter("customerAge");
+			String customerAge = req.getParameter("customerAge");
 			int cntOfRow= dao.selectByCustomerAge(conn, customerAge);
 			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
 			ArrayList<Customer>list= dao.selectByCustomerAge(conn, customerAge, pagination.getStartRow(), pagination.getLastRow());
@@ -97,11 +97,11 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 		try {
 			int pageNo= 1;
-			if(request.getParameter("pageNo")!=null){
-				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+			if(req.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(req.getParameter("pageNo"));
 				logger.info("사용자 페이징 요청");
 			}
-			String customerJob = request.getParameter("customerJob");
+			String customerJob = req.getParameter("customerJob");
 			int cntOfRow = dao.selectByCustomerJob(conn, customerJob);
 			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
 			ArrayList<Customer>list= dao.selectByCustomerJob(conn, customerJob, pagination.getStartRow(), pagination.getLastRow());
@@ -126,11 +126,11 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 		try {
 			int pageNo= 1;
-			if(request.getParameter("pageNo")!=null){
-				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+			if(req.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(req.getParameter("pageNo"));
 				logger.info("사용자 페이징 요청");
 			}
-			String customerGender = request.getParameter("customerGender");
+			String customerGender = req.getParameter("customerGender");
 			int cntOfRow= dao.selectByCustomerGender(conn, customerGender);
 			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
 			ArrayList<Customer>list= dao.selectByCustomerGender(conn, customerGender, pagination.getStartRow(), pagination.getLastRow());
@@ -155,11 +155,11 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 		try {
 			int pageNo= 1;
-			if(request.getParameter("pageNo")!=null){
-				pageNo= Integer.parseInt(request.getParameter("pageNo"));
+			if(req.getParameter("pageNo")!=null){
+				pageNo= Integer.parseInt(req.getParameter("pageNo"));
 				logger.info("사용자 페이징 요청");
 			}
-			String customerName = request.getParameter("customerName");
+			String customerName = req.getParameter("customerName");
 			int cntOfRow= dao.selectByCustomerName(conn, customerName);
 			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
 			ArrayList<Customer>list= dao.selectByCustomerName(conn, customerName, pagination.getStartRow(), pagination.getLastRow());
@@ -243,8 +243,8 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 	      try {
 	         int pageNo= 1;
-	         if(request.getParameter("pageNo")!=null){
-	            pageNo= Integer.parseInt(request.getParameter("pageNo"));
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
 	            logger.info("사용자 페이지 요청");
 	         }
 	         int cntOfRow= dao.CustomerResReserv(conn);
@@ -288,7 +288,7 @@ public class CustomerServiceImpl implements CustomerService{
 	public String customerResReservDelete(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		int customerId = request.getParameter("customerId");
+		int customerId = req.getParameter("customerId");
 		try {
 			int result= dao.customerResReservDelete(conn, customerId);
 			JsonObject ob= new JsonObject();
@@ -316,8 +316,8 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 	      try {
 	         int pageNo= 1;
-	         if(request.getParameter("pageNo")!=null){
-	            pageNo= Integer.parseInt(request.getParameter("pageNo"));
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
 	            logger.info("사용자 페이지 요청");
 	         }
 	         int cntOfRow= dao.SelectLastResReserv(conn, date);
@@ -345,8 +345,8 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 	      try {
 	         int pageNo= 1;
-	         if(request.getParameter("pageNo")!=null){
-	            pageNo= Integer.parseInt(request.getParameter("pageNo"));
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
 	            logger.info("사용자 페이지 요청");
 	         }
 	         int cntOfRow= dao.SelectCustomerWineOrder(conn);
@@ -372,7 +372,7 @@ public class CustomerServiceImpl implements CustomerService{
 	public String customerWineOrderDelete(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		int customerId = request.getParameter("customerId");
+		int customerId = req.getParameter("customerId");
 		try {
 			int result= dao.CustomerWineOrderDelete(conn, customerId);
 			JsonObject ob= new JsonObject();
@@ -418,8 +418,8 @@ public class CustomerServiceImpl implements CustomerService{
 		Connection conn= JDBCUtil.getConnection();
 	      try {
 	         int pageNo= 1;
-	         if(request.getParameter("pageNo")!=null){
-	            pageNo= Integer.parseInt(request.getParameter("pageNo"));
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
 	            logger.info("사용자 페이지 요청");
 	         }
 	         int cntOfRow= dao.CustomerWineCart(conn, customerId);
@@ -451,7 +451,7 @@ public class CustomerServiceImpl implements CustomerService{
 	public String customerWineWishListDelete(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		int customerId = request.getParameter("customerId");
+		int customerId = req.getParameter("customerId");
 		try {
 			int result= dao.CustomerWineCartDelete(conn, customerId);
 			JsonObject ob= new JsonObject();
