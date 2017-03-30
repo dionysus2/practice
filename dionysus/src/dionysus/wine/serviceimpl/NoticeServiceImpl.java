@@ -38,8 +38,8 @@ public class NoticeServiceImpl implements NoticeService{
 		Connection conn= JDBCUtil.getConnection();
 	      try {
 	         int pageNo= 1;
-	         if(request.getParameter("pageNo")!=null){
-	            pageNo= Integer.parseInt(request.getParameter("pageNo"));
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
 	            logger.info("사용자 페이지 요청");
 	         }
 	         int cntOfRow= dao.NoticeCount(conn);
@@ -111,7 +111,7 @@ public class NoticeServiceImpl implements NoticeService{
 	public String deleteNotice(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		int NoticeId= request.getParameter("noticeId");
+		int NoticeId= req.getParameter("noticeId");
 		try {
 			int result= dao.deleteNotice(conn, NoticeId);
 			JsonObject ob= new JsonObject();
