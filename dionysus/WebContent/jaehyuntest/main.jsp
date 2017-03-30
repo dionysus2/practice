@@ -10,5 +10,7 @@
 	<%=session.getAttribute("basicInfoUsername") %>님 안녕하세요.
 	<a href="basicupdate.jsp">정보변경</a>
 	<a href="logout.jsp">로그아웃</a>
+	<a href="/dionysus/wineinfo/insert">상품추가</a>
+	<a href="/dionysus/wineinfo/list">상품리스트</a>
 </body>
 </html>

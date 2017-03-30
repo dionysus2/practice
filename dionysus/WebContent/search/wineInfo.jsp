@@ -100,18 +100,12 @@
 													+ wine.wineInfoName
 													+ "</a></p>";
 											str = str + "<p>"
-													+ wine.wineInfoOrigin
+													+ wine.wineInfoCountry
 													+ "</a></p>";
-											str = str
-													+ "<p>"
-													+ wine.wineInfoProfilePicture
-													+ "</a></p>";
-											str = str + "<p>"
-													+ wine.wineSellerId
-													+ "</a></p>";
+													
 											str = str
 													+ "<p>"		
-													+ "<img src=/dionysus/img/"+wine.wineInfoProfilePicture
+													+ "<img src='/dionysus/img/"+wine.wineInfoProfilePicture+"'>"
 													+ "</p> </div> </a> </div></div>";
 											target.append(str);
 										})
