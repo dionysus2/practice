@@ -12,19 +12,19 @@ import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
 public class BasicInfoController {
 	private static Logger logger= LoggerFactory.getLogger(BasicInfoController.class);
-	@RequestMapping(value="/main/home", method="GET")
+	@RequestMapping(value="/basic/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/dionysus/modals/forms/join.html");
+		mav.setView("/modals/forms/join.html");
 		return mav;
 	}
-	@RequestMapping(value="/main/home", method="POST")
+	@RequestMapping(value="/basic/insert", method="POST")
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
-			mav.setView("login");
+			mav.setView("/dionysus/jaehyuntest/test.jsp");
 			mav.setRedirect();
 			return mav;
 		}
