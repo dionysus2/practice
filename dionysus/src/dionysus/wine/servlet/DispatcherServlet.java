@@ -24,7 +24,7 @@ import dionysus.wine.serviceimpl.ResInfoServiceImpl;
 import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 import dionysus.wine.serviceimpl.WineOrderServiceImpl;
 
-@WebServlet({"/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*"})
+@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
