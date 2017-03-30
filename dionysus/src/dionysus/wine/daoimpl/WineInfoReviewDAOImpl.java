@@ -37,7 +37,7 @@ public class WineInfoReviewDAOImpl implements WineReviewDAO {
 	
 	//	상품별 리뷰정보 수정
 	@Override
-	public int wineReviewUpdate(Connection conn, int wineInfoId, int customerId, WineReview winereview) throws SQLException{
+	public int wineReviewUpdate(Connection conn, int wineReviewId, int wineInfoId, int customerId, WineReview winereview) throws SQLException{
 		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		try {
