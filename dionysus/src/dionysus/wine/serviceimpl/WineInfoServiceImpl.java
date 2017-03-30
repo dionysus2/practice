@@ -1,5 +1,6 @@
 package dionysus.wine.serviceimpl;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -234,6 +235,7 @@ public class WineInfoServiceImpl implements WineInfoService {
 					fileName= fName+"-"+System.nanoTime()+"."+extension;
 					if(fileName!=null && !fileName.equals("")){
 						logger.info(path+"/"+fileName);
+						item.write(new File(path+"/"+fileName));
 						wine.setWineInfoProfilePicture(fileName);
 						logger.info(fileName);
 						logger.info(wine.getWineInfoProfilePicture());
