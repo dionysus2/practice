@@ -21,4 +21,6 @@ public interface ResResrvQuery {
     public String delete="delete from res_Reserv where res_Resrv_Id=?";
      //  예약번호별 예약정보 조회
     public String selectByResReservId ="select * from res_Reserv where res_Reserv_id=?";
+    //   레스토랑 예약 count조회
+  	public String selectByReservCount = "select count(*)from res_Reserv";
 }

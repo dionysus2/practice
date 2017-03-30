@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dionysus.wine.dao.ResReservDAO;
+import dionysus.wine.query.ResInfoQuery;
 import dionysus.wine.query.ResResrvQuery;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.Res;
@@ -43,6 +44,23 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 	    JDBCUtil.close(pstmt,rs);	
 		}
 	
+	}
+	//레스토랑 예약 count조회
+	@Override
+	public int selectByReservCount(Connection conn) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			pstmt = conn.prepareStatement(ResResrvQuery.selectByReservCount);	
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getInt(1);
+		}catch (SQLException e) {
+			throw e;
+		}finally{
+			JDBCUtil.close(pstmt,rs);
+		}
+		return 0;
 	}
 
 //	레스토랑별 예약접수 리스트 출력
@@ -80,7 +98,7 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		ResReserv resReserv = new ResReserv();
 		try{
 		pstmt =conn.prepareStatement(ResResrvQuery.selectByMonthReserv);	
-		pstmt.setDate(1, resResrvDate);
+		pstmt.setDate(1, new java.sql.Date(resResrvDate.getTime()));
 		while(rs.next()){
 			resReserv.setResResrvId(rs.getInt("resResrvId"));
 			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
@@ -106,8 +124,8 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		ResReserv resReserv = new ResReserv();
 		try{
 		pstmt =conn.prepareStatement(ResResrvQuery.selectByDayReserv);	
-		pstmt.setDate(1, resResrvDate);
-		while(rs.next()){
+		pstmt.setDate(1, new java.sql.Date(resResrvDate.getTime()));
+	        while(rs.next()){
 			resReserv.setResResrvId(rs.getInt("resResrvId"));
 			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
 			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
@@ -252,5 +270,7 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 	  }
 	  return null;
 	  }
+
+	
 
 }

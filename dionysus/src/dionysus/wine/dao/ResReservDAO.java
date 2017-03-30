@@ -19,6 +19,7 @@ public interface ResReservDAO {
 =======
 	 * 1.예약접수 전체 리스트 출력					ArrayList<ResReserv>	Connection, startRow, lastRow
 	 * 2.레스토랑별 예약접수 리스트 출력			ArrayList<ResReserv>	Connection, 레스토랑번호
+	 * 2. 레스토랑 예약 count조회						int						Connection	
      * 3.월별 예약접수 리스트 출력					ArrayList<ResReserv>	Connection, date							
 	 * 4.일별 예약접수 리스트 출력					ArrayList<ResReserv>	Conneciton, date
 	 * 5.일반회원별 지난예약리스트 조회			ArrayList<ResReserv>	Connection, 회원번호
@@ -30,6 +31,7 @@ public interface ResReservDAO {
 	 */
 
 	public ArrayList<ResReserv>selectAllReserv(Connection conn, int startRow, int lastRow)throws Exception;
+	public int selectByReservCount(Connection conn)throws Exception;
 	public ArrayList<ResReserv>selectByResReserv(Connection conn, int resInfoId)throws Exception;
 	public ArrayList<ResReserv>selectByMonthReserv(Connection conn, Date resResrvDate)throws Exception;
 	public ArrayList<ResReserv>selectByDayReserv(Connection conn, Date resResrvDate)throws Exception;

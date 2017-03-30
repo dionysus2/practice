@@ -1,6 +1,7 @@
  package dionysus.wine.dao;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dionysus.wine.vo.ResInfo;
@@ -21,16 +22,18 @@ public interface ResInfoDAO {
 	 * 	- 레스토랑 정보 수정
 	 * 		6. 레스토랑 정보 수정							int						Connection, ResInfo
 	 *     7. 레스토랑정보업데이트 시작                   ResInfo 		       Connection, 레스토랑번호
-	 *    
+	 *     8.아이디별 레스토랑업주 정보 가져오기.     int 					Connection, 상품번호
 	 * */
 
 
 public ArrayList<ResInfo>selectResInfoAllList(Connection conn, int startRow, int  lastRow)throws Exception;
 public int selectByCount(Connection conn)throws Exception;
-public ArrayList<ResInfo>selectByResOwnerResInfo(Connection conn, int resInfoId, int startRow, int  lastRow)throws Exception;
+public ArrayList<ResInfo>selectByResOwnerResInfo(Connection conn, int resId, int startRow, int  lastRow)throws Exception;
 public int ResOwnerResInfoCount(Connection conn)throws Exception;
 public int insertResInfo(Connection conn, ResInfo resInfo) throws Exception;
 public int deleteResInfo(Connection conn, int resInfo)throws Exception;
 public int updateResInfo(Connection conn, ResInfo resInfo) throws Exception;
 public ResInfo selectByResInfoId(Connection conn, int resInfoId)throws Exception;
+public int selectByBasicId(Connection conn, String basicInfoUsername)throws SQLException;
+
 }
