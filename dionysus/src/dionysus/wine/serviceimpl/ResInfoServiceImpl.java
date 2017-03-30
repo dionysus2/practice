@@ -32,8 +32,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 		try{
 			int pageNo =1;
 			if(request.getParameter("pageNo")!=null){
-			logger.info("사용자 폐이지 요청");
-			pageNo = Integer.parseInt(request.getParameter("pageNo"));
+	        pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			}
 			int cntOfRow = dao.selectByCount(conn);
 			Pagination pagination = PagingUtil.getPagination(pageNo, cntOfRow);
@@ -41,11 +40,10 @@ public class ResInfoServiceImpl implements ResInfoService {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			 map.put("pagination", pagination);
 	         map.put("list", list);
-	         logger.info("서비스단 페이징"+pagination);
 	         return new Gson().toJson(map);
 		    }catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		    }finally {
 			JDBCUtil.close(conn);
 		}
 		return null;
@@ -83,17 +81,18 @@ public class ResInfoServiceImpl implements ResInfoService {
 	@Override
 	public String ResInfoCreateEnd(HttpServletRequest request) throws Exception {
 		Connection conn = JDBCUtil.getConnection();
-		String resInfoName = request.getParameter("resInfoName");
-		String resInfoPicture1 = request.getParameter("resInfoPicture1");
-		String resInfoPicture2 = request.getParameter("resInfoPicture2");
-		String resInfoPicture3 = request.getParameter("resInfoPicture3");
-		int resInfoAvailableSeat = Integer.parseInt("resInfoAvailableSeat");
-		String resInfoOpeningHours = request.getParameter("resInfoOpeningHours");
-		String resInfoWebsite = request.getParameter("resInfoWebsite");
-		int resId = Integer.parseInt("resId");
-		try{
+		ResInfo resInfo = new ResInfo();
+		resInfo.setResInfoName( request.getParameter("resInfoName"));
+		resInfo.setResInfoPicture1(request.getParameter("resInfoPicture1"));
+		resInfo.setResInfoPicture2(request.getParameter("resInfoPicture2"));
+	    resInfo.setResInfoPicture3(request.getParameter("resInfoPicture3"));
+		resInfo.setResInfoAvailableSeat(Integer.parseInt(request.getParameter("resInfoAvailableSeat")));
+		resInfo.setResInfoOpeningHours(request.getParameter("resInfoOpeningHours"));
+		resInfo.setResInfoWebsite(request.getParameter("resInfoWebsite"));
+	    resInfo.setResId(Integer.parseInt(request.getParameter("resId")));
+	    try{
 			logger.info("Connection연결성공");
-			int result = dao.insertResInfo(conn, new ResInfo());
+			int result = dao.insertResInfo(conn, resInfo);
 			JsonObject ob = new JsonObject();
 			if(result==1){
 				ob.addProperty("result", "success");
@@ -114,7 +113,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 	@Override
 	public String ResInfoUpdateStart(HttpServletRequest request) throws Exception {
 		Connection conn = JDBCUtil.getConnection();
-		int resInfoId = Integer.parseInt("resInfoId");
+		int resInfoId = Integer.parseInt(request.getParameter("resInfoId"));
 		try{
 			ResInfo resInfo = dao.selectByResInfoId(conn, resInfoId);
 			return new Gson().toJson(resInfo);
@@ -129,17 +128,18 @@ public class ResInfoServiceImpl implements ResInfoService {
 	@Override
 	public String ResInfoUpdateEnd(HttpServletRequest request) throws Exception {
 		Connection conn = JDBCUtil.getConnection();
-		String resInfoName = request.getParameter("resInfoName");
-		String resInfoPicture1 = request.getParameter("resInfoPicture1");
-		String resInfoPicture2 = request.getParameter("resInfoPicture2");
-		String resInfoPicture3 = request.getParameter("resInfoPicture3");
-		int resInfoAvailableSeat = Integer.parseInt("resInfoAvailableSeat");
-		String resInfoOpeningHours = request.getParameter("resInfoOpeningHours");
-		String resInfoWebsite = request.getParameter("resInfoWebsite");
-		int resId = Integer.parseInt("resId");
+		ResInfo resInfo = new ResInfo();
+		resInfo.setResInfoName( request.getParameter("resInfoName"));
+		resInfo.setResInfoPicture1(request.getParameter("resInfoPicture1"));
+		resInfo.setResInfoPicture2(request.getParameter("resInfoPicture2"));
+	    resInfo.setResInfoPicture3(request.getParameter("resInfoPicture3"));
+		resInfo.setResInfoAvailableSeat(Integer.parseInt(request.getParameter("resInfoAvailableSeat")));
+		resInfo.setResInfoOpeningHours(request.getParameter("resInfoOpeningHours"));
+		resInfo.setResInfoWebsite(request.getParameter("resInfoWebsite"));
+	    resInfo.setResId(Integer.parseInt(request.getParameter("resId")));
 		try{
 			JsonObject ob = new JsonObject();
-			int result = dao.insertResInfo(conn, new ResInfo());
+			int result = dao.updateResInfo(conn, resInfo);
 		    if(result==1){
 				ob.addProperty("result", "success");
 			}
@@ -158,7 +158,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 	@Override
 	public String ResInfoDelete(HttpServletRequest request) throws Exception {
 		Connection conn = JDBCUtil.getConnection();
-		int resId = Integer.parseInt("resId");
+		int resId = Integer.parseInt(request.getParameter("resId"));
 		try{
 			int  result = dao.deleteResInfo(conn, resId);
 			JsonObject ob= new JsonObject();
@@ -193,7 +193,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 		}
 	return null;
 	}
-
+  
 
 
 }

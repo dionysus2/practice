@@ -12,13 +12,17 @@ import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
 public class BasicInfoController {
 	private static Logger logger= LoggerFactory.getLogger(BasicInfoController.class);
-	@RequestMapping(value="/basic/insert", method="GET")
+	@RequestMapping(value="/main/home", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/jaehyuntest/basicjoin.jsp");
+<<<<<<< HEAD
+		mav.setView("http://localhost:8087/dionysus/modals/forms/join.html");
+=======
+		mav.setView("/dionysus/main/home");
+>>>>>>> branch 'master' of https://github.com/dionysus2/practice.git
 		return mav;
 	}
-	@RequestMapping(value="/basic/insert", method="POST")
+	@RequestMapping(value="/main/home", method="POST")
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
@@ -28,15 +32,11 @@ public class BasicInfoController {
 			mav.setRedirect();
 			return mav;
 		}
-		else if(service.createEnd(request).equals("{\"result\":\"fail\"}")){
+		else {
 			mav.setRedirect();
 			mav.setView("insert");
 			return mav;
 		}
-		logger.info("Controller회원가입 추가실패");
-		mav.setView("insert");
-		mav.setRedirect();
-		return null;
 	}
 	@RequestMapping(value="/basic/login", method="GET")
 	public static ModelAndView loginStart(HttpServletRequest request){
@@ -56,15 +56,12 @@ public class BasicInfoController {
 			mav.setRedirect();
 			return mav;
 		}
-		else if(service.login(request).equals("{\"result\":\"fail\"}")){
+		else{
 			logger.info("Conroller로그인 실패");
 			mav.setView("login");
 			mav.setRedirect();
 			return mav;
 		}
-		mav.setView("login");
-		mav.setRedirect();
-		return mav;
 	}
 	@RequestMapping(value="/basic/update", method="GET")
 	public static ModelAndView updateStart(HttpServletRequest request){
@@ -84,5 +81,11 @@ public class BasicInfoController {
 	public static ModelAndView updateEnd(HttpServletRequest request){
 		return null;
 		//	다음에
+	}
+	@RequestMapping(value="/main/home", method="GET")
+	public static ModelAndView homeMain(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		mav.setView("/index.html");
+		return mav;
 	}
 }

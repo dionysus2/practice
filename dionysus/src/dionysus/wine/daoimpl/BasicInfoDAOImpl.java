@@ -132,4 +132,26 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 		}
 		return null;
 	}
+	
+	@Override
+	public int selectByUsernameOfCustomerId(Connection conn, String basicInfoUsername) throws SQLException{
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(BasicInfoQuery.selectByUsernameOfCustomerId);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
+	}
 }

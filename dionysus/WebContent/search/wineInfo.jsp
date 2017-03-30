@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="import"
@@ -19,7 +19,7 @@
 		w3IncludeHTML();
 	</script>
 	<div class="container-fluid" align="center">
-	
+
 		<div class="jumbotron">
 			<form class="form-inline">
 				<input type="text" class="form-control" placeholder="Search">
@@ -38,7 +38,7 @@
 				</div>
 			</form>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-sm-2">
 				<ul class="nav  nav-stacked">
@@ -60,23 +60,23 @@
 				</ul>
 			</div>
 			<div class="col-sm-10">
-			
-					<div class="row">
-						<div id="content">
-							<section id="content-main">
-							<table>
-								<tbody>
-								</tbody>
-							</table>
-							<div id="pagination"></div>
-							</section>
-						</div>
+
+				<div class="row">
+					<div id="content">
+						<section id="content-main">
+						<table>
+							<tbody>
+							</tbody>
+						</table>
+						<div id="pagination"></div>
+						</section>
 					</div>
-		
+				</div>
+
 			</div>
+		</div>
+	</div>
 </body>
-
-
 
 <script>
 	$(document)
@@ -89,8 +89,8 @@
 								.each(
 										list,
 										function(index, wine) {
-											var str = "<div class='col-md-3'> <div class='thumbnail'> <a href='search/wineInfo.jsp'> <img src='../images/res1.jpg' alt='Lights' "
-											+  "style='width: 100%'> <div class='caption'> <p>"
+											var str = "<div class='col-md-3'> <div class='thumbnail'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
+													+ "style='width: 100%'> <div class='caption'> <p>"
 													+ wine.wineInfoId + "</p>";
 											str = str
 													+ "<p><a href='view?pageNo="
@@ -115,7 +115,8 @@
 													+ "</p> </div> </a> </div></div>";
 											target.append(str);
 										})
-						$("#pagination").append("<ul class='pagination pagination-lg'></ul>");
+						$("#pagination").append(
+								"<ul class='pagination pagination-lg'></ul>");
 						var p = $("#pagination ul");
 						if (pagination.prev > -1)
 							p.append("<li><a href='list?pageNo="

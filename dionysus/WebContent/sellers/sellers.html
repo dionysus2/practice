@@ -2,112 +2,44 @@
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>
-<link rel="import" href="http://localhost:8087/dionysus/heads/bootstrap.html">
+<link rel="import"
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
 </head>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 
 <body>
 
-<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div> 
-<script>w3IncludeHTML();</script>
+	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div>
+	<script>
+		w3IncludeHTML();
+	</script>
 
 	<div class="container-fluid">
-
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Dionysus</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Page 1</a></li>
-						<li><a href="#">Page 2</a></li>
-						<li><a href="#">Page 3</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" data-toggle="modal" data-target="#myModal2"><span
-								class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#myModal"><span
-								class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
-
-
-
-	<div class="container">
-
 		<h1>관리 메뉴</h1>
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#home">기본정보</a></li>
-			<li><a data-toggle="tab" href="#menu1">와인 등록</a></li>
-			<li><a data-toggle="tab" href="#menu2">와인 정보 수정</a></li>
-			<li><a data-toggle="tab" href="#menu2">통계</a></li>
-			<li><a data-toggle="tab" href="#menu2">기타</a></li>
+			<li class="active"><a href="http://localhost:8087/dionysus/sellers/sellers.html">기본정보</a></li>
+			<li><a href="http://localhost:8087/dionysus/wineinfo/insert">와인 등록</a></li>
+			<li><a href="#menu2">와인 정보 수정</a></li>
+			<li><a href="#menu2">통계</a></li>
+			<li><a href="#menu2">기타</a></li>
 		</ul>
 
 		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
 				<h3>HOME</h3>
-				<p>Some content.</p>
+					<p>Some content.</p>
 			</div>
 			<div id="menu1" class="tab-pane fade">
-				<h3>와인 등록</h3>
-				<p>사진은 전부 url로 등록해야 됨</p>
-				<div class="row">
-
-			<form action="/dionysus/sellers/insert" method="post">
-				<div class="form-group">
-					<label for="name">이름</label> <input type="text"
-						class="form-control" id="name" name="wineInfoName">
-				</div>
-				<div class="form-group">
-					<label for="pro_pic">프로필 사진</label> <input type="url"
-						class="form-control" id="pro_pic" name="wineInfoProfilePicture">
-				</div>
-				<div class="form-group">
-					<label for="price">가격</label> <input type="number"
-						class="form-control" id="price" name="wineInfoPrice">
-				</div>
-				<div class="form-group">
-					<label for="origin">원산지</label> <input type="text"
-						class="form-control" id="origin" name="wineInfoOrigin">
-				</div>
-				<div class="form-group">
-					<label for="pic1">사진1</label> <input type="url" class="form-control"
-						id="pic1" name="wineInfoPicture1">
-				</div>
-				<div class="form-group">
-					<label for="pic2">사진2</label> <input type="url" class="form-control"
-						id="pic2" name="wineInfoPicture2">
-				</div>
-				<div class="form-group">
-					<label for="pic3">사진3</label> <input type="url" class="form-control"
-						id="pic3" name="wineInfoPicture3">
-				</div>
-				<button type="submit" class="btn btn-default">추가</button>
-			</form>
-
-		</div>
+				<div
+					w3-include-html="http://localhost:8087/dionysus/sellers/addWine.html"></div>
+					<!-- <tr><td>상품 업로드 회원:</td><td><%=session.getAttribute("basicInfoUsername") %></td></tr> -->
 			</div>
 			<div id="menu2" class="tab-pane fade">
 				<h3>Menu 2</h3>
 				<p>Some content in menu 2.</p>
 			</div>
 		</div>
-
-		
-
-
 	</div>
 
 </body>

@@ -151,11 +151,11 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 	}
 	// 레스토랑 정보 삭제	
 	@Override
-	public int deleteResInfo(Connection conn, int resId) throws Exception {
+	public int deleteResInfo(Connection conn, int resInfoId) throws Exception {
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(ResInfoQuery.delete);	
-			pstmt.setInt(1, resId);
+			pstmt.setInt(1,  resInfoId);
 			return pstmt.executeUpdate();
 		}catch (SQLException e) {
 			throw e;
@@ -189,7 +189,7 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}
 		
 	}
-	//레스토랑번호별 레스토랑상세정보 조회
+	//레스토랑정보 업데이트 시작
 	@Override
 	public ResInfo selectByResInfoId(Connection conn, int resInfoId) throws Exception {
 		PreparedStatement pstmt= null;

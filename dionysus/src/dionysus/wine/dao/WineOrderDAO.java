@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import dionysus.wine.vo.Customer;
 import dionysus.wine.vo.WineOrder;
@@ -17,7 +18,7 @@ public interface WineOrderDAO {
 	 * 		3. 주문일자별(월별)주문 리스트 조회					ArrayList<WineOrder>		Connection, 주문일자(월별)
 	 * 		4. 주문일자별(일별)주문 리스트 조회					ArrayList<WineOrder>		Connection, 주문일자(일별)
 	 * 	- 와인상품 레스토랑별 주문 리스트 조회
-	 * 		5. 와인상품 레스토랑별 주문 리스트 조회		ArrayList<WineOrder>	Connection, 레스토랑번호
+	 * 		5. 와인상품 와인회사별 주문 리스트 조회		ArrayList<WineOrder>	Connection, 와인회사번호
 	 * 	- 와인회사별 상품 주문건 판매량 조회
 	 * 		6. 와인회사별 상품 주문건 전체 판매량 조회			ArrayList<WineOrder>		Connection
 	 * 	- 월별/일별 상품 주문건 판매량 조회
@@ -30,14 +31,18 @@ public interface WineOrderDAO {
 	 * 	- 주문건 삭제.
 	 * 		11. 주문건 삭제											int						Connection, 주문번호
 	 * 	- 주문건수정(주문상세에서 처리)
+	 * 와인주문 번호별 와인업주번호 가져오기 
 	 * */
 	public ArrayList<WineOrder> selectWineOrderList(Connection conn, int startRow, int lastRow)throws SQLException;
 	public int selectWineOrderCount(Connection conn)throws SQLException;
 	public ArrayList<WineOrder> selectWineOrderByMonth(Connection conn, Date wineOrderDate)throws SQLException;
 	public ArrayList<WineOrder> selectWineOrderByDay(Connection conn, Date wineOrderDate)throws SQLException;
-	public ArrayList<Integer> wineSellerSellMonth(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
-	public ArrayList<Integer> wineSellerSellDay(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
-	public ArrayList<Customer> wineOrderCustomer(Connection conn, int wineSellerId, int customerId)throws SQLException;
+	public ArrayList<WineOrder> selectByWineSellerWineOrder(Connection conn, int wineSellerId)throws SQLException;
+	public int selectByWineOrderAmountSum(Connection conn, int wineSellerId)throws SQLException;
+	public int wineSellerSellMonth(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
+	public int wineSellerSellDay(Connection conn, Date wineOrderDate, int wineSellerId)throws SQLException;
+	public ArrayList<HashMap<String, Object>> wineOrderCustomer(Connection conn, int wineSellerId, int customerId)throws SQLException;
 	public int wineOrderInsert(Connection conn, WineOrder wineorder)throws SQLException;
 	public int wineOrderDelete(Connection conn, int wineOrderId)throws SQLException;
+	public ArrayList<HashMap<String, Object>> selectByWineSellerId(Connection conn)throws SQLException;
 }

@@ -14,13 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dionysus.wine.daoimpl.BasicInfoDAOImpl;
+import dionysus.wine.daoimpl.ResInfoDaoImpl;
 import dionysus.wine.daoimpl.WineInfoDAOImpl;
 import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
+import dionysus.wine.serviceimpl.ResInfoServiceImpl;
 import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 
-@WebServlet({"/basic/*", "/wineinfo/*"})
+@WebServlet({"/basic/*", "/wineinfo/*","/resinfo/*", "/main/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
@@ -34,6 +36,10 @@ public class DispatcherServlet extends HttpServlet {
 		WineInfoDAOImpl wineinfodao= new WineInfoDAOImpl();
 		WineInfoServiceImpl wineinfoservice= new WineInfoServiceImpl(wineinfodao);
 		context.setAttribute("wineinfoservice", wineinfoservice);
+		//  3. 레스토랑 정보 DAO, SERVICE 객체화
+		ResInfoDaoImpl resInfodao = new ResInfoDaoImpl();
+		ResInfoServiceImpl resInfoservice = new ResInfoServiceImpl(resInfodao);
+		context.setAttribute("resInfoservice", resInfoservice);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");

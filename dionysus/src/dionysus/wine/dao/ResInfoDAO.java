@@ -19,7 +19,7 @@ public interface ResInfoDAO {
 	 * 		5. 레스토랑 정보 삭제							int						Connection, 레스토랑 회원번호
 	 * 	- 레스토랑 정보 수정
 	 * 		6. 레스토랑 정보 수정							int						Connection, ResInfo
-	 *     7. 레스토랑번호별 레스토랑상세정보 조회 ResInfo 		       Connection, 레스토랑번호
+	 *     7. 레스토랑정보업데이트 시작                   ResInfo 		       Connection, 레스토랑번호
 	 * */
 
 
@@ -28,7 +28,7 @@ public int selectByCount(Connection conn)throws Exception;
 public ArrayList<ResInfo>selectByResOwnerResInfo(Connection conn, int resInfoId, int startRow, int  lastRow)throws Exception;
 public int ResOwnerResInfoCount(Connection conn)throws Exception;
 public int insertResInfo(Connection conn, ResInfo resInfo) throws Exception;
-public int deleteResInfo(Connection conn, int resId)throws Exception;
+public int deleteResInfo(Connection conn, int resInfo)throws Exception;
 public int updateResInfo(Connection conn, ResInfo resInfo) throws Exception;
 public ResInfo selectByResInfoId(Connection conn, int resInfoId)throws Exception;
 }

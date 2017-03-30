@@ -1,6 +1,5 @@
 package dionysus.wine.serviceimpl;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -163,13 +162,12 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
 		logger.info("업주아뒤:"+basicInfoUsername);
 		String path= request.getServletContext().getRealPath("img");
+		System.out.println("저장경로:"+path);
 		DiskFileItemFactory df= new DiskFileItemFactory();
 		ServletFileUpload uploader= new ServletFileUpload(df);
 		uploader.setSizeMax(320*480*10);
 		WineInfo wine= new WineInfo();
-		System.out.println("try접근전");
 		try {
-			System.out.println("try접근후");
 			JsonObject ob= new JsonObject();
 			List<FileItem>list= uploader.parseRequest(request);
 			int wineSellerId= dao.selectByBasicId(conn, basicInfoUsername);
@@ -294,6 +292,10 @@ public class WineInfoServiceImpl implements WineInfoService {
 	public String wineInfoUpdateEnd(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
+		HttpSession session= request.getSession();
+		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
+		//	현재 접속된 BasicInfoUsername의 아이디를 꺼내온다.
+		//	View단에서 본인이 업로드한 상품정보가 아니면 수정하기를 불가할 수 있도록 완료해야 함.
 		String wineInfoName= request.getParameter("wineInfoName");
 		String wineInfoProfilePicture= request.getParameter("wineInfoProfilePicture");
 		int wineInfoPrice= Integer.parseInt(request.getParameter("wineInfoPrice"));
@@ -310,8 +312,9 @@ public class WineInfoServiceImpl implements WineInfoService {
 		String wineInfoFlavors= request.getParameter("wineInfoFlavors");
 		String wineInfoSweetness= request.getParameter("wineInfoSweetness");
 		String wineInfoAcidity= request.getParameter("wineInfoAcidity");
-		String wineInfoBody= request.getParameter("wineInfoBody");
-		int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
+		String wineInfoBody= request.getParameter("wineInfoBody"); 
+		int wineSellerId= dao.selectByBasicId(conn, basicInfoUsername);
+		//	dao단에서 검색하여 WineSellerId를 꺼내온다.
 		try {
 			JsonObject ob= new JsonObject();
 			int result = dao.wineInfoUpdate(conn, new WineInfo(wineInfoName, wineInfoProfilePicture, wineInfoPrice, wineInfoCapacity, wineInfoCountry, wineInfoRegion, wineInfoWinery, wineInfoImporter, wineInfoVintage, wineInfoGrapes, wineInfoABV, wineInfoType, wineInfoClassification, wineInfoFlavors, wineInfoSweetness, wineInfoAcidity, wineInfoBody, wineSellerId));
@@ -371,7 +374,11 @@ public class WineInfoServiceImpl implements WineInfoService {
 			}
 			int cntOfRow= dao.wineSellerWineInfoCount(conn);
 			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
-			int wineSellerId= Integer.parseInt(request.getParameter("wineSellerId"));
+			HttpSession session= request.getSession();
+			String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
+			//	현재 접속된 WineSeller의 BasicInfoUsername 아이디를 추출한다.
+			int wineSellerId= dao.selectByBasicId(conn, basicInfoUsername);
+			//	dao에서 BasicInfoUsername을 통하여 WineSellerId값을 빼온다.
 			ArrayList<WineInfo>list= dao.selectByWineSellerWineInfo(conn, wineSellerId, pagination.getStartRow(), pagination.getLastRow());
 			HashMap<String, Object>map= new HashMap<String, Object>();
 			map.put("pagination", pagination);
