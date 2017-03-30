@@ -19,6 +19,6 @@ public interface WineReviewDAO {
 	 * */
 	public int wineReviewInsert(Connection conn, int wineInfoId, int customerId, WineReview winereview)throws SQLException;
 	public int wineReviewUpdate(Connection conn, int wineInfoId, int customerId, WineReview winereview)throws SQLException;
-	public int wineReviewDelete(Connection conn, int wineInfoId, int customerId)throws SQLException;
+	public int wineReviewDelete(Connection conn, int wineReviewId ,int wineInfoId, int customerId)throws SQLException;
 	public ArrayList<WineReview> selectAllWineReview(Connection conn, int wineInfoId)throws SQLException;
 }
