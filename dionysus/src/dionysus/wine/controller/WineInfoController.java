@@ -15,6 +15,7 @@ public class WineInfoController {
 	private static Logger logger= LoggerFactory.getLogger(WineInfoController.class);
 	@RequestMapping(value="/wineinfo/list", method="GET")
 	public static ModelAndView readAllWineInfo(HttpServletRequest request){
+		logger.info("출력");
 		ModelAndView mav= new ModelAndView();
 		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
 		mav.setView("/search/wineInfo.jsp");
@@ -75,7 +76,7 @@ public class WineInfoController {
 	@RequestMapping(value="/wineinfo/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/sellers/addWine.html");
+		mav.setView("/jaehyuntest/insert.jsp");
 		return mav;
 	}
 	//	와인상품 추가완료 => 경로 수정 필요합니다
