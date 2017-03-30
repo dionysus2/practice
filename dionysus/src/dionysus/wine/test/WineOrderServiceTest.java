@@ -33,7 +33,8 @@ public class WineOrderServiceTest {
 			JDBCUtil.close(conn);
 		}
 	}
-	@Test
+	//	@Test
+	//	성공
 	public void selectWineOrderCountTest(){
 		Connection conn= JDBCUtil.getConnection();
 		try {
@@ -48,7 +49,7 @@ public class WineOrderServiceTest {
 			JDBCUtil.close(conn);
 		}
 	}
-//	테스트 진행예정
+
 	/*
 	public int selectWineOrderCount(Connection conn)throws SQLException;
 	public ArrayList<WineOrder> selectWineOrderByMonth(Connection conn, Date wineOrderDate)throws SQLException;
