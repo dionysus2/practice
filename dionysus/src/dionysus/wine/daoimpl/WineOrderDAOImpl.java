@@ -299,6 +299,7 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 		return 0;
 	}
 	
+	//	와인주문번호별 와인업주번호 가져오기(매칭되는 것으로만)
 	@Override
 	public ArrayList<HashMap<String, Object>> selectByWineSellerId(Connection conn) throws SQLException{
 		// TODO Auto-generated method stub
@@ -327,5 +328,29 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 		finally{
 			JDBCUtil.close(pstm, rs);
 		}
+	}
+	
+	//	고객번호별 와인 주문번호 가져오기
+	@Override
+	public int selectByCustomerIdOfWineOrderId(Connection conn, int customerId) throws SQLException{
+		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineOrderQuery.selectByWineOrderId);
+			pstm.setInt(1, customerId);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
 	}
 }

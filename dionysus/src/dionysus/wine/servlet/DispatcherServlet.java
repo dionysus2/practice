@@ -16,13 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import dionysus.wine.daoimpl.BasicInfoDAOImpl;
 import dionysus.wine.daoimpl.ResInfoDaoImpl;
 import dionysus.wine.daoimpl.WineInfoDAOImpl;
+import dionysus.wine.daoimpl.WineOrderDAOImpl;
 import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 import dionysus.wine.serviceimpl.ResInfoServiceImpl;
 import dionysus.wine.serviceimpl.WineInfoServiceImpl;
+import dionysus.wine.serviceimpl.WineOrderServiceImpl;
 
-@WebServlet({"/basic/*", "/wineinfo/*","/resinfo/*", "/main/*"})
+@WebServlet({"/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
@@ -40,6 +42,10 @@ public class DispatcherServlet extends HttpServlet {
 		ResInfoDaoImpl resInfodao = new ResInfoDaoImpl();
 		ResInfoServiceImpl resInfoservice = new ResInfoServiceImpl(resInfodao);
 		context.setAttribute("resInfoservice", resInfoservice);
+		//	4. 와인주문 DAO, SERVICE 객체화
+		WineOrderDAOImpl wineOrderDao= new WineOrderDAOImpl();
+		WineOrderServiceImpl wineOrderService= new WineOrderServiceImpl(wineOrderDao);
+		context.setAttribute("wineOrderService", wineOrderService);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");

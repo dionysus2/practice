@@ -1,6 +1,7 @@
 package dionysus.wine.serviceimpl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import dionysus.wine.daoimpl.BasicInfoDAOImpl;
 import dionysus.wine.daoimpl.WineInfoDAOImpl;
@@ -25,19 +27,7 @@ import dionysus.wine.vo.Pagination;
 import dionysus.wine.vo.WineOrder;
 
 public class WineOrderServiceImpl implements WineOrderService {
-	/*
-	 * 
-	 * 	- 월별/일별 상품 주문건 판매량 조회
-	 * 		7. 와인회사별/월별 상품 주문건 판매량 조회	ArrayList<Integer>	Connection, 주문일자(월별), 와인회사번호
-	 * 		8. 와인회사별/일별 상품 주문건 판매량 조회	ArrayList<Integer>	Connection, 주문일자(일별), 와인회사번호
-	 * 	- 와인상품 주문회원 정보조회
-	 * 		9. 와인상품 주문회원 정보조회						ArryList<Customer>			Connection, 와인회사번호, 고객번호
-	 * 	- 주문건 등록.
-	 * 		10. 주문건 등록											int						Connection, WineOrder
-	 * 	- 주문건 삭제.
-	 * 		11. 주문건 삭제											int						Connection, 주문번호
-	 * 	- 주문건수정(주문상세에서 처리)
-	 * */
+
 	private WineOrderDAOImpl dao;
 	public WineOrderServiceImpl(WineOrderDAOImpl dao) {
 		// TODO Auto-generated constructor stub
@@ -262,13 +252,16 @@ public class WineOrderServiceImpl implements WineOrderService {
 			date= sdf.parse(request.getParameter("wineOrderDate"));
 			int wineOrderAmount= Integer.parseInt(request.getParameter("wineOrderAmount"));
 			int customerId= new BasicInfoDAOImpl().selectByUsernameOfCustomerId(conn, basicInfoUsername);
-			ArrayList<HashMap<String, Object>>list= dao.selectByWineSellerId(conn);
-			ArrayList<WineOrder>wine= new ArrayList<WineOrder>();
-			for(HashMap<String, Object> result: list){
-				if(result.get("wine").equals("wine")){
-					logger.info("result값"+result.get("wine"));
-				}
+			int wineSellerId= (int)session.getAttribute("wineSellerId");
+			int result= dao.wineOrderInsert(conn, new WineOrder((Date)new java.util.Date(date.getTime()), wineOrderAmount, customerId, wineSellerId));
+			JsonObject ob= new JsonObject();
+			if(result==1){
+				ob.addProperty("result", "success");
 			}
+			else{
+				ob.addProperty("result", "fail");
+			}
+			return new Gson().toJson(ob);
 		} 
 		catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -281,9 +274,33 @@ public class WineOrderServiceImpl implements WineOrderService {
 		return null;
 	}
 
+	//	와인주문 취소
 	@Override
 	public String delete(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		HttpSession session= request.getSession();
+		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
+		try {
+			int customerId= new BasicInfoDAOImpl().selectByUsernameOfCustomerId(conn, basicInfoUsername);
+			int wineOrderId= dao.selectByCustomerIdOfWineOrderId(conn, customerId);
+			int result= dao.wineOrderDelete(conn, wineOrderId);
+			JsonObject ob= new JsonObject();
+			if(result==1){
+				ob.addProperty("result", "success");
+			}
+			else{
+				ob.addProperty("result", "fail");
+			}
+			return new Gson().toJson(ob);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
 		return null;
 	}
 

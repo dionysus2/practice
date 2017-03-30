@@ -1,6 +1,7 @@
 package dionysus.wine.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,8 @@ public class WineInfoController {
 		ModelAndView mav= new ModelAndView();
 		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
 		mav.setView("#.jsp");
+		HttpSession session= request.getSession();
+		session.setAttribute("wineInfoId", request.getParameter("wineInfoId"));
 		mav.addObject("result", service.readByWineInfoId(request));
 		return mav;
 	}
