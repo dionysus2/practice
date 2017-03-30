@@ -19,5 +19,6 @@ public interface ResResrvQuery {
     public String update="update res_Reserv set res_Resrv_Date=?,res_Resrv_Fee=?";
      //    예약접수 정보삭제	
     public String delete="delete from res_Reserv where res_Resrv_Id=?";
-
+     //  예약번호별 예약정보 조회
+    public String selectByResReservId ="select * from res_Reserv where res_Reserv_id=?";
 }

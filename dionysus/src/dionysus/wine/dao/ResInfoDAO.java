@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import dionysus.wine.vo.ResInfo;
+import dionysus.wine.vo.ResReserv;
 
 public interface ResInfoDAO {
 	/* 
@@ -20,6 +21,7 @@ public interface ResInfoDAO {
 	 * 	- 레스토랑 정보 수정
 	 * 		6. 레스토랑 정보 수정							int						Connection, ResInfo
 	 *     7. 레스토랑정보업데이트 시작                   ResInfo 		       Connection, 레스토랑번호
+	 *    
 	 * */
 
 

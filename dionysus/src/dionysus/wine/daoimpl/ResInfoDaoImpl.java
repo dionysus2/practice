@@ -29,7 +29,7 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 	
    //레스토랑 정보 페이지별 리스트 조회	
 	@Override
-	public ArrayList<ResInfo> selectResInfoAllList(Connection conn,  int startRow, int  lastRow) throws Exception {
+	public ArrayList<ResInfo>selectResInfoAllList(Connection conn,  int startRow, int  lastRow) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ResInfo>list = new ArrayList<>();

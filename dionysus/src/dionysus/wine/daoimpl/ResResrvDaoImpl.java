@@ -228,7 +228,29 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		}
 	
 	}
-
-
+    //  예약번호별 예약정보 조회
+	@Override
+	public ResReserv selectResReserv(Connection conn, int resResrvId) throws Exception {
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   try{
+	   pstmt= conn.prepareStatement(ResResrvQuery.selectByResReservId);  
+	   pstmt.setInt(1, resResrvId);
+	   rs=pstmt.executeQuery();
+	   if(rs.next()){
+	   ResReserv resReserv = new ResReserv();
+	   resReserv.setResResrvDate(rs.getDate("resResrvDate"));
+	   resReserv.setResResrvFee(rs.getInt("resResrvFee"));
+	   resReserv.setCustomerId(rs.getInt("customerId"));
+	   resReserv.setResId(rs.getInt("resId"));
+	   return resReserv;
+	   }
+	   }catch (SQLException e) {
+       throw e;
+	   }finally {
+	   JDBCUtil.close(pstmt, rs);
+	  }
+	  return null;
+	  }
 
 }

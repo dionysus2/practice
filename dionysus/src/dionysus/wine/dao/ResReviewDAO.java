@@ -14,12 +14,14 @@ public interface ResReviewDAO {
 	 * 2. 리뷰 수정												int			Connection,ResReview
 	 * 3. 리뷰 삭제												int			Connection,ResReview
 	 * 4. 레스토랑별 리뷰정보 전체리스트 조회		ArrayList<ResReview>	Connection, 레스토랑번호
-	 * 5. 리뷰변경시작                                        
+	 * 5. 리뷰변경시작 
+	 * 6. 리뷰 개수 조회                                       
 	 */
 	public int insertResReivew(Connection conn, ResReview resReview)throws Exception;
 	public int updateResReivew(Connection conn, ResReview resReview)throws Exception;
     public int deleteResReivew(Connection conn, int customerId)throws Exception;
-    public ArrayList<ResReview>selectAllResReview(Connection conn, int resInfoId)throws SQLException;
+    public ArrayList<ResReview>selectAllResReview(Connection conn, int resInfoId,int startRow, int  lastRow)throws SQLException;
     public ResReview selectByCustomerId(Connection conn, int customerId)throws Exception;
-
+    public int selectByReviewCount(Connection conn)throws Exception;
+    
 }

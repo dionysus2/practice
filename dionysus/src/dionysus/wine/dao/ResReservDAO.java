@@ -26,7 +26,7 @@ public interface ResReservDAO {
 	 * 7.예약접수 추가									int					Connection, 레스토랑번호,회원번호,예약일자,예약금액
 	 * 8.예약접수 정보수정								int					Connection, 예약일자,예약금액
 	 * 9.예약접수 정보삭제								int					Connection, 예약번호
-	 * 
+	 *  8.예약번호별 예약정보 조회                   ResReserv               	Connection, 레스토랑 회원번호
 	 */
 
 	public ArrayList<ResReserv>selectAllReserv(Connection conn, int startRow, int lastRow)throws Exception;
@@ -38,4 +38,5 @@ public interface ResReservDAO {
 	public int insertReserv(Connection conn, int resId, int customerId, Date resResrvDate, int resResrvFee)throws Exception;
 	public int updateReserv(Connection conn, Date resResrvDate,int resResrvFee)throws Exception;
 	public int deleteReserv(Connection conn, int resResrvId)throws Exception;
+	public ResReserv selectResReserv(Connection conn, int resResrvId)throws Exception;
 }
