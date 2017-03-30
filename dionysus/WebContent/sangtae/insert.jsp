@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/dionysus/res/insert" method="post" enctype="multipart/form-data">
+	<form action="/dionysus/res/insert" method="get" enctype="multipart/form-data">
 		<h1>레스토랑 사업자 회원가입</h1>
 		<table>
 			<tbody>
