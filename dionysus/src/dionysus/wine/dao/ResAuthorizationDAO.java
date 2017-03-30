@@ -31,7 +31,7 @@ public interface ResAuthorizationDAO {
 	public int deleteResauthorization(Connection conn, int resAuthorizationId)throws SQLException;
 	
 	//5. 레스토랑 업주 회원신청자 승인
-	public int yesWineSellerAuthorizated(Connection conn, int resAuthorizationId)throws SQLException;
+	public int yesResAuthorizated(Connection conn, int resAuthorizationId)throws SQLException;
 	
 	//6. 레스토랑 업주 회원 신청자 비활성화 속성 1로 변경
 	//public int selectResauthorization(Connection conn, int resAuthorizationId)throws SQLException;

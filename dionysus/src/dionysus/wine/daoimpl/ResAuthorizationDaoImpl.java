@@ -40,7 +40,7 @@ public class ResAuthorizationDaoImpl implements ResAuthorizationDAO {
 	//2. 레스토랑 업주 회원신청자 count
 	@Override
 	public int resauthorization(Connection conn) throws SQLException {
-		String Sql = "select count(res_id) from res_authorization";
+		String Sql = "select count(res_id+1) from res_authorization";
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		try{
@@ -93,7 +93,7 @@ public class ResAuthorizationDaoImpl implements ResAuthorizationDAO {
 	}
 	//5. 레스토랑 업주 회원신청자 승인
 	@Override
-	public int yesWineSellerAuthorizated(Connection conn, int resAuthorizationId) throws SQLException {
+	public int yesResAuthorizated(Connection conn, int resAuthorizationId) throws SQLException {
 		String Sql ="update res_authorization "
 				+ "set res_authorizated = '승인완료' "
 				+ "where res_id=?";

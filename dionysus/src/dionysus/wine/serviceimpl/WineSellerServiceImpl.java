@@ -137,12 +137,16 @@ public class WineSellerServiceImpl implements WineSellerService {
 
 	@Override
 	public String updateWineSeller(HttpServletRequest req) throws Exception {
-		Connection conn = JDBCUtil.getConnection();
-		int wineSellerId = Integer.parseInt(req.getParameter("wineSellerId"));		
-		
+		Connection conn = JDBCUtil.getConnection();			
+		String wineSellerLocation = req.getParameter("wineSellerLocation");
+		String wineSellerTel = req.getParameter("wineSellerTel");
+		String wineSellerAccountNo = req.getParameter("wineSellerAccountNo");
+		String wineSellerProfilePicture = req.getParameter("wineSellerProfilePicture");
+		String wineSellerName = req.getParameter("wineSellerName");
+		int wineSellerId = Integer.parseInt(req.getParameter("wineSellerId"));	
 		try{
-			int result = dao.updateWineSeller(conn, new WineSeller);
-		
+			int result = dao.updateWineSeller(conn, new WineSeller(wineSellerId, wineSellerLocation, 
+					wineSellerTel, wineSellerAccountNo, wineSellerProfilePicture,wineSellerName));
 		JsonObject ob = new JsonObject();
 		if(result==1)ob.addProperty("result", "success");
 		else ob.addProperty("result", "fail");
@@ -150,8 +154,9 @@ public class WineSellerServiceImpl implements WineSellerService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
-			JDBCUtil
+			JDBCUtil.close(conn);
 		}
+		return null;
 	}
 
 }
