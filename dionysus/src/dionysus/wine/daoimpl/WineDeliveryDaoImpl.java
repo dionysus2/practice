@@ -10,7 +10,7 @@ import dionysus.wine.dao.WineDeliveryDAO;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.WineDelivery;
 
-public class WineDelivaryDaoImpl implements WineDeliveryDAO {
+public class WineDeliveryDaoImpl implements WineDeliveryDAO {
 
 	
 	//배송추가
@@ -41,8 +41,7 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 
 	//페이지별 배송리스트 조회 
 	@Override
-	public ArrayList<WineDelivery> selectWineDeliveryAllList(Connection conn, int startRow, int lastRow,
-			int wineDeliveryId) throws SQLException {
+	public ArrayList<WineDelivery> selectWineDeliveryAllList(Connection conn, int startRow, int lastRow) throws SQLException {
 		PreparedStatement pstmt = null;
 		String Sql = "sfasdfsadf";
 		ResultSet rs = null;
@@ -76,7 +75,7 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 	}
 	//배송번호로 조회
 	@Override
-	public WineDelivery selectWineDeliveryCustomerId(Connection conn, int wineDeliveryId) throws SQLException {
+	public WineDelivery selectWineDeliveryId(Connection conn, int wineDeliveryId) throws SQLException {
 		String Sql = "select customer_id,res_id,wine_delivery_date"
 				+ ",wine_delivery_id,wine_delivery_progress,seller_id"
 				+ " from wine_delivery where wine_delivery_id = ?";
@@ -219,6 +218,22 @@ public class WineDelivaryDaoImpl implements WineDeliveryDAO {
 			JDBCUtil.close(pstmt, rs);
 		}				
 		return null;
+	}
+
+	@Override
+	public int WineDeliveryCount(Connection conn) {
+		String Sql = "select count(wine_delivery_id) from wine_delivery";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(Sql);
+			rs =pstmt.executeQuery();
+			if(rs.next()){
+			return rs.getInt(1);}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 }

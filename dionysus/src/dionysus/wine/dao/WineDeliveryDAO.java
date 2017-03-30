@@ -24,10 +24,10 @@ public interface WineDeliveryDAO {
 	public int insertWineDelivery(Connection conn, WineDelivery wine)throws SQLException;
 	
 	//페이지별 배송리스트 조회 
-	public ArrayList<WineDelivery> selectWineDeliveryAllList(Connection conn, int startRow, int lastRow, int wineDeliveryId)throws SQLException;
+	public ArrayList<WineDelivery> selectWineDeliveryAllList(Connection conn, int startRow, int lastRow)throws SQLException;
 	
 	//배송번호로 조회
-	public WineDelivery selectWineDeliveryCustomerId(Connection conn, int wineDeliveryId)throws SQLException;
+	public WineDelivery selectWineDeliveryId(Connection conn, int wineDeliveryId)throws SQLException;
 	
 	//회원이름으로 배송리스트 조회
 	public ArrayList<WineDelivery> selectWineDeliveryCustomerId(Connection conn, int startRow, int lastRow, int customerId)throws SQLException;
@@ -40,4 +40,8 @@ public interface WineDeliveryDAO {
 	
 	//레스토랑며으로 배송리스트 조회
 	public ArrayList<WineDelivery> selectWineDeliveryResId(Connection conn, int startRow, int lastRow, int resId)throws SQLException;
+	
+	//배송번호 카운트
+	public int WineDeliveryCount(Connection conn);
+	
 }

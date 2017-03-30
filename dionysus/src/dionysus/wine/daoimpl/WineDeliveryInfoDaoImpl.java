@@ -9,7 +9,7 @@ import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.WineDeliveryInfo;
 import dionysus.wine.vo.WineOrderInfo;
 
-public class wineDeliveryInfoDaoImpl implements WineDeliveryInfoDAO {
+public class WineDeliveryInfoDaoImpl implements WineDeliveryInfoDAO {
 
 	
 		//배송번호별 추가
