@@ -78,24 +78,42 @@ public class WineDeliveryServiceImpl implements WineDeliveryService {
 	public String readWineDeliveryId(HttpServletRequest req) {
 		Connection conn = JDBCUtil.getConnection();
 		int wineDeliveryId = Integer.parseInt(req.getParameter("wineDeliveryId"));		
-		try{
-			int result = dao.selectWineDeliveryId(conn, wineDeliveryId);
-			JsonObject ob = new JsonObject();
-			if(result==1)ob.addProperty(property, value);
-		}catch (SQLException e) {
+		try {
+			WineDelivery wineDelivery = dao.selectWineDeliveryId(conn, wineDeliveryId);
+			return new Gson().toJson(wineDelivery);
+		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			JDBCUtil.close(conn);
 		}
-		
-		
 		return null;
 	}
 
 	@Override
 	public String readWineDeliverCustomerId(HttpServletRequest req) {
-		// TODO Auto-generated method stub
+		Connection conn = JDBCUtil.getConnection();
+		int customerId = Integer.parseInt(req.getParameter("customerId"));
+		 try {
+	         int pageNo= 1;
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
+	         }
+	         int cntOfRow= dao.WineDeliveryCount(conn);
+	         Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+	         ArrayList<WineDelivery>list= dao.selectWineDeliveryCustomerId(conn, pagination.getStartRow(), pagination.getLastRow(), customerId);
+	         HashMap<String, Object> map= new HashMap<String, Object>();
+	         map.put("pagination", pagination);
+	         map.put("list", list);
+	         return new Gson().toJson(map);
+	      } 
+	      catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	      finally{
+	         JDBCUtil.close(conn);
+	      }
 		return null;
 	}
-
 	@Override
 	public String updateWineDelivery(HttpServletRequest req) {
 		// TODO Auto-generated method stub
@@ -104,14 +122,53 @@ public class WineDeliveryServiceImpl implements WineDeliveryService {
 
 	@Override
 	public String readWineDeliveryWineSellerId(HttpServletRequest req) {
-		// TODO Auto-generated method stub
+		Connection conn = JDBCUtil.getConnection();
+		int wineSellerId = Integer.parseInt(req.getParameter("wineSellerId"));
+		 try {
+	         int pageNo= 1;
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
+	         }
+	         int cntOfRow= dao.WineDeliveryCount(conn);
+	         Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+	         ArrayList<WineDelivery>list= dao.selectWineDeliveryWineSellerId(conn, pagination.getStartRow(), pagination.getLastRow(), wineSellerId);
+	         HashMap<String, Object> map= new HashMap<String, Object>();
+	         map.put("pagination", pagination);
+	         map.put("list", list);
+	         return new Gson().toJson(map);
+	      } 
+	      catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	      finally{
+	         JDBCUtil.close(conn);
+	      }
 		return null;
 	}
 
 	@Override
 	public String readWineDeliveryResId(HttpServletRequest req) {
-		// TODO Auto-generated method stub
+		Connection conn = JDBCUtil.getConnection();
+		int resId = Integer.parseInt(req.getParameter("resId"));
+		 try {
+	         int pageNo= 1;
+	         if(req.getParameter("pageNo")!=null){
+	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
+	         }
+	         int cntOfRow= dao.WineDeliveryCount(conn);
+	         Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
+	         ArrayList<WineDelivery>list= dao.selectWineDeliveryResId(conn, pagination.getStartRow(), pagination.getLastRow(), resId);
+	         HashMap<String, Object> map= new HashMap<String, Object>();
+	         map.put("pagination", pagination);
+	         map.put("list", list);
+	         return new Gson().toJson(map);
+	      } 
+	      catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	      finally{
+	         JDBCUtil.close(conn);
+	      }
 		return null;
 	}
-
 }
