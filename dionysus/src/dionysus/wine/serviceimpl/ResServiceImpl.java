@@ -144,14 +144,13 @@ public class ResServiceImpl implements ResService{
 
 	@Override
 	public String updateRes(HttpServletRequest req) throws Exception {
-		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
 		String reslocation = req.getParameter("resLocation");
 		String resTel = req.getParameter("resTel");
-		String resAccountNo = req.getParameter("res_account_no");
-		String resProfilePictiure = req.getParameter("res_profile_picture");
+		String resAccountNo = req.getParameter("resAccountNo");
+		String resProfilePictiure = req.getParameter("resProfilePicture");
 		String resName = req.getParameter("res_name");
-		int resId = Integer.parseInt(req.getParameter("res_id"));
+		int resId = Integer.parseInt(req.getParameter("resId"));
 		JsonObject ob = new JsonObject();
 		try {
 			int result = dao.updateResOwner(conn, new Res(reslocation,resTel,resAccountNo,resProfilePictiure,resName,resId));
@@ -160,7 +159,6 @@ public class ResServiceImpl implements ResService{
 			return new Gson().toJson(ob);
 		} 
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally{

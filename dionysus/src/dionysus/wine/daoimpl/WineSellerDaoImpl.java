@@ -83,7 +83,7 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	public int wineSellerCount(Connection conn) throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String Sql = "select max(wine_seller_id) from wine_seller";
+		String Sql = "select max(wine_seller_id+1) from wine_seller";
 				try {
 					pstmt = conn.prepareStatement(Sql);
 					rs = pstmt.executeQuery();
@@ -146,12 +146,12 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 			pstmt = conn.prepareStatement(Sql);
 			pstmt.setInt(1, wineSeller.getWineSellerId());
 			pstmt.setString(2, wineSeller.getWineSellerBrn());
-			pstmt.setString(5, wineSeller.getWineSellerLocation());
-			pstmt.setString(6, wineSeller.getWineSellerTel());
-			pstmt.setString(8, wineSeller.getWineSellerAccountNo());
-			pstmt.setString(9, wineSeller.getWineSellerProfilePicture());
+			pstmt.setString(3, wineSeller.getWineSellerLocation());
+			pstmt.setString(4, wineSeller.getWineSellerTel());
+			pstmt.setString(5, wineSeller.getWineSellerAccountNo());
+			pstmt.setString(6, wineSeller.getWineSellerProfilePicture());
 			pstmt.setString(7, wineSeller.getWineSellerName());
-			pstmt.setInt(7, wineSeller.getBasicInfoId());
+			pstmt.setInt(8, wineSeller.getBasicInfoId());
 			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -184,14 +184,14 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	}*/
 	//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
 	@Override
-	public int SelectWineSellerrId(Connection conn, String wineSellerOwnername, String wineSellerBrn)throws SQLException {
+	public int SelectWineSellerrId(Connection conn, String wineSellerName, String wineSellerBrn)throws SQLException {
 		String Sql ="select b.basic_info_username from wine_seller w, basic_info b where w.basic_info_id= b.basic_info_id and w.wine_seller_ownername='?' and w.wine_seller_brn ='?'";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt=conn.prepareStatement(Sql);
-			pstmt.setString(1, wineSellerOwnername);
+			pstmt.setString(1, wineSellerName);
 			pstmt.setString(2, wineSellerBrn);
 			rs =pstmt.executeQuery();
 			if(rs.next()){
@@ -230,9 +230,10 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	//와인회사 업주 회원 정보수정	UpdateResOwner
 	@Override
 	public int updateWineSeller(Connection conn, WineSeller WineSellerId)throws SQLException {
-		String Sql ="update wine_seller set wine_seller_pwd=?,wine_seller_location=?,"
-				+ "wine_seller_tel=?,wine_seller_email=?,wine_seller_account_no=?,wine_seller_profile_picture=?,"
-				+ "wine_seller_ownername=? where wine_seller_id=?";
+		String Sql ="update wine_seller set wine_seller_location=?,"
+				+ "wine_seller_tel=?,wine_seller_account_no=?,"
+				+ "wine_seller_profile_picture=?,"
+				+ "wine_seller_name=? where wine_seller_id=?";
 		PreparedStatement pstmt=null;
 		WineSeller wine = new WineSeller();
 		try {
@@ -240,19 +241,19 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 			//비밀번호 변경
 			//pstmt.setString(1, res.getResPwd());
 			//위치변경
-			pstmt.setString(2, wine.getWineSellerLocation());
+			pstmt.setString(1, wine.getWineSellerLocation());
 			//연락처
-			pstmt.setString(3, wine.getWineSellerTel());
+			pstmt.setString(2, wine.getWineSellerTel());
 			//이메일
 			//pstmt.setString(4, res.getResEmail());
 			//계좌번호
-			pstmt.setString(5, wine.getWineSellerAccountNo());
+			pstmt.setString(3, wine.getWineSellerAccountNo());
 			//프로필사진
-			pstmt.setString(6, wine.getWineSellerProfilePicture());
+			pstmt.setString(4, wine.getWineSellerProfilePicture());
 			//이름
-			pstmt.setString(7, wine.getWineSellerName());
+			pstmt.setString(5, wine.getWineSellerName());
 			//번호
-			pstmt.setInt(8, wine.getWineSellerId());
+			pstmt.setInt(6, wine.getWineSellerId());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

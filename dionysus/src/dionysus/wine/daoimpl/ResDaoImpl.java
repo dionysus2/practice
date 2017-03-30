@@ -152,7 +152,7 @@ public class ResDaoImpl implements ResDAO {
 			pstmt.setString(5, res.getResAccountNo());
 			pstmt.setString(6, res.getResProfilePicture());
 			pstmt.setString(7, res.getResName());
-			pstmt.setInt(7, res.getBasicInfoId());
+			pstmt.setInt(8, res.getBasicInfoId());
 			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -264,7 +264,8 @@ public class ResDaoImpl implements ResDAO {
 		}		
 		return 0;
 	}
-	/*//레스토랑 업주 회원 아이디 중복 확인
+
+/*//레스토랑 업주 회원 아이디 중복 확인
 	@Override
 	public int resOwnerIdCheck(Connection conn, String username) {
 		String Sql = "select count(*) from res where res_username=?";
