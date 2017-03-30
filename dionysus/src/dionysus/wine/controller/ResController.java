@@ -15,7 +15,7 @@ public class ResController {
 		mav.setView("/sangtae/resjoin.jsp");
 		return mav;
 	}
-	@RequestMapping(value="/basic/insert", method="POST")
+	@RequestMapping(value="/res/insert", method="POST")
 	public static ModelAndView insertRes(HttpServletRequest request) throws Exception{
 		ModelAndView mav= new ModelAndView();
 		ResServiceImpl service= (ResServiceImpl)request.getServletContext().getAttribute("resservice");
@@ -45,7 +45,6 @@ public class ResController {
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
 		if(service.login(request).equals("{\"result\":\"success\"}")){
-			logger.info("Controller로그인 성공");
 			HttpSession session= request.getSession();
 			session.setAttribute("basicInfoUsername", request.getParameter("basicInfoUsername"));
 			mav.setView("/dionysus/jaehyuntest/main.jsp");
@@ -53,7 +52,6 @@ public class ResController {
 			return mav;
 		}
 		else if(service.login(request).equals("{\"result\":\"fail\"}")){
-			logger.info("Conroller로그인 실패");
 			mav.setView("login");
 			mav.setRedirect();
 			return mav;

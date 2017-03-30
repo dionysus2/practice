@@ -18,7 +18,7 @@ public interface WineReviewDAO {
 	 * 		4. 상품별 리뷰정보 전체리스트 조회		ArrayList<WineReview>	Connection, 상품번호
 	 * */
 	public int wineReviewInsert(Connection conn, int wineInfoId, int customerId, WineReview winereview)throws SQLException;
-	public int wineReviewUpdate(Connection conn, int wineInfoId, int customerId, WineReview winereview)throws SQLException;
+	public int wineReviewUpdate(Connection conn, int wineReviewId, int wineInfoId, int customerId, WineReview winereview)throws SQLException;
 	public int wineReviewDelete(Connection conn, int wineReviewId ,int wineInfoId, int customerId)throws SQLException;
 	public ArrayList<WineReview> selectAllWineReview(Connection conn, int wineInfoId)throws SQLException;
 }
