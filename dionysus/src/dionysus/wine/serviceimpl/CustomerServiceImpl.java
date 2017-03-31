@@ -224,6 +224,33 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 		return null;
 	}
+	
+	@Override
+	public String deleteCustomer (HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		Connection conn= JDBCUtil.getConnection();
+		String wineInfoName= req.getParameter("customerId");
+		try {
+			int result= dao.CustomerInfoDelete(conn, customerId));
+			JsonObject ob= new JsonObject();
+			if(result==1){
+				ob.addProperty("result", "success");
+			}
+			else{
+				ob.addProperty("result", "fail");
+			}
+			return new Gson().toJson(ob);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
+		return null;
+	}
+
 
 	@Override
 	public String customerIdFind(HttpServletRequest req) {
