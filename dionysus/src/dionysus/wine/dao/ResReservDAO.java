@@ -2,6 +2,7 @@ package dionysus.wine.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dionysus.wine.vo.Res;
@@ -36,8 +37,8 @@ public interface ResReservDAO {
 	public ArrayList<ResReserv>selectByMonthReserv(Connection conn, Date resResrvDate)throws Exception;
 	public ArrayList<ResReserv>selectByDayReserv(Connection conn, Date resResrvDate)throws Exception;
 	public ArrayList<ResReserv>selectByLastReserv(Connection conn, int customerId)throws Exception;
-	public ArrayList<ResReserv>selectBySalesLate(Connection conn, int resInfoId)throws Exception;
-	public int insertReserv(Connection conn, int resId, int customerId, Date resResrvDate, int resResrvFee)throws Exception;
+	public int selectBySalesLate(Connection conn, int resInfoId)throws Exception;
+	public int insertReserv(Connection conn,Date resResrvDate, int resResrvFee,int resId, int customerId)throws Exception;
 	public int updateReserv(Connection conn, Date resResrvDate,int resResrvFee)throws Exception;
 	public int deleteReserv(Connection conn, int resResrvId)throws Exception;
 	public ResReserv selectResReserv(Connection conn, int resResrvId)throws Exception;

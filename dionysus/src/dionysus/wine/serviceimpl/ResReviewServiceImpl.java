@@ -28,12 +28,12 @@ public class ResReviewServiceImpl implements ResReviewService {
 	}
 	 private Logger logger= LoggerFactory.getLogger(ResReviewServiceImpl.class); 
 	@Override
-	public String ResReviewCreateStart(HttpServletRequest request) throws Exception {
+	public String ResReviewCreateStart(HttpServletRequest request){
 	return null;
 	}
 
 	@Override
-	public String ResReviewCreateEnd(HttpServletRequest request) throws Exception {
+	public String ResReviewCreateEnd(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		ResReview resReview = new ResReview();
 		resReview.setResReviewContent(request.getParameter("resReviewContent"));
@@ -52,8 +52,8 @@ public class ResReviewServiceImpl implements ResReviewService {
 			ob.addProperty("result", "fail");
 		}
 		return new Gson().toJson(ob);
-		}catch (SQLException e) {
-			e.printStackTrace();
+	   } catch (Exception e) {
+		e.printStackTrace();
 		}finally {
 		JDBCUtil.close(conn);
 		}
@@ -61,13 +61,14 @@ public class ResReviewServiceImpl implements ResReviewService {
 	}
 
 	@Override
-	public String ResReviewUpdateStart(HttpServletRequest request) throws Exception {
+	public String ResReviewUpdateStart(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		int customerId =  Integer.parseInt(request.getParameter("customerId"));
 	    try{
 		ResReview resReview = dao.selectByCustomerId(conn, customerId);
 		return new Gson().toJson(resReview);
-		}catch (SQLException e){
+	
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			JDBCUtil.close(conn);
@@ -76,7 +77,7 @@ public class ResReviewServiceImpl implements ResReviewService {
 	}
 
 	@Override
-	public String ResReviewUpdateEnd(HttpServletRequest request) throws Exception {
+	public String ResReviewUpdateEnd(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		ResReview resReview = new ResReview();
 		resReview.setResReviewContent(request.getParameter("resReviewContent"));
@@ -91,8 +92,8 @@ public class ResReviewServiceImpl implements ResReviewService {
 		    else{
 				ob.addProperty("result", "fail");
 		}
-		}catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+		  e.printStackTrace();
 		}finally {
 			JDBCUtil.close(conn);
 		}
@@ -100,7 +101,7 @@ public class ResReviewServiceImpl implements ResReviewService {
 	}
 
 	@Override
-	public String ResReviewDelete(HttpServletRequest request) throws Exception {
+	public String ResReviewDelete(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		int customerId =  Integer.parseInt(request.getParameter("customerId"));
 		try{
@@ -113,8 +114,8 @@ public class ResReviewServiceImpl implements ResReviewService {
 				ob.addProperty("result", "fail");
 			}
 			return new Gson().toJson(ob);
-		}catch (SQLException e) {
-			e.printStackTrace();
+		   } catch (Exception e) {
+			 e.printStackTrace();
 		}finally {
 			JDBCUtil.close(conn);
 		}
@@ -123,7 +124,7 @@ public class ResReviewServiceImpl implements ResReviewService {
 	}
 		
 	@Override
-	public String readAllResReview(HttpServletRequest request) throws Exception {
+	public String readAllResReview(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		try{
 		int pageNo = 1;
@@ -138,8 +139,8 @@ public class ResReviewServiceImpl implements ResReviewService {
 		 map.put("pagination", pagination);
          map.put("list", list);
         return new Gson().toJson(map);
-		}catch (SQLException e) {
-		e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}finally {
 		JDBCUtil.close(conn);
 		}

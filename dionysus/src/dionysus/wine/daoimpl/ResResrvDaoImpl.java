@@ -2,6 +2,7 @@ package dionysus.wine.daoimpl;
 
 import java.sql.Connection;
 import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -94,12 +95,13 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 	public ArrayList<ResReserv> selectByMonthReserv(Connection conn, Date resResrvDate) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<ResReserv> list = new ArrayList<>();
-		ResReserv resReserv = new ResReserv();
 		try{
 		pstmt =conn.prepareStatement(ResResrvQuery.selectByMonthReserv);	
 		pstmt.setDate(1, new java.sql.Date(resResrvDate.getTime()));
+		ArrayList<ResReserv> list = new ArrayList<>();
+		rs= pstmt.executeQuery();
 		while(rs.next()){
+			ResReserv resReserv = new ResReserv();
 			resReserv.setResResrvId(rs.getInt("resResrvId"));
 			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
 			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
@@ -121,11 +123,12 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ResReserv> list = new ArrayList<>();
-		ResReserv resReserv = new ResReserv();
+		rs= pstmt.executeQuery();
 		try{
 		pstmt =conn.prepareStatement(ResResrvQuery.selectByDayReserv);	
 		pstmt.setDate(1, new java.sql.Date(resResrvDate.getTime()));
 	        while(rs.next()){
+	        ResReserv resReserv = new ResReserv();
 			resReserv.setResResrvId(rs.getInt("resResrvId"));
 			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
 			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
@@ -151,11 +154,11 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		ResReserv resReserv = new ResReserv();
 		try{
 		pstmt =conn.prepareStatement(ResResrvQuery.selectByLastReserv);	
+		pstmt.setInt(1, customerId);
 		while(rs.next()){
 			resReserv.setResResrvId(rs.getInt("resResrvId"));
 			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
 			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
-			resReserv.setCustomerId(rs.getInt("customerId"));
 			resReserv.setResId(rs.getInt("resId"));
 			list.add(resReserv);
 		}
@@ -169,43 +172,36 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 	}
 //	레스토랑별 예약접수 판매량 조회
 	@Override
-	public ArrayList<ResReserv> selectBySalesLate(Connection conn, int resInfoId) throws Exception {
+	public int selectBySalesLate(Connection conn, int resId) throws Exception {
 		String sql = "";  //sql 문 보류
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<ResReserv> list = new ArrayList<>();
-		ResReserv resReserv = new ResReserv();
-		try{
+     	try{
 		pstmt =conn.prepareStatement(sql);	
-		pstmt.setInt(1, resInfoId);
-		while(rs.next()){
-			resReserv.setResResrvId(rs.getInt("resResrvId"));
-			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
-			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
-			resReserv.setCustomerId(rs.getInt("customerId"));
-			resReserv.setResId(rs.getInt("resId"));
-			list.add(resReserv);
+		pstmt.setInt(1, resId);
+		rs= pstmt.executeQuery();
+		if(rs.next()){
+	    return rs.getInt(1);
 		}
-		return list;
 		}catch (SQLException e) {
 		throw e;
 		}finally{
 	    JDBCUtil.close(pstmt,rs);	
 		}
-	 
+     	return 0;
 	}
 //	예약접수 추가		
 	@Override
-	public int insertReserv(Connection conn, int resId, int customerId, Date resResrvDate, int resResrvFee)
+	public int insertReserv(Connection conn,Date resResrvDate, int resResrvFee,int resId, int customerId)
 			throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try{
 		pstmt =conn.prepareStatement(ResResrvQuery.insert);	
-		pstmt.setInt(1, resId);
-		pstmt.setInt(2, customerId);
-		pstmt.setDate(3, resResrvDate);
-		pstmt.setInt(4, resResrvFee);
+		pstmt.setDate(1, (Date) resResrvDate);
+		pstmt.setInt(2, resResrvFee);
+		pstmt.setInt(3, resId);
+		pstmt.setInt(4, customerId);
 		return pstmt.executeUpdate();
 		}catch (SQLException e) {
 		throw e;

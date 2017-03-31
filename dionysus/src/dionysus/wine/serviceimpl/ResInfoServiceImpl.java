@@ -27,7 +27,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 	}
     private Logger logger= LoggerFactory.getLogger(ResInfoServiceImpl.class); 
 	@Override
-	public String readAllResInfo(HttpServletRequest request) throws Exception {
+	public String readAllResInfo(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		try{
 			int pageNo =1;
@@ -41,16 +41,16 @@ public class ResInfoServiceImpl implements ResInfoService {
 			 map.put("pagination", pagination);
 	         map.put("list", list);
 	         return new Gson().toJson(map);
-		    }catch (SQLException e) {
-			e.printStackTrace();
-		    }finally {
+		    } catch (Exception e) {
+				e.printStackTrace();
+			}finally {
 			JDBCUtil.close(conn);
 		}
 		return null;
 	}
 
 	@Override
-	public String readResOwnerResInfo(HttpServletRequest request) throws Exception {
+	public String readResOwnerResInfo(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		try{
 			int pageNo =1;
@@ -65,21 +65,21 @@ public class ResInfoServiceImpl implements ResInfoService {
 			 map.put("pagination", pagination);
 	         map.put("list", list);
 	         return new Gson().toJson(map);
-		    }catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
+		    } catch (Exception e) {
+			  e.printStackTrace();
+			}finally {
 			JDBCUtil.close(conn);
 		}
 		return null;
 	}
 
 	@Override
-	public String ResInfoCreateStart(HttpServletRequest request) throws Exception  {
+	public String ResInfoCreateStart(HttpServletRequest request){
 		return null;
 	}
 
 	@Override
-	public String ResInfoCreateEnd(HttpServletRequest request) throws Exception {
+	public String ResInfoCreateEnd(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		ResInfo resInfo = new ResInfo();
 		resInfo.setResInfoName( request.getParameter("resInfoName"));
@@ -91,14 +91,11 @@ public class ResInfoServiceImpl implements ResInfoService {
 		resInfo.setResInfoWebsite(request.getParameter("resInfoWebsite"));
 	    resInfo.setResId(Integer.parseInt(request.getParameter("resId")));
 	    try{
-			logger.info("Connection연결성공");
 			int result = dao.insertResInfo(conn, resInfo);
 			JsonObject ob = new JsonObject();
 			if(result==1){
 				ob.addProperty("result", "success");
-				logger.info("Dao insert 성공");
-			}
-			else{
+			}else{
 				ob.addProperty("result", "fail");
 			}
 			return new Gson().toJson(ob);
@@ -111,14 +108,14 @@ public class ResInfoServiceImpl implements ResInfoService {
 	}
 
 	@Override
-	public String ResInfoUpdateStart(HttpServletRequest request) throws Exception {
+	public String ResInfoUpdateStart(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		int resInfoId = Integer.parseInt(request.getParameter("resInfoId"));
 		try{
 			ResInfo resInfo = dao.selectByResInfoId(conn, resInfoId);
 			return new Gson().toJson(resInfo);
-		}catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+		e.printStackTrace();
 		}finally{
 			JDBCUtil.close(conn);
 		}
@@ -126,7 +123,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 	}
 	
 	@Override
-	public String ResInfoUpdateEnd(HttpServletRequest request) throws Exception {
+	public String ResInfoUpdateEnd(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		ResInfo resInfo = new ResInfo();
 		resInfo.setResInfoName( request.getParameter("resInfoName"));
@@ -156,7 +153,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 	}
 
 	@Override
-	public String ResInfoDelete(HttpServletRequest request) throws Exception {
+	public String ResInfoDelete(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		int resId = Integer.parseInt(request.getParameter("resId"));
 		try{
@@ -169,24 +166,24 @@ public class ResInfoServiceImpl implements ResInfoService {
 				ob.addProperty("result", "fail");
 			}
 			return new Gson().toJson(ob);
-		}catch (SQLException e) {
+	        } catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		    }finally {
 			JDBCUtil.close(conn);
-		}
-		return null;
+		    }
+		    return null;
 		
 	}
 
 	@Override
-	public String readByResInfoId(HttpServletRequest request) throws Exception {
+	public String readByResInfoId(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		int resInfoId = Integer.parseInt(request.getParameter("resInfoId"));
 	    try{
 	    	ResInfo resInfo = dao.selectByResInfoId(conn, resInfoId);
 	    	logger.info("서비스단 레스토랑정보 상세검색"+ resInfoId);
 	    	return new Gson().toJson(resInfo);
-	    }catch (SQLException e) {
+	     } catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			JDBCUtil.close(conn);

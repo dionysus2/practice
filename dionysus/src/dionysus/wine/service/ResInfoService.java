@@ -13,14 +13,14 @@ public interface ResInfoService {
 	 *  아이디별 레스토랑업주 정보 가져오기.
 	 */
 	
-	public String readAllResInfo(HttpServletRequest request) throws Exception;
-	public String readResOwnerResInfo(HttpServletRequest request) throws Exception;
-	public String ResInfoCreateStart(HttpServletRequest request) throws Exception;
-	public String ResInfoCreateEnd(HttpServletRequest request) throws Exception;
-	public String ResInfoUpdateStart(HttpServletRequest request) throws Exception;
-	public String ResInfoUpdateEnd(HttpServletRequest request) throws Exception;
-	public String ResInfoDelete(HttpServletRequest request) throws Exception;
-	public String readByResInfoId(HttpServletRequest request)throws Exception;
+	public String readAllResInfo(HttpServletRequest request);
+	public String readResOwnerResInfo(HttpServletRequest request);
+	public String ResInfoCreateStart(HttpServletRequest request);
+	public String ResInfoCreateEnd(HttpServletRequest request);
+	public String ResInfoUpdateStart(HttpServletRequest request);
+	public String ResInfoUpdateEnd(HttpServletRequest request);
+	public String ResInfoDelete(HttpServletRequest request);
+	public String readByResInfoId(HttpServletRequest request);
 	
 	
 }

@@ -10,10 +10,10 @@ public interface ResReviewService {
 	 * 4. 레스토랑별 리뷰정보 전체리스트 조회		
 	 */
 	
-	public String ResReviewCreateStart(HttpServletRequest request) throws Exception;
-	public String ResReviewCreateEnd(HttpServletRequest request) throws Exception;
-	public String  ResReviewUpdateStart(HttpServletRequest request) throws Exception;
-	public String  ResReviewUpdateEnd(HttpServletRequest request) throws Exception;
-	public String  ResReviewDelete(HttpServletRequest request) throws Exception;
-	public String readAllResReview(HttpServletRequest request) throws Exception;
+	public String ResReviewCreateStart(HttpServletRequest request);
+	public String ResReviewCreateEnd(HttpServletRequest request);
+	public String  ResReviewUpdateStart(HttpServletRequest request);
+	public String  ResReviewUpdateEnd(HttpServletRequest request);
+	public String  ResReviewDelete(HttpServletRequest request);
+	public String readAllResReview(HttpServletRequest request);
 }

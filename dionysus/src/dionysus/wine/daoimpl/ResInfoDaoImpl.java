@@ -221,12 +221,12 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 //아이디별 레스토랑업주 정보 가져오기.
 	@Override
 	public int selectByBasicId(Connection conn, String basicInfoUsername) throws SQLException {
-		PreparedStatement pstm= null;
+		PreparedStatement pstmt= null;
 		ResultSet rs= null;
 		try {
-			pstm= conn.prepareStatement(ResInfoQuery.selectByResId);
-			pstm.setString(1, basicInfoUsername);
-			rs= pstm.executeQuery();
+			pstmt= conn.prepareStatement(ResInfoQuery.selectByResId);
+			pstmt.setString(1, basicInfoUsername);
+			rs= pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt(1);
 			}
@@ -235,7 +235,7 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 			e.printStackTrace();
 		}	
 		finally{
-			JDBCUtil.close(pstm, rs);
+			JDBCUtil.close(pstmt, rs);
 		}
 		return 0;
 	}
