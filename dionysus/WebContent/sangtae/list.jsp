@@ -10,7 +10,7 @@ var result = <%=request.getAttribute("result")%>;
 </script>
 </head>
 <body>
-
+	<form action="dionysus/res/list" method="post"enctype="multipart/form-data">
 	<table>
 			<thead>
 				<th>ป็น๘</th>
@@ -24,6 +24,7 @@ var result = <%=request.getAttribute("result")%>;
 			</thead>
 	
 	</table>
+	</form>
 
 </body>
 </html>

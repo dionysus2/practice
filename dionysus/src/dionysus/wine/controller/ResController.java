@@ -20,6 +20,7 @@ public class ResController {
 			System.out.println("성공!");
 			mav.setView("login");
 			mav.setRedirect();
+			
 			return mav;
 		}
 		else if(service.createRes(request).equals("{\"result\":\"fail\"}")){
@@ -33,30 +34,19 @@ public class ResController {
 	}
 	@RequestMapping(value="/res/list", method="GET")
 	public static ModelAndView list(HttpServletRequest request) throws Exception{
-		ResServiceImpl service =(ResServiceImpl)request.getServletContext().getAttribute("service");
+		ResServiceImpl service =(ResServiceImpl)request.getServletContext().getAttribute("resservice");
 		ModelAndView mav= new ModelAndView();
-		mav.addObject("result", service.readAllRes(request));
+		
 		mav.setView("/sangtae/list.jsp");
+		mav.addObject("result", service.readAllRes(request));
+		System.out.println("와인회원 정보 전체 출력");
 		return mav;
 	}
-	@RequestMapping(value="/basic/login", method="POST")
-	public static ModelAndView loginEnd(HttpServletRequest request){
+	@RequestMapping(value="/res/list", method="AJAX")
+	public static ModelAndView listAjax(HttpServletRequest request) throws Exception{
+		ResServiceImpl service =(ResServiceImpl)request.getServletContext().getAttribute("resservice");
 		ModelAndView mav= new ModelAndView();
-		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
-		if(service.login(request).equals("{\"result\":\"success\"}")){
-			HttpSession session= request.getSession();
-			session.setAttribute("basicInfoUsername", request.getParameter("basicInfoUsername"));
-			mav.setView("/dionysus/jaehyuntest/main.jsp");
-			mav.setRedirect();
-			return mav;
-		}
-		else if(service.login(request).equals("{\"result\":\"fail\"}")){
-			mav.setView("login");
-			mav.setRedirect();
-			return mav;
-		}
-		mav.setView("login");
-		mav.setRedirect();
+		mav.addObject("result", service.readAllRes(request));
 		return mav;
 	}
 	@RequestMapping(value="/basic/update", method="GET")

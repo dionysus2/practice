@@ -36,8 +36,8 @@ public class DispatcherServlet extends HttpServlet {
 		context.setAttribute("wineOrderService", wineOrderService);
 		// 5. 레스토랑 사업자 회원 DAO.SERVICE 객체화
 		ResDaoImpl	resDao= new ResDaoImpl();
-		ResServiceImpl resService= new ResServiceImpl(resDao);
-		context.setAttribute("resService", resService);
+		ResServiceImpl resservice= new ResServiceImpl(resDao);
+		context.setAttribute("resservice", resservice);
 		
 		
 		String path = getServletContext().getRealPath("/");
