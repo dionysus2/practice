@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dionysus.wine.dao.NoticeDAO;
-import dionysus.wine.query.CustomerQuery;
 import dionysus.wine.query.NoticeQuery;
 import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.Customer;
 import dionysus.wine.vo.Notice;
 
 public class NoticeImpl implements NoticeDAO{
