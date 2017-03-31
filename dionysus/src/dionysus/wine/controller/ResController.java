@@ -1,12 +1,9 @@
 package dionysus.wine.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
-import dionysus.wine.di.ModelAndView;
-import dionysus.wine.di.RequestMapping;
-import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
-import dionysus.wine.serviceimpl.ResServiceImpl;
+import dionysus.wine.di.*;
+import dionysus.wine.serviceimpl.*;
 
 public class ResController {
 	@RequestMapping(value="/res/insert", method="GET")
@@ -34,10 +31,12 @@ public class ResController {
 		mav.setRedirect();
 		return null;
 	}
-	@RequestMapping(value="/basic/login", method="GET")
-	public static ModelAndView loginStart(HttpServletRequest request){
+	@RequestMapping(value="/res/list", method="GET")
+	public static ModelAndView list(HttpServletRequest request) throws Exception{
+		ResServiceImpl service =(ResServiceImpl)request.getServletContext().getAttribute("service");
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/jaehyuntest/basiclogin.jsp");
+		mav.addObject("result", service.readAllRes(request));
+		mav.setView("/sangtae/list.jsp");
 		return mav;
 	}
 	@RequestMapping(value="/basic/login", method="POST")

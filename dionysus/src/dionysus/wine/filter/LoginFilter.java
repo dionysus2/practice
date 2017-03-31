@@ -17,11 +17,11 @@ import javax.servlet.http.HttpSession;
 import dionysus.wine.vo.BasicInfo;
 
 @WebFilter()
-//<<<<<<< HEAD
-//=======
-//{"/basic/*", "/customer/*", "/res/*", "/notice/*", "/resinfo/*", "/wineinfo/*", "/manager/*"}
-//>>>>>>> branch 'master' of https://github.com/dionysus2/practice.git
+
+//	{"/basic/*", "/customer/*", "/res/*", "/notice/*", "/resinfo/*", "/wineinfo/*", "/manager/*"}
+/*
 public class LoginFilter implements Filter {
+
 	private ArrayList<String> whiteList= new ArrayList<String>();
 	//	로그인 없이 접근할 수 있는 경로를 지정
     public LoginFilter() {
@@ -59,6 +59,6 @@ public class LoginFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
-	}
+	}*/
 
 }

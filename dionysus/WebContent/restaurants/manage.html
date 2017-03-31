@@ -5,44 +5,36 @@
 <link rel="import"
 	href="http://localhost:8087/dionysus/heads/bootstrap.html">
 </head>
-<script>
-	$(document)
-			.ready(
-					function() {
-						$("#first")
-								.ready(
-										function() {
-											$("#div1")
-													.load(
-															"http://localhost:8087/dionysus/restaurants/sub.html");
-										});
-					});
-</script>
+
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
+
 <body>
+
 	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div>
 	<script>
 		w3IncludeHTML();
 	</script>
+
 	<div class="container-fluid">
 		<h1>관리 메뉴</h1>
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#home" id=first>예약
-					현황</a></li>
-			<li><a data-toggle="tab" data-target="#menu1" href="#">Menu 1</a></li>
-			<li><a data-toggle="tab" href="#menu2">통계</a></li>
+			<li class="active"><a href="http://localhost:8087/dionysus/sellers/sellers.html">기본정보</a></li>
+			<li><a href="http://localhost:8087/dionysus/wineinfo/insert">레스토랑 정보 수정</a></li>
+			<li><a href="#menu2">메뉴 등록</a></li>
+			<li><a href="#menu2">메뉴 수정</a></li>
+			<li><a href="#menu2">통계</a></li>
+			<li><a href="#menu2">기타</a></li>
 		</ul>
-	</div>
 
-	<div class="container-fluid">
 		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
-				<div id="div1"></div>
+				<h3>HOME</h3>
+					<p>Some content.</p>
 			</div>
 			<div id="menu1" class="tab-pane fade">
-				<h3>Menu 1</h3>
-				<p>Some content in menu 1.</p>
-				<div w3-include-html="http://localhost:8087/dionysus/sellers/addwine.html"></div>
+				<div
+					w3-include-html="http://localhost:8087/dionysus/sellers/addWine.html"></div>
+					<!-- <tr><td>상품 업로드 회원:</td><td><%=session.getAttribute("basicInfoUsername") %></td></tr> -->
 			</div>
 			<div id="menu2" class="tab-pane fade">
 				<h3>Menu 2</h3>
