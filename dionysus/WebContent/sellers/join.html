@@ -1,74 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Bootstrap Example</title>
-<link rel="import" href="http://localhost:8087/dionysus/heads/bootstrap.html">
-    
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
-
-<script src="https://www.w3schools.com/lib/w3data.js"></script>
-
 <body>
-
-<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div> 
-<script>w3IncludeHTML();</script>
-	
-	<!-- 회원 가입 추가 정보 폼 -->
-	<div class="container">
-
-		<h1>와인회사 회원 가입</h1>
-		<br>
-
-		<form>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="name">법인명</label> <input type="text"
-							class="form-control" id="name" name="wineSellerName">
-					</div>
+	<div id="join" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">회원가입</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/dionysus/basic/insert" method="post">
+						<div class="form-group">
+							<label for="email">아이디</label> <input type="text"
+								class="form-control" id="text" name="basicInfoUsername" maxlength="12">
+						</div>
+						<div class="form-group">
+							<label for="pwd">비밀번호</label> <input type="password"
+								class="form-control" id="pwd1" name="basicInfoPwd">
+						</div>
+						<div class="form-group">
+							<label for="pwd">비밀번호 확인</label> <input type="password"
+								class="form-control" id="pwd2">
+						</div>
+						<div class="form-group">
+							<label for="email">이메일</label> <input type="email"
+								class="form-control" id="email" name="basicInfoEmail">
+						</div>
+						<div><input type="submit" value="가입완료"></div>
+						<!-- <a href="http://localhost:8087/dionysus/users/join.html" input type="submit"
+							class="btn btn-default" value="Submit Button">회원</a> <a
+							href="http://localhost:8087/dionysus/restaurants/join.html" input type="submit"
+							class="btn btn-default" value="Submit Button">레스토랑</a> <a
+							href="http://localhost:8087/dionysus/sellers/join.html" input type="submit"
+							class="btn btn-default" value="Submit Button">와인회사</a> -->
+					</form>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="brn">사업자번호</label> <input type="text"
-							class="form-control" id="brn" name="wineSellerBrn">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="tel">연락처</label> <input type="tel"
-							class="form-control" id="tel" name="wineSellerTel">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="location">위치</label> <input type="text"
-							class="form-control" id="location" name="wineSellerLocation">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="account">연결계좌</label> <input type="text"
-							class="form-control" id="account" name="wineSellerAccount">
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-6">
-					<a href="../index.html" input type="submit"
-						class="btn btn-default btn-block" value="Submit Button">가입 완료</a>
-				</div>
-			</div>
-		</form>
+		</div>
 	</div>
-
 </body>
 </html>

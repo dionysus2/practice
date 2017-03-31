@@ -57,6 +57,7 @@
 					<li><a href="#">Menu 1</a></li>
 					<li><a href="#">Menu 2</a></li>
 					<li><a href="#">Menu 3</a></li>
+					<li><a href="/dionysus/wineinfo/insert">와인추가</a>
 				</ul>
 			</div>
 			<div class="col-sm-10">
@@ -99,9 +100,9 @@
 													+ wine.wineInfoId + "'>"
 													+ wine.wineInfoName
 													+ "</a></p>";
-											str = str + "<p>"
-													+ wine.wineInfoCountry
-													+ "</a></p>";
+											str = str + "<p>가격: "
+													+ wine.wineInfoPrice
+													+ "원</a></p>";
 													
 											str = str
 													+ "<p>"		
