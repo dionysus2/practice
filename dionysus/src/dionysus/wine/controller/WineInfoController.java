@@ -29,7 +29,7 @@ public class WineInfoController {
 	public static ModelAndView readByWineInfoIdStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		WineInfoServiceImpl service= (WineInfoServiceImpl)request.getServletContext().getAttribute("wineinfoservice");
-		mav.setView("#.jsp");
+		mav.setView("/jaehyuntest/viewForm.jsp");
 		HttpSession session= request.getSession();
 		session.setAttribute("wineInfoId", request.getParameter("wineInfoId"));
 		mav.addObject("result", service.readByWineInfoId(request));
