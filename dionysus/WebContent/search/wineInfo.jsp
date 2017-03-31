@@ -70,8 +70,7 @@
 						var target = $("#content-main table tbody");
 						$.each(list,function(index, wine) {
 							var str = "<div class='col-md-3'> <div class='thumbnail'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
-									+ "style='width: 100%'> <div class='caption'> <p>"
-									+ wine.wineInfoId + "</p>";
+									+ "style='width: 100%'> <div class='caption'>";
 							str = str+ "<p><a href='view?wineInfoId="+wine.wineInfoId+"'>"+ wine.wineInfoName+ "</a></p>";
 								str = str + "<p>가격: "+ wine.wineInfoPrice+ "원</a></p>";
 								str = str+ "<p>"+ "<img src='/dionysus/img/"+wine.wineInfoProfilePicture+"'>"+ "</p> </div> </a> </div></div>";
