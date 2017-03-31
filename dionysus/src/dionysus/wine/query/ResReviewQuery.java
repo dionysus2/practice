@@ -11,5 +11,6 @@ public interface ResReviewQuery {
     public String selectAllResReview = "select * from res_Review where res_Info_Id=?";
     //회원번호별 리뷰 조회
     public String selectByCustomerId ="select * from res_Review where customer_Id=?";
-
+    //     리뷰 개수 조회
+    public String selectByReviewCount = "select count(*)from res_Review";
 }

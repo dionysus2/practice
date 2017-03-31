@@ -10,6 +10,7 @@ public interface ResInfoService {
 	 *  레스토랑 정보 추가
 	 *  레스토랑 정보 삭제
 	 *  레스토랑 정보 수정
+	 *  아이디별 레스토랑업주 정보 가져오기.
 	 */
 	
 	public String readAllResInfo(HttpServletRequest request) throws Exception;
@@ -20,4 +21,6 @@ public interface ResInfoService {
 	public String ResInfoUpdateEnd(HttpServletRequest request) throws Exception;
 	public String ResInfoDelete(HttpServletRequest request) throws Exception;
 	public String readByResInfoId(HttpServletRequest request)throws Exception;
+	
+	
 }

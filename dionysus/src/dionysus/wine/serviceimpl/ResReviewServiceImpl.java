@@ -2,6 +2,8 @@ package dionysus.wine.serviceimpl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +16,8 @@ import com.google.gson.JsonObject;
 import dionysus.wine.daoimpl.ResReviewDaoImpl;
 import dionysus.wine.service.ResReviewService;
 import dionysus.wine.util.JDBCUtil;
+import dionysus.wine.util.PagingUtil;
+import dionysus.wine.vo.Pagination;
 import dionysus.wine.vo.ResInfo;
 import dionysus.wine.vo.ResReview;
 
@@ -118,10 +122,27 @@ public class ResReviewServiceImpl implements ResReviewService {
 		
 	}
 		
-	
-
 	@Override
 	public String readAllResReview(HttpServletRequest request) throws Exception {
+		Connection conn = JDBCUtil.getConnection();
+		try{
+		int pageNo = 1;
+		int resInfoId =  Integer.parseInt(request.getParameter("resInfoId"));
+		if(request.getParameter("pageNo")!=null){
+		pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		}
+		int cntOfRow = dao.selectByReviewCount(conn);
+		Pagination pagination = PagingUtil.getPagination(pageNo, cntOfRow);
+		ArrayList<ResReview>list = dao.selectAllResReview(conn, resInfoId, pagination.getStartRow(),pagination.getLastRow());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		 map.put("pagination", pagination);
+         map.put("list", list);
+        return new Gson().toJson(map);
+		}catch (SQLException e) {
+		e.printStackTrace();
+		}finally {
+		JDBCUtil.close(conn);
+		}
 		return null;
 	}
 

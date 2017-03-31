@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dionysus.wine.dao.ResInfoDAO;
 import dionysus.wine.query.ResInfoQuery;
+import dionysus.wine.query.WineInfoQuery;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.ResInfo;
 
@@ -29,7 +30,7 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 	
    //레스토랑 정보 페이지별 리스트 조회	
 	@Override
-	public ArrayList<ResInfo> selectResInfoAllList(Connection conn,  int startRow, int  lastRow) throws Exception {
+	public ArrayList<ResInfo>selectResInfoAllList(Connection conn,  int startRow, int  lastRow) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ResInfo>list = new ArrayList<>();
@@ -78,14 +79,14 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 	
 	// 레스토랑 정보 업주별 조회	
 	@Override
-	public  ArrayList<ResInfo>selectByResOwnerResInfo(Connection conn, int resInfoId, int startRow, int  lastRow) throws Exception {
+	public  ArrayList<ResInfo>selectByResOwnerResInfo(Connection conn, int resId, int startRow, int  lastRow) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ResInfo>list = new ArrayList<>();
 		ResInfo resInfo = new ResInfo();
 		try{
 			pstmt = conn.prepareStatement(ResInfoQuery.selectByResOwnerResInfo);	
-			pstmt.setInt(1, resInfoId);
+			pstmt.setInt(1, resId);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, lastRow);
 			rs = pstmt.executeQuery();
@@ -217,6 +218,29 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}
 	  return null;
 	}
+//아이디별 레스토랑업주 정보 가져오기.
+	@Override
+	public int selectByBasicId(Connection conn, String basicInfoUsername) throws SQLException {
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(ResInfoQuery.selectByResId);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
+	}
+		
+	
 
 
 }

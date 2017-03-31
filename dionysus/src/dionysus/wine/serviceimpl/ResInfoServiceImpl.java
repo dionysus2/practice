@@ -57,7 +57,7 @@ public class ResInfoServiceImpl implements ResInfoService {
 			if(request.getParameter("pageNo")!=null){
 			logger.info("사용자 폐이지 요청");
 			}
-			int resInfoId =  Integer.parseInt("resInfoId");
+			int resInfoId =  Integer.parseInt(request.getParameter("resInfoId"));
 			int cntOfRow = dao.ResOwnerResInfoCount(conn);
 			Pagination pagination = PagingUtil.getPagination(pageNo, cntOfRow);
 			ArrayList<ResInfo>list = dao.selectByResOwnerResInfo(conn, resInfoId, pagination.getStartRow(), pagination.getLastRow());
