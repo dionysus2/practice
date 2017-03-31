@@ -1,28 +1,16 @@
 package dionysus.wine.servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
 
-import dionysus.wine.daoimpl.BasicInfoDAOImpl;
-import dionysus.wine.daoimpl.ResInfoDaoImpl;
-import dionysus.wine.daoimpl.WineInfoDAOImpl;
-import dionysus.wine.daoimpl.WineOrderDAOImpl;
-import dionysus.wine.di.AnnotationRunner;
-import dionysus.wine.di.ModelAndView;
-import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
-import dionysus.wine.serviceimpl.ResInfoServiceImpl;
-import dionysus.wine.serviceimpl.WineInfoServiceImpl;
-import dionysus.wine.serviceimpl.WineOrderServiceImpl;
+import dionysus.wine.daoimpl.*;
+import dionysus.wine.di.*;
+import dionysus.wine.serviceimpl.*;
+import dionysus.wine.vo.*;
 
 @WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*"})
 public class DispatcherServlet extends HttpServlet {
@@ -46,6 +34,11 @@ public class DispatcherServlet extends HttpServlet {
 		WineOrderDAOImpl wineOrderDao= new WineOrderDAOImpl();
 		WineOrderServiceImpl wineOrderService= new WineOrderServiceImpl(wineOrderDao);
 		context.setAttribute("wineOrderService", wineOrderService);
+		// 5. 레스토랑 사업자 회원 DAO.SERVICE 객체화
+		ResDaoImpl	resDao= new ResDaoImpl();
+		ResServiceImpl resService= new ResServiceImpl(resDao);
+		context.setAttribute("resService", resService);
+		
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");
