@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bootstrap Example</title>
+<link rel="import"
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
+</head>
+
+<script src="https://www.w3schools.com/lib/w3data.js"></script>
+
+<body>
+
+	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div>
+	<script>
+		w3IncludeHTML();
+	</script>
+
+	<div class="container-fluid">
+		<h1>관리 메뉴</h1>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#personalDetails">개인 정보</a></li>
+			<li><a data-toggle="tab" href="#bookingDetails">예약 수정 확인</a></li>
+			<li><a data-toggle="tab" href="#menu3">리뷰 관리</a></li>
+			<li><a data-toggle="tab" href="#menu4">통계</a></li>
+			<li><a data-toggle="tab" href="#menu2">기타</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="personalDetails" class="tab-pane fade in active">
+						<div
+					w3-include-html="http://localhost:8087/dionysus/users/personalDetails.html"></div>
+			</div>
+		
+			<div id="bookingDetails" class="tab-pane fade">
+				<div w3-include-html="http://localhost:8087/dionysus/users/bookingDetails.html"></div>
+			</div>
+			
+			<div id="menu2" class="tab-pane fade">
+				<h3>예약 정보</h3>
+				<p>예약 확인</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
