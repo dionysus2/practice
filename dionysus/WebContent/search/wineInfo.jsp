@@ -21,25 +21,6 @@
 	</script>
 	<div class="container-fluid" align="center">
 
-		<div class="jumbotron">
-			<form class="form-inline">
-				<input type="text" class="form-control" placeholder="Search">
-				<div class="input-group">
-					<select class="form-control" id="sel1">
-						<option>서울</option>
-						<option>부산</option>
-						<option>대구</option>
-						<option>인천</option>
-					</select>
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
 		<div class="row">
 			<div class="col-sm-2">
 				<ul class="nav  nav-stacked">
