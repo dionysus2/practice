@@ -58,6 +58,11 @@ public class BasicInfoController {
 		if(service.login(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller로그인 성공");
 			HttpSession session= request.getSession();
+			String go= (String)session.getAttribute("go");
+			logger.info("로그인시 컨트롤단(호출된: go):"+go);
+			session.removeAttribute("go");
+			if(go==null)
+				go= "/dionysus/main/home";
 			session.setAttribute("basicInfoUsername", request.getParameter("basicInfoUsername"));
 			mav.setView("/dionysus/main/home");
 			mav.setRedirect();
