@@ -48,39 +48,68 @@ public class ResInfoController {
 		mav.addObject("result", service.readResOwnerResInfo(request));
 		return mav;
 	}
-
+	@RequestMapping(value = "/resinfo/insert", method = "GET")
 	public static ModelAndView insertStar(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setView("/kibacktest/insert.jsp");
 		return mav;
 	}
-
+	@RequestMapping(value = "/resinfo/insert", method = "POST")
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		ResInfoServiceImpl service = (ResInfoServiceImpl)request.getServletContext().getAttribute("resinfoservice");
-		HttpSession session = request.getSession();
-		String path = request.getServletContext().getRealPath("img");
-		DiskFileItemFactory df = new DiskFileItemFactory();
-		ServletFileUpload uploader = new ServletFileUpload(df);
-		uploader.setSizeMax(320*480*10);
-		try {
-			List<FileItem>list = uploader.parseRequest(request);
-			for(FileItem item:list){
-			if(item.isFormField()){
-				if(item.getFieldName().equals("resInfoName"))
-				request.setAttribute("wineInfoName", item.getString("UTF-8"));
-			
-				else if(item.getFieldName().equals("resInfoPicture1"))
-				request.setAttribute("wineInfoName", item.getString("UTF-8"));
+		if(service.ResInfoCreateEnd(request).equals("{\"result\":\"success\"}")){
+			mav.setView("list");
+			mav.setRedirect();
+			return mav;
+		}
+		else{
+			mav.setView("insert");
+			mav.setRedirect();
+			return mav;
+		}
+	}
+		@RequestMapping(value = "/resinfo/update", method = "GET")
+		public static ModelAndView updateStar(HttpServletRequest request) {
+			ModelAndView mav= new ModelAndView();
+			ResInfoServiceImpl service = (ResInfoServiceImpl)request.getServletContext().getAttribute("resinfoservice");
+			mav.setView("/kibacktest/update.jsp");
+			mav.addObject("result", service.ResInfoUpdateStart(request));
+			return mav;
+	}
+		@RequestMapping(value = "/resinfo/update", method = "POST")
+		public static ModelAndView updateEnd(HttpServletRequest request) {
+			ModelAndView mav= new ModelAndView();
+			ResInfoServiceImpl service = (ResInfoServiceImpl)request.getServletContext().getAttribute("resinfoservice");
+			mav.addObject("result", service.ResInfoUpdateEnd(request));
+			if(mav.getObject("result").equals(true)){
+				mav.setView("/kibacktest/update.jsp");
+				mav.setRedirect();
+				return mav;
 			}
-		} 
-			
+			else{
+				mav.setView("update");
+				mav.setRedirect();
+				return mav;
+			}
 		}
-		catch (FileUploadException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	   }                  
+			@RequestMapping(value = "/resinfo/delete", method = "GET")
+			public static ModelAndView delete(HttpServletRequest request){
+				ModelAndView mav= new ModelAndView();
+				ResInfoServiceImpl service = (ResInfoServiceImpl)request.getServletContext().getAttribute("resinfoservice");
+				mav.addObject("result", service.ResInfoDelete(request));
+				if(mav.getObject("result").equals(true)){
+					mav.setView("/kibacktest/delete.jsp");
+					mav.setRedirect();
+					return mav;
+				}
+				else{
+					mav.setView("list");
+					mav.setRedirect();
+					return mav;
+				}
+				
+			}
+		
+	                     
 }
