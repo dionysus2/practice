@@ -12,7 +12,7 @@ import dionysus.wine.di.*;
 import dionysus.wine.serviceimpl.*;
 import dionysus.wine.vo.*;
 
-@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*", "/notice/*"})
+@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*", "/notice/*", "/wineinfo/wineorder/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {

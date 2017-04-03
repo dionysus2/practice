@@ -17,7 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebFilter({"/basic/*", "/customer/*", "/res/*", "/notice/*", "/resinfo/*", "/wineinfo/*", "/manager/*", "/notice/*"})
+@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*", "/notice/*", "/wineinfo/wineorder/*"})
+
 public class LoginFilter implements Filter {
 	private Logger logger= LoggerFactory.getLogger(LoginFilter.class);
 	private ArrayList<String> whiteList= new ArrayList<String>();

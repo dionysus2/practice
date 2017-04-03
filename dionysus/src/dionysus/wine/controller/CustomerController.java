@@ -9,22 +9,7 @@ import org.slf4j.LoggerFactory;
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.di.RequestMapping;
 import dionysus.wine.serviceimpl.CustomerServiceImpl;
-/*
- * <!-- 
-customerId  => 시퀀스
-customerRrn 
-customerAddress
-customerName => customerLastName+customerFirstName
-customerTel
-customerGender => name => male, femail
-customerAcoountNo
-customerJob
-customerActivated
-basicInfoId   => session으로 가져옴
- -->
- * 
- * 
- * */
+
 
 public class CustomerController {
 	private static Logger logger = LoggerFactory.getLogger(CustomerController.class);

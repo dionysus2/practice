@@ -95,7 +95,7 @@ public class WineOrderServiceImpl implements WineOrderService {
 	public String readByWineOrderDateDay(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD");
+		SimpleDateFormat sdf= new SimpleDateFormat("YYYY-MM-DD");
 		java.util.Date date= null;
 		try {
 			date= sdf.parse(request.getParameter("wineOrderDate"));
@@ -244,17 +244,24 @@ public class WineOrderServiceImpl implements WineOrderService {
 	public String createEnd(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD");
+		SimpleDateFormat sdf= new SimpleDateFormat("YYYY-MM-DD");
 		java.util.Date date= null;
 		HttpSession session= request.getSession();
 		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
 		try {
 			date= sdf.parse(request.getParameter("wineOrderDate"));
-			int wineOrderAmount= Integer.parseInt(request.getParameter("wineOrderAmount"));
+			int wineOrderAmount= (int)session.getAttribute("wineInfoPrice");
 			int customerId= new BasicInfoDAOImpl().selectByUsernameOfCustomerId(conn, basicInfoUsername);
 			int wineSellerId= (int)session.getAttribute("wineSellerId");
-			int result= dao.wineOrderInsert(conn, new WineOrder((Date)new java.util.Date(date.getTime()), wineOrderAmount, customerId, wineSellerId));
+			System.out.println("주문일자"+date);
+			System.out.println("주문금액"+wineOrderAmount);
+			System.out.println("고객번호"+customerId);
+			System.out.println("와인업체번호"+wineSellerId);
+			Date getDate= new Date(date.getTime());
+			System.out.println("주문일자 get"+getDate);
+			int result= dao.wineOrderInsert(conn, new WineOrder(getDate, wineOrderAmount, customerId, wineSellerId));
 			JsonObject ob= new JsonObject();
+			System.out.println("와인주문 서비스단");
 			if(result==1){
 				ob.addProperty("result", "success");
 			}

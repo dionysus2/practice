@@ -129,21 +129,27 @@ public class WineOrderController {
 	@RequestMapping(value="/wineinfo/wineorder/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("#.jsp");
+		mav.setView("/search/order.jsp");
 		return mav;
 	}
 	//	주문건 등록완료.
 	@RequestMapping(value="/wineinfo/wineorder/insert", method="POST")
 	public static ModelAndView isnertEnd(HttpServletRequest request){
+		System.out.println("와인주문 시작");
 		ModelAndView mav= new ModelAndView();
 		WineOrderServiceImpl service= (WineOrderServiceImpl)request.getServletContext().getAttribute("wineOrderService");
+		HttpSession session= request.getSession();
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
-			mav.setView("list");
+			mav.setView("/dionysus/wineinfo/list");
+			session.removeAttribute("wineInfoPrice");
+			session.removeAttribute("wineSellerId");
+			//	와인가격 session에서 삭제합니다.
 			mav.setRedirect();
 			return mav;
 		}
 		else{
-			mav.setView("/wineorder/insert");
+			System.out.println("실패");
+			mav.setView("/dionysus/wineinfo/wineorder/insert");
 			mav.setRedirect();
 			return mav;
 		}
