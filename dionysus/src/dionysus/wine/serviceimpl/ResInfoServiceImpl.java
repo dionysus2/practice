@@ -26,7 +26,9 @@ public class ResInfoServiceImpl implements ResInfoService {
 		this.dao = dao;
 	}
     private Logger logger= LoggerFactory.getLogger(ResInfoServiceImpl.class); 
-	@Override
+	
+    //	레스토랑 전체리스트 조회
+    @Override
 	public String readAllResInfo(HttpServletRequest request){
 		Connection conn = JDBCUtil.getConnection();
 		try{
@@ -41,9 +43,11 @@ public class ResInfoServiceImpl implements ResInfoService {
 			 map.put("pagination", pagination);
 	         map.put("list", list);
 	         return new Gson().toJson(map);
-		    } catch (Exception e) {
+		    } 
+			catch (Exception e) {
 				e.printStackTrace();
-			}finally {
+			}
+			finally {
 			JDBCUtil.close(conn);
 		}
 		return null;

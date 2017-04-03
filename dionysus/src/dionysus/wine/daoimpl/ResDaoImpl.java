@@ -51,13 +51,13 @@ public class ResDaoImpl implements ResDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	
 		ArrayList<Res> list = new ArrayList<>();
-		Res res= new Res();
 		try {
 			pstmt = conn.prepareStatement(Sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, lastRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){				
+				Res res= new Res();
 				res.setResId(rs.getShort("res_id"));
 				res.setResBrn(rs.getString("res_brn"));
 				res.setResLocation(rs.getString("res_location"));

@@ -35,7 +35,7 @@ var result=<%=request.getAttribute("result")%>
 </script>
 </head>
 <body>
-	<form action="dionysus/res/list" method="post"enctype="multipart/form-data"> 
+	<!-- <form action="dionysus/res/list" method="post"enctype="multipart/form-data"> -->
 	<div class="container-fluid" align="center">
 	<h1>레스토랑 사업자 정보</h1>
 	<table border="1">
@@ -53,7 +53,6 @@ var result=<%=request.getAttribute("result")%>
 		</tbody>
 	</table>    
 	</div>
-	</form>
 	<div id="pagination"></div>  	
 </body>
 </html>

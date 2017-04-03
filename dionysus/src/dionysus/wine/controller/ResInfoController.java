@@ -19,14 +19,15 @@ import dionysus.wine.serviceimpl.ResInfoServiceImpl;
 public class ResInfoController {
 
 	private static Logger logger = LoggerFactory.getLogger(ResInfoController.class);
-
+	
+	//	레스토랑 전체리스트 조회
 	@RequestMapping(value = "/resinfo/list", method = "GET")
 	public static ModelAndView readAllResInfo(HttpServletRequest request) throws Exception {
+		System.out.println("시작");
 		ModelAndView mav = new ModelAndView();
-		ResInfoServiceImpl service = (ResInfoServiceImpl) request.getServletContext().getAttribute("resinfoservice");
+		ResInfoServiceImpl service = (ResInfoServiceImpl) request.getServletContext().getAttribute("resInfoservice");
 		mav.setView("/kibacktest/list.jsp");
 		mav.addObject("result", service.readAllResInfo(request));
-		logger.info("레스토랑정보 전체리스트 출력");
 		return mav;
 	}
 

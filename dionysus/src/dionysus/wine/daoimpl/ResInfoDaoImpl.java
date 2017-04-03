@@ -28,27 +28,28 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		return resInfo;
 	}
 	
-   //레스토랑 정보 페이지별 리스트 조회	
+   //레스토랑 정보 페이지별 리스트 조회	    
 	@Override
 	public ArrayList<ResInfo>selectResInfoAllList(Connection conn,  int startRow, int  lastRow) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<ResInfo>list = new ArrayList<>();
-		ResInfo resInfo = new ResInfo();
 		try{
 			pstmt = conn.prepareStatement(ResInfoQuery.selectResInfoAllList);	
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, lastRow);
+			ArrayList<ResInfo>list = new ArrayList<>();
+			ResInfo resInfo = new ResInfo();
+			rs= pstmt.executeQuery();
 			while(rs.next()){
-				resInfo.setResInfoId(rs.getInt("res_Info_Id"));
-				resInfo.setResInfoName(rs.getString("res_Info_Name"));
-				resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
-				resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
-				resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
-				resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
-				resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
-				resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
-				resInfo.setResId(rs.getInt("res_Id"));
+				resInfo.setResInfoId(rs.getInt("RES_INFO_ID"));
+				resInfo.setResInfoName(rs.getString("RES_INFO_NAME"));
+				resInfo.setResInfoPicture1(rs.getString("RES_INFO_PICTURE1"));
+				resInfo.setResInfoPicture2(rs.getString("RES_INFO_PICTURE2"));
+				resInfo.setResInfoPicture3(rs.getString("RES_INFO_PICTURE3"));
+				resInfo.setResInfoAvailableSeat(rs.getInt("RES_INFO_AVAILABLE_SEAT"));
+				resInfo.setResInfoOpeningHours(rs.getString("RES_INFO_OPENING_HOURS"));
+				resInfo.setResInfoWebsite(rs.getString("RES_INFO_WEBSITE"));
+				resInfo.setResId(rs.getInt("RES_ID"));
 				list.add(resInfo);
 				}
 			 return list;
@@ -57,7 +58,6 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}finally{
 			JDBCUtil.close(pstmt,rs);
 		}
-		
 	}
 	//레스토랑 정보 count조회
 	@Override

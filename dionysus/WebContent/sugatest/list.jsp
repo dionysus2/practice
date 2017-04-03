@@ -15,7 +15,7 @@
 		var target = $("tbody");
 		$.each(list, function(idx, notice) {
 			var str = "<tr><td>"+notice.noticeId+"</td>";
-			str = str + "<td><a href='view?pageNo=" + pagination.pageNo + "&noticeId=" + notice.noticeId + "'>" + notice.noticeTitle + "</a></td>";
+			str = str + "<td><a href='view?pageNo=" + pagination.pageNo + "&notice.noticeId=" + notice.noticeId + "'>" + notice.noticeTitle + "</a></td>";
 			str	= str + "<td>" + notice.noticeWritedate +"</td>";
 			str = str + "<td>" + notice.noticeWriter + "</td>";
 			str = str + "<td>" + notice.noticeViews + "</td></tr>"
