@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 	}
 	private Logger logger= LoggerFactory.getLogger(BasicInfoServiceImpl.class);
 	
+	//	회원 아이디 중복체크
 	@Override
 	public String createStart(HttpServletRequest request){
 		Connection conn= JDBCUtil.getConnection();
@@ -32,11 +34,9 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 			int result = dao.basicInfoUserNameCheck(conn, basicInfoUsername);
 			JsonObject ob= new JsonObject();
 			if(result==1){
-				logger.info("Service아이디 중복됨");
 				ob.addProperty("userNameResult", "success");
 			}
 			else{
-				logger.info("Service아이디 중복안됨");
 				ob.addProperty("userNameResult", "fail");
 			}
 		} 
@@ -50,6 +50,7 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 		return null;
 	}
 	
+	//	회원아이디 가입완료.
 	@Override
 	public String createEnd(HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -57,17 +58,16 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 		String basicInfoUsername= request.getParameter("basicInfoUsername");
 		String basicInfoPwd= request.getParameter("basicInfoPwd");
 		String basicInfoEmail= request.getParameter("basicInfoEmail");
+		HttpSession session= request.getSession();
 		try {
 			int result= dao.basicInfoInsert(conn, new BasicInfo(basicInfoUsername, basicInfoPwd, basicInfoEmail));
 			JsonObject ob= new JsonObject();
-			System.out.println(result);
+			session.setAttribute("basicInfoId", dao.selectByBasicInfoIdBasicInfoUsername(conn, basicInfoUsername));
 			if(result==1){
 				ob.addProperty("result", "success");
-				logger.info("Service아이디생성 성공");
 			}
 			else if(result==0){
 				ob.addProperty("result", "fail");
-				logger.info("Serivce아이디생성 실패");
 			}
 			return new Gson().toJson(ob);
 		} 
