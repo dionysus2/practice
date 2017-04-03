@@ -11,7 +11,6 @@
 		<h1>레스토랑 사업자 회원가입</h1>
 		<table>
 			<tbody>
-				<tr><td>번호</td><td><input type="text" name="resId" size="20"></td></tr>
 				<tr><td>사업자번호:</td><td><input type="text" name="resBrn" size="20"></td></tr>
 				<tr><td>지역:</td><td><input type="text" name="resLocation" size="20"></td></tr>
 				<tr><td>전화번호:</td><td><input type="text" name="resTel" size="20"></td></tr>
@@ -22,7 +21,7 @@
 				
 			</tbody>
 		</table>
-		<div><input type="submit" value="사업자가입"><a href="main/jsp"><button>취소하기</button></a></div>
+		<div><input type="submit" value="사업자가입"><a href="/dionysus/main/home"><button>취소하기</button></a></div>
 	</form>
 </body>
 </html>

@@ -17,11 +17,11 @@ public class WineDeliveryInfoDaoImpl implements WineDeliveryInfoDAO {
 	public int insertWineDeliveryInfoId(Connection conn, WineDeliveryInfo wineDeliveryInfo) throws SQLException {
 		
 		String Sql = "insert into wine_delivery_info(wine_delivery_id, wine_info_id, wine_delivery_info_count)"
-				+ "values(?,?,?)";
+				+ "values(wine_delivery_seq.nextval,?,?)";
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1, wineDeliveryInfo.getWineDeliveryId());
+			//pstmt.setInt(1, wineDeliveryInfo.getWineDeliveryId());시퀀스 값으로 변경
 			pstmt.setInt(2, wineDeliveryInfo.getWineInfoId());
 			pstmt.setInt(3, wineDeliveryInfo.getWineDeliveryInfoCount());
 			return pstmt.executeUpdate();

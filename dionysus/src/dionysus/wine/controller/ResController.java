@@ -9,7 +9,7 @@ public class ResController {
 	@RequestMapping(value="/res/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/sangtae/resjoin.jsp");
+		mav.setView("/sangtae/insert.jsp");
 		return mav;
 	}
 	@RequestMapping(value="/res/insert", method="POST")

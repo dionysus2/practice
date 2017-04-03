@@ -140,19 +140,19 @@ public class ResDaoImpl implements ResDAO {
 	public int insertResOwner(Connection conn, Res res)throws SQLException {
 		String Sql = "insert into res(res_id,res_brn,res_location,res_tel,"
 				+ "res_account_no,res_profile_picture,res_activated,res_name,basic_info_id,"
-				+ "values(?,?,?,?,"
+				+ "values(res_seq.nextval,?,?,?,"
 				+ "?,?,0,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1, res.getResId());
-			pstmt.setString(2, res.getResBrn());
-			pstmt.setString(3, res.getResLocation());
-			pstmt.setString(4, res.getResTel());
-			pstmt.setString(5, res.getResAccountNo());
-			pstmt.setString(6, res.getResProfilePicture());
-			pstmt.setString(7, res.getResName());
-			pstmt.setInt(8, res.getBasicInfoId());
+			//pstmt.setInt(1, res.getResId()); 시퀀스로 변경
+			pstmt.setString(1, res.getResBrn());
+			pstmt.setString(2, res.getResLocation());
+			pstmt.setString(3, res.getResTel());
+			pstmt.setString(4, res.getResAccountNo());
+			pstmt.setString(5, res.getResProfilePicture());
+			pstmt.setString(6, res.getResName());
+			pstmt.setInt(7, res.getBasicInfoId());
 			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();

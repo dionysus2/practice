@@ -19,15 +19,15 @@ public class WineDeliveryDaoImpl implements WineDeliveryDAO {
 		
 		PreparedStatement pstmt = null;
 		String Sql = "insert set wine_delivery(wine_delivery_id,wine_delivery_date,wine_delivery_progress,customer_id"
-				+ ",wine_seller_id,res_id) values(?,?,?,?,?,?)";
+				+ ",wine_seller_id,res_id) values(wine_delivery_seq.nextval,?,?,?,?,?)";
 		try{
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1,wine.getWineDeliveryId());
-			pstmt.setDate(2, wine.getWineDeliveryDate());
-			pstmt.setString(3, wine.getWineDeliveryProgress());
-			pstmt.setInt(4, wine.getCustomerId());
-			pstmt.setInt(5, wine.getWineSellerId());
-			pstmt.setInt(6, wine.getResId());
+			//pstmt.setInt(1,wine.getWineDeliveryId()); 시퀀스 값으로 변경
+			pstmt.setDate(1, wine.getWineDeliveryDate());
+			pstmt.setString(2, wine.getWineDeliveryProgress());
+			pstmt.setInt(3, wine.getCustomerId());
+			pstmt.setInt(4, wine.getWineSellerId());
+			pstmt.setInt(5, wine.getResId());
 			return pstmt.executeUpdate();
 		}catch (Exception e) {
 		e.printStackTrace();
@@ -222,7 +222,7 @@ public class WineDeliveryDaoImpl implements WineDeliveryDAO {
 
 	@Override
 	public int WineDeliveryCount(Connection conn) {
-		String Sql = "select count(wine_delivery_id) from wine_delivery";
+		String Sql = "select count(wine_delivery_id+1) from wine_delivery";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
