@@ -30,7 +30,6 @@ public class LoginFilter implements Filter {
     	whiteList.add("/dionysus/customer/login");
     	whiteList.add("/dionysus/manager/login");
     	whiteList.add("/dionysus/res/list");
-    	whiteList.add("/dionysus/notice/list");
     }
 	public void destroy() {
 		// TODO Auto-generated method stub

@@ -15,10 +15,9 @@ public class NoticeController {
 	@RequestMapping(value = "/notice/list", method = "GET")
 	public static ModelAndView readNotice(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		NoticeServiceImpl service = (NoticeServiceImpl) request.getServletContext().getAttribute("noticeservice");
+		NoticeServiceImpl service = (NoticeServiceImpl)request.getServletContext().getAttribute("noticeService");
 		mav.setView("/sugatest/list.jsp");
 		mav.addObject("result", service.readNotice(request));
-		logger.info("공지사항 전체리스트 출력");
 		return mav;
 	}
 	

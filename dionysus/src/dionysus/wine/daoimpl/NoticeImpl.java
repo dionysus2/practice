@@ -13,13 +13,16 @@ import dionysus.wine.vo.Notice;
 
 public class NoticeImpl implements NoticeDAO{
 
+	//	공지사항 게시글 전체보기
 	@Override
-	public ArrayList<Notice> selectAllNoticeList(Connection conn) throws SQLException{
+	public ArrayList<Notice> selectAllNoticeList(Connection conn, int startRow, int lastRow) throws SQLException{
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt= null;
 		ResultSet rs= null;
 		try {
 			pstmt= conn.prepareStatement(NoticeQuery.selectNotice);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, lastRow);
 			rs= pstmt.executeQuery();
 			ArrayList<Notice>list= new ArrayList<Notice>();
 			while(rs.next()){
@@ -42,6 +45,7 @@ public class NoticeImpl implements NoticeDAO{
 		}
 	}
 
+	//	공지사항 게시글 카운트
 	@Override
 	public int NoticeCount(Connection conn) throws SQLException {
 		// TODO Auto-generated method stub

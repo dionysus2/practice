@@ -12,7 +12,7 @@ import dionysus.wine.di.*;
 import dionysus.wine.serviceimpl.*;
 import dionysus.wine.vo.*;
 
-@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*"})
+@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*", "/notice/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
@@ -38,7 +38,10 @@ public class DispatcherServlet extends HttpServlet {
 		ResDaoImpl	resDao= new ResDaoImpl();
 		ResServiceImpl resservice= new ResServiceImpl(resDao);
 		context.setAttribute("resservice", resservice);
-		
+		//	6. 공지사항 DAO, SERVICE 객체화
+		NoticeImpl noticeDAO= new NoticeImpl();
+		NoticeServiceImpl noticeService= new NoticeServiceImpl(noticeDAO);
+		context.setAttribute("noticeService", noticeService);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");
