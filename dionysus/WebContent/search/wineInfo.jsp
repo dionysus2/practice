@@ -39,7 +39,7 @@
 					<li><a href="#">Menu 1</a></li>
 					<li><a href="#">Menu 2</a></li>
 					<li><a href="#">Menu 3</a></li>
-					<li><a href="/dionysus/resinfo/insert">와인추가</a>
+					<li><a href="/dionysus/wineinfo/insert">와인추가</a>
 				</ul>
 			</div>
 			<div class="col-sm-10">
