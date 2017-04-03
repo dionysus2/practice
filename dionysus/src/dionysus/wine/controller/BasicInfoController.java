@@ -12,19 +12,25 @@ import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 
 public class BasicInfoController {
 	private static Logger logger= LoggerFactory.getLogger(BasicInfoController.class);
+	/*
+	Main index에 존재하기에 GET폼을 띄워주지 않고 POST방식으로만 URL을 검색하여 데이터를 빼옵니다.
+	
 	@RequestMapping(value="/basic/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		mav.setView("/modals/forms/join.html");
 		return mav;
 	}
+	
+	*/
 	@RequestMapping(value="/basic/insert", method="POST")
 	public static ModelAndView insertEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
-			mav.setView("/dionysus/jaehyuntest/test.jsp");
+			mav.setView("/dionysus/main/home");
+			//	추가정보 입력 폼으로 이동 => 고객, 와인업주, 레스토랑 업주 => insert후 login창 이동
 			mav.setRedirect();
 			return mav;
 		}
@@ -34,21 +40,31 @@ public class BasicInfoController {
 			return mav;
 		}
 	}
-	@RequestMapping(value="/basic/login", method="GET")
+	/*
+	Main index에 존재하기에 GET폼을 띄워주지 않고 POST방식으로만 URL을 검색하여 데이터를 빼옵니다.
+	 
+	@RequestMapping(value="/customer/login", method="GET")
 	public static ModelAndView loginStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/jaehyuntest/basiclogin.jsp");
+		mav.setView("/modals/forms/signin.html");
 		return mav;
 	}
-	@RequestMapping(value="/basic/login", method="POST")
+	
+	*/
+	@RequestMapping(value="/customer/login", method="POST")
 	public static ModelAndView loginEnd(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
 		if(service.login(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller로그인 성공");
 			HttpSession session= request.getSession();
+			String go= (String)session.getAttribute("go");
+			logger.info("로그인시 컨트롤단(호출된: go):"+go);
+			session.removeAttribute("go");
+			if(go==null)
+				go= "/dionysus/main/home";
 			session.setAttribute("basicInfoUsername", request.getParameter("basicInfoUsername"));
-			mav.setView("/dionysus/jaehyuntest/main.jsp");
+			mav.setView("/dionysus/main/home");
 			mav.setRedirect();
 			return mav;
 		}

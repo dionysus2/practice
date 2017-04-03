@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,25 +21,6 @@
 	</script>
 	<div class="container-fluid" align="center">
 
-		<div class="jumbotron">
-			<form class="form-inline">
-				<input type="text" class="form-control" placeholder="Search">
-				<div class="input-group">
-					<select class="form-control" id="sel1">
-						<option>서울</option>
-						<option>부산</option>
-						<option>대구</option>
-						<option>인천</option>
-					</select>
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
 		<div class="row">
 			<div class="col-sm-2">
 				<ul class="nav  nav-stacked">
@@ -57,6 +39,7 @@
 					<li><a href="#">Menu 1</a></li>
 					<li><a href="#">Menu 2</a></li>
 					<li><a href="#">Menu 3</a></li>
+					<li><a href="/dionysus/wineinfo/insert">와인추가</a>
 				</ul>
 			</div>
 			<div class="col-sm-10">
@@ -85,29 +68,13 @@
 						var list = result.list;
 						var pagination = result.pagination;
 						var target = $("#content-main table tbody");
-						$
-								.each(
-										list,
-										function(index, wine) {
-											var str = "<div class='col-md-3'> <div class='thumbnail'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
-													+ "style='width: 100%'> <div class='caption'> <p>"
-													+ wine.wineInfoId + "</p>";
-											str = str
-													+ "<p><a href='view?pageNo="
-													+ pagination.pageNo
-													+ "&wineInfoId="
-													+ wine.wineInfoId + "'>"
-													+ wine.wineInfoName
-													+ "</a></p>";
-											str = str + "<p>"
-													+ wine.wineInfoCountry
-													+ "</a></p>";
-													
-											str = str
-													+ "<p>"		
-													+ "<img src='/dionysus/img/"+wine.wineInfoProfilePicture+"'>"
-													+ "</p> </div> </a> </div></div>";
-											target.append(str);
+						$.each(list,function(index, wine) {
+							var str = "<div class='col-md-3'> <div class='thumbnail'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
+									+ "style='width: 100%'> <div class='caption'>";
+							str = str+ "<p><a href='view?wineInfoId="+wine.wineInfoId+"'>"+ wine.wineInfoName+ "</a></p>";
+								str = str + "<p>가격: "+ wine.wineInfoPrice+ "원</a></p>";
+								str = str+ "<p>"+ "<img src='/dionysus/img/"+wine.wineInfoProfilePicture+"'>"+ "</p> </div> </a> </div></div>";
+								target.append(str);
 										})
 						$("#pagination").append(
 								"<ul class='pagination pagination-lg'></ul>");
@@ -124,3 +91,4 @@
 					})
 </script>
 </html>
+

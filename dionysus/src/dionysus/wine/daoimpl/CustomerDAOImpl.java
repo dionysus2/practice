@@ -514,10 +514,20 @@ public class CustomerDAOImpl implements CustomerDAO{
 				info.setWineInfoName(rs.getString("WINE_INFO_NAME"));
 				info.setWineInfoProfilePicture(rs.getString("WINE_INFO_PROFILE_PICTURE"));
 				info.setWineInfoPrice(rs.getInt("WINE_INFO_PRICE"));
-				info.setWineInfoOrigin(rs.getString("WINE_INFO_ORIGIN"));
-				info.setWineInfoPicture1(rs.getString("WINE_INFO_PICTURE1"));
-				info.setWineInfoPicture2(rs.getString("WINE_INFO_PICTURE2"));
-				info.setWineInfoPicture3(rs.getString("WINE_INFO_PICTURE3"));
+				info.setWineInfoCapacity(rs.getString("WINE_INFO_CAPACITY"));
+				info.setWineInfoCountry(rs.getString("WINE_INFO_COUNTRY"));
+				info.setWineInfoRegion(rs.getString("WINE_INFO_REGION"));
+				info.setWineInfoImporter(rs.getString("WINE_INFO_IMPORTER"));
+				info.setWineInfoVintage(rs.getString("WINE_INFO_VINTAGE"));
+				info.setWineInfoGrapes(rs.getString("WINE_INFO_GRAPES"));
+				info.setWineInfoABV(rs.getString("WINE_INFO_ABV"));
+				info.setWineInfoType(rs.getString("WINE_INFO_TYPE"));
+				info.setWineInfoClassification(rs.getString("WINE_INFO_CLASSIFICATION"));
+				info.setWineInfoFlavors(rs.getString("WINE_INFO_FLAVORS"));
+				info.setWineInfoSweetness(rs.getString("WINE_INFO_SWEETNESS"));
+				info.setWineInfoAcidity(rs.getString("WINE_INFO_ACIDITY"));
+				info.setWineInfoBody(rs.getString("WINE_INFO_BODY"));
+				info.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
 				list.add(info);
 			}
 			return list;

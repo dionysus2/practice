@@ -8,10 +8,7 @@ import java.util.ArrayList;
 
 import dionysus.wine.dao.NoticeCommentDAO;
 import dionysus.wine.query.NoticeCommentQuery;
-import dionysus.wine.query.NoticeQuery;
 import dionysus.wine.util.JDBCUtil;
-import dionysus.wine.vo.Customer;
-import dionysus.wine.vo.Notice;
 import dionysus.wine.vo.NoticeComment;
 
 public class NoticeCommentImpl implements NoticeCommentDAO{
