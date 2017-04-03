@@ -45,7 +45,7 @@ public class ResDaoImpl implements ResDAO {
 		String Sql = "select r2.*from(select rownum rnum, r1.* from"
 				+ "(select res_id, res_brn,res_location,"
 				+ "res_tel,res_account_no,res_profile_picture,"
-				+ "res_activated,res_ownername from res r, "
+				+ "res_activated,res_name from res r, "
 				+ "basic_info b where r.basic_info_id = b.basic_info_id)r1)r2 "
 				+ "where rnum between ? and ?";		
 		PreparedStatement pstmt = null;
@@ -61,10 +61,10 @@ public class ResDaoImpl implements ResDAO {
 				res.setResId(rs.getShort("res_id"));
 				res.setResBrn(rs.getString("res_brn"));
 				res.setResLocation(rs.getString("res_location"));
-				res.setResTel(rs.getString("resTel"));
+				res.setResTel(rs.getString("res_tel"));
 				res.setResAccountNo(rs.getString("res_account_no"));
 				res.setResProfilePicture(rs.getString("res_profile_picture"));
-				res.setResActivated(rs.getString("res_activatied"));
+				res.setResActivated(rs.getString("res_activated"));
 				res.setResName(rs.getString("res_name"));				
 				list.add(res);
 			}
