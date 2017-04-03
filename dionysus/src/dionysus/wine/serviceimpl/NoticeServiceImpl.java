@@ -32,6 +32,7 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 	private Logger logger= LoggerFactory.getLogger(NoticeServiceImpl.class);
 
+	//	공지사항 게시글 전체조회(페이징 처리)
 	@Override
 	public String readNotice(HttpServletRequest req) {
 		// TODO Auto-generated method stub
