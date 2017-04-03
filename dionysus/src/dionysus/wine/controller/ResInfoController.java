@@ -50,7 +50,7 @@ public class ResInfoController {
 
 	public static ModelAndView insertStar(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		mav.setView("/jaehyuntest/insert.jsp");
+		mav.setView("/kibacktest/insert.jsp");
 		return mav;
 	}
 
@@ -81,6 +81,5 @@ public class ResInfoController {
 			e.printStackTrace();
 		}
 		return null;
-	
-	}
+	   }                  
 }

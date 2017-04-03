@@ -16,15 +16,15 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 	
 	public ResInfo makerResInfo(ResultSet rs)throws Exception{
 		ResInfo resInfo = new ResInfo();
-		resInfo.setResInfoId(rs.getInt("resInfoId"));
-		resInfo.setResInfoName(rs.getString("resInfoName"));
-		resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-		resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-		resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-		resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-		resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-		resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-		resInfo.setResId(rs.getInt("resId"));
+		resInfo.setResInfoId(rs.getInt("res_Info_Id"));
+		resInfo.setResInfoName(rs.getString("res_Info_Name"));
+		resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
+		resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
+		resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
+		resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
+		resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
+		resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
+		resInfo.setResId(rs.getInt("res_Id"));
 		return resInfo;
 	}
 	
@@ -40,15 +40,15 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, lastRow);
 			while(rs.next()){
-				resInfo.setResInfoId(rs.getInt("resInfoId"));
-				resInfo.setResInfoName(rs.getString("resInfoName"));
-				resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-				resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-				resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-				resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-				resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-				resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-				resInfo.setResId(rs.getInt("resId"));
+				resInfo.setResInfoId(rs.getInt("res_Info_Id"));
+				resInfo.setResInfoName(rs.getString("res_Info_Name"));
+				resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
+				resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
+				resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
+				resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
+				resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
+				resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
+				resInfo.setResId(rs.getInt("res_Id"));
 				list.add(resInfo);
 				}
 			 return list;
@@ -91,15 +91,15 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 			pstmt.setInt(3, lastRow);
 			rs = pstmt.executeQuery();
 		    while(rs.next()){
-				resInfo.setResInfoId(rs.getInt("resInfoId"));
-				resInfo.setResInfoName(rs.getString("resInfoName"));
-				resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-				resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-				resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-				resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-				resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-				resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-				resInfo.setResId(rs.getInt("resId"));
+		    	resInfo.setResInfoId(rs.getInt("res_Info_Id"));
+				resInfo.setResInfoName(rs.getString("res_Info_Name"));
+				resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
+				resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
+				resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
+				resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
+				resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
+				resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
+				resInfo.setResId(rs.getInt("res_Id"));
 				list.add(resInfo);
 				}
 		}catch (SQLException e) {
@@ -201,14 +201,14 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		rs=pstmt.executeQuery();
 		if(rs.next()){
 			ResInfo resInfo = new ResInfo();
-			resInfo.setResInfoName(rs.getString("resInfoName"));
-			resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-			resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-			resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-			resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-			resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-			resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-			resInfo.setResId(rs.getInt("resId"));
+			resInfo.setResInfoName(rs.getString("res_Info_Name"));
+			resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
+			resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
+			resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
+			resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
+			resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
+			resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
+			resInfo.setResId(rs.getInt("res_Id"));
 			return resInfo;
 		}
 		}catch (SQLException e) {
