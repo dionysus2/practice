@@ -29,7 +29,7 @@ public class BasicInfoController {
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
-			mav.setView("/dionysus/main/home");
+			mav.setView("/dionysus/customer/insert");
 			//	추가정보 입력 폼으로 이동 => 고객, 와인업주, 레스토랑 업주 => insert후 login창 이동
 			mav.setRedirect();
 			return mav;

@@ -13,6 +13,7 @@ public interface BasicInfoDAO {
 	 * 	4. 로그인
 	 * 	5. 아이디 중복확인
 	 * 	6. basicInfoUsername별 customerId빼오기
+	 * 	7. basicInfoUsername별 basicInfoId빼오기
 	 * */
 	public int basicInfoInsert(Connection conn, BasicInfo basicinfo)throws SQLException;
 	public int basicInfoUpdate(Connection conn, BasicInfo basicinfo)throws SQLException;
@@ -20,4 +21,5 @@ public interface BasicInfoDAO {
 	public int basicInfoUserNameCheck(Connection conn, String basicInfoUserName)throws SQLException;
 	public BasicInfo selectByBasicInfoId(Connection conn, String basicInfoUsername)throws SQLException;
 	public int selectByUsernameOfCustomerId(Connection conn, String basicInfoUsername)throws SQLException;
+	public int selectByBasicInfoIdBasicInfoUsername(Connection conn, String basicInfoUsername)throws SQLException;
 }

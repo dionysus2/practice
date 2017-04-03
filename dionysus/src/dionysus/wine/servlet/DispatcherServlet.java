@@ -43,6 +43,10 @@ public class DispatcherServlet extends HttpServlet {
 		NoticeImpl noticeDAO= new NoticeImpl();
 		NoticeServiceImpl noticeService= new NoticeServiceImpl(noticeDAO);
 		context.setAttribute("noticeService", noticeService);
+		//	7. 고객 DAO, SERVICE 객체화
+		CustomerDAOImpl customerDAO= new CustomerDAOImpl();
+		CustomerServiceImpl customerService= new CustomerServiceImpl(customerDAO);
+		context.setAttribute("customerService", customerService);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");
