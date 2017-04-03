@@ -37,6 +37,7 @@ public class DispatcherServlet extends HttpServlet {
 		// 5. 레스토랑 사업자 회원 DAO.SERVICE 객체화
 		ResDaoImpl	resDao= new ResDaoImpl();
 		ResServiceImpl resservice= new ResServiceImpl(resDao);
+		System.out.println("여기는 서블릿");
 		context.setAttribute("resservice", resservice);
 		//	6. 공지사항 DAO, SERVICE 객체화
 		NoticeImpl noticeDAO= new NoticeImpl();
