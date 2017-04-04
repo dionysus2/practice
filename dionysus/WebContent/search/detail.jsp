@@ -43,6 +43,7 @@
 				</table>
 				<div>
 					<button id="btn">주문하기</button>
+					<button id="cart">장바구니</button>
 				</div>
 			</div>
 		</div>
