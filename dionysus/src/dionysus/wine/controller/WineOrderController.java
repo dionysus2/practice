@@ -15,7 +15,7 @@ public class WineOrderController {
 		ModelAndView mav= new ModelAndView();
 		WineOrderServiceImpl service= (WineOrderServiceImpl)request.getServletContext().getAttribute("wineOrderService");
 		mav.addObject("result", service.readAllWineOrderList(request));
-		mav.setView("#.jsp");
+		mav.setView("/jaehyuntest/orderlist.jsp");
 		return mav;
 	}
 	
