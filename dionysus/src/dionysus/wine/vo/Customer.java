@@ -1,8 +1,10 @@
 package dionysus.wine.vo;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Customer {
 	private int customerId;
        private String customerRrn;

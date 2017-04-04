@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import dionysus.wine.daoimpl.BasicInfoDAOImpl;
 import dionysus.wine.daoimpl.WineInfoDAOImpl;
 import dionysus.wine.daoimpl.WineOrderDAOImpl;
+import dionysus.wine.daoimpl.WineOrderInfoDAOImpl;
 import dionysus.wine.service.WineOrderService;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.util.PagingUtil;
@@ -250,19 +251,18 @@ public class WineOrderServiceImpl implements WineOrderService {
 		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
 		try {
 			date= sdf.parse(request.getParameter("wineOrderDate"));
-			int wineOrderAmount= (int)session.getAttribute("wineInfoPrice");
+			int wineOrderInfoCount= Integer.parseInt(request.getParameter("wineOrderInfoCount"));
+			int wineOrderAmount= ((int)session.getAttribute("wineInfoPrice"))*wineOrderInfoCount;
 			int customerId= new BasicInfoDAOImpl().selectByUsernameOfCustomerId(conn, basicInfoUsername);
 			int wineSellerId= (int)session.getAttribute("wineSellerId");
-			System.out.println("주문일자"+date);
-			System.out.println("주문금액"+wineOrderAmount);
-			System.out.println("고객번호"+customerId);
-			System.out.println("와인업체번호"+wineSellerId);
 			Date getDate= new Date(date.getTime());
-			System.out.println("주문일자 get"+getDate);
-			int result= dao.wineOrderInsert(conn, new WineOrder(getDate, wineOrderAmount, customerId, wineSellerId));
+			int wineOrderResult= dao.wineOrderInsert(conn, new WineOrder(getDate, wineOrderAmount, customerId, wineSellerId));
+			//	와인상세를 위한 추가
+			int wineOrderId= dao.selectWinOrderIdMax(conn);
+			int wineInfoId= (int)session.getAttribute("wineInfoId");
+			int wineOrderInfoResult= new WineOrderInfoDAOImpl().wineOrderInfoInsert(conn, wineOrderInfoCount, wineOrderId, wineInfoId);
 			JsonObject ob= new JsonObject();
-			System.out.println("와인주문 서비스단");
-			if(result==1){
+			if(wineOrderResult==1 && wineOrderInfoResult==1){
 				ob.addProperty("result", "success");
 			}
 			else{

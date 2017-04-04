@@ -144,6 +144,7 @@ public class WineOrderController {
 			mav.setView("/dionysus/wineinfo/list");
 			session.removeAttribute("wineInfoPrice");
 			session.removeAttribute("wineSellerId");
+			session.removeAttribute("wineInfoId");
 			//	와인가격 session에서 삭제합니다.
 			mav.setRedirect();
 			return mav;

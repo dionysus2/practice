@@ -13,15 +13,38 @@
 				location.replace("/dionysus/wineinfo/list");
 		})
 	})
+	$(document).ready(function() {
+		var price= <%=(int)session.getAttribute("wineInfoPrice")%>;
+		$("#count").bind("change", function() {
+			var index="";
+			$("#count option:selected").each(function() {
+				index+=$(this).text()+"";
+			})
+			$("#wineOrderPrice").html(price*index+"(원)");
+		})
+		$("#count").change();
+	})
 </script>
 </head>
 <body>
 	<h1>주문페이지</h1>
-	<%@ include file="orderdetail.jsp"%>
 	<form action="/dionysus/wineinfo/wineorder/insert" method="post">
 		<table>
 			<tr><td>와인 주문일자</td><td><input type="date" name="wineOrderDate"></td></tr>
-			<tr><td>와인 가격</td><td><%=session.getAttribute("wineInfoPrice") %>원</td></tr>
+			<tr><td>와인 가격</td><td id="wineOrderPrice"></td></tr>
+			<tr><td>와인 개수</td><td>
+						<select name="wineOrderInfoCount" id="count">
+							<option value="1" selected="selected">1</option>
+							<option value="2" >2</option>
+							<option value="3" >3</option>
+							<option value="4" >4</option>
+							<option value="5" >5</option>
+							<option value="6" >6</option>
+							<option value="7" >7</option>
+							<option value="8" >8</option>
+							<option value="9" >9</option>
+							<option value="10">10</option>
+						</select></td></tr>
 		</table>
 		<div><input type="submit" value="주문하기"></div>
 	</form>

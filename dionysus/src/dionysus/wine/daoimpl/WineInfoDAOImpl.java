@@ -396,6 +396,7 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 		return 0;
 	}
 	
+	//	와인 상품번호별 조회
 	@Override
 	public WineInfo selectByWineInfoId(Connection conn, int wineInfoId) throws SQLException{
 		// TODO Auto-generated method stub
@@ -425,7 +426,7 @@ public class WineInfoDAOImpl implements WineInfoDAO {
 				wine.setWineInfoVintage(rs.getString("WINE_INFO_VINTAGE"));
 				wine.setWineInfoWinery(rs.getString("WINE_INFO_WINERY"));
 				wine.setWineSellerId(rs.getInt("WINE_SELLER_ID"));
-				logger.info("DAO와인정보 상세검색:"+wine);
+				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
 				return wine;
 			}
 		} 
