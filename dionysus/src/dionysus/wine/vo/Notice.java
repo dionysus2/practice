@@ -11,6 +11,6 @@ public class Notice {
 	private String noticeContent;
 	private String noticeWriter;
 	private Date noticeWritedate;
-	private String noticeViews;
+	private int noticeViews;
 	
 }

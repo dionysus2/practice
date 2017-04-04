@@ -32,7 +32,7 @@ public class NoticeImpl implements NoticeDAO{
 				notice.setNoticeContent(rs.getString("NOTICE_CONTENT"));
 				notice.setNoticeWriter(rs.getString("NOTICE_WRITER"));
 				notice.setNoticeWritedate(rs.getDate("NOTICE_WRITEDATE"));
-				notice.setNoticeViews(rs.getString("NOTICE_VIEWS"));
+				notice.setNoticeViews(rs.getInt("NOTICE_VIEWS"));
 				list.add(notice);
 			}
 			return list;
@@ -67,6 +67,7 @@ public class NoticeImpl implements NoticeDAO{
 		return 0;
 	}
 
+	//	공지사항 게시글 추가하기.
 	@Override
 	public int insertNotice(Connection conn, Notice notice) throws SQLException {
 		// TODO Auto-generated method stub
@@ -78,16 +79,19 @@ public class NoticeImpl implements NoticeDAO{
 			pstmt.setString(3, notice.getNoticeContent());
 			pstmt.setString(4, notice.getNoticeWriter());
 			pstmt.setDate(5, notice.getNoticeWritedate());
-			pstmt.setString(6, notice.getNoticeViews());
-		return pstmt.executeUpdate();
-		} catch (SQLException e) {
+			pstmt.setInt(6, notice.getNoticeViews());
+			return pstmt.executeUpdate();
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			JDBCUtil.close(pstmt, null);
 		}
 		return 0;
 	}
 
+	//	공지사항 게시글 수정하기.
 	@Override
 	public int updateNotice(Connection conn, Notice notice) throws SQLException {
 		// TODO Auto-generated method stub
@@ -96,15 +100,18 @@ public class NoticeImpl implements NoticeDAO{
 			pstmt = conn.prepareStatement(NoticeQuery.updateNotice);
 			pstmt.setString(1, notice.getNoticeTitle());
 			pstmt.setString(2, notice.getNoticeContent());
-		return pstmt.executeUpdate();
-		} catch (SQLException e) {
+			return pstmt.executeUpdate();
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			JDBCUtil.close(pstmt, null);
 		}
 		return 0;
 	}
 
+	//	공지사항 게시글 삭제하기.
 	@Override
 	public int deleteNotice(Connection conn, int noticeId) throws SQLException {
 		// TODO Auto-generated method stub
@@ -122,7 +129,8 @@ public class NoticeImpl implements NoticeDAO{
 			JDBCUtil.close(pstmt, null);
 		}
 	}
-
+	
+	//	공지사항 NOTICE_VIEWS MAX+1값 조회
 	@Override
 	public int viewsNotice(Connection conn, int noticeId) throws SQLException {
 		// TODO Auto-generated method stub
@@ -135,7 +143,7 @@ public class NoticeImpl implements NoticeDAO{
 			if(rs.next()) {
 				return rs.getInt(1);
 				}
-			}
+		}
 		catch (SQLException e) {
 			throw e;
 		}
@@ -143,5 +151,56 @@ public class NoticeImpl implements NoticeDAO{
 			JDBCUtil.close(pstmt, null);
 		}
 		return 0;
+	}
+
+	//	공지사랑 NOTICE_VIEWS MAX+1값 조회후 UPDATE문
+	@Override
+	public int updateNoticeViews(Connection conn, int noticeViews, int noticeId) throws SQLException  {
+		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		try {
+			pstm= conn.prepareStatement(NoticeQuery.updateNoticeViews);
+			pstm.setInt(1, noticeViews);
+			pstm.setInt(2, noticeId);
+			return pstm.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, null);
+		}
+	}
+
+	//	공지사항 게시글 번호별 조회하기
+	@Override
+	public Notice selectByNoticeId(Connection conn, int noticeId) throws SQLException {
+		// TODO Auto-generated method stub
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(NoticeQuery.selectByNoticeId);
+			pstm.setInt(1, noticeId);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				Notice notice= new Notice();
+				notice.setNoticeContent(rs.getString("NOTICE_CONTENT"));
+				notice.setNoticeId(rs.getInt("NOTICE_ID"));
+				notice.setNoticeTitle(rs.getString("NOTICE_TITLE"));
+				notice.setNoticeViews(rs.getInt("NOTICE_VIEWS"));
+				notice.setNoticeWritedate(rs.getDate("NOTICE_WRITEDATE"));
+				notice.setNoticeWriter(rs.getString("NOTICE_WRITER"));
+				return notice;
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return null;
 	}
 }

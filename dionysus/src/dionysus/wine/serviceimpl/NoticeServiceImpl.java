@@ -41,7 +41,6 @@ public class NoticeServiceImpl implements NoticeService{
 	         int pageNo= 1;
 	         if(req.getParameter("pageNo")!=null){
 	            pageNo= Integer.parseInt(req.getParameter("pageNo"));
-	            logger.info("사용자 페이지 요청");
 	         }
 	         int cntOfRow= dao.NoticeCount(conn);
 	         Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
@@ -49,7 +48,6 @@ public class NoticeServiceImpl implements NoticeService{
 	         HashMap<String, Object> map= new HashMap<String, Object>();
 	         map.put("pagination", pagination);
 	         map.put("list", list);
-	         logger.info("서비스단 페이징"+pagination);
 	         return new Gson().toJson(map);
 	      } 
 	      catch (SQLException e) {
@@ -61,23 +59,19 @@ public class NoticeServiceImpl implements NoticeService{
 	      }
 		return null;
 	}
-
+	
+	//	공지사항 게시글 추가하기.
 	@Override
 	public String createNotice(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
 		try {
-			logger.info("Connection연결성공");
 			int result= dao.insertNotice(conn, new Notice());
 			JsonObject ob= new JsonObject();
-			if(result==1){
+			if(result==1)
 				ob.addProperty("result", "success");
-				logger.info("DAO INSERT입력성공");
-			}
-			else{
+			else
 				ob.addProperty("result", "fail");	
-				logger.info("DAO INSERT입력실패");
-			}
 			return new Gson().toJson(ob);
 		} 
 		catch (SQLException e) {
@@ -89,40 +83,44 @@ public class NoticeServiceImpl implements NoticeService{
 		}
 		return null;
 	}
-
+	
+	//	공지사항 게시글 수정하기 전 폼뷰
 	@Override
-	public String updateNotice(HttpServletRequest req) {
+	public String updateNoticeStart(HttpServletRequest reuqest) {
 		// TODO Auto-generated method stub
-		Connection conn= JDBCUtil.getConnection();
-		try {
-			Notice notice= dao.updateNotice(conn, notice);
-			return new Gson().toJson(notice);
-		} 
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally{
-			JDBCUtil.close(conn);
-		}
 		return null;
 	}
 
+
+	//	공지사항 게시글 수정하기.
+	@Override
+	public String updateNoticeEnd(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	//	공지사항 게시글 삭제하기
 	@Override
 	public String deleteNotice(HttpServletRequest req) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//	공지사항 게시글 번호별 조회하기.
+	//	공지사항 조회수 증감
+	@Override
+	public String readByNoticeId(HttpServletRequest request) {
+		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
-		int NoticeId= req.getParameter("noticeId");
+		int noticeId= Integer.parseInt(request.getParameter("noticeId"));
 		try {
-			int result= dao.deleteNotice(conn, NoticeId);
-			JsonObject ob= new JsonObject();
-			if(result==1){
-				ob.addProperty("result", "success");
-			}
-			else{
-				ob.addProperty("result", "fail");
-			}
-			return new Gson().toJson(ob);
+			Notice result= dao.selectByNoticeId(conn, noticeId);
+			int noticeViews= dao.viewsNotice(conn, noticeId);
+			logger.info("넘어온 NOTICE_ID값:"+noticeId);
+			logger.info("선택된 NOTICE의 VIEWS MAX+1값:"+noticeViews);
+			int updateViews= dao.updateNoticeViews(conn, noticeViews, noticeId);
+			logger.info("업뎃됨:"+updateViews);
+			return new Gson().toJson(result);
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -133,11 +131,4 @@ public class NoticeServiceImpl implements NoticeService{
 		}
 		return null;
 	}
-
-	@Override
-	public String viewsNotice(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
