@@ -406,7 +406,7 @@ public class WineInfoServiceImpl implements WineInfoService {
 		try {
 			WineInfo wine= dao.selectByWineInfoId(conn, wineInfoId);
 			session.setAttribute("wineInfoPrice", wine.getWineInfoPrice());
-			System.out.println("가격저장"+session.getAttribute("wineInfoPrice"));
+			session.setAttribute("wineSellerId", wine.getWineSellerId());
 			//	와인정보 주문위해 가격저장했습니다.
 			//	주문완료 시 와인주문가격 remove해야합니다!
 			return new Gson().toJson(wine);
