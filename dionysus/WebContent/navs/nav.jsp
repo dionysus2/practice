@@ -15,6 +15,19 @@ body {
 </style>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
+<script>
+	var result= <%=session.getAttribute("basicInfoUsername")%>
+</script>
+<script>
+	$(document).ready(function() {
+		if(resul===null){
+			$('.nav navbar-nav navbar-right.').hide()
+		}
+		else{
+	        $('.nav navbar-nav navbar-right.').show();
+		}
+	})
+</script>
 <body>
 	<div
 		w3-include-html="http://localhost:8087/dionysus/modals/forms/join.html"></div>
@@ -53,7 +66,7 @@ body {
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="http://localhost:8087/dionysus/users/manage.html">프로필 수정</a></li>
+							<li><a href="/dionysus/users/manage.html">프로필 수정</a></li>
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
 							<li><a href="#">로그아웃</a></li>
