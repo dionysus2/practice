@@ -372,7 +372,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public int customerResReservUpdate(Connection conn, ResReserv ResReserv) throws SQLException {
+	public int CustomerResReservUpdate(Connection conn, ResReserv ResReserv) throws SQLException {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		try{
@@ -389,7 +389,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public int customerResReservDelete(Connection conn, int customerId) throws SQLException {
+	public int CustomerResReservDelete(Connection conn, int customerId) throws SQLException {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt= null;
 		try {
