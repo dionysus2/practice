@@ -12,7 +12,7 @@ public class WineSellerAthorizationDaoImpl implements WineSellerAuthorizationDAO
 	
 	//1. 와인회사 업주 회원신청 리스트 조회
 	@Override
-	public ArrayList<WineSellerAuthorization> selectWineSellerAuthozationAllList(Connection conn, int startRow, int lastRow)
+	public ArrayList<WineSellerAuthorization> selectWineSellerAuthorizationAllList(Connection conn, int startRow, int lastRow)
 			throws SQLException {
 		String Sql ="select r2.*from(select rownum rnum, r1.* from "
 				+ "(select wine_seller_id, wine_seller_authorization_date,wine_seller_authorizated "

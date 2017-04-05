@@ -160,7 +160,7 @@ public class WineInfoServiceImpl implements WineInfoService {
 	public String wineInfoCreateEnd(HttpServletRequest request){
 		Connection conn= JDBCUtil.getConnection();
 		HttpSession session= request.getSession();
-		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
+		String basicInfoUsername= (String)session.getAttribute("basicInfoUsername");
 		logger.info("업주아뒤:"+basicInfoUsername);
 		String path= request.getServletContext().getRealPath("img");
 		System.out.println("저장경로:"+path);
@@ -169,6 +169,7 @@ public class WineInfoServiceImpl implements WineInfoService {
 		uploader.setSizeMax(320*480*10);
 		WineInfo wine= new WineInfo();
 		try {
+			System.out.println("테스트");
 			JsonObject ob= new JsonObject();
 			List<FileItem>list= uploader.parseRequest(request);
 			int wineSellerId= dao.selectByBasicId(conn, basicInfoUsername);

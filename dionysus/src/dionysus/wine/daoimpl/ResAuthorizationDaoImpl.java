@@ -11,7 +11,7 @@ public class ResAuthorizationDaoImpl implements ResAuthorizationDAO {
 	
 	//1. 레스토랑 업주 회원신청 리스트 조회
 	@Override
-	public ArrayList<ResAuthorization> selectResAuthorizitionAllList(Connection conn, int startRow, int lastRow)throws SQLException {
+	public ArrayList<ResAuthorization> selectResAuthorizationAllList(Connection conn, int startRow, int lastRow)throws SQLException {
 		String Sql ="select r2.*from(select rownum rnum, r1.* from "
 				+ "(select res_id, res_authorization_date,res_authorizated "
 				+ "from res_authorization)r1)r2 where rnum between ? and ?";
@@ -39,7 +39,7 @@ public class ResAuthorizationDaoImpl implements ResAuthorizationDAO {
 	}
 	//2. 레스토랑 업주 회원신청자 count
 	@Override
-	public int resauthorization(Connection conn) throws SQLException {
+	public int resAuthorization(Connection conn) throws SQLException {
 		String Sql = "select count(res_id+1) from res_authorization";
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
@@ -58,7 +58,7 @@ public class ResAuthorizationDaoImpl implements ResAuthorizationDAO {
 	}
 	//3. 레스토랑 업주 회원신청자 추가
 	@Override
-	public int insertResauthorization(Connection conn, ResAuthorization resauthorization){
+	public int insertResAuthorization(Connection conn, ResAuthorization resauthorization){
 	String Sql = "insert into res_authorization(res_id,res_authorization_date, "
 			+ "res_authorizated)values(?,?,'승인신청중')";
 	PreparedStatement pstmt = null;
@@ -77,7 +77,7 @@ public class ResAuthorizationDaoImpl implements ResAuthorizationDAO {
 }
 	//4.레스토랑 업주 회원신청자 삭제
 	@Override
-	public int deleteResauthorization(Connection conn, int resAuthorizationId) throws SQLException {
+	public int deleteResAuthorization(Connection conn, int resAuthorizationId) throws SQLException {
 		String Sql = "delete from res_authorization where res_id=?";
 		PreparedStatement pstmt = null;
 		try{

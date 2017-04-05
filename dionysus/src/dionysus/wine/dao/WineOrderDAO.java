@@ -49,6 +49,6 @@ public interface WineOrderDAO {
 	public int wineOrderDelete(Connection conn, int wineOrderId)throws SQLException;
 	public ArrayList<HashMap<String, Object>> selectByWineSellerId(Connection conn)throws SQLException;
 	public int selectByCustomerIdOfWineOrderId(Connection conn, int customerId)throws SQLException;
-	public int selectWinOrderIdMax(Connection conn)throws SQLException;
+	public int selectWineOrderIdMax(Connection conn)throws SQLException;
 	public ArrayList<WineOrder> selectByWineOrderBasicInfoUsername(Connection conn, String basicInfoUsername)throws SQLException;
 }

@@ -252,6 +252,7 @@ public class WineOrderServiceImpl implements WineOrderService {
 		HttpSession session= request.getSession();
 		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
 		try {
+			System.out.println(session.getAttribute("wineInfoId"));
 			date= sdf.parse(request.getParameter("wineOrderDate"));
 			int wineOrderInfoCount= Integer.parseInt(request.getParameter("wineOrderInfoCount"));
 			int wineOrderAmount= ((int)session.getAttribute("wineInfoPrice"))*wineOrderInfoCount;
@@ -260,7 +261,8 @@ public class WineOrderServiceImpl implements WineOrderService {
 			Date getDate= new Date(date.getTime());
 			int wineOrderResult= dao.wineOrderInsert(conn, new WineOrder(getDate, wineOrderAmount, customerId, wineSellerId));
 			//	와인상세를 위한 추가
-			int wineOrderId= dao.selectWinOrderIdMax(conn);
+			int wineOrderId= dao.selectWineOrderIdMax(conn);
+			System.out.println("오더아이디"+wineOrderId);
 			int wineInfoId= (int)session.getAttribute("wineInfoId");
 			int wineOrderInfoResult= new WineOrderInfoDAOImpl().wineOrderInfoInsert(conn, wineOrderInfoCount, wineOrderId, wineInfoId);
 			System.out.println("개수"+wineOrderInfoCount);

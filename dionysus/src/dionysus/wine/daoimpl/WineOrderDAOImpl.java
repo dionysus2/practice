@@ -357,7 +357,7 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 	
 	//	와인주문번호 최댓값 조회
 	@Override
-	public int selectWinOrderIdMax(Connection conn) throws SQLException{
+	public int selectWineOrderIdMax(Connection conn) throws SQLException{
 		// TODO Auto-generated method stub
 		PreparedStatement pstm= null;
 		ResultSet rs= null;
@@ -403,4 +403,5 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 			JDBCUtil.close(pstm, rs);
 		}
 	}
+
 }

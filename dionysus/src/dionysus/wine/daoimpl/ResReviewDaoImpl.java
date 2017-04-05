@@ -19,7 +19,7 @@ public class ResReviewDaoImpl implements ResReviewDAO {
 
 //  리뷰추가	
 	@Override
-	public int insertResReivew(Connection conn, ResReview resReview) throws Exception {
+	public int insertResReview(Connection conn, ResReview resReview) throws Exception {
 	
 	   PreparedStatement pstmt = null;
 	   try{
@@ -38,7 +38,7 @@ public class ResReviewDaoImpl implements ResReviewDAO {
 	 }
 	// 리뷰 변경
 	@Override
-	public int updateResReivew(Connection conn, ResReview resReview) throws Exception {
+	public int updateResReview(Connection conn, ResReview resReview) throws Exception {
 		      PreparedStatement pstmt = null;
 		   try{
 			   pstmt = conn.prepareStatement(ResReviewQuery.update);
@@ -55,7 +55,7 @@ public class ResReviewDaoImpl implements ResReviewDAO {
 		}
 // 리뷰 삭제
 	@Override
-	public int deleteResReivew(Connection conn, int customerId) throws Exception {
+	public int deleteResReview(Connection conn, int customerId) throws Exception {
 		   String sql = "delete from Res_Reivew where customer_Id=? and wine_Info_Id=?";
 		   PreparedStatement pstmt = null;
 		   try{

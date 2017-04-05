@@ -30,8 +30,8 @@ public interface CustomerDAO {
 	public String CustomerPwdFind(Connection conn, String customerName, String customerRrn, String customerUserName) throws SQLException;
 	public int CustomerLogin(Connection conn, String customerUserName, String customerPwd) throws SQLException;
 	public ArrayList<HashMap<String, Object>> CustomerResReserv(Connection conn) throws SQLException;
-	public int customerResReservUpdate(Connection conn, ResReserv ResReserv) throws SQLException;
-	public int customerResReservDelete(Connection conn, int customerId) throws SQLException;
+	public int CustomerResReservUpdate(Connection conn, ResReserv ResReserv) throws SQLException;
+	public int CustomerResReservDelete(Connection conn, int customerId) throws SQLException;
 	public ArrayList<HashMap<String, Object>> SelectLastResReserv(Connection conn, Date date) throws SQLException;
 	public ArrayList<HashMap<String, Object>> SelectCustomerWineOrder(Connection conn) throws SQLException;
 	public int CustomerWineOrderUpdate(Connection conn, WineOrder wineorder) throws SQLException;
