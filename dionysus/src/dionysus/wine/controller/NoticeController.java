@@ -12,13 +12,13 @@ import dionysus.wine.serviceimpl.NoticeServiceImpl;
 public class NoticeController {
 	private static Logger logger = LoggerFactory.getLogger(NoticeController.class);
 
+	//	공지사항 전체조회
 	@RequestMapping(value = "/notice/list", method = "GET")
 	public static ModelAndView readNotice(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		NoticeServiceImpl service = (NoticeServiceImpl) request.getServletContext().getAttribute("noticeservice");
-		mav.setView("/sugatest/list.jsp");
+		NoticeServiceImpl service = (NoticeServiceImpl)request.getServletContext().getAttribute("noticeService");
+		mav.setView("/board/list.jsp");
 		mav.addObject("result", service.readNotice(request));
-		logger.info("공지사항 전체리스트 출력");
 		return mav;
 	}
 	
@@ -75,11 +75,13 @@ public class NoticeController {
 		}
 	}
 	
+	//	공지사항 번호별 상세 조회
 	@RequestMapping(value = "/notice/view", method = "GET")
 	public static ModelAndView viewNotice(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		NoticeServiceImpl service = (NoticeServiceImpl)request.getServletContext().getAttribute("noticeservice");
-		mav.addObject("result", service.viewsNotice(request));
+		NoticeServiceImpl service = (NoticeServiceImpl)request.getServletContext().getAttribute("noticeService");
+		mav.setView("/board/noticedetail.jsp");
+		mav.addObject("result", service.readByNoticeId(request));
 		return mav;
 	}
 }

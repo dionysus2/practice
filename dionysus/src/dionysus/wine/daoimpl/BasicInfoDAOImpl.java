@@ -154,4 +154,27 @@ public class BasicInfoDAOImpl implements BasicInfoDAO {
 		}
 		return 0;
 	}
+	
+	//	BasicInfoUsername별 BasicInfoId조회하기.
+	@Override
+	public int selectByBasicInfoIdBasicInfoUsername(Connection conn, String basicInfoUsername) throws SQLException{
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(BasicInfoQuery.selectByBasicInfoIdOfBaiscInfUsername);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
+	}
 }

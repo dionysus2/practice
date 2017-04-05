@@ -13,6 +13,6 @@
 <body>
 	<%=session.getAttribute("basicInfoUsername") %><br>
 	아이디가 세션 종료되었습니다.<br>
-	<a href="start.html">홈으로</a>
+	<a href="/dionysus/main/home">홈으로</a>
 </body>
 </html>

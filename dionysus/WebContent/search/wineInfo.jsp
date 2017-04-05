@@ -62,9 +62,7 @@
 </body>
 
 <script>
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						var list = result.list;
 						var pagination = result.pagination;
 						var target = $("#content-main table tbody");

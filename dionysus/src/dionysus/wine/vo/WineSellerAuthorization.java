@@ -2,9 +2,10 @@ package dionysus.wine.vo;
 
 import java.sql.Date;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
 public class WineSellerAuthorization {
 	
 	private int wineSellerId;

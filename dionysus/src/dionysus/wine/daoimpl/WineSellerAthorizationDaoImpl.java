@@ -62,7 +62,7 @@ public class WineSellerAthorizationDaoImpl implements WineSellerAuthorizationDAO
 	@Override
 	public int insertWineSellerAuthorization(Connection conn, WineSellerAuthorization wineSellerAuthorization) throws SQLException {
 		String Sql = "insert into wine_seller_authorization(wine_seller_id,wine_seller_authorization_date, "
-				+ "wine_seller_authorizated)values(?,?,'승인신청중')";
+				+ "wine_seller_authorizated)values(res_seq.nextval,?,'승인신청중')";
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(Sql);

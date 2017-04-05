@@ -49,6 +49,7 @@ public class ResServiceImpl implements ResService{
 	         Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
 	         ArrayList<Res>list= dao.selectResownerAllList(conn, pagination.getStartRow(), pagination.getLastRow());
 	         HashMap<String, Object> map= new HashMap<String, Object>();
+	         System.out.println("서비스단:"+list);
 	         map.put("pagination", pagination);
 	         map.put("list", list);
 	         return new Gson().toJson(map);

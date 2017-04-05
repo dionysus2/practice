@@ -1,9 +1,11 @@
 package dionysus.wine.serviceimpl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,6 @@ import dionysus.wine.service.WineSellerAuthorizationService;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.util.PagingUtil;
 import dionysus.wine.vo.Pagination;
-import dionysus.wine.vo.ResAuthorization;
 import dionysus.wine.vo.WineSellerAuthorization;
 
 public class WineSellerAuthorizationServiceImpl implements WineSellerAuthorizationService {
@@ -55,16 +56,23 @@ public class WineSellerAuthorizationServiceImpl implements WineSellerAuthorizati
 	public String createWineSellerAuthorization(HttpServletRequest req) {
 		Connection conn = JDBCUtil.getConnection();
 		int wineSellerId = Integer.parseInt(req.getParameter("wineSellerId"));
-		Date wineSellerAuthorizationDate = req.getParameter("wineSellerAuthorizationDate");
-		try{		
-		int result = dao.insertWineSellerAuthorization(conn, new ResAuthorization(wineSellerId,wineSellerAuthorizationDate));
+		SimpleDateFormat sdf= new SimpleDateFormat("YYYY-MM-DD");
+		java.util.Date date= null;
+		
+		try{
+			date= sdf.parse(req.getParameter("wineSellerAuthorizationDate"));
+			Date wineSellerAuthorizationDate = (Date) new java.util.Date(date.getTime());
+		int result = dao.insertWineSellerAuthorization(conn, new WineSellerAuthorization(wineSellerId,wineSellerAuthorizationDate));
 		JsonObject ob = new JsonObject();
 		if(result==1)ob.addProperty("result","success");
 		else ob.addProperty("result", "fail");
 		return new Gson().toJson(ob);
 		}catch (SQLException e) {
 	        e.printStackTrace();
-	     }
+	     } catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	     finally{
 	        JDBCUtil.close(conn);
 	     }

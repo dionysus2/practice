@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ResAuthorization {
+class ResAuthorization {
 	private int resId;
 	private Date resAuthorizationDate;
 	private String resAuthorizated;

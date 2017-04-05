@@ -1,18 +1,40 @@
 package dionysus.wine.servlet;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Set;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import dionysus.wine.daoimpl.*;
-import dionysus.wine.di.*;
-import dionysus.wine.serviceimpl.*;
-import dionysus.wine.vo.*;
+import dionysus.wine.daoimpl.BasicInfoDAOImpl;
+import dionysus.wine.daoimpl.CustomerDAOImpl;
+import dionysus.wine.daoimpl.NoticeImpl;
+import dionysus.wine.daoimpl.ResDaoImpl;
+import dionysus.wine.daoimpl.ResInfoDaoImpl;
+import dionysus.wine.daoimpl.WineInfoDAOImpl;
+import dionysus.wine.daoimpl.WineOrderDAOImpl;
+import dionysus.wine.daoimpl.WineSellerDaoImpl;
+import dionysus.wine.daoimpl.WineWishListDAOImpl;
+import dionysus.wine.di.AnnotationRunner;
+import dionysus.wine.di.ModelAndView;
+import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
+import dionysus.wine.serviceimpl.CustomerServiceImpl;
+import dionysus.wine.serviceimpl.NoticeServiceImpl;
+import dionysus.wine.serviceimpl.ResInfoServiceImpl;
+import dionysus.wine.serviceimpl.ResServiceImpl;
+import dionysus.wine.serviceimpl.WineInfoServiceImpl;
+import dionysus.wine.serviceimpl.WineOrderServiceImpl;
+import dionysus.wine.serviceimpl.WineSellerServiceImpl;
+import dionysus.wine.serviceimpl.WineWishListServiceImpl;
 
-@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*"})
+@WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*", "/notice/*", "/wineinfo/wineorder/*"})
 public class DispatcherServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
@@ -38,7 +60,22 @@ public class DispatcherServlet extends HttpServlet {
 		ResDaoImpl	resDao= new ResDaoImpl();
 		ResServiceImpl resservice= new ResServiceImpl(resDao);
 		context.setAttribute("resservice", resservice);
-		
+		//	6. 공지사항 DAO, SERVICE 객체화
+		NoticeImpl noticeDAO= new NoticeImpl();
+		NoticeServiceImpl noticeService= new NoticeServiceImpl(noticeDAO);
+		context.setAttribute("noticeService", noticeService);
+		//	7. 고객 DAO, SERVICE 객체화
+		CustomerDAOImpl customerDAO= new CustomerDAOImpl();
+		CustomerServiceImpl customerService= new CustomerServiceImpl(customerDAO);
+		context.setAttribute("customerService", customerService);
+		//	8. 장바구니 DAO, SERVICE 객체화
+		WineWishListDAOImpl wineWishListDAO= new WineWishListDAOImpl();
+		WineWishListServiceImpl wineWishListService= new WineWishListServiceImpl(wineWishListDAO);
+		context.setAttribute("wineWishListService", wineWishListService);
+		//	9. 와인상품 업주 DAO, SERVICE 객체화
+		WineSellerDaoImpl wineSellerDAO= new WineSellerDaoImpl();
+		WineSellerServiceImpl wineSellerService= new WineSellerServiceImpl(wineSellerDAO);
+		context.setAttribute("wineSellerService", wineSellerService);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");

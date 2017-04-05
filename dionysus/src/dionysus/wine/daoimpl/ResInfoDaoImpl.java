@@ -16,39 +16,40 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 	
 	public ResInfo makerResInfo(ResultSet rs)throws Exception{
 		ResInfo resInfo = new ResInfo();
-		resInfo.setResInfoId(rs.getInt("resInfoId"));
-		resInfo.setResInfoName(rs.getString("resInfoName"));
-		resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-		resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-		resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-		resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-		resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-		resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-		resInfo.setResId(rs.getInt("resId"));
+		resInfo.setResInfoId(rs.getInt("res_Info_Id"));
+		resInfo.setResInfoName(rs.getString("res_Info_Name"));
+		resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
+		resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
+		resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
+		resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
+		resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
+		resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
+		resInfo.setResId(rs.getInt("res_Id"));
 		return resInfo;
 	}
 	
-   //레스토랑 정보 페이지별 리스트 조회	
+   //레스토랑 정보 페이지별 리스트 조회	    
 	@Override
 	public ArrayList<ResInfo>selectResInfoAllList(Connection conn,  int startRow, int  lastRow) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<ResInfo>list = new ArrayList<>();
-		ResInfo resInfo = new ResInfo();
 		try{
 			pstmt = conn.prepareStatement(ResInfoQuery.selectResInfoAllList);	
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, lastRow);
+			ArrayList<ResInfo>list = new ArrayList<>();
+			ResInfo resInfo = new ResInfo();
+			rs= pstmt.executeQuery();
 			while(rs.next()){
-				resInfo.setResInfoId(rs.getInt("resInfoId"));
-				resInfo.setResInfoName(rs.getString("resInfoName"));
-				resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-				resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-				resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-				resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-				resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-				resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-				resInfo.setResId(rs.getInt("resId"));
+				resInfo.setResInfoId(rs.getInt("RES_INFO_ID"));
+				resInfo.setResInfoName(rs.getString("RES_INFO_NAME"));
+				resInfo.setResInfoPicture1(rs.getString("RES_INFO_PICTURE1"));
+				resInfo.setResInfoPicture2(rs.getString("RES_INFO_PICTURE2"));
+				resInfo.setResInfoPicture3(rs.getString("RES_INFO_PICTURE3"));
+				resInfo.setResInfoAvailableSeat(rs.getInt("RES_INFO_AVAILABLE_SEAT"));
+				resInfo.setResInfoOpeningHours(rs.getString("RES_INFO_OPENING_HOURS"));
+				resInfo.setResInfoWebsite(rs.getString("RES_INFO_WEBSITE"));
+				resInfo.setResId(rs.getInt("RES_ID"));
 				list.add(resInfo);
 				}
 			 return list;
@@ -57,7 +58,6 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		}finally{
 			JDBCUtil.close(pstmt,rs);
 		}
-		
 	}
 	//레스토랑 정보 count조회
 	@Override
@@ -91,15 +91,15 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 			pstmt.setInt(3, lastRow);
 			rs = pstmt.executeQuery();
 		    while(rs.next()){
-				resInfo.setResInfoId(rs.getInt("resInfoId"));
-				resInfo.setResInfoName(rs.getString("resInfoName"));
-				resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-				resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-				resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-				resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-				resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-				resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-				resInfo.setResId(rs.getInt("resId"));
+		    	resInfo.setResInfoId(rs.getInt("res_Info_Id"));
+				resInfo.setResInfoName(rs.getString("res_Info_Name"));
+				resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
+				resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
+				resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
+				resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
+				resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
+				resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
+				resInfo.setResId(rs.getInt("res_Id"));
 				list.add(resInfo);
 				}
 		}catch (SQLException e) {
@@ -201,14 +201,14 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 		rs=pstmt.executeQuery();
 		if(rs.next()){
 			ResInfo resInfo = new ResInfo();
-			resInfo.setResInfoName(rs.getString("resInfoName"));
-			resInfo.setResInfoPicture1(rs.getString("resInfoPicture1"));
-			resInfo.setResInfoPicture2(rs.getString("resInfoPicture2"));
-			resInfo.setResInfoPicture3(rs.getString("resInfoPicture3"));
-			resInfo.setResInfoAvailableSeat(rs.getInt("resInfoAvailableSeat"));
-			resInfo.setResInfoOpeningHours(rs.getString("resInfoOpeningHours"));
-			resInfo.setResInfoWebsite(rs.getString("resInfoWebsite"));
-			resInfo.setResId(rs.getInt("resId"));
+			resInfo.setResInfoName(rs.getString("res_Info_Name"));
+			resInfo.setResInfoPicture1(rs.getString("res_Info_Picture1"));
+			resInfo.setResInfoPicture2(rs.getString("res_Info_Picture2"));
+			resInfo.setResInfoPicture3(rs.getString("res_Info_Picture3"));
+			resInfo.setResInfoAvailableSeat(rs.getInt("res_Info_Available_Seat"));
+			resInfo.setResInfoOpeningHours(rs.getString("res_Info_Opening_Hours"));
+			resInfo.setResInfoWebsite(rs.getString("res_Info_Website"));
+			resInfo.setResId(rs.getInt("res_Id"));
 			return resInfo;
 		}
 		}catch (SQLException e) {
@@ -221,12 +221,12 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 //아이디별 레스토랑업주 정보 가져오기.
 	@Override
 	public int selectByBasicId(Connection conn, String basicInfoUsername) throws SQLException {
-		PreparedStatement pstm= null;
+		PreparedStatement pstmt= null;
 		ResultSet rs= null;
 		try {
-			pstm= conn.prepareStatement(ResInfoQuery.selectByResId);
-			pstm.setString(1, basicInfoUsername);
-			rs= pstm.executeQuery();
+			pstmt= conn.prepareStatement(ResInfoQuery.selectByResId);
+			pstmt.setString(1, basicInfoUsername);
+			rs= pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt(1);
 			}
@@ -235,7 +235,7 @@ public class ResInfoDaoImpl implements ResInfoDAO {
 			e.printStackTrace();
 		}	
 		finally{
-			JDBCUtil.close(pstm, rs);
+			JDBCUtil.close(pstmt, rs);
 		}
 		return 0;
 	}

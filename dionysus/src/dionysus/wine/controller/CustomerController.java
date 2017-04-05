@@ -1,6 +1,7 @@
 package dionysus.wine.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,20 +60,29 @@ public class CustomerController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/customer/insert", method="POST")
-	public static ModelAndView createCustomer(HttpServletRequest request){
+	//	고객 회원가입 신청 폼뷰
+	@RequestMapping(value="/customer/insert", method="GET")
+	public static ModelAndView createCustomerStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		CustomerServiceImpl service= (CustomerServiceImpl)request.getServletContext().getAttribute("customerservice");
-		logger.info("서비스호출");
+		mav.setView("/users/join.html");
+		return mav;
+	}
+	
+	//	고객 회원가입 신청완료
+	@RequestMapping(value="/customer/insert", method="POST")
+	public static ModelAndView createCustomerEnd(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		CustomerServiceImpl service= (CustomerServiceImpl)request.getServletContext().getAttribute("customerService");
+		HttpSession session= request.getSession();
 		if(service.createCustomer(request).equals("{\"result\":\"success\"}")){
-			logger.info("회원정보 추가완료");
-			mav.setView("list");
+			mav.setView("/dionysus/main/home");
 			mav.setRedirect();
+			//	성공시 고객정보 가입을 위해 필요했던 basicInfoId를 세션에서 지운다.
+			session.removeAttribute("basicInfoId");
 			return mav;
 		}
 		else{
-			logger.info("추가안됨.");
-			mav.setView("insert");
+			mav.setView("/insert");
 			mav.setRedirect();
 			return mav;
 		}

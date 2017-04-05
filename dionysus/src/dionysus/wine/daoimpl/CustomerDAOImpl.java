@@ -10,31 +10,30 @@ import dionysus.wine.util.*;
 import dionysus.wine.vo.*;
 
 public class CustomerDAOImpl implements CustomerDAO{
+	
+	//	고객 회원 추가신청가입
 	@Override
 	public int CustomerJoin(Connection conn, Customer customer) throws SQLException {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(CustomerQuery.insert);
-			pstmt.setInt(1, customer.getCustomerId());
-			//pstmt.setString(2, customer.getCustomerUsername());
-			//pstmt.setString(3, customer.getCustomerPwd());
-			pstmt.setString(4, customer.getCustomerRrn());
-			pstmt.setString(5, customer.getCustomerAddress());
-			pstmt.setString(6, customer.getCustomerName());
-			pstmt.setString(7, customer.getCustomerTel());
-			pstmt.setString(8, customer.getCustomerGender());
-			pstmt.setString(9, customer.getCustomerAccountNo());
-			pstmt.setString(10, customer.getCustomerJob());
-			//pstmt.setString(11, customer.getCustomerEmail());
-			pstmt.setString(12, customer.getCustomerActivated());
-		return pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+			pstmt.setString(1, customer.getCustomerRrn());
+			pstmt.setString(2, customer.getCustomerAddress());
+			pstmt.setString(3, customer.getCustomerName());
+			pstmt.setString(4, customer.getCustomerTel());
+			pstmt.setString(5, customer.getCustomerGender());
+			pstmt.setString(6, customer.getCustomerAccountNo());
+			pstmt.setString(7, customer.getCustomerJob());
+			pstmt.setInt(8, customer.getBasicInfoId());
+			return pstmt.executeUpdate();
+		} 
+		catch (SQLException e){
+			throw e;
+		} 
+		finally {
 			JDBCUtil.close(pstmt, null);
 		}
-		return 0;
 	}
 	@Override
 	public ArrayList<Customer> selectAllCustomer(Connection conn) throws SQLException {

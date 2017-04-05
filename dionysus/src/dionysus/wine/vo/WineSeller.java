@@ -42,8 +42,16 @@ public class WineSeller {
 		this.wineSellerProfilePicture = wineSellerProfilePicture;
 		this.wineSellerName = wineSellerName;
 	}
-
-	
-	
+	public WineSeller(String wineSellerBrn, String wineSellerLocation, String wineSellerTel, String wineSellerAccountNo,
+			String wineSellerProfilePicture, String wineSellerName, int basicInfoId) {
+		super();
+		this.wineSellerBrn = wineSellerBrn;
+		this.wineSellerLocation = wineSellerLocation;
+		this.wineSellerTel = wineSellerTel;
+		this.wineSellerAccountNo = wineSellerAccountNo;
+		this.wineSellerProfilePicture = wineSellerProfilePicture;
+		this.wineSellerName = wineSellerName;
+		this.basicInfoId = basicInfoId;
+	}
 	
 }

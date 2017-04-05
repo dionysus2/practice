@@ -9,7 +9,7 @@ public class ResController {
 	@RequestMapping(value="/res/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		mav.setView("/sangtae/resjoin.jsp");
+		mav.setView("/sangtae/insert.jsp");
 		return mav;
 	}
 	@RequestMapping(value="/res/insert", method="POST")
@@ -35,8 +35,7 @@ public class ResController {
 	@RequestMapping(value="/res/list", method="GET")
 	public static ModelAndView list(HttpServletRequest request) throws Exception{
 		ResServiceImpl service =(ResServiceImpl)request.getServletContext().getAttribute("resservice");
-		ModelAndView mav= new ModelAndView();
-		
+		ModelAndView mav= new ModelAndView();		
 		mav.setView("/sangtae/list.jsp");
 		mav.addObject("result", service.readAllRes(request));
 		System.out.println("와인회원 정보 전체 출력");
@@ -47,9 +46,10 @@ public class ResController {
 		ResServiceImpl service =(ResServiceImpl)request.getServletContext().getAttribute("resservice");
 		ModelAndView mav= new ModelAndView();
 		mav.addObject("result", service.readAllRes(request));
+		System.out.println("여기는 포스트");
 		return mav;
 	}
-	@RequestMapping(value="/basic/update", method="GET")
+	@RequestMapping(value="/res/update", method="GET")
 	public static ModelAndView updateStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");

@@ -137,21 +137,17 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	//와인회사 업주 회원추가	InserResOwner
 	@Override
 	public int inserWineSeller(Connection conn, WineSeller wineSeller)throws SQLException {
-		String Sql = "insert into wine_seller(wine_seller_id,wine_seller_brn,wine_seller_location,wine_seller_tel,"
-				+ "wine_seller_account_no,wine_seller_profile_picture,wine_seller_activated,wine_seller_name,basic_info_id,"
-				+ "values(?,?,?,?,"
-				+ "?,?,0,?,?)";
+		String Sql = "insert into wine_seller(wine_seller_id, wine_seller_brn, wine_seller_location, wine_seller_tel, wine_seller_account_no, wine_seller_profile_picture, wine_seller_activated, wine_seller_name, basic_info_id)values(wine_seller_seq.nextval, ?, ?, ?, ?, ?, 1, ?, ?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1, wineSeller.getWineSellerId());
-			pstmt.setString(2, wineSeller.getWineSellerBrn());
-			pstmt.setString(3, wineSeller.getWineSellerLocation());
-			pstmt.setString(4, wineSeller.getWineSellerTel());
-			pstmt.setString(5, wineSeller.getWineSellerAccountNo());
-			pstmt.setString(6, wineSeller.getWineSellerProfilePicture());
-			pstmt.setString(7, wineSeller.getWineSellerName());
-			pstmt.setInt(8, wineSeller.getBasicInfoId());
+			pstmt.setString(1, wineSeller.getWineSellerBrn());
+			pstmt.setString(2, wineSeller.getWineSellerLocation());
+			pstmt.setString(3, wineSeller.getWineSellerTel());
+			pstmt.setString(4, wineSeller.getWineSellerAccountNo());
+			pstmt.setString(5, wineSeller.getWineSellerProfilePicture());
+			pstmt.setString(6, wineSeller.getWineSellerName());
+			pstmt.setInt(7, wineSeller.getBasicInfoId());
 			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();

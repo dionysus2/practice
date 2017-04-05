@@ -42,7 +42,8 @@
 					</tbody>
 				</table>
 				<div>
-					<a href="#"><button>주문하기</button></a>
+					<button id="btn">주문하기</button>
+					<button id="cart">장바구니</button>
 				</div>
 			</div>
 		</div>
@@ -52,8 +53,7 @@
 <script>
 	var result =
 <%=request.getAttribute("result")%>
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
 				var str = "<tr><td>와인이름:</td><td>" + result.wineInfoName
 						+ "</td></tr>";
 				str = str + "<tr><td>와인가격:<td><td>" + result.wineInfoPrice
@@ -87,6 +87,17 @@
 				str = str + "<tr><td>바디:<td><td>" + result.wineInfoBody
 						+ "</td><tr>";
 				$("tbody").append(str);
-			})
+	})
+	$(document).ready(function() {
+		$("#btn").on("click", function() {
+			var result= confirm("해당상품을 주문하시겠습니까?");
+			if(result==true){
+				location.replace("/dionysus/wineinfo/wineorder/insert");
+			}
+			else{
+				alert("감사합니다");
+			}
+		})
+	})	
 </script>
 </html>

@@ -15,16 +15,16 @@ public interface ResReservService {
 	 *  예약접수 정보수정
 	 *  예약접수 정보삭제
 	 */
-	 public String readAllReserv(HttpServletRequest request)throws Exception;
-	 public String readByResReserv(HttpServletRequest request)throws Exception;
-	 public String readByMonthReserv(HttpServletRequest request)throws Exception;
-	 public String readByDayReserv(HttpServletRequest request)throws Exception;
-	 public String readByLastReserv(HttpServletRequest request)throws Exception;
-	 public String readBySalesLate(HttpServletRequest request)throws Exception;
-	 public String ResReservCreateStart(HttpServletRequest request)throws Exception;
-	 public String ResReservCreateEnd(HttpServletRequest request)throws Exception;
-	 public String ResReservUpdateStart(HttpServletRequest request)throws Exception;
-	 public String ResReservUpdateEnd(HttpServletRequest request)throws Exception;
-	 public String ResReservDelete(HttpServletRequest request) throws Exception;
+	 public String readAllReserv(HttpServletRequest request);
+	 public String readByResReserv(HttpServletRequest request);
+	 public String readByMonthReserv(HttpServletRequest request);
+	 public String readByDayReserv(HttpServletRequest request);
+	 public String readByLastReserv(HttpServletRequest request);
+	 public String readBySalesLate(HttpServletRequest request);
+	 public String ResReservCreateStart(HttpServletRequest request);
+	 public String ResReservCreateEnd(HttpServletRequest request);
+	 public String ResReservUpdateStart(HttpServletRequest request);
+	 public String ResReservUpdateEnd(HttpServletRequest request);
+	 public String ResReservDelete(HttpServletRequest request);
 	
 }

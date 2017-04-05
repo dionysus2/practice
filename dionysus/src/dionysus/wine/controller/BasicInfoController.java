@@ -29,7 +29,7 @@ public class BasicInfoController {
 		BasicInfoServiceImpl service= (BasicInfoServiceImpl)request.getServletContext().getAttribute("basicinfoservice");
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller회원가입 추가성공");
-			mav.setView("/dionysus/main/home");
+			mav.setView("/dionysus/customer/insert");
 			//	추가정보 입력 폼으로 이동 => 고객, 와인업주, 레스토랑 업주 => insert후 login창 이동
 			mav.setRedirect();
 			return mav;
@@ -58,6 +58,11 @@ public class BasicInfoController {
 		if(service.login(request).equals("{\"result\":\"success\"}")){
 			logger.info("Controller로그인 성공");
 			HttpSession session= request.getSession();
+			String go= (String)session.getAttribute("go");
+			logger.info("로그인시 컨트롤단(호출된: go):"+go);
+			session.removeAttribute("go");
+			if(go==null)
+				go= "/dionysus/main/home";
 			session.setAttribute("basicInfoUsername", request.getParameter("basicInfoUsername"));
 			mav.setView("/dionysus/main/home");
 			mav.setRedirect();

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -178,21 +179,33 @@ public class CustomerServiceImpl implements CustomerService{
 		return null;
 	}
 
+	//	일반고객 회원가입 추가신청
 	@Override
 	public String createCustomer(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
+		HttpSession session= req.getSession();
+		String customerRrn= req.getParameter("customerRrn");
+		String customerAddress= req.getParameter("customerAddress");
+		String customerLastName= req.getParameter("customerLastName");
+		String customerFirstName= req.getParameter("customerFirstName");
+		String customerName= customerFirstName+customerLastName;
+		String customerTel= req.getParameter("customerTel");
+		String customerGender= req.getParameter("customerGender");
+		String customerAccountNo= req.getParameter("customerAccountNo");
+		String customerJob= req.getParameter("customerJob");
+		//	세션으로 얻어온 basicInfoId
+		int basicInfoId= (int)session.getAttribute("basicInfoId");
 		try {
-			logger.info("Connection연결성공");
-			int result= dao.CustomerJoin(conn, customer);
+			int result= dao.CustomerJoin(conn, new Customer(customerRrn, customerAddress, customerName, customerTel, customerAccountNo, customerGender, customerJob, basicInfoId));
 			JsonObject ob= new JsonObject();
 			if(result==1){
 				ob.addProperty("result", "success");
-				logger.info("DAO INSERT입력성공");
+				logger.info("성공");
 			}
 			else{
-				ob.addProperty("result", "fail");	
-				logger.info("DAO INSERT입력실패");
+				ob.addProperty("result", "fail");
+				logger.info("실패");
 			}
 			return new Gson().toJson(ob);
 		} 

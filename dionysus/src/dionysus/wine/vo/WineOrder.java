@@ -1,6 +1,7 @@
 package dionysus.wine.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -45,26 +45,26 @@ public class ResDaoImpl implements ResDAO {
 		String Sql = "select r2.*from(select rownum rnum, r1.* from"
 				+ "(select res_id, res_brn,res_location,"
 				+ "res_tel,res_account_no,res_profile_picture,"
-				+ "res_activated,res_ownername from res r, "
+				+ "res_activated,res_name from res r, "
 				+ "basic_info b where r.basic_info_id = b.basic_info_id)r1)r2 "
 				+ "where rnum between ? and ?";		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	
 		ArrayList<Res> list = new ArrayList<>();
-		Res res= new Res();
 		try {
 			pstmt = conn.prepareStatement(Sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, lastRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){				
+				Res res= new Res();
 				res.setResId(rs.getShort("res_id"));
 				res.setResBrn(rs.getString("res_brn"));
 				res.setResLocation(rs.getString("res_location"));
-				res.setResTel(rs.getString("resTel"));
+				res.setResTel(rs.getString("res_tel"));
 				res.setResAccountNo(rs.getString("res_account_no"));
 				res.setResProfilePicture(rs.getString("res_profile_picture"));
-				res.setResActivated(rs.getString("res_activatied"));
+				res.setResActivated(rs.getString("res_activated"));
 				res.setResName(rs.getString("res_name"));				
 				list.add(res);
 			}
@@ -140,19 +140,19 @@ public class ResDaoImpl implements ResDAO {
 	public int insertResOwner(Connection conn, Res res)throws SQLException {
 		String Sql = "insert into res(res_id,res_brn,res_location,res_tel,"
 				+ "res_account_no,res_profile_picture,res_activated,res_name,basic_info_id,"
-				+ "values(?,?,?,?,"
+				+ "values(res_seq.nextval,?,?,?,"
 				+ "?,?,0,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1, res.getResId());
-			pstmt.setString(2, res.getResBrn());
-			pstmt.setString(3, res.getResLocation());
-			pstmt.setString(4, res.getResTel());
-			pstmt.setString(5, res.getResAccountNo());
-			pstmt.setString(6, res.getResProfilePicture());
-			pstmt.setString(7, res.getResName());
-			pstmt.setInt(8, res.getBasicInfoId());
+			//pstmt.setInt(1, res.getResId()); 시퀀스로 변경
+			pstmt.setString(1, res.getResBrn());
+			pstmt.setString(2, res.getResLocation());
+			pstmt.setString(3, res.getResTel());
+			pstmt.setString(4, res.getResAccountNo());
+			pstmt.setString(5, res.getResProfilePicture());
+			pstmt.setString(6, res.getResName());
+			pstmt.setInt(7, res.getBasicInfoId());
 			return pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();

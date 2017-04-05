@@ -397,13 +397,20 @@ public class WineInfoServiceImpl implements WineInfoService {
 		return null;
 	}
 	
+	//	와인정보 상세검색.
 	@Override 
 	public String readByWineInfoId(HttpServletRequest request){
 		Connection conn= JDBCUtil.getConnection();
 		int wineInfoId= Integer.parseInt(request.getParameter("wineInfoId"));
+		HttpSession session= request.getSession();
 		try {
 			WineInfo wine= dao.selectByWineInfoId(conn, wineInfoId);
-			logger.info("서비스단 와인정보 상세검색"+wineInfoId);
+			session.setAttribute("wineInfoPrice", wine.getWineInfoPrice());
+			session.setAttribute("wineSellerId", wine.getWineSellerId());
+			session.setAttribute("wineInfoId", wine.getWineInfoId());
+			//	와인정보 주문위해 가격저장했습니다.
+			//	주문완료 시 와인주문가격 remove해야합니다!
+			//	와인가격, 와인업주번호, 와인상품번호 session추가
 			return new Gson().toJson(wine);
 		} 
 		catch (SQLException e) {

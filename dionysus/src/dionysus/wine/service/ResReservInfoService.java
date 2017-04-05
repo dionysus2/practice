@@ -10,7 +10,7 @@ public interface ResReservInfoService {
 	 * 3. 예약 좌석수 수정									
 	 
 	 * */
-     public String CreateResReservInfo(HttpServletRequest request)throws Exception;
-     public String UpdateResReservInfo(HttpServletRequest request)throws Exception;
-     public String deleteResReservInfo(HttpServletRequest request)throws Exception;
+     public String CreateResReservInfo(HttpServletRequest request);
+     public String UpdateResReservInfo(HttpServletRequest request);
+     public String deleteResReservInfo(HttpServletRequest request);
 }

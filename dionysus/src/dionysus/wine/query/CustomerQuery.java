@@ -1,7 +1,8 @@
 package dionysus.wine.query;
 
 public interface CustomerQuery {
-	public String insert = "insert into customer(Customer_id, Customer_UserName, Customer_Pwd, Customer_Rrn , Customer_Address, Customer_Name, Customer_Tel, Customer_Gender, Customer_AccountNo, Customer_Job, Customer_Email, Customer_Activated) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+	//	고객 회원추가가입 쿼리
+	public String insert = "insert into customer(CUSTOMER_ID, CUSTOMER_RRN, CUSTOMER_ADDRESS, CUSTOMER_NAME, CUSTOMER_TEL, CUSTOMER_GENDER, CUSTOMER_ACCOUNT_NO, CUSTOMER_JOB, CUSTOMER_ACTIVATED, BASIC_INFO_ID) values(CUSTOMER_SEQ.NEXTVAL,?, ?, ?, ?, ?, ?, ?, 1, ?)";
 	public String update = "update customer set pwd=?, rrn=?, address=?, name=?, tel=?, gender=?, accountNo=?, job=?, email=?, activated=? where customer_id=?";
 	public String delete = "delete from customer where Customer_id=?";
 	public String customerList = "select * from customer where Customer_Id";
