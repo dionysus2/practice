@@ -27,6 +27,14 @@ body {
 	        $('.nav navbar-nav navbar-right.').show();
 		}
 	})
+	$(document).ready(function(){
+		if(result===null){
+			$('.dropdown-toggle').hide();
+		}
+		else{
+			$('.dropdown-toggle').show();
+		}
+	})
 </script>
 <body>
 	<div
@@ -64,11 +72,8 @@ body {
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
 						<ul class="dropdown-menu">
-<<<<<<< HEAD
 							<li><a href="/dionysus/users/manage.html">프로필 수정</a></li>
-=======
 							<li><a href="http://192.168.0.180:8087/dionysus/users/manage.html">프로필 수정</a></li>
->>>>>>> branch 'master' of https://github.com/dionysus2/practice.git
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
 							<li><a href="http://192.168.0.180:8087/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
