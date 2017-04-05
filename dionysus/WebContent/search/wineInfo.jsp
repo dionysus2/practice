@@ -22,33 +22,7 @@
 	<div class="container-fluid" align="center">
 
 		<div class="row">
-			<div class="col-sm-2">
-				<ul class="nav  nav-stacked">
-					<h3>가격별</h3>
-					<li><a href="#">0~50000</a></li>
-					<li><a href="#">50000~100000</a></li>
-					<li><a href="#">100000~200000</a></li>
-					<li><a href="#">200000~300000</a></li>
-					<li><a href="#">300000~400000</a></li>
-					<li><a href="#">400000~500000</a></li>
-					<br>
-					<h3>국가별</h3>
-					<li><a href="#">프랑스</a></li>
-					<li><a href="#">이탈리아</a></li>
-					<li><a href="#">미국</a></li>
-					<li><a href="#">독일</a></li>
-					<li><a href="#">호주</a></li>
-					<li><a href="#">뉴질랜드</a></li>
-					<li><a href="#">칠레</a></li>
-					<li><a href="#">남아공</a></li>
-						<br>
-					<h3>종류별</h3>
-					<li><a href="#">레드 와인</a></li>
-					<li><a href="#">화이트 와인</a></li>
-					<li><a href="#">로제 와인</a></li>
-					<li><a href="#">스파클링 와인</a></li>
-				</ul>
-			</div>
+			<div w3-include-html="http://localhost:8087/dionysus/search/select.html"></div>
 			<div class="col-sm-10">
 
 				<div class="row">

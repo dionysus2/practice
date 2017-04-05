@@ -18,39 +18,12 @@
 	<script>
 		w3IncludeHTML();
 	</script>
-
 	<div class="container-fluid" align="center">
 
 		<div class="row">
-			<div class="col-sm-2">
-				<ul class="nav  nav-stacked" text-align="center">
-					<h3>가격별</h3>
-					<li><a href="#">10만원 미만</a></li>
-					<li><a href="#">10만원대</a></li>
-					<li><a href="#">20만원대</a></li>
-					<li><a href="#">30만원대</a></li>
-					<li><a href="#">40만원대</a></li>
-					<li><a href="#">50만원대</a></li>
-					<li><a href="#">60만원 이상</a></li>
-					<br>
-					<h3>국가별</h3>
-					<li><a href="#">프랑스</a></li>
-					<li><a href="#">이탈리아</a></li>
-					<li><a href="#">미국</a></li>
-					<li><a href="#">독일</a></li>
-					<li><a href="#">호주</a></li>
-					<li><a href="#">뉴질랜드</a></li>
-					<li><a href="#">칠레</a></li>
-					<li><a href="#">남아공</a></li>
-					<br>
-					<h3>종류별</h3>
-					<li><a href="#">레드 와인</a></li>
-					<li><a href="#">화이트 와인</a></li>
-					<li><a href="#">로제 와인</a></li>
-					<li><a href="#">스파클링 와인</a></li>
-				</ul>
-			</div>
-			<div class="col-sm-10">
+				<div w3-include-html="http://localhost:8087/dionysus/search/select.html"></div>
+				
+				<div class="col-sm-10">
 				<h1 align="left">와인 정보</h1>
 
 				<br> <br>
@@ -84,7 +57,7 @@
 			</div>
 		</div>
 
-
+</div>
 
 		<div id="order" class="modal fade" role="dialog">
 			<div class="modal-dialog">
