@@ -3,7 +3,7 @@
 <head>
 <title>Bootstrap Example</title>
 <link rel="import"
-	href="http://localhost:8087/dionysus/heads/bootstrap.html">
+	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
 </head>
 <script>
 	$(document)
@@ -14,13 +14,13 @@
 										function() {
 											$("#div1")
 													.load(
-															"http://localhost:8087/dionysus/restaurants/sub.html");
+															"http://192.168.0.180:8087/dionysus/restaurants/sub.html");
 										});
 					});
 </script>
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 <body>
-	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.jsp"></div>
+	<div w3-include-html="http://192.168.0.180:8087/dionysus/navs/nav.jsp"></div>
 	<script>
 		w3IncludeHTML();
 	</script>
@@ -42,7 +42,7 @@
 			<div id="menu1" class="tab-pane fade">
 				<h3>Menu 1</h3>
 				<p>Some content in menu 1.</p>
-				<div w3-include-html="http://localhost:8087/dionysus/sellers/addwine.html"></div>
+				<div w3-include-html="http://192.168.0.180:8087/dionysus/sellers/addwine.html"></div>
 			</div>
 			<div id="menu2" class="tab-pane fade">
 				<h3>Menu 2</h3>
