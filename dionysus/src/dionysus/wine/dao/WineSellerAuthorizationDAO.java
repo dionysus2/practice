@@ -18,7 +18,7 @@ public interface WineSellerAuthorizationDAO {
 	 * */
 	
 	//1. 와인회사 업주 회원신청 리스트 조회
-	public ArrayList<WineSellerAuthorization> selectWineSellerAuthozationAllList(Connection conn, int startRow, int lastRow)throws SQLException;
+	public ArrayList<WineSellerAuthorization> selectWineSellerAuthorizationAllList(Connection conn, int startRow, int lastRow)throws SQLException;
 	
 	//2. 와인회사 업주 회원신청자 count
 	public int wineSellerAuthorization(Connection conn)throws SQLException;

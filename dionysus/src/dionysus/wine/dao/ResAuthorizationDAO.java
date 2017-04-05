@@ -19,16 +19,16 @@ public interface ResAuthorizationDAO {
 	
 	
 	//1. 레스토랑 업주 회원신청 리스트 조회
-	public ArrayList<ResAuthorization> selectResAuthorizitionAllList(Connection conn, int startRow, int lastRow)throws SQLException;
+	public ArrayList<ResAuthorization> selectResAuthorizationAllList(Connection conn, int startRow, int lastRow)throws SQLException;
 	
 	//2. 레스토랑 업주 회원신청자 count
-	public int resauthorization(Connection conn)throws SQLException;
+	public int resAuthorization(Connection conn)throws SQLException;
 	
 	//3. 레스토랑 업주 회원신청자 추가
-	public int insertResauthorization(Connection conn, ResAuthorization resauthorization)throws SQLException;
+	public int insertResAuthorization(Connection conn, ResAuthorization resauthorization)throws SQLException;
 	
 	//4.레스토랑 업주 회원신청자 삭제
-	public int deleteResauthorization(Connection conn, int resAuthorizationId)throws SQLException;
+	public int deleteResAuthorization(Connection conn, int resAuthorizationId)throws SQLException;
 	
 	//5. 레스토랑 업주 회원신청자 승인
 	public int yesResAuthorizated(Connection conn, int resAuthorizationId)throws SQLException;

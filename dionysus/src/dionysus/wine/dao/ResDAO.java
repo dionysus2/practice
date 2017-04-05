@@ -31,7 +31,7 @@ public interface ResDAO {
 	//레스토랑 업주 회원 비활성화 설정	SelectResOwnerActivated
 public int selectResOwnerActivated(Connection conn, int resId)throws SQLException;
 	//레스토랑 업주 페이지별 리스트 조회	SelectResOwnerAllList
-public ArrayList<Res> selectResownerAllList(Connection conn, int startRow, int lastRow)throws SQLException;
+public ArrayList<Res> selectResOwnerAllList(Connection conn, int startRow, int lastRow)throws SQLException;
 	//레스토랑 업주 회원 마지막 번호 찾기count	ResOwnerCount
 public int resOwnerCount(Connection conn)throws SQLException;
 	//레스토랑 업주 회원 지역별 조회	SelectResOwnerLocation

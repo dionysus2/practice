@@ -41,7 +41,7 @@ public class ResDaoImpl implements ResDAO {
 	}
 	//레스토랑 업주 페이지별 리스트 조회	SelectResOwnerAllList
 	@Override
-	public ArrayList<Res> selectResownerAllList(Connection conn, int startRow, int lastRow)throws SQLException {
+	public ArrayList<Res> selectResOwnerAllList(Connection conn, int startRow, int lastRow)throws SQLException {
 		String Sql = "select r2.*from(select rownum rnum, r1.* from"
 				+ "(select res_id, res_brn,res_location,"
 				+ "res_tel,res_account_no,res_profile_picture,"

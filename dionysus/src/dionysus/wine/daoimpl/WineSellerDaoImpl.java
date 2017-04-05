@@ -183,7 +183,7 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	}
 	//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
 	@Override
-	public int SelectWineSellerrId(Connection conn, String wineSellerName, String wineSellerBrn)throws SQLException {
+	public int SelectWineSellerId(Connection conn, String wineSellerName, String wineSellerBrn)throws SQLException {
 		String Sql ="select b.basic_info_username from wine_seller w, basic_info b where w.basic_info_id= b.basic_info_id and w.wine_seller_ownername='?' and w.wine_seller_brn ='?'";
 
 		PreparedStatement pstmt = null;
