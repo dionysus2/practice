@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="import"
-	href="http://localhost:8087/dionysus/heads/bootstrap.html">
+	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
 </head>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
@@ -15,7 +15,7 @@
 }
 </style>
 <body>
-	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.jsp"></div>
+	<div w3-include-html="http://192.168.0.180:8087/dionysus/navs/nav.jsp"></div>
 	<script>
 		w3IncludeHTML();
 	</script>
@@ -38,7 +38,7 @@
 		var text = "";
 		for (var i = 0; i < 12; i++) {
 			text += '<div class="col-md-3"> <a href="restaurants/restaurants.html">'
-					+ '<img src="http://localhost:8087/dionysus/images/res1.jpg" alt="Lights" width="250" height="360"> <div class="caption"> <p>Lorem ipsum...</p> </div> </a>  </div>';
+					+ '<img src="http://192.168.0.180:8087/dionysus/images/res1.jpg" alt="Lights" width="250" height="360"> <div class="caption"> <p>Lorem ipsum...</p> </div> </a>  </div>';
 		}
 		document.getElementById("resList").innerHTML = text;
 	</script>

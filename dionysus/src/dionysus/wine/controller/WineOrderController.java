@@ -126,6 +126,7 @@ public class WineOrderController {
 	}
 	//	와인상품 주문회원 정보조회(DAO, SERVICE작업 아직 못하였습니다)
 	
+	/*
 	//	주문건 등록 폼뷰(주문상세 폼뷰 => 주문상세 정보완료=> 주문건 등록 폼뷰=> 주문건 등록 완료)
 	@RequestMapping(value="/wineinfo/wineorder/insert", method="GET")
 	public static ModelAndView insertStart(HttpServletRequest request){
@@ -133,6 +134,7 @@ public class WineOrderController {
 		mav.setView("/search/order.jsp");
 		return mav;
 	}
+	*/
 	//	주문건 등록완료.
 	@RequestMapping(value="/wineinfo/wineorder/insert", method="POST")
 	public static ModelAndView isnertEnd(HttpServletRequest request){
@@ -141,6 +143,7 @@ public class WineOrderController {
 		WineOrderServiceImpl service= (WineOrderServiceImpl)request.getServletContext().getAttribute("wineOrderService");
 		HttpSession session= request.getSession();
 		if(service.createEnd(request).equals("{\"result\":\"success\"}")){
+			System.out.println("와인주문완료");
 			mav.setView("/dionysus/wineinfo/list");
 			session.removeAttribute("wineInfoPrice");
 			session.removeAttribute("wineSellerId");

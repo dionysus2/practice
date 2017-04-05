@@ -21,6 +21,7 @@ public interface WineSellerService {
 	public String readWineSellerId(HttpServletRequest req)throws Exception;
 	public String readWineSellerPwd(HttpServletRequest req)throws Exception;
 	public String updateWineSeller(HttpServletRequest req)throws Exception;
+	public String login(HttpServletRequest request);
 	
 	
 

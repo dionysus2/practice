@@ -4,7 +4,7 @@
 <html>
 <head>
 <link rel="import"
-	href="http://localhost:8087/dionysus/heads/bootstrap.html">
+	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
 </head>
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 <body>
@@ -92,13 +92,10 @@
 								</select></td>
 							</tr>
 						</table>
+						<button type="submit" class="btn btn-default">주문하기</button>
+						<button type="button" class="btn btn-default" data-toggle="modal"
+							data-target="#" data-dismiss="modal">취소하기</button>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-default" data-toggle="modal"
-						data-target="#" data-dismiss="modal">주문하기</button>
-					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#" data-dismiss="modal">취소하기</button>
 				</div>
 			</div>
 		</div>
@@ -145,6 +142,7 @@
 				$("tbody").append(str);
 			})
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#btn").on("click", function() {
