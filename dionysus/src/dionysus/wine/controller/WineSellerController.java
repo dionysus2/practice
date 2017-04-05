@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import dionysus.wine.di.ModelAndView;
 import dionysus.wine.di.RequestMapping;
+import dionysus.wine.serviceimpl.BasicInfoServiceImpl;
 import dionysus.wine.serviceimpl.WineSellerServiceImpl;
 
 public class WineSellerController {
@@ -35,4 +36,35 @@ public class WineSellerController {
 			return mav;
 		}
 	}
+	
+	//	로그인 접속폼 뷰
+	@RequestMapping(value="/manager/login", method="GET")
+	public static ModelAndView wineSellerLoginStart(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		mav.setView("/admin/login.jsp");
+		return mav;
+	}
+	
+	//	로그인 접속시도 완료.
+	@RequestMapping(value="/manager/login", method="POST")
+	public static ModelAndView wineSellerLoginEnd(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		WineSellerServiceImpl service= (WineSellerServiceImpl)request.getServletContext().getAttribute("wineSellerService");
+		HttpSession session= request.getSession();
+		if(service.login(request).equals("{\"result\":\"success\"}")){
+			String go= (String)session.getAttribute("go");
+			session.removeAttribute("go");
+			if(go==null)
+				go= "/dionysus/manager/login";
+			mav.setView("/dionysus/manager/home");
+			mav.setRedirect();
+			session.setAttribute("basicInfoUsername", request.getParameter("basicInfoUsername"));
+			return mav;
+		}
+		else{
+			mav.setView("/dionysus/manager/login");
+			return mav;
+		}
+	}
+	
 }

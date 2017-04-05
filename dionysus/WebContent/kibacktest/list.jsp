@@ -44,8 +44,8 @@
 	</script>
 	<div class="container-fluid" align="center">
 	
-	<h1>공지사항 게시판</h1>
-	<table border="1">
+	<h1>레스토랑 정보</h1>
+	<table>
 		<tbody>
 		</tbody>
 	</table>    

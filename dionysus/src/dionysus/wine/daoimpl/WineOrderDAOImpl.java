@@ -12,6 +12,7 @@ import dionysus.wine.dao.WineOrderDAO;
 import dionysus.wine.query.WineOrderQuery;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.vo.Customer;
+import dionysus.wine.vo.WineInfo;
 import dionysus.wine.vo.WineOrder;
 import dionysus.wine.vo.WineSeller;
 
@@ -375,5 +376,31 @@ public class WineOrderDAOImpl implements WineOrderDAO {
 			JDBCUtil.close(pstm, rs);
 		}
 		return 0;
+	}
+	
+	//	아이디별 주문정보 가져오기
+	public ArrayList<WineOrder> selectByWineOrderBasicInfoUsername(Connection conn, String basicInfoUsername) throws SQLException{
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineOrderQuery.selectByWineOrderBasicInfoUsername);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			ArrayList<WineOrder>list= new ArrayList<WineOrder>();
+			while(rs.next()){
+				WineOrder wine= new WineOrder();;
+				wine.setWineOrderAmount(rs.getInt("WINE_ORDER_AMOUNT"));
+				wine.setWineOrderDate(rs.getDate("WINE_ORDER_DATE"));
+				list.add(wine);
+			}
+			return list;
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
 	}
 }

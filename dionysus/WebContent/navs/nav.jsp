@@ -39,27 +39,40 @@ body {
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="/dionysus/wineinfo/list">와인검색</a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#">Page 3</a></li>
+					<li><a href="/dionysus/wineinfo/list">와인</a></li>
+					<li><a href="#">레스토랑</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" data-toggle="modal" data-target="#join"><span
-							class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+							id="joinTool" class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#signIn"><span
-							class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+							id="loginTool" class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="http://localhost:8087/dionysus/users/manage.html">프로필 수정</a></li>
+							<li><a
+								href="http://localhost:8087/dionysus/users/manage.html">프로필
+									수정</a></li>
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
+							<li><a href="/dionysus/wineinfo/wineorder/list">주문정보 조회</a>
+							<li><a
+								href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
 						</ul></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<script>
+		var result =<%=session.getAttribute("basicInfoUsername")%>
+		$(document).ready(function() {
+			if (result == null) {
+				$('.dropdown').hide();
+			}
+			$('.dropdown').change();
+		})
+	</script>
 </body>
 </html>

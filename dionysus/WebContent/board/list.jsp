@@ -4,7 +4,7 @@
 <html>
 <head>
 <link rel="import"
-	href="http://localhost:8087/dionysus/heads/bootstrap.html">
+	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 <script>
@@ -36,7 +36,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div>
+	<div w3-include-html="http://192.168.0.180:8087/dionysus/navs/nav.html"></div>
 	<script>
 		w3IncludeHTML();
 	</script>

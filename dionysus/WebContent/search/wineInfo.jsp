@@ -22,26 +22,7 @@
 	<div class="container-fluid" align="center">
 
 		<div class="row">
-			<div class="col-sm-2">
-				<ul class="nav  nav-stacked">
-					<h3>가격별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
-					<h3>국가별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
-					<h3>종류별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
-					<li><a href="/dionysus/wineinfo/insert">와인추가</a>
-				</ul>
-			</div>
+			<div w3-include-html="http://localhost:8087/dionysus/search/select.html"></div>
 			<div class="col-sm-10">
 
 				<div class="row">
@@ -67,7 +48,7 @@
 						var pagination = result.pagination;
 						var target = $("#content-main table tbody");
 						$.each(list,function(index, wine) {
-							var str = "<div class='col-md-3'> <div class='thumbnail'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
+							var str = "<div class='col-md-3'> <div class='thumbnail' align='center'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
 									+ "style='width: 100%'> <div class='caption'>";
 							str = str+ "<p><a href='view?wineInfoId="+wine.wineInfoId+"'>"+ wine.wineInfoName+ "</a></p>";
 								str = str + "<p>가격: "+ wine.wineInfoPrice+ "원</a></p>";

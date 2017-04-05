@@ -13,7 +13,9 @@
 			<tr><td>아이디</td><td><input type="text" name="basicInfoUsername"></td></tr>
 			<tr><td>비밀번호</td><td><input type="password" name="basicInfoPwd"></td></tr>
 		</table>
-		<input type="submit" value="로그인">
+		<input type="submit" value="회원">
+		<input type="submit" value="레스토랑">
+		<input type="submit" value="와인회사">
 	</form>
 </body>
 </html>
