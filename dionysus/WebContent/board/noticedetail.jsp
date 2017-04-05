@@ -13,10 +13,6 @@
 </script>
 <script>
 		$(document).ready(function() {
-			$("#pagination").on("click","#update", function() {
-				location.href='update?noticeId=' + result.noticeId;
-			});	
-			
 			$("#pagination").on("click","#list", function() {
 				location.href='list?pageNo=' + pageNo;
 			});		
@@ -29,7 +25,6 @@
 				$("#content-main tbody").append(str);
 				
 				var pagination = $("#pagination");
-				pagination.append("<button id='update'>내용 수정</button>");
 				pagination.append("<button id='list'>리스트로</button>");
 		});
 </script>

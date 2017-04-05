@@ -80,6 +80,7 @@ public class NoticeController {
 	public static ModelAndView viewNotice(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		NoticeServiceImpl service = (NoticeServiceImpl)request.getServletContext().getAttribute("noticeService");
+		mav.setView("/board/noticedetail.jsp");
 		mav.addObject("result", service.readByNoticeId(request));
 		return mav;
 	}
