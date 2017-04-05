@@ -137,14 +137,10 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 	//와인회사 업주 회원추가	InserResOwner
 	@Override
 	public int inserWineSeller(Connection conn, WineSeller wineSeller)throws SQLException {
-		String Sql = "insert into wine_seller(wine_seller_id,wine_seller_brn,wine_seller_location,wine_seller_tel,"
-				+ "wine_seller_account_no,wine_seller_profile_picture,wine_seller_activated,wine_seller_name,basic_info_id,"
-				+ "values(wine_seller_seq.nextval,?,?,?,"
-				+ "?,?,0,?,?)";
+		String Sql = "insert into wine_seller(wine_seller_id, wine_seller_brn, wine_seller_location, wine_seller_tel, wine_seller_account_no, wine_seller_profile_picture, wine_seller_activated, wine_seller_name, basic_info_id)values(wine_seller_seq.nextval, ?, ?, ?, ?, ?, 1, ?, ?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(Sql);
-			//pstmt.setInt(1, wineSeller.getWineSellerId()); 시퀀스로 자동 증가
 			pstmt.setString(1, wineSeller.getWineSellerBrn());
 			pstmt.setString(2, wineSeller.getWineSellerLocation());
 			pstmt.setString(3, wineSeller.getWineSellerTel());

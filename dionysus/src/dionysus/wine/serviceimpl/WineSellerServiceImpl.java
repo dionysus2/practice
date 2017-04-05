@@ -89,29 +89,36 @@ public class WineSellerServiceImpl implements WineSellerService {
 	//	와인업주 등록하기.
 	@Override
 	public String createWineSeller(HttpServletRequest req)  {
+
 		Connection conn = JDBCUtil.getConnection();
 		HttpSession session= req.getSession();
-		String wineSellerBrn = req.getParameter("resBrn");
-		String wineSellerLocation = req.getParameter("resLocation");
-		String wineSellerTel = req.getParameter("resTel");
-		String wineSellerAccountNo=req.getParameter("resAccpuntNO");
-		String wineSellerProfilePicture = req.getParameter("resProfilePicture");
-		String wineSellerName= req.getParameter("resName");
-		//		세션으로 얻어온 basicInfoId
+		String wineSellerBrn = req.getParameter("wineSellerBrn");
+		String wineSellerLocation = req.getParameter("wineSellerLocation");
+		String wineSellerTel = req.getParameter("wineSellerTel");
+		String wineSellerAccountNo=req.getParameter("wineSellerAccpuntNO");
+		String wineSellerProfilePicture = req.getParameter("wineSellerProfilePicture");
+		String wineSellerName= req.getParameter("wineSellerName");
+		//	세션으로 얻어온 basicInfoId
 		int basicInfoId= (int)session.getAttribute("basicInfoId");
 		JsonObject ob = new JsonObject();
 		try{
-		int result = dao.inserWineSeller(conn, new WineSeller(wineSellerBrn,wineSellerLocation,wineSellerTel,wineSellerAccountNo,wineSellerProfilePicture,wineSellerName,basicInfoId));
-		if(result==1)ob.addProperty("result", "success");		
-		else ob.addProperty("result", "fail");		
-		return new Gson().toJson(ob);
-		}catch (SQLException e) {
-        e.printStackTrace();
-     }
-     finally{
-        JDBCUtil.close(conn);
-     }
-	return null;
+			int result = dao.inserWineSeller(conn, new WineSeller
+					(wineSellerBrn,wineSellerLocation,wineSellerTel,
+							wineSellerAccountNo,wineSellerProfilePicture,
+							wineSellerName,basicInfoId));
+			if(result==1)
+				ob.addProperty("result", "success");		
+			else 
+				ob.addProperty("result", "fail");		
+			return new Gson().toJson(ob);
+		}
+			catch (SQLException e) {
+				e.printStackTrace();
+		}
+			finally{
+				JDBCUtil.close(conn);
+		}
+		return null;
 		
 	}
 	@Override

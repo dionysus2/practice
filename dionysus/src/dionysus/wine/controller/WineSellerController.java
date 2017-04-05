@@ -30,7 +30,7 @@ public class WineSellerController {
 			return mav;
 		}
 		else{
-			mav.setView("/insert");
+			mav.setView("/dionysus/manager/insert");
 			mav.setRedirect();
 			return mav;
 		}
