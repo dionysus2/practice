@@ -5,7 +5,7 @@
 <html>
 <head>
 <link rel="import"
-	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
 <script>
 	var result =
 <%=request.getAttribute("result")%>
@@ -15,7 +15,7 @@
 
 </head>
 <body>
-	<div w3-include-html="http://192.168.0.180:8087/dionysus/navs/nav.jsp"></div>
+	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.jsp"></div>
 	<script>
 		w3IncludeHTML();
 	</script>

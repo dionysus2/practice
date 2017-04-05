@@ -4,7 +4,7 @@
 <html>
 <head>
 <link rel="import"
-	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
 </head>
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 <body>
