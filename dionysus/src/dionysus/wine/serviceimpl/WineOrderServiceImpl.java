@@ -252,6 +252,7 @@ public class WineOrderServiceImpl implements WineOrderService {
 		HttpSession session= request.getSession();
 		String basicInfoUsername= session.getAttribute("basicInfoUsername")+"";
 		try {
+			System.out.println(session.getAttribute("wineInfoId"));
 			date= sdf.parse(request.getParameter("wineOrderDate"));
 			int wineOrderInfoCount= Integer.parseInt(request.getParameter("wineOrderInfoCount"));
 			int wineOrderAmount= ((int)session.getAttribute("wineInfoPrice"))*wineOrderInfoCount;
