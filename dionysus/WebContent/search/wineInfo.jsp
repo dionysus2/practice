@@ -15,7 +15,7 @@
 
 </head>
 <body>
-	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div>
+	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.jsp"></div>
 	<script>
 		w3IncludeHTML();
 	</script>
