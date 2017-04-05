@@ -15,16 +15,15 @@ body {
 </style>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
+
 <script>
 	var result= <%=session.getAttribute("basicInfoUsername")%>
-</script>
-<script>
 	$(document).ready(function() {
-		if(resul===null){
-			$('.nav navbar-nav navbar-right.').hide()
+		if(result==null){
+			$('.nav navbar-nav navbar-right.').show();
 		}
 		else{
-	        $('.nav navbar-nav navbar-right.').show();
+	        $('.nav navbar-nav navbar-right.').hide();
 		}
 	})
 
