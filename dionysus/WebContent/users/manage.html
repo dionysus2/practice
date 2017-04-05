@@ -19,29 +19,52 @@
 	<div class="container-fluid">
 		<h1>관리 메뉴</h1>
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#personalDetails">개인 정보</a></li>
+			<li class="active"><a data-toggle="tab" href="#personalDetails">개인
+					정보</a></li>
 			<li><a data-toggle="tab" href="#bookingDetails">예약 수정 확인</a></li>
+			<li><a data-toggle="tab" href="#orderDetails" id="orderDetailsTab">와인 주문 내역</a></li>
 			<li><a data-toggle="tab" href="#menu3">리뷰 관리</a></li>
 			<li><a data-toggle="tab" href="#menu4">통계</a></li>
-			<li><a data-toggle="tab" href="#menu2">기타</a></li>
+			<li><a data-toggle="tab" href="#notice" id="noticeTab">공지사항</a></li>
 		</ul>
 
 		<div class="tab-content">
 			<div id="personalDetails" class="tab-pane fade in active">
-						<div
-					w3-include-html="http://192.168.0.180:8087/dionysus/users/personalDetails.html"></div>
+				<div id="personalDetailsContent"></div>
 			</div>
-		
+
 			<div id="bookingDetails" class="tab-pane fade">
-				<div w3-include-html="http://localhost:8087/dionysus/users/bookingDetails.html"></div>
+				<div id="bookingDetailsContent"></div>
 			</div>
-			
-			<div id="menu2" class="tab-pane fade">
-				<h3>예약 정보</h3>
-				<p>예약 확인</p>
+
+			<div id="orderDetails" class="tab-pane fade">
+				<div id="orderDetailsContent"></div>
+			</div>
+			<div id="notice" class="tab-pane fade">
+				<div id="noticeContent"></div>
 			</div>
 		</div>
 	</div>
 
 </body>
+<script>
+	$(document).ready( function() {
+						$("#orderDetailsTab")
+								.click(
+										function() {
+											$("#orderDetailsContent")
+													.load(
+															"http://localhost:8087/dionysus/wineinfo/wineorder/list");
+										});
+
+						$("#noticeTab")
+								.click(
+										function() {
+											$("#noticeContent")
+													.load(
+															"http://localhost:8087/dionysus/notice/list");
+										});
+					});
+</script>
+
 </html>

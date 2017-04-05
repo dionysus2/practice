@@ -4,9 +4,29 @@
 <html>
 <head>
 <link rel="import"
-	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://www.w3schools.com/lib/w3data.js"></script>
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container" align="center">
+	
+	<h1>공지사항 게시판</h1>
+	<table border="1">
+		<thead>
+			<tr><td>글번호</td>
+			<td>글제목</td>
+			<td>작성일자</td>
+			<td>작성자</td>
+			<td>조회수</td>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>    
+	<div id="pagination"></div>
+	</div>  
+</body>
 <script>
 	var result=<%=request.getAttribute("result")%>
 	$(function() {
@@ -31,29 +51,4 @@
 			p.append("<li><a href='list?pageNo=" + pagination.next + "'>다음으로</a></li>");
 	});
 </script>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div w3-include-html="http://192.168.0.180:8087/dionysus/navs/nav.html"></div>
-	<script>
-		w3IncludeHTML();
-	</script>
-	<div class="container-fluid" align="center">
-	
-	<h1>공지사항 게시판</h1>
-	<table border="1">
-		<thead>
-			<tr><td>글번호</td>
-			<td>글제목</td>
-			<td>작성일자</td>
-			<td>작성자</td>
-			<td>조회수</td>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>    
-	<div id="pagination"></div>  
-</body>
 </html>
