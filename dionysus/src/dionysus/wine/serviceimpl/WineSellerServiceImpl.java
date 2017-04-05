@@ -169,5 +169,22 @@ public class WineSellerServiceImpl implements WineSellerService {
 		}
 		return null;
 	}
+	
+	//	와인업주 로그인.
+	@Override
+	public String login(HttpServletRequest request){
+		System.out.println("와인업주로긴");
+		Connection conn= JDBCUtil.getConnection();
+		String basicInfoUsername= request.getParameter("basicInfoUsername");
+		String basicInfoPwd= request.getParameter("basicInfoPwd");
+		int result= dao.WineSellerLogin(conn, basicInfoUsername, basicInfoPwd);
+		JsonObject ob= new JsonObject();
+		System.out.println("결과"+result);
+		if(result==1)
+			ob.addProperty("result", "success");
+		else
+			ob.addProperty("result", "fail");
+		return new Gson().toJson(ob);
+	}
 
 }

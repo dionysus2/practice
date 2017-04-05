@@ -86,15 +86,13 @@
 								</select></td>
 							</tr>
 						</table>
-					
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="order" class="btn btn-default" data-toggle="modal"
-						data-target="#" data-dismiss="modal">주문하기</button>
+					<button type="submit" class="btn btn-default">주문하기</button>
 					<button type="button" class="btn btn-default" data-toggle="modal"
 						data-target="#" data-dismiss="modal">취소하기</button>
+					</form>
+					
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -141,6 +139,7 @@
 			})
 
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#btn").on("click", function() {

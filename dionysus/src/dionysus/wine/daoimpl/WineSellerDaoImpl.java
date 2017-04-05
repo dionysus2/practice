@@ -157,27 +157,30 @@ public class WineSellerDaoImpl implements WineSellerDAO {
 		return -1;
 	}
 
-	//와인회사 업주 회원로그인 	ResOwnerLogin
-	/*@Override
-	public int resWineSellerLogin(Connection conn, int wineSellerid, String wineSellerPwd)throws SQLException {
-		String Sql= "select count(*) from res where res_user_name=? and res_pwd=?";
-		PreparedStatement pstmt = null;
+	//	와인회사 업주 회원로그인 	ResOwnerLogin
+	@Override
+	public int WineSellerLogin(Connection conn, String basicInfoUsername, String basicInfoPwd) {
+		String sql= "SELECT COUNT(*) FROM WINE_SELLER W, BASIC_INFO B WHERE B.BASIC_INFO_ID=W.BASIC_INFO_ID AND B.BASIC_INFO_USERNAME=? AND B.BASIC_INFO_PWD=?";
+		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement(Sql);
-			pstmt.setInt(1, wineSellerid);
-			pstmt.setString(2, wineSellerPwd);
-			rs =pstmt.executeQuery();
-			if(rs.next()){				
+			pstm= conn.prepareStatement(sql);
+			pstm.setString(1, basicInfoUsername);
+			pstm.setString(2, basicInfoPwd);
+			rs= pstm.executeQuery();
+			if(rs.next()){
 				return rs.getInt(1);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			JDBCUtil.close(conn);
 		}
-		return -1;
-	}*/
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
+		return 0;
+	}
 	//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
 	@Override
 	public int SelectWineSellerrId(Connection conn, String wineSellerName, String wineSellerBrn)throws SQLException {

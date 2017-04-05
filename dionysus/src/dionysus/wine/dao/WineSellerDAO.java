@@ -51,7 +51,7 @@ public interface WineSellerDAO {
 		//와인회사 업주 회원추가	InserResOwner
 	public int inserWineSeller(Connection conn, WineSeller WineSeller)throws SQLException;
 		//와인회사 업주 회원로그인 	ResOwnerLogin
-//public int resWineSellerLogin(Connection conn, int wineSellerid, String wineSellerPwd)throws SQLException;
+	//public int resWineSellerLogin(Connection conn, int wineSellerid, String wineSellerPwd)throws SQLException;
 		//와인회사 업주 회원 아이디 찾기	SelectResOwnerId
 	public int SelectWineSellerrId(Connection conn, String wineSellerOwnername, String wineSellerBrn)throws SQLException;
 		//와인회사 업주 회원 비밀번호 찾기	SelectResOwnerPwd
@@ -59,7 +59,8 @@ public interface WineSellerDAO {
 		//와인회사 업주 회원 정보수정	UpdateResOwner
 	public int updateWineSeller(Connection conn, WineSeller WineSellerId)throws SQLException;
 		//와인회사 업주 회원 아이디 중복 확인
-//public int resOwnerIdCheck(Connection conn, String wineSellerUsername)throws SQLException;
+	//public int resOwnerIdCheck(Connection conn, String wineSellerUsername)throws SQLException;
+	public int WineSellerLogin(Connection conn, String basicInfoUsername, String basicInfoPwd)throws SQLException;
 
 			
 		

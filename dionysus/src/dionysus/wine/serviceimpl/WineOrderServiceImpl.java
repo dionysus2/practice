@@ -261,6 +261,13 @@ public class WineOrderServiceImpl implements WineOrderService {
 			int wineOrderId= dao.selectWinOrderIdMax(conn);
 			int wineInfoId= (int)session.getAttribute("wineInfoId");
 			int wineOrderInfoResult= new WineOrderInfoDAOImpl().wineOrderInfoInsert(conn, wineOrderInfoCount, wineOrderId, wineInfoId);
+			System.out.println("개수"+wineOrderInfoCount);
+			System.out.println("총가격"+wineOrderAmount);
+			System.out.println("고객ID"+customerId);
+			System.out.println("상품등록업주번호"+wineSellerId);
+			System.out.println("요청일자"+getDate);
+			System.out.println("오더아이디"+wineOrderId);
+			System.out.println("와인정보아이디"+wineInfoId);
 			JsonObject ob= new JsonObject();
 			if(wineOrderResult==1 && wineOrderInfoResult==1){
 				ob.addProperty("result", "success");
