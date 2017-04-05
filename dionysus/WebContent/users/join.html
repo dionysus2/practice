@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Bootstrap Example</title>
-<link rel="import" href="http://localhost:8087/dionysus/heads/bootstrap.html">
+<link rel="import"
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
 </head>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 
 <body>
-<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div> 
-<script>w3IncludeHTML();</script>
+	<div w3-include-html="http://localhost:8087/dionysus/navs/nav.html"></div>
+	<script>
+		w3IncludeHTML();
+	</script>
 
 	<!-- 회원 가입 추가 정보 폼 -->
 	<div class="container">
@@ -82,10 +85,21 @@
 
 			<div class="row">
 				<div class="col-sm-6">
-					<input type="submit"
-						class="btn btn-default btn-block" value="Submit Button">가입 완료
+					<div class="form-group">
+						<label for="job">계좌번호</label> <input type="text"
+							class="form-control" id="accountno" name="customerAccountNo">
+					</div>
 				</div>
 			</div>
+
+
+			<div class="row">
+				<div class="col-sm-6">
+					<input type="submit" class="btn btn-default btn-block"
+						value="고객정보 등록">
+				</div>
+			</div>
+
 		</form>
 	</div>
 
