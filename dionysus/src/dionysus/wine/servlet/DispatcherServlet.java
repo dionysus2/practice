@@ -20,6 +20,7 @@ import dionysus.wine.daoimpl.ResDaoImpl;
 import dionysus.wine.daoimpl.ResInfoDaoImpl;
 import dionysus.wine.daoimpl.WineInfoDAOImpl;
 import dionysus.wine.daoimpl.WineOrderDAOImpl;
+import dionysus.wine.daoimpl.WineSellerDaoImpl;
 import dionysus.wine.daoimpl.WineWishListDAOImpl;
 import dionysus.wine.di.AnnotationRunner;
 import dionysus.wine.di.ModelAndView;
@@ -30,6 +31,7 @@ import dionysus.wine.serviceimpl.ResInfoServiceImpl;
 import dionysus.wine.serviceimpl.ResServiceImpl;
 import dionysus.wine.serviceimpl.WineInfoServiceImpl;
 import dionysus.wine.serviceimpl.WineOrderServiceImpl;
+import dionysus.wine.serviceimpl.WineSellerServiceImpl;
 import dionysus.wine.serviceimpl.WineWishListServiceImpl;
 
 @WebServlet({"/main/*", "/basic/*", "/wineinfo/*", "/res/*", "/resinfo/*", "/customer/*", "/manager/*", "/notice/*", "/wineinfo/wineorder/*"})
@@ -70,6 +72,10 @@ public class DispatcherServlet extends HttpServlet {
 		WineWishListDAOImpl wineWishListDAO= new WineWishListDAOImpl();
 		WineWishListServiceImpl wineWishListService= new WineWishListServiceImpl(wineWishListDAO);
 		context.setAttribute("wineWishListService", wineWishListService);
+		//	9. 와인상품 업주 DAO, SERVICE 객체화
+		WineSellerDaoImpl wineSellerDAO= new WineSellerDaoImpl();
+		WineSellerServiceImpl wineSellerService= new WineSellerServiceImpl(wineSellerDAO);
+		context.setAttribute("wineSellerService", wineSellerService);
 		
 		String path = getServletContext().getRealPath("/");
 		String packageName = getServletContext().getInitParameter("packageName");

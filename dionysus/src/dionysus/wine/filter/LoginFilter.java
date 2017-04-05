@@ -30,6 +30,7 @@ public class LoginFilter implements Filter {
     	whiteList.add("/dionysus/customer/login");
     	whiteList.add("/dionysus/customer/insert");
     	whiteList.add("/dionysus/manager/login");
+    	whiteList.add("/dionysus/manager/insert");
     	whiteList.add("/dionysus/res/list");
     	whiteList.add("/dionysus/res/insert");
     	whiteList.add("/dionysus/wineSeller/list");

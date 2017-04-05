@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -84,20 +85,23 @@ public class WineSellerServiceImpl implements WineSellerService {
 	      }
 		return null;
 	}
+	
+	//	와인업주 등록하기.
 	@Override
-	public String createWineSeller(HttpServletRequest req) throws Exception {
+	public String createWineSeller(HttpServletRequest req)  {
 		Connection conn = JDBCUtil.getConnection();
-		int wineSellerId = dao.wineSellerCount(conn);
+		HttpSession session= req.getSession();
 		String wineSellerBrn = req.getParameter("resBrn");
 		String wineSellerLocation = req.getParameter("resLocation");
 		String wineSellerTel = req.getParameter("resTel");
 		String wineSellerAccountNo=req.getParameter("resAccpuntNO");
 		String wineSellerProfilePicture = req.getParameter("resProfilePicture");
 		String wineSellerName= req.getParameter("resName");
-		int basicInfoId=Integer.parseInt(req.getParameter("basicInfoId"));	
+		//		세션으로 얻어온 basicInfoId
+		int basicInfoId= (int)session.getAttribute("basicInfoId");
 		JsonObject ob = new JsonObject();
 		try{
-		int result = dao.inserWineSeller(conn, new WineSeller(wineSellerId,wineSellerBrn,wineSellerLocation,wineSellerTel,wineSellerAccountNo,wineSellerProfilePicture,wineSellerName,basicInfoId));
+		int result = dao.inserWineSeller(conn, new WineSeller(wineSellerBrn,wineSellerLocation,wineSellerTel,wineSellerAccountNo,wineSellerProfilePicture,wineSellerName,basicInfoId));
 		if(result==1)ob.addProperty("result", "success");		
 		else ob.addProperty("result", "fail");		
 		return new Gson().toJson(ob);
