@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="import"
-	href="http://192.168.0.180:8087/dionysus/heads/bootstrap.html">
+	href="http://localhost:8087/dionysus/heads/bootstrap.html">
 </head>
 <style>
 body {
@@ -17,9 +17,9 @@ body {
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
 <body>
 	<div
-		w3-include-html="http://192.168.0.180:8087/dionysus/modals/forms/join.html"></div>
+		w3-include-html="http://localhost:8087/dionysus/modals/forms/join.html"></div>
 	<div
-		w3-include-html="http://192.168.0.180:8087/dionysus/modals/forms/signIn.html"></div>
+		w3-include-html="http://localhost:8087/dionysus/modals/forms/signIn.html"></div>
 	<script>
 		w3IncludeHTML();
 	</script>
@@ -34,7 +34,7 @@ body {
 				</button>
 				<a class="navbar-brand" href="/dionysus/main/home"><img
 					class="img-responsive"
-					src="http://192.168.0.180:8087/dionysus/images/grapelogo.png"
+					src="http://localhost:8087/dionysus/images/grapelogo.png"
 					alt="logo" width="25" height="25"></a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
@@ -51,10 +51,10 @@ body {
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="http://192.168.0.180:8087/dionysus/users/manage.html">프로필 수정</a></li>
+							<li><a href="http://localhost:8087/dionysus/users/manage.html">프로필 수정</a></li>
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
-							<li><a href="http://192.168.0.180:8087/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
+							<li><a href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
 						</ul></li>
 				</ul>
 			</div>
