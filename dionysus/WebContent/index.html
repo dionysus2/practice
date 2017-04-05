@@ -19,24 +19,26 @@
 	<script>
 		w3IncludeHTML();
 	</script>
-		<div><a href="/dionysus/jaehyuntest/logout.jsp">로그아웃</a></div>
-		<div></div> 
 	<div class="container">
+		<div class="row">
 			<br>
 			<h3>지역 레스토랑</h3>
 			<br>
 			<p id="resList" align="center"></p>
-	
+		</div>
+		<div class="row">
+			<br>
 			<h3>지역 레스토랑</h3>
 			<p id="resList" align="center"></p>
+		</div>
 	</div>
 
 
 	<script>
 		var text = "";
 		for (var i = 0; i < 12; i++) {
-			text += '<div class="col-md-3"> <div class="thumbnail"> <a href="restaurants/restaurants.html">'
-					+ '<img src="http://localhost:8087/dionysus/images/res1.jpg" alt="Lights" style="width: 100%"> <div class="caption"> <p>Lorem ipsum...</p> </div> </a> </div> </div>';
+			text += '<div class="col-md-3"> <a href="restaurants/restaurants.html">'
+					+ '<img src="http://localhost:8087/dionysus/images/res1.jpg" alt="Lights" width="250" height="360"> <div class="caption"> <p>Lorem ipsum...</p> </div> </a>  </div>';
 		}
 		document.getElementById("resList").innerHTML = text;
 	</script>

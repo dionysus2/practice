@@ -17,23 +17,29 @@
 
 		<div class="row">
 			<div class="col-sm-2">
-				<ul class="nav  nav-stacked">
+				<ul class="nav  nav-stacked" text-align="center">
 					<h3>가격별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
+					<li><a href="#">0~50000</a></li>
+					<li><a href="#">50000~100000</a></li>
+					<li><a href="#">100000~200000</a></li>
+					<li><a href="#">200000~300000</a></li>
+					<li><a href="#">300000~400000</a></li>
+					<li><a href="#">400000~500000</a></li>
 					<h3>국가별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
+					<li><a href="#">프랑스</a></li>
+					<li><a href="#">이탈리아</a></li>
+					<li><a href="#">미국</a></li>
+					<li><a href="#">독일</a></li>
+					<li><a href="#">호주</a></li>
+					<li><a href="#">뉴질랜드</a></li>
+					<li><a href="#">칠레</a></li>
+					<li><a href="#">남아공</a></li>
 					<h3>종류별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
-					<li><a href="/dionysus/wineinfo/insert">와인추가</a>
+					<li><a href="#">레드 와인</a></li>
+					<li><a href="#">화이트 와인</a></li>
+					<li><a href="#">로제 와인</a></li>
+					<li><a href="#">스파클링 와인</a></li>
+
 				</ul>
 			</div>
 			<div class="col-sm-10">
@@ -86,11 +92,10 @@
 								</select></td>
 							</tr>
 						</table>
-					
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="order" class="btn btn-default" data-toggle="modal"
+					<button type="submit" class="btn btn-default" data-toggle="modal"
 						data-target="#" data-dismiss="modal">주문하기</button>
 					<button type="button" class="btn btn-default" data-toggle="modal"
 						data-target="#" data-dismiss="modal">취소하기</button>
@@ -139,23 +144,24 @@
 						+ "</td><tr>";
 				$("tbody").append(str);
 			})
-
 </script>
 <script>
 	$(document).ready(function() {
 		$("#btn").on("click", function() {
-				alert("감사합니다");
-				location.replace("/dionysus/wineinfo/list");
+			alert("감사합니다");
+			location.replace("/dionysus/wineinfo/list");
 		})
 	})
 	$(document).ready(function() {
-		var price= <%=(int)session.getAttribute("wineInfoPrice")%>;
+		var price =
+<%=(int) session.getAttribute("wineInfoPrice")%>
+	;
 		$("#count").bind("change", function() {
-			var index="";
+			var index = "";
 			$("#count option:selected").each(function() {
-				index+=$(this).text()+"";
+				index += $(this).text() + "";
 			})
-			$("#wineOrderPrice").html(price*index+"(원)");
+			$("#wineOrderPrice").html(price * index + "(원)");
 		})
 		$("#count").change();
 	})

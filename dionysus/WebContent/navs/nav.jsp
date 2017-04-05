@@ -39,10 +39,8 @@ body {
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="/dionysus/wineinfo/list">와인검색</a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#">Page 3</a></li>
+					<li><a href="/dionysus/wineinfo/list">와인</a></li>
+					<li><a href="#">레스토랑</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" data-toggle="modal" data-target="#join"><span
@@ -56,7 +54,7 @@ body {
 							<li><a href="http://localhost:8087/dionysus/users/manage.html">프로필 수정</a></li>
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
-							<li><a href="#">로그아웃</a></li>
+							<li><a href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
 						</ul></li>
 				</ul>
 			</div>
