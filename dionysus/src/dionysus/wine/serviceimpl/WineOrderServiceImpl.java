@@ -25,7 +25,9 @@ import dionysus.wine.service.WineOrderService;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.util.PagingUtil;
 import dionysus.wine.vo.Pagination;
+import dionysus.wine.vo.WineInfo;
 import dionysus.wine.vo.WineOrder;
+import dionysus.wine.vo.WineOrderInfo;
 
 public class WineOrderServiceImpl implements WineOrderService {
 
@@ -317,5 +319,34 @@ public class WineOrderServiceImpl implements WineOrderService {
 		}
 		return null;
 	}
-
+	
+	//	아이디별 주문정보 가져오기.
+	public String readByBasicInfoUsernameWineOrder(HttpServletRequest request){
+		Connection conn= JDBCUtil.getConnection();
+		HttpSession session= request.getSession();
+		String basicInfoUsername= (String)session.getAttribute("basicInfoUsername");
+		try {
+			HashMap<String, Object>map= new HashMap<String, Object>();
+			ArrayList<WineOrder>orderList= dao.selectByWineOrderBasicInfoUsername(conn, basicInfoUsername);
+			ArrayList<WineOrderInfo>orderInfoList= new WineOrderInfoDAOImpl().selectByBasicInfoUsernameWineInfoId(conn, basicInfoUsername);
+			ArrayList<WineInfo> wineList= new ArrayList<WineInfo>();
+			for(WineOrderInfo wine: orderInfoList){
+				int result= wine.getWineInfoId();
+				wineList.add(new WineInfoDAOImpl().selectByWineInfoId(conn, result));
+			}
+			logger.info("리스트 정보"+wineList);
+			map.put("wineList", wineList);
+			map.put("orderList", orderList);
+			map.put("orderInfoList", orderInfoList);
+			return new Gson().toJson(map);
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			JDBCUtil.close(conn);
+		}
+		return null;
+	}
 }

@@ -24,6 +24,7 @@ public interface WineOrderService {
 	 * 	- 주문건 삭제.
 	 * 		11. 주문건 삭제											int						Connection, 주문번호
 	 * 	- 주문건수정(주문상세에서 처리)
+	 * 	아이디별 주문정보가져오기.
 	 * */
 	public String readAllWineOrderList(HttpServletRequest request);
 	public String readByWineOrderDateMonth(HttpServletRequest request);
@@ -36,4 +37,5 @@ public interface WineOrderService {
 	public String createStart(HttpServletRequest request);
 	public String createEnd(HttpServletRequest request);
 	public String delete(HttpServletRequest request);
+	public String readByBasicInfoUsernameWineOrder(HttpServletRequest request);
 }

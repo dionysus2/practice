@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dionysus.wine.dao.WineOrderInfoDAO;
 import dionysus.wine.query.WineOrderInfoQuery;
 import dionysus.wine.util.JDBCUtil;
+import dionysus.wine.vo.WineOrderInfo;
 
 public class WineOrderInfoDAOImpl implements WineOrderInfoDAO {
 
@@ -44,6 +46,32 @@ public class WineOrderInfoDAOImpl implements WineOrderInfoDAO {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	//	와인상품번호 가져오기.
+	@Override
+	public ArrayList<WineOrderInfo> selectByBasicInfoUsernameWineInfoId(Connection conn, String basicInfoUsername) throws SQLException{
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(WineOrderInfoQuery.selectByWinInfoIdBasicInfoUsername);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			ArrayList<WineOrderInfo>list= new ArrayList<WineOrderInfo>();
+			while(rs.next()){
+				WineOrderInfo wine= new WineOrderInfo();
+				wine.setWineInfoId(rs.getInt("WINE_INFO_ID"));
+				list.add(wine);
+			}
+			return list;
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		finally{
+			JDBCUtil.close(pstm, rs);
+		}
 	}
 
 }

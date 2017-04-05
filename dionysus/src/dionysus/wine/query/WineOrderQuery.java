@@ -23,4 +23,6 @@ public interface WineOrderQuery {
 	public String selectByWineOrderId="SELECT WINE_ORDER_ID FROM WINE_ORDER WHERE CUSTOMER_ID=?";
 	//	와인주문번호 최댓값 조회
 	public String selectByWineOrderIdMax="SELECT MAX(WINE_ORDER_ID)FROM WINE_ORDER";
+	//	주문정보 가져오기(추가로 WINE_INFO_ID도 가져옵니다)
+	public String selectByWineOrderBasicInfoUsername="SELECT O.WINE_ORDER_DATE, O.WINE_ORDER_AMOUNT FROM WINE_ORDER O, CUSTOMER C, BASIC_INFO B WHERE C.BASIC_INFO_ID=B.BASIC_INFO_ID AND C.CUSTOMER_ID=O.CUSTOMER_ID AND B.BASIC_INFO_USERNAME=?";
 }

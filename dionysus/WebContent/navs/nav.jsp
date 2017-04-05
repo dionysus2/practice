@@ -15,19 +15,6 @@ body {
 </style>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
-
-<script>
-	var result= <%=session.getAttribute("basicInfoUsername")%>
-	$(document).ready(function() {
-		if(result==null){
-			$('.nav navbar-nav navbar-right.').show();
-		}
-		else{
-	        $('.nav navbar-nav navbar-right.').hide();
-		}
-	})
-
-</script>
 <body>
 	<div
 		w3-include-html="http://localhost:8087/dionysus/modals/forms/join.html"></div>
@@ -57,21 +44,35 @@ body {
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" data-toggle="modal" data-target="#join"><span
-							class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+							id="joinTool" class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#signIn"><span
-							class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+							id="loginTool" class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="http://localhost:8087/dionysus/users/manage.html">프로필 수정</a></li>
+							<li><a
+								href="http://localhost:8087/dionysus/users/manage.html">프로필
+									수정</a></li>
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
-							<li><a href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
+							<li><a href="/dionysus/wineinfo/wineorder/list">주문정보 조회</a>
+							<li><a
+								href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
 						</ul></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<script>
+		var result =<%=session.getAttribute("basicInfoUsername")%>
+		$(document).ready(function() {
+			if (result == null) {
+				$('.dropdown').hide();
+			}
+			$('.dropdown').change();
+		})
+	</script>
 </body>
 </html>

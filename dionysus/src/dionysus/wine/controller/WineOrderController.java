@@ -159,5 +159,15 @@ public class WineOrderController {
 			return mav;
 		}
 	}
+	
+	//	개인 아이디별 주문정보 조회하기.
+	@RequestMapping(value="/wineinfo/wineorder/list", method="GET")
+	public static ModelAndView selectBasicInfoUsernameByWineOrderList(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		WineOrderServiceImpl service= (WineOrderServiceImpl)request.getServletContext().getAttribute("wineOrderService");
+		mav.addObject("result", service.readByBasicInfoUsernameWineOrder(request));
+		mav.setView("/users/orderlist.jsp");
+		return mav;
+	}
 	//	주문건 삭제	(jQuery로 처리)	
 }

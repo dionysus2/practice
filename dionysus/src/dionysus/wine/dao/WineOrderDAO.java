@@ -34,6 +34,7 @@ public interface WineOrderDAO {
 	 * 와인주문 번호별 와인업주번호 가져오기
 	 * 주문고객 번호별 주문번호 가져오기
 	 * 주문번호 최댓값 가져오기.
+	 * 아이디별 주문정보가져오기
 	 * */
 	public ArrayList<WineOrder> selectWineOrderList(Connection conn, int startRow, int lastRow)throws SQLException;
 	public int selectWineOrderCount(Connection conn)throws SQLException;
@@ -49,4 +50,5 @@ public interface WineOrderDAO {
 	public ArrayList<HashMap<String, Object>> selectByWineSellerId(Connection conn)throws SQLException;
 	public int selectByCustomerIdOfWineOrderId(Connection conn, int customerId)throws SQLException;
 	public int selectWinOrderIdMax(Connection conn)throws SQLException;
+	public ArrayList<WineOrder> selectByWineOrderBasicInfoUsername(Connection conn, String basicInfoUsername)throws SQLException;
 }
