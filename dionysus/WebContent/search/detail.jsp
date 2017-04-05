@@ -42,8 +42,58 @@
 					</tbody>
 				</table>
 				<div>
-					<button id="btn">주문하기</button>
-					<button id="cart">장바구니</button>
+					<button type="button" class="btn btn-default" data-toggle="modal"
+						data-target="#order" data-dismiss="modal">주문하기</button>
+					<button type="button" class="btn btn-default" data-toggle="modal"
+						data-target="#" data-dismiss="modal">장바구니</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="order" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">와인 주문</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/dionysus/wineinfo/wineorder/insert" method="post">
+						<table>
+							<tr>
+								<td>와인 주문일자</td>
+								<td><input type="date" name="wineOrderDate"></td>
+							</tr>
+							<tr>
+								<td>와인 가격</td>
+								<td id="wineOrderPrice"></td>
+							</tr>
+							<tr>
+								<td>와인 개수</td>
+								<td><select name="wineOrderInfoCount" id="count">
+										<option value="1" selected="selected">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+								</select></td>
+							</tr>
+						</table>
+					
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="order" class="btn btn-default" data-toggle="modal"
+						data-target="#" data-dismiss="modal">주문하기</button>
+					<button type="button" class="btn btn-default" data-toggle="modal"
+						data-target="#" data-dismiss="modal">취소하기</button>
 				</div>
 			</div>
 		</div>
@@ -53,7 +103,8 @@
 <script>
 	var result =
 <%=request.getAttribute("result")%>
-	$(document).ready(function() {
+	$(document).ready(
+			function() {
 				var str = "<tr><td>와인이름:</td><td>" + result.wineInfoName
 						+ "</td></tr>";
 				str = str + "<tr><td>와인가격:<td><td>" + result.wineInfoPrice
@@ -87,17 +138,26 @@
 				str = str + "<tr><td>바디:<td><td>" + result.wineInfoBody
 						+ "</td><tr>";
 				$("tbody").append(str);
-	})
+			})
+
+</script>
+<script>
 	$(document).ready(function() {
 		$("#btn").on("click", function() {
-			var result= confirm("해당상품을 주문하시겠습니까?");
-			if(result==true){
-				location.replace("/dionysus/wineinfo/wineorder/insert");
-			}
-			else{
 				alert("감사합니다");
-			}
+				location.replace("/dionysus/wineinfo/list");
 		})
-	})	
+	})
+	$(document).ready(function() {
+		var price= <%=(int)session.getAttribute("wineInfoPrice")%>;
+		$("#count").bind("change", function() {
+			var index="";
+			$("#count option:selected").each(function() {
+				index+=$(this).text()+"";
+			})
+			$("#wineOrderPrice").html(price*index+"(원)");
+		})
+		$("#count").change();
+	})
 </script>
 </html>

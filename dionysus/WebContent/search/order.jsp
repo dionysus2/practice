@@ -27,6 +27,8 @@
 </script>
 </head>
 <body>
+
+
 	<h1>주문페이지</h1>
 	<form action="/dionysus/wineinfo/wineorder/insert" method="post">
 		<table>

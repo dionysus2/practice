@@ -56,6 +56,7 @@ body {
 							<li><a href="http://localhost:8087/dionysus/users/manage.html">프로필 수정</a></li>
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
+							<li><a href="#">로그아웃</a></li>
 						</ul></li>
 				</ul>
 			</div>
