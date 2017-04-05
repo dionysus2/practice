@@ -15,6 +15,20 @@ body {
 </style>
 
 <script src="https://www.w3schools.com/lib/w3data.js"></script>
+<script>
+	var result= <%=session.getAttribute("basicInfoUsername")%>
+</script>
+<script>
+	$(document).ready(function() {
+		if(resul===null){
+			$('.nav navbar-nav navbar-right.').hide()
+		}
+		else{
+	        $('.nav navbar-nav navbar-right.').show();
+		}
+	})
+
+</script>
 <body>
 	<div
 		w3-include-html="http://localhost:8087/dionysus/modals/forms/join.html"></div>
