@@ -25,21 +25,28 @@
 			<div class="col-sm-2">
 				<ul class="nav  nav-stacked">
 					<h3>가격별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
+					<li><a href="#">0~50000</a></li>
+					<li><a href="#">50000~100000</a></li>
+					<li><a href="#">100000~200000</a></li>
+					<li><a href="#">200000~300000</a></li>
+					<li><a href="#">300000~400000</a></li>
+					<li><a href="#">400000~500000</a></li>
+					<br>
 					<h3>국가별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
+					<li><a href="#">프랑스</a></li>
+					<li><a href="#">이탈리아</a></li>
+					<li><a href="#">미국</a></li>
+					<li><a href="#">독일</a></li>
+					<li><a href="#">호주</a></li>
+					<li><a href="#">뉴질랜드</a></li>
+					<li><a href="#">칠레</a></li>
+					<li><a href="#">남아공</a></li>
+						<br>
 					<h3>종류별</h3>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
-					<li><a href="/dionysus/wineinfo/insert">와인추가</a>
+					<li><a href="#">레드 와인</a></li>
+					<li><a href="#">화이트 와인</a></li>
+					<li><a href="#">로제 와인</a></li>
+					<li><a href="#">스파클링 와인</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-10">
@@ -67,7 +74,7 @@
 						var pagination = result.pagination;
 						var target = $("#content-main table tbody");
 						$.each(list,function(index, wine) {
-							var str = "<div class='col-md-3'> <div class='thumbnail'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
+							var str = "<div class='col-md-3'> <div class='thumbnail' align='center'> <a href='search/wineInfo.jsp'> <img src='../images/wine.jpg' alt='Lights' "
 									+ "style='width: 100%'> <div class='caption'>";
 							str = str+ "<p><a href='view?wineInfoId="+wine.wineInfoId+"'>"+ wine.wineInfoName+ "</a></p>";
 								str = str + "<p>가격: "+ wine.wineInfoPrice+ "원</a></p>";
