@@ -47,8 +47,6 @@ body {
 							id="joinTool" class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#signIn"><span
 							id="loginTool" class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-					<li><a href="/dionysus/manager/login" data-toggle="modal" data-target="#signIn"><span
-							id="loginTool" class="glyphicon glyphicon-log-in"></span> 업주 로그인</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
@@ -58,9 +56,7 @@ body {
 									수정</a></li>
 							<li><a href="#">계정 관리</a></li>
 							<li><a href="#">히스토리</a></li>
-							<li><a href="/dionysus/wineinfo/wineorder/list">주문정보 조회</a>
-							<li><a
-								href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp" id="signout">로그아웃</a></li>
+							<li><a href="/dionysus/wineinfo/wineorder/list">주문정보 조회</a></li>
 							<li id="logout"><a
 								href="/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
 						</ul></li>
@@ -71,10 +67,13 @@ body {
 	<script>
 		var result =<%=session.getAttribute("basicInfoUsername")%>
 		$(document).ready(function() {
-			if (result != null) {
-				$('.dropdown').show();
-			}
+			if(result==null)
 			$('.dropdown').hide();
+		})
+		$("#signout").click(function() {
+			$('.dropdown').show();
+			if(result==null)
+				$('.dropdown').hide();
 		})
 		$("#signout").click(function() {
 				$('.dropdown').hide();
