@@ -48,8 +48,6 @@ body {
 							id="joinTool" class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#signIn"><span
 							id="loginTool" class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-					<li><a href="/dionysus/manager/login" data-toggle="modal" data-target="#signIn"><span
-							id="loginTool" class="glyphicon glyphicon-log-in"></span> 업주 로그인</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
@@ -70,10 +68,13 @@ body {
 	<script>
 		var result =<%=session.getAttribute("basicInfoUsername")%>
 		$(document).ready(function() {
-			if (result != null) {
-				$('.dropdown').show();
-			}
+			if(result==null)
 			$('.dropdown').hide();
+		})
+		$("#signout").click(function() {
+			$('.dropdown').show();
+			if(result==null)
+				$('.dropdown').hide();
 		})
 		$("#signout").click(function() {
 				$('.dropdown').hide();
