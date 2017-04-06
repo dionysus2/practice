@@ -40,8 +40,8 @@ body {
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li><a href="/dionysus/wineinfo/list">와인</a></li>
-					<li><a href="/dionysus/resinfo/list">레스토랑</a></li>
-					<li><a href="/dionysus/notice/list">공지사항</a></li>
+					<li><a href="/dionysus/res/list">레스토랑</a></li>
+					<li><a href="/diondysus/notice/list">공지사항</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" data-toggle="modal" data-target="#join"><span
@@ -68,16 +68,13 @@ body {
 	<script>
 		var result =<%=session.getAttribute("basicInfoUsername")%>
 		$(document).ready(function() {
-			if(result==null)
-			$('.dropdown').hide();
-		})
-		$("#signout").click(function() {
-			$('.dropdown').show();
-			if(result==null)
+			if (result!= null) 
+				$('.dropdown').show();
+			else if(result==null)
 				$('.dropdown').hide();
-		})
 		$("#signout").click(function() {
 				$('.dropdown').hide();
+			})
 		})
 	</script>
 </body>
