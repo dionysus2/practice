@@ -72,7 +72,7 @@ body {
 	<script>
 		var result =<%=session.getAttribute("basicInfoUsername")%>
 		$(document).ready(function() {
-			if (result!= null) 
+			if (result!=null) 
 				$('.dropdown').show();
 			else if(result==null)
 				$('.dropdown').hide();
