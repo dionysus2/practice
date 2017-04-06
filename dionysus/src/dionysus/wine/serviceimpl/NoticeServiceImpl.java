@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.connector.Request;
 import org.slf4j.Logger;
@@ -65,8 +66,13 @@ public class NoticeServiceImpl implements NoticeService{
 	public String createNotice(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
+		HttpSession session= req.getSession();
 		try {
-			int result= dao.insertNotice(conn, new Notice());
+			String basicInfoUsername= (String)session.getAttribute("basicInfoUsername");
+			String noticeContent= req.getParameter("noticeContent");
+			String noticeTitle= req.getParameter("noticeTitle");
+			String noticeWriter= basicInfoUsername;
+			int result= dao.insertNotice(conn, new Notice(noticeTitle, noticeContent, noticeWriter));
 			JsonObject ob= new JsonObject();
 			if(result==1)
 				ob.addProperty("result", "success");

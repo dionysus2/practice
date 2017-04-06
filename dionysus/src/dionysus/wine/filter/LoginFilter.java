@@ -26,6 +26,7 @@ public class LoginFilter implements Filter {
         // TODO Auto-generated constructor stub
     	whiteList.add("/dionysus/basic/main");
     	whiteList.add("/dionysus/index.html");
+    	whiteList.add("/dionysus/wineinfo/list");
     	whiteList.add("/dionysus/basic/insert");
     	whiteList.add("/dionysus/customer/login");
     	whiteList.add("/dionysus/customer/insert");

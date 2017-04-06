@@ -61,9 +61,7 @@ body {
 							<li><a href="#">히스토리</a></li>
 							<li><a href="/dionysus/wineinfo/wineorder/list">주문정보 조회</a>
 							<li><a
-								href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp" id="signout">로그아웃</a></li>
-							<li id="logout"><a
-								href="/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
+								href="/dionysus/jaehyuntest/logout.jsp" id="signout">로그아웃</a></li>
 						</ul></li>
 				</ul>
 			</div>

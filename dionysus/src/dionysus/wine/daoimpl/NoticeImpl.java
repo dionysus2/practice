@@ -74,12 +74,9 @@ public class NoticeImpl implements NoticeDAO{
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(NoticeQuery.insertNotice);
-			pstmt.setInt(1, notice.getNoticeId());
-			pstmt.setString(2, notice.getNoticeTitle());
-			pstmt.setString(3, notice.getNoticeContent());
-			pstmt.setString(4, notice.getNoticeWriter());
-			pstmt.setDate(5, notice.getNoticeWritedate());
-			pstmt.setInt(6, notice.getNoticeViews());
+			pstmt.setString(1, notice.getNoticeTitle());
+			pstmt.setString(2, notice.getNoticeContent());
+			pstmt.setString(3, notice.getNoticeWriter());
 			return pstmt.executeUpdate();
 		} 
 		catch (SQLException e) {

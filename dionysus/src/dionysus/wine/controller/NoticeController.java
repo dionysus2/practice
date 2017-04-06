@@ -22,14 +22,20 @@ public class NoticeController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/notice/insert", method="POST")
-	public static ModelAndView createNotice(HttpServletRequest request){
+	//	공지사항 게시글 폼뷰
+	@RequestMapping(value="/manager/notice/insert", method="GET")
+	public static ModelAndView createNoticeStart(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		NoticeServiceImpl service= (NoticeServiceImpl)request.getServletContext().getAttribute("noticeservice");
-		logger.info("서비스호출");
+		mav.setView("/board/insert.jsp");
+		return mav;
+	}
+	//	공지사항 게시글 추가
+	@RequestMapping(value="/manager/notice/insert", method="POST")
+	public static ModelAndView createNoticeEnd(HttpServletRequest request){
+		ModelAndView mav= new ModelAndView();
+		NoticeServiceImpl service= (NoticeServiceImpl)request.getServletContext().getAttribute("noticeService");
 		if(service.createNotice(request).equals("{\"result\":\"success\"}")){
-			logger.info("공지사항 추가완료");
-			mav.setView("list");
+			mav.setView("/dionysus/manager/home");
 			mav.setRedirect();
 			return mav;
 		}
