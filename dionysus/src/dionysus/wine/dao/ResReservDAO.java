@@ -14,7 +14,6 @@ public interface ResReservDAO {
 	/*
 	 * 레스토랑 예약(레스토랑 예약번호,예약일자,예약금액,고객번호)
 	 * 												리턴						매개변수
-<<<<<<< HEAD
 	 * 1.예약접수 전체 리스트 출력					ArrayList<ResReserv>	Connection  startRow,lastRow
 	 * 2.레스토랑별 예약접수 리스트 출력			ArrayList<ResReserv>			Connection, 레스토랑번호
 =======
