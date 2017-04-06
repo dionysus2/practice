@@ -10,7 +10,8 @@ public interface CustomerQuery {
 	public String customerAge = "select * from customer where Customer_Age=?";	
 	public String customerJob = "select * from customer where Customer_Job=?";
 	public String customerGender = "select * from customer where Customer_Gender=?";
-	public String customerName = "select * from customer where Customer_Name=?";
+	//	아이디별 고객정보 조회
+	public String customerName = "SELECT C.CUSTOMER_RRN, C.CUSTOMER_ADDRESS, C.CUSTOMER_NAME, C.CUSTOMER_TEL, C.CUSTOMER_GENDER, C.CUSTOMER_ACCOUNT_NO, C.CUSTOMER_JOB FROM CUSTOMER C, BASIC_INFO B WHERE C.BASIC_INFO_ID=B.BASIC_INFO_ID AND B.BASIC_INFO_USERNAME=?";
 	public String login = " select count(*) from customer where Customer_UserName=?, and Customer_Pwd=?";
 	public String selectUserName = "select Customer_UserName from customer where Customer_Name=? Customer_Rrn=?";
 	public String selectPwd = "select Customer_Pwd from customer where Customer_UserName=?, Customer_Name=?, Customer_Rrn=?";

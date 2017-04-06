@@ -51,12 +51,13 @@ public class CustomerController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/customer/namelist", method="GET")
+	//	아이디별 고객정보 조회
+	@RequestMapping(value="/customer/myinfo", method="GET")
 	public static ModelAndView readCustomerName (HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
-		CustomerServiceImpl service= (CustomerServiceImpl)request.getServletContext().getAttribute("customerservice");
-		mav.setView("/sugatest/list.jsp");
+		CustomerServiceImpl service= (CustomerServiceImpl)request.getServletContext().getAttribute("customerService");
 		mav.addObject("result", service.readCustomerName(request));
+		mav.setView("/users/myinfo.jsp");
 		return mav;
 	}
 	

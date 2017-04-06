@@ -19,10 +19,8 @@ import dionysus.wine.service.CustomerService;
 import dionysus.wine.util.JDBCUtil;
 import dionysus.wine.util.PagingUtil;
 import dionysus.wine.vo.Customer;
-import dionysus.wine.vo.NoticeComment;
 import dionysus.wine.vo.Pagination;
 import dionysus.wine.vo.ResReserv;
-import dionysus.wine.vo.WineInfo;
 import dionysus.wine.vo.WineOrder;
 import dionysus.wine.vo.WineWishlist;
 
@@ -150,24 +148,17 @@ public class CustomerServiceImpl implements CustomerService{
 		return null;
 	}
 
+	//	사용자 아이디별 사용자 정보조회
 	@Override
 	public String readCustomerName(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		Connection conn= JDBCUtil.getConnection();
+		HttpSession session= req.getSession();
+		String basicInfoUsername= (String)session.getAttribute("basicInfoUsername");
 		try {
-			int pageNo= 1;
-			if(req.getParameter("pageNo")!=null){
-				pageNo= Integer.parseInt(req.getParameter("pageNo"));
-				logger.info("사용자 페이징 요청");
-			}
-			String customerName = req.getParameter("customerName");
-			int cntOfRow= dao.selectByCustomerName(conn, customerName);
-			Pagination pagination= PagingUtil.getPagination(pageNo, cntOfRow);
-			ArrayList<Customer>list= dao.selectByCustomerName(conn, customerName, pagination.getStartRow(), pagination.getLastRow());
-			HashMap<String, Object>map= new HashMap<String, Object>();
-			map.put("pagination", pagination);
-			map.put("list", list);
-			return new Gson().toJson(map);
+			Customer list= dao.selectByCustomerName(conn, basicInfoUsername);
+			logger.info("리스트정보:"+list);
+			return new Gson().toJson(list);
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

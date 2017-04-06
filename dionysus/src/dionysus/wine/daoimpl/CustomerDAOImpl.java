@@ -200,40 +200,36 @@ public class CustomerDAOImpl implements CustomerDAO{
 		}
 	}
 
+	//	아이디별 고객정보 조회하기.
 	@Override
-	public ArrayList<Customer> selectByCustomerName(Connection conn, String customerName) throws SQLException {
+	public Customer selectByCustomerName(Connection conn, String basicInfoUsername) throws SQLException {
 		// TODO Auto-generated method stub
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try{
-			pstmt = conn.prepareStatement(CustomerQuery.customerName);
-			pstmt.setString(1, customerName);
-			rs = pstmt.executeQuery();
-			ArrayList<Customer> list = new ArrayList<>();
-			while(rs.next()) {
-				Customer customer = new Customer();
-				customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
-				//customer.setCustomerUsername(rs.getString("CUSTOMER_USERNAME"));
-				//customer.setCustomerPwd(rs.getString("CUSTOMER_PWD"));
-				customer.setCustomerRrn(rs.getString("CUSTOMER_PWD"));
-				customer.setCustomerAddress(rs.getString("CUSTOMER_ADDRESS"));
-				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
-				customer.setCustomerTel(rs.getString("CUSTOMER_TEL"));
-				customer.setCustomerGender(rs.getString("CUSTOMER_GENDER"));
-				customer.setCustomerAccountNo(rs.getString("CUSTOMER_ACCOUNT_NO"));
-				customer.setCustomerJob(rs.getString("CUSTOMER_JOB"));
-				//customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
-				customer.setCustomerActivated(rs.getString("CUSTOMER_ACTIVATED"));
-				list.add(customer);
+		PreparedStatement pstm= null;
+		ResultSet rs= null;
+		try {
+			pstm= conn.prepareStatement(CustomerQuery.customerName);
+			pstm.setString(1, basicInfoUsername);
+			rs= pstm.executeQuery();
+			if(rs.next()){
+				Customer c= new Customer();
+				c.setCustomerAccountNo(rs.getString("CUSTOMER_ACCOUNT_NO"));
+				c.setCustomerRrn(rs.getString("CUSTOMER_RRN"));
+				c.setCustomerAddress(rs.getString("CUSTOMER_ADDRESS"));
+				c.setCustomerGender(rs.getString("CUSTOMER_GENDER"));
+				c.setCustomerName(rs.getString("CUSTOMER_NAME"));
+				c.setCustomerTel(rs.getString("CUSTOMER_TEL"));
+				c.setCustomerJob(rs.getString("CUSTOMER_JOB"));
+				return c;
 			}
-			return list;
-		}
-		catch (SQLException e){
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			throw e;
 		}
-		finally {
-			JDBCUtil.close(pstmt,rs);
+		finally{
+			JDBCUtil.close(pstm, rs);
 		}
+		return null;
 	}
 
 	@Override

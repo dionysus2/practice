@@ -23,7 +23,7 @@ public interface CustomerDAO {
 	public ArrayList<Customer> selectByCustomerAge(Connection conn, int customerAge) throws SQLException;
 	public ArrayList<Customer> selectByCustomerJob(Connection conn, String customerJob) throws SQLException;
 	public ArrayList<Customer> selectByCustomerGender(Connection conn, String customerGender) throws SQLException;
-	public ArrayList<Customer> selectByCustomerName(Connection conn, String customerName) throws SQLException;
+	public Customer selectByCustomerName(Connection conn, String basicInfoUsername) throws SQLException;
 	public int CustomerInfoUpdate(Connection conn, Customer customer) throws SQLException;
 	public int CustomerInfoDelete(Connection conn, int customerId) throws SQLException ;
 	public String CustomerIdFind(Connection conn, String customerName, String customerRrn) throws SQLException;
