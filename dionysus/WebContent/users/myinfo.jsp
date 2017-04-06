@@ -5,14 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script>
+	var result= <%=request.getAttribute("result")%>
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-var result= <%=request.getAttribute("result")%>
-</script>
-<script>
 	$(document).ready(function(){
-			var str= "<tr><td>아이디</td><td>"+<%=session.getAttribute("basicInfoUsername")%>+"</td></tr>"
-			str= str+"<tr><td>이름</td><td>"+result.customerName+"</td></tr>"
+			var str= "<tr><td>이름</td><td>"+result.customerName+"</td></tr>"
 			str= str+"<tr><td>주민번호</td><td>"+result.customerRrn+"</td></tr>"
 			str= str+"<tr><td>주소</td><td>"+result.customerAddress+"</td></tr>"
 			str= str+"<tr><td>성별</td><td>"+result.customerGender+"</td></tr>"
