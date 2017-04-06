@@ -31,11 +31,11 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		pstmt.setInt(1, startRow);
 		pstmt.setInt(2, lastRow);
 		while(rs.next()){
-			resReserv.setResResrvId(rs.getInt("resResrvId"));
-			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
-			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
-			resReserv.setCustomerId(rs.getInt("customerId"));
-			resReserv.setResId(rs.getInt("resId"));
+			resReserv.setResResrvId(rs.getInt("res_Resrv_Id"));
+			resReserv.setResResrvDate(rs.getDate("res_Resrv_Date"));
+			resReserv.setResResrvFee(rs.getInt("res_Resrv_Fee"));
+			resReserv.setCustomerId(rs.getInt("customer_Id"));
+			resReserv.setResId(rs.getInt("res_Id"));
 			list.add(resReserv);
 		}
 		return list;
@@ -75,11 +75,11 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		pstmt =conn.prepareStatement(ResResrvQuery.selectByResReserv);
 		pstmt.setInt(1, resInfoId);
 		while(rs.next()){
-			resReserv.setResResrvId(rs.getInt("resResrvId"));
-			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
-			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
-			resReserv.setCustomerId(rs.getInt("customerId"));
-			resReserv.setResId(rs.getInt("resId"));
+			resReserv.setResResrvId(rs.getInt("res_Resrv_Id"));
+			resReserv.setResResrvDate(rs.getDate("res_Resrv_Date"));
+			resReserv.setResResrvFee(rs.getInt("res_Resrv_Fee"));
+			resReserv.setCustomerId(rs.getInt("customer_Id"));
+			resReserv.setResId(rs.getInt("res_Id"));
 			list.add(resReserv);
 		}
 		return list;
@@ -102,11 +102,11 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		rs= pstmt.executeQuery();
 		while(rs.next()){
 			ResReserv resReserv = new ResReserv();
-			resReserv.setResResrvId(rs.getInt("resResrvId"));
-			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
-			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
-			resReserv.setCustomerId(rs.getInt("customerId"));
-			resReserv.setResId(rs.getInt("resId"));
+			resReserv.setResResrvId(rs.getInt("res_Resrv_Id"));
+			resReserv.setResResrvDate(rs.getDate("res_Resrv_Date"));
+			resReserv.setResResrvFee(rs.getInt("res_Resrv_Fee"));
+			resReserv.setCustomerId(rs.getInt("customer_Id"));
+			resReserv.setResId(rs.getInt("res_Id"));
 			list.add(resReserv);
 		}
 		return list;
@@ -129,11 +129,11 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		pstmt.setDate(1, new java.sql.Date(resResrvDate.getTime()));
 	        while(rs.next()){
 	        ResReserv resReserv = new ResReserv();
-			resReserv.setResResrvId(rs.getInt("resResrvId"));
-			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
-			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
-			resReserv.setCustomerId(rs.getInt("customerId"));
-			resReserv.setResId(rs.getInt("resId"));
+			resReserv.setResResrvId(rs.getInt("res_Resrv_Id"));
+			resReserv.setResResrvDate(rs.getDate("res_Resrv_Date"));
+			resReserv.setResResrvFee(rs.getInt("res_Resrv_Fee"));
+			resReserv.setCustomerId(rs.getInt("customer_Id"));
+			resReserv.setResId(rs.getInt("res_Id"));
 			list.add(resReserv);
 		}
 		return list;
@@ -156,10 +156,10 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 		pstmt =conn.prepareStatement(ResResrvQuery.selectByLastReserv);	
 		pstmt.setInt(1, customerId);
 		while(rs.next()){
-			resReserv.setResResrvId(rs.getInt("resResrvId"));
-			resReserv.setResResrvDate(rs.getDate("resResrvDate"));
-			resReserv.setResResrvFee(rs.getInt("resResrvFee"));
-			resReserv.setResId(rs.getInt("resId"));
+			resReserv.setResResrvId(rs.getInt("res_Resrv_Id"));
+			resReserv.setResResrvDate(rs.getDate("res_Resrv_Date"));
+			resReserv.setResResrvFee(rs.getInt("res_Resrv_Fee"));
+			resReserv.setResId(rs.getInt("res_Id"));
 			list.add(resReserv);
 		}
 		return list;
@@ -173,11 +173,10 @@ public  class ResResrvDaoImpl implements ResReservDAO {
 //	레스토랑별 예약접수 판매량 조회
 	@Override
 	public int selectBySalesLate(Connection conn, int resId) throws Exception {
-		String sql = "";  //sql 문 보류
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
      	try{
-		pstmt =conn.prepareStatement(sql);	
+		pstmt =conn.prepareStatement(ResResrvQuery.selectBySalesLate);	
 		pstmt.setInt(1, resId);
 		rs= pstmt.executeQuery();
 		if(rs.next()){

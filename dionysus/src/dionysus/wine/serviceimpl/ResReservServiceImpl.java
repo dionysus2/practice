@@ -226,7 +226,6 @@ public class ResReservServiceImpl implements ResReservService {
 		}finally {
 		JDBCUtil.close(conn);
 		}
-		
 		return null;
 	}
 
@@ -249,7 +248,6 @@ public class ResReservServiceImpl implements ResReservService {
 		}finally {
 		JDBCUtil.close(conn);
 		}
-		
 		return null;
 	}
 

@@ -23,7 +23,7 @@ public class ResInfoController {
 	//	레스토랑 전체리스트 조회
 	@RequestMapping(value = "/resinfo/list", method = "GET")
 	public static ModelAndView readAllResInfo(HttpServletRequest request) throws Exception {
-		System.out.println("시작");
+		//System.out.println("시작");s
 		ModelAndView mav = new ModelAndView();
 		ResInfoServiceImpl service = (ResInfoServiceImpl) request.getServletContext().getAttribute("resInfoservice");
 		mav.setView("/kibacktest/list.jsp");
@@ -35,7 +35,7 @@ public class ResInfoController {
 	public static ModelAndView readByResInfoId(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ResInfoServiceImpl service = (ResInfoServiceImpl) request.getServletContext().getAttribute("resinfoservice");
-		mav.setView("#.jsp");
+		mav.setView("#kibacktest/view.jsp");
 		mav.addObject("result", service.readByResInfoId(request));
 		return mav;
 	}
@@ -44,7 +44,7 @@ public class ResInfoController {
 	public static ModelAndView readByResOwnerResInfo(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ResInfoServiceImpl service = (ResInfoServiceImpl) request.getServletContext().getAttribute("resinfoservice");
-		mav.setView("#.jsp");
+		mav.setView("#kibacktest/ownerlist.jsp");
 		mav.addObject("result", service.readResOwnerResInfo(request));
 		return mav;
 	}
