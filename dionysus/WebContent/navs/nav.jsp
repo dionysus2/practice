@@ -40,14 +40,16 @@ body {
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li><a href="/dionysus/wineinfo/list">와인</a></li>
-					<li><a href="/dionysus/res/list">레스토랑</a></li>
-					<li><a href="/dionysus/notice/list">공지사항</a></li>
+					<li><a href="#">레스토랑</a></li>
+					<li><a href="#">공지사항</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" data-toggle="modal" data-target="#join"><span
 							id="joinTool" class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#signIn"><span
 							id="loginTool" class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+					<li><a href="/dionysus/manager/login" data-toggle="modal" data-target="#signIn"><span
+							id="loginTool" class="glyphicon glyphicon-log-in"></span> 업주 로그인</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> <%=session.getAttribute("basicInfoUsername")%>
 					</a>
@@ -59,7 +61,9 @@ body {
 							<li><a href="#">히스토리</a></li>
 							<li><a href="/dionysus/wineinfo/wineorder/list">주문정보 조회</a>
 							<li><a
-								href="/dionysus/jaehyuntest/logout.jsp" id="signout">로그아웃</a></li>
+								href="http://localhost:8087/dionysus/jaehyuntest/logout.jsp" id="signout">로그아웃</a></li>
+							<li id="logout"><a
+								href="/dionysus/jaehyuntest/logout.jsp">로그아웃</a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -72,9 +76,6 @@ body {
 				$('.dropdown').show();
 			else if(result==null)
 				$('.dropdown').hide();
-		$("#signout").click(function() {
-				$('.dropdown').hide();
-			})
 		})
 	</script>
 </body>
